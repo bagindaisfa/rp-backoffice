@@ -35,10 +35,10 @@ public class User implements UserDetails {
 
 
 	@Column(name = "CREATED_ON")
-	private Date createdAt;
+	private Date createdAt = new Date();
 
 	@Column(name = "UPDATED_ON")
-	private Date updatedAt;
+	private Date updatedAt = new Date();
 
 	@Column(name = "first_name")
 	private String firstName;
