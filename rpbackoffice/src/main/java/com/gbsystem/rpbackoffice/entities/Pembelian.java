@@ -1,5 +1,7 @@
 package com.gbsystem.rpbackoffice.entities;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ public class Pembelian {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private Date tanggal_transaksi;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -30,6 +33,12 @@ public class Pembelian {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -80,7 +89,7 @@ public class Pembelian {
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
-	public double getRowstatus() {
+	public int getRowstatus() {
 		return rowstatus;
 	}
 	public void setRowstatus(int rowstatus) {
@@ -96,6 +105,7 @@ public class Pembelian {
 	@Override
 	public String toString() {
 		return "Pembelian [id=" + id + ","
+				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
 				+ " artikel=" + artikel + ", "
 				+ "kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","

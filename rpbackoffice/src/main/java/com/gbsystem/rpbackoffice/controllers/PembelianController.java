@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,7 @@ public class PembelianController {
 	
 	@PostMapping("/addPembelian")
     public String saveProduct(@RequestParam("file") MultipartFile file,
+    		@RequestParam("tanggal_transaksi") Date tanggal_transaksi,
     		@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,
     		@RequestParam("tipe") String tipe,
@@ -42,7 +44,7 @@ public class PembelianController {
     		@RequestParam("hpp") double hpp,
     		@RequestParam("harga_jual") double harga_jual)
     {
-		pembelianService.savePembelian(file, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
+		pembelianService.savePembelian(file, tanggal_transaksi, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
     	return "redirect:/pembelian";
     }
     
@@ -54,7 +56,12 @@ public class PembelianController {
     	return "redirect:/pembelian";
     }
     
-    
+    @PostMapping("/changeTanggal_transaksi")
+    public String changeTanggal_transaksi(@RequestParam("id") Long id ,@RequestParam("newTanggal_transaksi") Date tanggal_transaksi)
+    {
+    	pembelianService.changePembelianTanggal_transaksi(id, tanggal_transaksi);
+    	return "redirect:/pembelian"; 
+    }
     @PostMapping("/changeArtikel")
     public String changeArtikel(@RequestParam("id") Long id ,@RequestParam("newArtikel") String artikel)
     {

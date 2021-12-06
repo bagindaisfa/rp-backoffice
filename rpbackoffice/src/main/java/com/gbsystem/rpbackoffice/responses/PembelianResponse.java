@@ -1,7 +1,10 @@
 package com.gbsystem.rpbackoffice.responses;
 
+import java.util.Date;
+
 public class PembelianResponse {
 	private Long id;
+	private Date tanggal_transaksi;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -15,6 +18,12 @@ public class PembelianResponse {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 	public String getArtikel() {
 		return artikel;

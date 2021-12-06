@@ -2,6 +2,7 @@ package com.gbsystem.rpbackoffice.services;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class PembelianService {
 	@Autowired
 	private PembelianRepository eRepo;
 	
-	public void savePembelian(MultipartFile file, String artikel, String kategori
+	public void savePembelian(MultipartFile file, Date tanggal_transaksi, String artikel, String kategori
 			,String tipe, String nama_barang, int kuantitas, String ukuran, double hpp, double harga_jual ) {
 		
 		Pembelian p = new Pembelian();
@@ -31,6 +32,7 @@ public class PembelianService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		p.setTanggal_transaksi(tanggal_transaksi);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setTipe(tipe);
@@ -43,14 +45,25 @@ public class PembelianService {
 		eRepo.save(p);
 	}
 	public List<Pembelian> getAllPembelian(){
-		return eRepo.findAll();
+
+		return eRepo.findByRowstatus(1);
 	}
 	
 	public void deletePembelianById(Long id)
     {
-    	eRepo.deleteById(id);
+		Pembelian p = new Pembelian();
+    	p = eRepo.findById(id).get();
+    	p.setRowstatus(0);
+    	eRepo.save(p);    
     }
 	
+	public void changePembelianTanggal_transaksi(Long id ,Date tanggal_transaksi)
+    {
+		Pembelian p = new Pembelian();
+    	p = eRepo.findById(id).get();
+    	p.setTanggal_transaksi(tanggal_transaksi);
+    	eRepo.save(p);    
+    }
 	public void changePembelianArtikel(Long id ,String artikel)
     {
 		Pembelian p = new Pembelian();
