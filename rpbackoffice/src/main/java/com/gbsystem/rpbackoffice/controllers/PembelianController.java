@@ -1,18 +1,23 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,28 +31,24 @@ public class PembelianController {
 	
 	@Autowired
 	private PembelianService pembelianService;
-	
-	@GetMapping("/pembelian")
+
+    @GetMapping("/pembelian")
 	public ResponseEntity<List<Pembelian>> getAll() {
         return new ResponseEntity<>(pembelianService.getAllPembelian(), HttpStatus.OK);
     }
-	
-	@PostMapping("/addPembelian")
-    public String saveProduct(@RequestParam("file") MultipartFile file,
-    		@RequestParam("tanggal_transaksi") Date tanggal_transaksi,
-    		@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,
-    		@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,
-    		@RequestParam("kuantitas") int kuantitas,
-    		@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,
-    		@RequestParam("harga_jual") double harga_jual)
-    {
-		pembelianService.savePembelian(file, tanggal_transaksi, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
-    	return "redirect:/pembelian";
-    }
     
+    @PostMapping(value = "/addPembelian", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody String saveProduct(@RequestParam("image") MultipartFile image,@RequestParam("artikel") String artikel,
+    		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
+    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
+    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    	
+    	if (artikel != "") {
+    		pembelianService.savePembelian(image, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
+    	}
+    	return "Insert Data Failed!";
+		
+    }
     @GetMapping("/deletePembelian/{id}")
     public String deletePembelian(@PathVariable("id") Long id)
     {
@@ -108,6 +109,13 @@ public class PembelianController {
     public String changePembelianHargaJual(@RequestParam("id") Long id ,@RequestParam("newHargaJual") double harga_jual)
     {
     	pembelianService.changePembelianHargaJual(id, harga_jual);
+    	return "redirect:/pembelian"; 
+	}
+    
+    @PostMapping("/changeTotal_hpp")
+    public String changePembelianTotal_hpp(@RequestParam("id") Long id)
+    {
+    	pembelianService.changePembelianTotal_hpp(id);
     	return "redirect:/pembelian"; 
 	}
 }

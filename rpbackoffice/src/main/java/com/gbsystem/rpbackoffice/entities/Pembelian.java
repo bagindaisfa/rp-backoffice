@@ -9,20 +9,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Pembelian {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	
+	@JsonFormat(pattern="yyyy MMMM dd")
 	private Date tanggal_transaksi;
+	
 	private String artikel;
 	private String kategori;
 	private String tipe;
 	private String nama_barang;
-	private int kuantitas;
+	private double kuantitas;
 	private String ukuran;
 	private double hpp;
 	private double harga_jual;
+	private double total_hpp;
 	private int rowstatus;
 	
 	@Lob
@@ -64,10 +70,10 @@ public class Pembelian {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
-	public int getKuantitas() {
+	public double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(int kuantitas) {
+	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
 	public String getUkuran() {
@@ -88,6 +94,13 @@ public class Pembelian {
 	}
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
+	}
+	
+	public double getTotal_hpp() {
+		return total_hpp;
+	}
+	public void setTotal_hpp(double total_hpp) {
+		this.total_hpp = total_hpp;
 	}
 	public int getRowstatus() {
 		return rowstatus;
@@ -114,6 +127,7 @@ public class Pembelian {
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
 	            + " harga_jual=" + harga_jual + ","
+	            + " total_hpp=" + total_hpp + ","
 	            + " rowstatus=" + rowstatus + ","
 	            + " image=" + image + "]";
 	}

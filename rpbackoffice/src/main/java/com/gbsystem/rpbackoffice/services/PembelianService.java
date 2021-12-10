@@ -19,20 +19,20 @@ public class PembelianService {
 	@Autowired
 	private PembelianRepository eRepo;
 	
-	public void savePembelian(MultipartFile file, Date tanggal_transaksi, String artikel, String kategori
-			,String tipe, String nama_barang, int kuantitas, String ukuran, double hpp, double harga_jual ) {
+	public Pembelian savePembelian(MultipartFile image, String artikel, String kategori
+			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual ) {
 		
 		Pembelian p = new Pembelian();
-		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");
 		}
 		try {
-			p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-		p.setTanggal_transaksi(tanggal_transaksi);
+		p.setTanggal_transaksi(new Date());
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setTipe(tipe);
@@ -41,9 +41,12 @@ public class PembelianService {
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
 		p.setHarga_jual(harga_jual);
+		p.setTotal_hpp(kuantitas * harga_jual);
 		p.setRowstatus(1);
-		eRepo.save(p);
+		return eRepo.save(p);
 	}
+
+	
 	public List<Pembelian> getAllPembelian(){
 
 		return eRepo.findByRowstatus(1);
@@ -122,6 +125,14 @@ public class PembelianService {
     	Pembelian p = new Pembelian();
     	p = eRepo.findById(id).get();
 		p.setHarga_jual(harga_jual);
+		eRepo.save(p);
+	}
+    
+    public void changePembelianTotal_hpp(Long id)
+    {
+    	Pembelian p = new Pembelian();
+    	p = eRepo.findById(id).get();
+		p.setTotal_hpp(p.getHpp()*p.getKuantitas());
 		eRepo.save(p);
 	}
 	
