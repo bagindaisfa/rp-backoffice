@@ -50,7 +50,7 @@ public class PembelianController {
     	if (artikel != "") {
     		pembelianService.savePembelian(image, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
     	}
-    	return "Insert Data Failed!";
+    	return "Insert Data Successs!";
 		
     }
     
