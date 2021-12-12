@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,11 @@ public class PembelianController {
     @GetMapping("/pembelian")
 	public ResponseEntity<List<Pembelian>> getAll() {
         return new ResponseEntity<>(pembelianService.getAllPembelian(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<Pembelian>> search(@Param("keyword") String keyword) {
+    	return new ResponseEntity<>(pembelianService.search(keyword), HttpStatus.OK);
     }
     
     @PostMapping(value = "/addPembelian", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

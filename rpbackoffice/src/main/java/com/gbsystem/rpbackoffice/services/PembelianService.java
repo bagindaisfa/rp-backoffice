@@ -46,6 +46,9 @@ public class PembelianService {
 		return eRepo.save(p);
 	}
 
+	public List<Pembelian> search(String keyword){
+		return eRepo.search(keyword);
+	}
 	
 	public List<Pembelian> getAllPembelian(){
 
