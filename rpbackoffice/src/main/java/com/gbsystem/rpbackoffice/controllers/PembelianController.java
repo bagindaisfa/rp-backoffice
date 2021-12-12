@@ -13,7 +13,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +59,19 @@ public class PembelianController {
 		
     }
     
+    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("image") MultipartFile image,@RequestParam("artikel") String artikel,
+    		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
+    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
+    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    	
+    	if (artikel != "") {
+    		pembelianService.update(id, image, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
+    	}
+    	return "Update Data Successs!";
+		
+    }
+    
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void mapReapExcelDatatoDB(@RequestParam("file") MultipartFile readExcelDataFile) throws Exception {
     	
@@ -86,73 +98,13 @@ public class PembelianController {
         
     }
     
-    @GetMapping("/deletePembelian/{id}")
-    public String deletePembelian(@PathVariable("id") Long id)
+    @GetMapping("/deletePembelian")
+    public String deletePembelian(@RequestParam("id") Long id)
     {
     	
     	pembelianService.deletePembelianById(id);
     	return "redirect:/pembelian";
     }
     
-    @PostMapping("/changeTanggal_transaksi")
-    public String changeTanggal_transaksi(@RequestParam("id") Long id ,@RequestParam("newTanggal_transaksi") Date tanggal_transaksi)
-    {
-    	pembelianService.changePembelianTanggal_transaksi(id, tanggal_transaksi);
-    	return "redirect:/pembelian"; 
-    }
-    @PostMapping("/changeArtikel")
-    public String changeArtikel(@RequestParam("id") Long id ,@RequestParam("newArtikel") String artikel)
-    {
-    	pembelianService.changePembelianArtikel(id, artikel);
-    	return "redirect:/pembelian"; 
-    }
-    @PostMapping("/changeKategori")
-    public String changePembelianKategori(@RequestParam("id") Long id , @RequestParam("newKategori") String kategori)
-    {
-    	pembelianService.changePembelianKategori(id, kategori);
-    	return "redirect:/pembelian"; 
-    }
-    @PostMapping("/changeTipe")
-    public String changePembelianTipe(@RequestParam("id") Long id ,@RequestParam("newTipe") String tipe)
-    {
-    	pembelianService.changePembelianTipe(id, tipe);
-    	return "redirect:/pembelian"; 
-    }
-    @PostMapping("/changeNamaBarang")
-    public String changePembelianNamaBarang(@RequestParam("id") Long id ,@RequestParam("newNamaBarang") String nama_barang)
-    {
-    	pembelianService.changePembelianNamaBarang(id, nama_barang);
-    	return "redirect:/pembelian"; 
-	}
-    @PostMapping("/changeKuantitas")
-    public String changePembelianKuantitas(@RequestParam("id") Long id ,@RequestParam("newKuantitas") int kuantitas)
-    {
-    	pembelianService.changePembelianKuantitas(id, kuantitas);
-    	return "redirect:/pembelian"; 
-	}
-    @PostMapping("/changeUkuran")
-    public String changePembelianUkuran(@RequestParam("id") Long id ,@RequestParam("newUkuran") String ukuran)
-    {
-    	pembelianService.changePembelianUkuran(id, ukuran);
-    	return "redirect:/pembelian"; 
-	}
-    @PostMapping("/changeHpp")
-    public String changePembelianHpp(@RequestParam("id") Long id ,@RequestParam("newHpp") double hpp)
-    {
-    	pembelianService.changePembelianHpp(id, hpp);
-    	return "redirect:/pembelian"; 
-	}
-    @PostMapping("/changeHargaJual")
-    public String changePembelianHargaJual(@RequestParam("id") Long id ,@RequestParam("newHargaJual") double harga_jual)
-    {
-    	pembelianService.changePembelianHargaJual(id, harga_jual);
-    	return "redirect:/pembelian"; 
-	}
     
-    @PostMapping("/changeTotal_hpp")
-    public String changePembelianTotal_hpp(@RequestParam("id") Long id)
-    {
-    	pembelianService.changePembelianTotal_hpp(id);
-    	return "redirect:/pembelian"; 
-	}
 }

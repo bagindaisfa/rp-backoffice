@@ -63,6 +63,32 @@ public class PembelianService {
     	eRepo.save(p);    
     }
 	
+	public void update(Long id, MultipartFile image, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual ) {
+		Pembelian p = new Pembelian();
+    	p = eRepo.findById(id).get();
+    	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		p.setTanggal_transaksi(new Date());
+		p.setArtikel(artikel);
+		p.setKategori(kategori);
+		p.setTipe(tipe);
+		p.setNama_barang(nama_barang);
+		p.setKuantitas(kuantitas);
+		p.setUkuran(ukuran);
+		p.setHpp(hpp);
+		p.setHarga_jual(harga_jual);
+		p.setTotal_hpp(kuantitas * harga_jual);
+		p.setRowstatus(1);
+    	eRepo.save(p);
+	}
+	
 	public void changePembelianTanggal_transaksi(Long id ,Date tanggal_transaksi)
     {
 		Pembelian p = new Pembelian();
