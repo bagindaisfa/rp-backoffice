@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public class Pembelian {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@JsonFormat(pattern="yyyy MMMM dd")

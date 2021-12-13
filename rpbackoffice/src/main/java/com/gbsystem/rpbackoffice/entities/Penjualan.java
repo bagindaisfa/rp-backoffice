@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Penjualan {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy MMMM dd")
 	private Date tanggal_transaksi;
