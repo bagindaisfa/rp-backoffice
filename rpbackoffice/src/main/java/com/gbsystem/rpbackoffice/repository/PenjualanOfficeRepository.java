@@ -13,7 +13,7 @@ import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
 public interface PenjualanOfficeRepository extends JpaRepository<PenjualanOffice, Long> {
 	List<PenjualanOffice> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM penjualan_office WHERE "
+	@Query(value = "SELECT * FROM penjualan_office WHERE rowstatus=1 AND "
 			+ "MATCH(id_transaksi, id_office, lokasi_office) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<PenjualanOffice> search(String keyword);
