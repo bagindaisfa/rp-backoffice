@@ -74,7 +74,7 @@ public class PenjualanOffice {
 	
 	@Override
 	public String toString() {
-		return "Penjualan [id=" + id + ","
+		return "PenjualanOffice [id=" + id + ","
 				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
 				+ " id_transaksi=" + id_transaksi + ", "
 				+ "id_office=" + id_office + ","
