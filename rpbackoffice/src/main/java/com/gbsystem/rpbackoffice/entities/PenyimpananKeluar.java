@@ -18,7 +18,7 @@ public class PenyimpananKeluar {
 	
 	@JsonFormat(pattern="yyyy MMMM dd")
 	private Date tanggal_transaksi;
-	private Long id_store;
+	private String id_store;
 	private String lokasi_store;
 	private String artikel;
 	private String kategori;
@@ -27,7 +27,6 @@ public class PenyimpananKeluar {
 	private double kuantitas;
 	private String ukuran;
 	private double hpp;
-	private double harga_jual;
 	private double total_hpp;
 	private String keterangan;
 	private int rowstatus;
@@ -43,10 +42,10 @@ public class PenyimpananKeluar {
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
 	}
-	public Long getId_store() {
+	public String getId_store() {
 		return id_store;
 	}
-	public void setId_store(Long id_store) {
+	public void setId_store(String id_store) {
 		this.id_store = id_store;
 	}
 	public String getLokasi_store() {
@@ -97,12 +96,12 @@ public class PenyimpananKeluar {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_jual() {
-		return harga_jual;
-	}
-	public void setHarga_jual(double harga_jual) {
-		this.harga_jual = harga_jual;
-	}
+//	public double getHarga_jual() {
+//		return harga_jual;
+//	}
+//	public void setHarga_jual(double harga_jual) {
+//		this.harga_jual = harga_jual;
+//	}
 	public double getTotal_hpp() {
 		return total_hpp;
 	}
@@ -134,7 +133,6 @@ public class PenyimpananKeluar {
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
-	            + " harga_jual=" + harga_jual + ","
 	            + " total_hpp=" + total_hpp + ","
 	            + " keterangan=" + keterangan + ","
 	            + " rowstatus=" + rowstatus + "]";

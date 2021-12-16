@@ -1,13 +1,11 @@
 package com.gbsystem.rpbackoffice.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,20 +38,19 @@ public class PenyimpananMasukController {
         return new ResponseEntity<>(penyimpananMasukService.getAllPenyimpananMasuk(), HttpStatus.OK);
     }
     
-    @GetMapping("/search")
-    public ResponseEntity<List<PenyimpananMasuk>> search(@Param("keyword") String keyword) {
-    	return new ResponseEntity<>(penyimpananMasukService.search(keyword), HttpStatus.OK);
-    }
+//    @GetMapping("/search")
+//    public ResponseEntity<List<PenyimpananMasuk>> search(@Param("keyword") String keyword) {
+//    	return new ResponseEntity<>(penyimpananMasukService.search(keyword), HttpStatus.OK);
+//    }
     
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual,
-    		@RequestParam("keterangan") String keterangan) throws Exception {
+    		@RequestParam("hpp") double hpp,@RequestParam("keterangan") String keterangan) throws Exception {
     	
     	if (artikel != "") {
-    		penyimpananMasukService.savePenyimpananMasuk(artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual, keterangan);
+    		penyimpananMasukService.savePenyimpananMasuk(artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, keterangan);
     	}
     	return "Insert Data Successs!";
 		
@@ -63,11 +60,10 @@ public class PenyimpananMasukController {
     public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual,
-    		@RequestParam("keterangan") String keterangan) throws Exception {
+    		@RequestParam("hpp") double hpp,@RequestParam("keterangan") String keterangan) throws Exception {
     	
     	if (artikel != "") {
-    		penyimpananMasukService.update(id, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual, keterangan);
+    		penyimpananMasukService.update(id, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, keterangan);
     	}
     	return "Update Data Successs!";
 		
@@ -82,18 +78,17 @@ public class PenyimpananMasukController {
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	PenyimpananMasuk p = new PenyimpananMasuk();
         	XSSFRow row = worksheet.getRow(i);
-    		p.setArtikel(row.getCell(0).getStringCellValue());
-    		p.setKategori(row.getCell(4).getStringCellValue());
-			p.setTipe(row.getCell(7).getStringCellValue());
-			p.setNama_barang(row.getCell(6).getStringCellValue());
+    		p.setArtikel(row.getCell(1).getStringCellValue());
+    		p.setKategori(row.getCell(2).getStringCellValue());
+			p.setTipe(row.getCell(3).getStringCellValue());
+			p.setNama_barang(row.getCell(4).getStringCellValue());
 			p.setKuantitas(row.getCell(5).getNumericCellValue());
-			p.setUkuran(row.getCell(8).getStringCellValue());
-			p.setHpp(row.getCell(1).getNumericCellValue());
-    		p.setHarga_jual(row.getCell(2).getNumericCellValue());
-    		p.setTotal_hpp((row.getCell(5).getNumericCellValue()) * (row.getCell(1).getNumericCellValue()));
-    		p.setKeterangan(null);
+			p.setUkuran(row.getCell(6).getStringCellValue());
+			p.setHpp(row.getCell(7).getNumericCellValue());
+    		p.setTotal_hpp((row.getCell(5).getNumericCellValue()) * (row.getCell(7).getNumericCellValue()));
     		p.setRowstatus(1);
-    		p.setTanggal_transaksi(new Date());
+    		p.setKeterangan(row.getCell(8).getStringCellValue());
+    		p.setTanggal_transaksi(row.getCell(0).getDateCellValue());
     		eRepo.save(p);
         }
         

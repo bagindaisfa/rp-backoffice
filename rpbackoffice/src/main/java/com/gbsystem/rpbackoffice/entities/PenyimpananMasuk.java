@@ -25,7 +25,6 @@ public class PenyimpananMasuk {
 	private double kuantitas;
 	private String ukuran;
 	private double hpp;
-	private double harga_jual;
 	private double total_hpp;
 	private String keterangan;
 	private int rowstatus;
@@ -83,12 +82,6 @@ public class PenyimpananMasuk {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_jual() {
-		return harga_jual;
-	}
-	public void setHarga_jual(double harga_jual) {
-		this.harga_jual = harga_jual;
-	}
 	public double getTotal_hpp() {
 		return total_hpp;
 	}
@@ -118,7 +111,6 @@ public class PenyimpananMasuk {
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
-	            + " harga_jual=" + harga_jual + ","
 	            + " total_hpp=" + total_hpp + ","
 	            + " keterangan=" + keterangan + ","
 	            + " rowstatus=" + rowstatus + "]";

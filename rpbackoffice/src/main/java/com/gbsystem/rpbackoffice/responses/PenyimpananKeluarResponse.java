@@ -6,7 +6,7 @@ public class PenyimpananKeluarResponse {
 	
 	private Long id;
 	private Date tanggal_transaksi;
-	private Long id_store;
+	private String id_store;
 	private String lokasi_store;
 	private String artikel;
 	private String kategori;
@@ -15,7 +15,6 @@ public class PenyimpananKeluarResponse {
 	private int kuantitas;
 	private String ukuran;
 	private double hpp;
-	private double harga_jual;
 	private String keterangan;
 	
 	public Long getId() {
@@ -30,10 +29,10 @@ public class PenyimpananKeluarResponse {
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
 	}
-	public Long getId_store() {
+	public String getId_store() {
 		return id_store;
 	}
-	public void setId_store(Long id_store) {
+	public void setId_store(String id_store) {
 		this.id_store = id_store;
 	}
 	public String getLokasi_store() {
@@ -84,12 +83,12 @@ public class PenyimpananKeluarResponse {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_jual() {
-		return harga_jual;
-	}
-	public void setHarga_jual(double harga_jual) {
-		this.harga_jual = harga_jual;
-	}
+//	public double getHarga_jual() {
+//		return harga_jual;
+//	}
+//	public void setHarga_jual(double harga_jual) {
+//		this.harga_jual = harga_jual;
+//	}
 	public String getKeterangan() {
 		return keterangan;
 	}

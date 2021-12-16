@@ -16,7 +16,7 @@ public class PenyimpananMasukService {
 	private PenyimpananMasukRepository eRepo;
 	
 	public PenyimpananMasuk savePenyimpananMasuk(String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
 		
 		PenyimpananMasuk p = new PenyimpananMasuk();
 		
@@ -28,8 +28,7 @@ public class PenyimpananMasukService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
+		p.setTotal_hpp(kuantitas * hpp);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
 		return eRepo.save(p);
@@ -52,7 +51,7 @@ public class PenyimpananMasukService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+	public void update(Long id, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
 		PenyimpananMasuk p = new PenyimpananMasuk();
     	p = eRepo.findById(id).get();
     	
@@ -64,8 +63,7 @@ public class PenyimpananMasukService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
+		p.setTotal_hpp(kuantitas * hpp);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
     	eRepo.save(p);

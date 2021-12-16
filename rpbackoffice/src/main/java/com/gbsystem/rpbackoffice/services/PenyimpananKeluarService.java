@@ -15,8 +15,8 @@ public class PenyimpananKeluarService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepo;
 	
-	public PenyimpananKeluar savePenyimpananKeluar(Long id_store, String lokasi_store, String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+	public PenyimpananKeluar savePenyimpananKeluar(String id_store, String lokasi_store, String artikel, String kategori
+			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
 		
 		PenyimpananKeluar p = new PenyimpananKeluar();
 		
@@ -30,8 +30,7 @@ public class PenyimpananKeluarService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
+		p.setTotal_hpp(kuantitas * hpp);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
 		return eRepo.save(p);
@@ -54,7 +53,7 @@ public class PenyimpananKeluarService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Long id_store, String lokasi_store, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+	public void update(Long id, String id_store, String lokasi_store, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
 		PenyimpananKeluar p = new PenyimpananKeluar();
     	p = eRepo.findById(id).get();
     	
@@ -68,8 +67,7 @@ public class PenyimpananKeluarService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
+		p.setTotal_hpp(kuantitas * hpp);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
     	eRepo.save(p);

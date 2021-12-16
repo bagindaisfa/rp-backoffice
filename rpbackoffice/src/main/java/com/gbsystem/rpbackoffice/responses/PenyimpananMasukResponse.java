@@ -12,7 +12,6 @@ public class PenyimpananMasukResponse {
 	private int kuantitas;
 	private String ukuran;
 	private double hpp;
-	private double harga_jual;
 	private String keterangan;
 	
 	public Long getId() {
@@ -68,12 +67,6 @@ public class PenyimpananMasukResponse {
 	}
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
-	}
-	public double getHarga_jual() {
-		return harga_jual;
-	}
-	public void setHarga_jual(double harga_jual) {
-		this.harga_jual = harga_jual;
 	}
 	public String getKeterangan() {
 		return keterangan;
