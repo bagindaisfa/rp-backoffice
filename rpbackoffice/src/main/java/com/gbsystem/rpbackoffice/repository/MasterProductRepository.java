@@ -12,7 +12,7 @@ import com.gbsystem.rpbackoffice.entities.MasterProduct;
 public interface MasterProductRepository extends JpaRepository<MasterProduct, Long> {
 	List<MasterProduct> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value= "select o from master_product o where artikel_product in :artikel_product", nativeQuery = true )
+	@Query(value= "SELECT * FROM master_product WHERE artikel_product IN :artikel_product", nativeQuery = true )
 	List<MasterProduct> findByMasterProductArtikel_product(@Param("artikel_product") List<String> masterProductArtikel_productList);
 	
 	@Query(value = "SELECT * FROM master_product WHERE rowstatus = 1 AND "
