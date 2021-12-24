@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PenyimpananMasukResponse {
 	private Long id;
-	private Date tanggal_transaksi;
+	private Date tanggal_masuk;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -12,6 +12,7 @@ public class PenyimpananMasukResponse {
 	private int kuantitas;
 	private String ukuran;
 	private double hpp;
+	private double harga_jual;
 	private String keterangan;
 	
 	public Long getId() {
@@ -20,11 +21,11 @@ public class PenyimpananMasukResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_transaksi() {
-		return tanggal_transaksi;
+	public Date getTanggal_masuk() {
+		return tanggal_masuk;
 	}
-	public void setTanggal_transaksi(Date tanggal_transaksi) {
-		this.tanggal_transaksi = tanggal_transaksi;
+	public void setTanggal_masuk(Date tanggal_masuk) {
+		this.tanggal_masuk = tanggal_masuk;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -67,6 +68,12 @@ public class PenyimpananMasukResponse {
 	}
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
+	}
+	public double getHarga_jual() {
+		return harga_jual;
+	}
+	public void setHarga_jual(double harga_jual) {
+		this.harga_jual = harga_jual;
 	}
 	public String getKeterangan() {
 		return keterangan;

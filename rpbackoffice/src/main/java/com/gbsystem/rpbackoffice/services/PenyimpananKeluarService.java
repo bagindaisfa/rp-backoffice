@@ -1,10 +1,14 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
@@ -16,11 +20,22 @@ public class PenyimpananKeluarService {
 	private PenyimpananKeluarRepository eRepo;
 	
 	public PenyimpananKeluar savePenyimpananKeluar(String id_store, String lokasi_store, String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
+			,String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
+			double harga_jual, String keterangan ) {
 		
 		PenyimpananKeluar p = new PenyimpananKeluar();
 		
-		p.setTanggal_transaksi(new Date());
+		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setFoto_barang(Base64.getEncoder().encodeToString(foto_barang.getBytes()));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		p.setTanggal_keluar(new Date());
 		p.setId_store(id_store);
 		p.setLokasi_store(lokasi_store);
 		p.setArtikel(artikel);
@@ -30,7 +45,7 @@ public class PenyimpananKeluarService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setTotal_hpp(kuantitas * hpp);
+		p.setHarga_jual(harga_jual);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
 		return eRepo.save(p);
@@ -53,11 +68,23 @@ public class PenyimpananKeluarService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String id_store, String lokasi_store, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
+	public void update(Long id, Date tanggal_keluar, String id_store, String lokasi_store, String artikel, String kategori, 
+			String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
+			double harga_jual, String keterangan ) {
 		PenyimpananKeluar p = new PenyimpananKeluar();
     	p = eRepo.findById(id).get();
     	
-		p.setTanggal_transaksi(new Date());
+    	String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setFoto_barang(Base64.getEncoder().encodeToString(foto_barang.getBytes()));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+    	
+		p.setTanggal_keluar(tanggal_keluar);
 		p.setId_store(id_store);
 		p.setLokasi_store(lokasi_store);
 		p.setArtikel(artikel);
@@ -67,7 +94,7 @@ public class PenyimpananKeluarService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setTotal_hpp(kuantitas * hpp);
+		p.setHarga_jual(harga_jual);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
     	eRepo.save(p);

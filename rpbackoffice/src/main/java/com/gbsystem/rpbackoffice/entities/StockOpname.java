@@ -17,15 +17,15 @@ public class StockOpname {
 	private Long id;
 	
 	@JsonFormat(pattern="yyyy MMMM dd")
-	private Date tanggal_transaksi;
+	private Date tanggal_so;
 	private String artikel;
 	private String kategori;
 	private String tipe;
 	private String nama_barang;
-	private double kuantitas;
-	private String ukuran;
-	private double hpp;
-	private double total_hpp;
+	private double kuantitas_masuk;
+	private double kuantitas_keluar;
+	private Float stock;
+	private double stock_opname;
 	private String keterangan;
 	private int rowstatus;
 	public Long getId() {
@@ -34,11 +34,11 @@ public class StockOpname {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_transaksi() {
-		return tanggal_transaksi;
+	public Date getTanggal_so() {
+		return tanggal_so;
 	}
-	public void setTanggal_transaksi(Date tanggal_transaksi) {
-		this.tanggal_transaksi = tanggal_transaksi;
+	public void setTanggal_so(Date tanggal_so) {
+		this.tanggal_so = tanggal_so;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -64,29 +64,29 @@ public class StockOpname {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
-	public double getKuantitas() {
-		return kuantitas;
+	public double getKuantitas_masuk() {
+		return kuantitas_masuk;
 	}
-	public void setKuantitas(double kuantitas) {
-		this.kuantitas = kuantitas;
+	public void setKuantitas_masuk(double kuantitas_masuk) {
+		this.kuantitas_masuk = kuantitas_masuk;
 	}
-	public String getUkuran() {
-		return ukuran;
+	public double getKuantitas_keluar() {
+		return kuantitas_keluar;
 	}
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
+	public void setKuantitas_keluar(double kuantitas_keluar) {
+		this.kuantitas_keluar = kuantitas_keluar;
 	}
-	public double getHpp() {
-		return hpp;
+	public Float getStock() {
+		return stock;
 	}
-	public void setHpp(double hpp) {
-		this.hpp = hpp;
+	public void setStock(Float stock) {
+		this.stock = stock;
 	}
-	public double getTotal_hpp() {
-		return total_hpp;
+	public double getStock_opname() {
+		return stock_opname;
 	}
-	public void setTotal_hpp(double total_hpp) {
-		this.total_hpp = total_hpp;
+	public void setStock_opname(double stock_opname) {
+		this.stock_opname = stock_opname;
 	}
 	public String getKeterangan() {
 		return keterangan;
@@ -103,15 +103,15 @@ public class StockOpname {
 	@Override
 	public String toString() {
 		return "StockOpname [id=" + id + ","
-				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
+				+ " tanggal_so=" + tanggal_so + ", "
 				+ " artikel=" + artikel + ", "
-				+ "kategori=" + kategori + ","
+				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
 	            + " nama_barang=" + nama_barang + ","
-	            + " kuantitas=" + kuantitas + ","
-	            + " ukuran=" + ukuran + ","
-	            + " hpp=" + hpp + ","
-	            + " total_hpp=" + total_hpp + ","
+	            + " kuantitas_masuk=" + kuantitas_masuk + ","
+	            + " kuantitas_keluar=" + kuantitas_keluar + ","
+	            + " stock=" + stock + ","
+	            + " stock_opname=" + stock_opname + ","
 	            + " keterangan=" + keterangan + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}

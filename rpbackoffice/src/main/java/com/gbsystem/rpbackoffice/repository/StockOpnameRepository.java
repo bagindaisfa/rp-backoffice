@@ -12,7 +12,7 @@ public interface StockOpnameRepository extends JpaRepository<StockOpname, Long> 
 List<StockOpname> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND "
-			+ "MATCH(artikel, tipe, kategori, nama_barang, ukuran, keterangan) "
+			+ "MATCH(nama_barang) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<StockOpname> search(String keyword);
 }

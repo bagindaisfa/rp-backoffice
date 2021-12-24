@@ -16,11 +16,11 @@ public class PenyimpananMasukService {
 	private PenyimpananMasukRepository eRepo;
 	
 	public PenyimpananMasuk savePenyimpananMasuk(String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
+			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		
 		PenyimpananMasuk p = new PenyimpananMasuk();
 		
-		p.setTanggal_transaksi(new Date());
+		p.setTanggal_masuk(new Date());
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setTipe(tipe);
@@ -28,7 +28,7 @@ public class PenyimpananMasukService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setTotal_hpp(kuantitas * hpp);
+		p.setHarga_jual(harga_jual);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
 		return eRepo.save(p);
@@ -51,11 +51,12 @@ public class PenyimpananMasukService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, String keterangan ) {
+	public void update(Long id, Date tanggal_masuk, String artikel, String kategori, String tipe, String nama_barang, 
+			double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		PenyimpananMasuk p = new PenyimpananMasuk();
     	p = eRepo.findById(id).get();
     	
-		p.setTanggal_transaksi(new Date());
+		p.setTanggal_masuk(tanggal_masuk);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setTipe(tipe);
@@ -63,7 +64,7 @@ public class PenyimpananMasukService {
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
 		p.setHpp(hpp);
-		p.setTotal_hpp(kuantitas * hpp);
+		p.setHarga_jual(harga_jual);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
     	eRepo.save(p);

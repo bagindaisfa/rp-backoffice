@@ -17,7 +17,7 @@ public class PenyimpananMasuk {
 	private Long id;
 	
 	@JsonFormat(pattern="yyyy MMMM dd")
-	private Date tanggal_transaksi;
+	private Date tanggal_masuk;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -25,7 +25,7 @@ public class PenyimpananMasuk {
 	private double kuantitas;
 	private String ukuran;
 	private double hpp;
-	private double total_hpp;
+	private double harga_jual;
 	private String keterangan;
 	private int rowstatus;
 	public Long getId() {
@@ -34,11 +34,11 @@ public class PenyimpananMasuk {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_transaksi() {
-		return tanggal_transaksi;
+	public Date getTanggal_masuk() {
+		return tanggal_masuk;
 	}
-	public void setTanggal_transaksi(Date tanggal_transaksi) {
-		this.tanggal_transaksi = tanggal_transaksi;
+	public void setTanggal_masuk(Date tanggal_masuk) {
+		this.tanggal_masuk = tanggal_masuk;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -82,11 +82,11 @@ public class PenyimpananMasuk {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getTotal_hpp() {
-		return total_hpp;
+	public double getHarga_jual() {
+		return harga_jual;
 	}
-	public void setTotal_hpp(double total_hpp) {
-		this.total_hpp = total_hpp;
+	public void setHarga_jual(double harga_jual) {
+		this.harga_jual = harga_jual;
 	}
 	public String getKeterangan() {
 		return keterangan;
@@ -103,7 +103,7 @@ public class PenyimpananMasuk {
 	@Override
 	public String toString() {
 		return "PenyimpananMasuk [id=" + id + ","
-				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
+				+ " tanggal_masuk=" + tanggal_masuk + ", "
 				+ " artikel=" + artikel + ", "
 				+ "kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
@@ -111,7 +111,7 @@ public class PenyimpananMasuk {
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
-	            + " total_hpp=" + total_hpp + ","
+	            + " harga_jual=" + harga_jual + ","
 	            + " keterangan=" + keterangan + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}

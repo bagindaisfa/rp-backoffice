@@ -2,11 +2,12 @@ package com.gbsystem.rpbackoffice.entities;
 
 import java.util.Date;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,7 +18,7 @@ public class PenyimpananKeluar {
 	private Long id;
 	
 	@JsonFormat(pattern="yyyy MMMM dd")
-	private Date tanggal_transaksi;
+	private Date tanggal_keluar;
 	private String id_store;
 	private String lokasi_store;
 	private String artikel;
@@ -26,8 +27,11 @@ public class PenyimpananKeluar {
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String foto_barang;
 	private double hpp;
-	private double total_hpp;
+	private double harga_jual;
 	private String keterangan;
 	private int rowstatus;
 	public Long getId() {
@@ -36,11 +40,11 @@ public class PenyimpananKeluar {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_transaksi() {
-		return tanggal_transaksi;
+	public Date getTanggal_keluar() {
+		return tanggal_keluar;
 	}
-	public void setTanggal_transaksi(Date tanggal_transaksi) {
-		this.tanggal_transaksi = tanggal_transaksi;
+	public void setTanggal_keluar(Date tanggal_keluar) {
+		this.tanggal_keluar = tanggal_keluar;
 	}
 	public String getId_store() {
 		return id_store;
@@ -90,6 +94,12 @@ public class PenyimpananKeluar {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
+	public String getFoto_barang() {
+		return foto_barang;
+	}
+	public void setFoto_barang(String foto_barang) {
+		this.foto_barang = foto_barang;
+	}
 	public double getHpp() {
 		return hpp;
 	}
@@ -102,11 +112,11 @@ public class PenyimpananKeluar {
 //	public void setHarga_jual(double harga_jual) {
 //		this.harga_jual = harga_jual;
 //	}
-	public double getTotal_hpp() {
-		return total_hpp;
+	public double getTHarga_jual() {
+		return harga_jual;
 	}
-	public void setTotal_hpp(double total_hpp) {
-		this.total_hpp = total_hpp;
+	public void setHarga_jual(double harga_jual) {
+		this.harga_jual = harga_jual;
 	}
 	public String getKeterangan() {
 		return keterangan;
@@ -123,17 +133,18 @@ public class PenyimpananKeluar {
 	@Override
 	public String toString() {
 		return "PenyimpananKeluar [id=" + id + ","
-				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
+				+ " tanggal_keluar=" + tanggal_keluar + ", "
 				+ " id_store=" + id_store + ", "
 				+ " lokasi_store=" + lokasi_store + ", "
 				+ " artikel=" + artikel + ", "
-				+ "kategori=" + kategori + ","
+				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
 	            + " nama_barang=" + nama_barang + ","
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
-	            + " total_hpp=" + total_hpp + ","
+	            + " foto_barang=" + foto_barang + ","
+	            + " harga_jual=" + harga_jual + ","
 	            + " keterangan=" + keterangan + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}

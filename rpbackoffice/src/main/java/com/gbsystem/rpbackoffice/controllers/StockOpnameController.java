@@ -1,11 +1,14 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gbsystem.rpbackoffice.entities.StockOpname;
+import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
+import com.gbsystem.rpbackoffice.repository.PenyimpananMasukRepository;
 import com.gbsystem.rpbackoffice.repository.StockOpnameRepository;
 import com.gbsystem.rpbackoffice.services.StockOpnameService;
 
@@ -32,25 +37,30 @@ public class StockOpnameController {
 	
 	@Autowired
 	private StockOpnameRepository eRepo;
+	
+	@Autowired
+	private PenyimpananMasukRepository eRepoMasuk;
+	
+	@Autowired
+	private PenyimpananKeluarRepository eRepoKeluar;
 
     @GetMapping("/all")
 	public ResponseEntity<List<StockOpname>> getAll() {
         return new ResponseEntity<>(stockOpnameService.getAllStockOpname(), HttpStatus.OK);
     }
     
-//    @GetMapping("/search")
-//    public ResponseEntity<List<StockOpname>> search(@Param("keyword") String keyword) {
-//    	return new ResponseEntity<>(stockOpnameService.search(keyword), HttpStatus.OK);
-//    }
+    @GetMapping("/search")
+    public ResponseEntity<List<StockOpname>> search(@Param("keyword") String keyword) {
+    	return new ResponseEntity<>(stockOpnameService.search(keyword), HttpStatus.OK);
+    }
     
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("keterangan") String keterangan) throws Exception {
+    		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {
-    		stockOpnameService.saveStockOpname(artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, keterangan);
+    		stockOpnameService.saveStockOpname(artikel, kategori, tipe, nama_barang, stock_opname);
     	}
     	return "Insert Data Successs!";
 		
@@ -59,11 +69,10 @@ public class StockOpnameController {
     @PostMapping(value = "/update")
     public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("keterangan") String keterangan) throws Exception {
+    		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {
-    		stockOpnameService.update(id, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, keterangan);
+    		stockOpnameService.update(id, artikel, kategori, tipe, nama_barang, stock_opname);
     	}
     	return "Update Data Successs!";
 		
@@ -78,17 +87,38 @@ public class StockOpnameController {
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	StockOpname p = new StockOpname();
         	XSSFRow row = worksheet.getRow(i);
+        	
+        	Date date = row.getCell(0).getDateCellValue();
+        	
+        	Calendar cal = Calendar.getInstance();
+        	cal.setTime(date);
+            cal.add(Calendar.MONTH, -1);
+            
+            Date date_before = cal.getTime();
+    		
+    		Float kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(row.getCell(2).getStringCellValue(), date, date_before);
+    		Float kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(row.getCell(2).getStringCellValue(), date, date_before);
+    		
+    		Float stock = kuantitas_masuk - kuantitas_keluar;
+    		
+    		String keterangan = "";
+    		if (stock == row.getCell(5).getNumericCellValue()) {
+    			keterangan = "Sesuai";
+    		} else {
+    			keterangan = "Tidak Sesuai";
+    		}
+        	
         	p.setArtikel(row.getCell(1).getStringCellValue());
     		p.setKategori(row.getCell(2).getStringCellValue());
 			p.setTipe(row.getCell(3).getStringCellValue());
 			p.setNama_barang(row.getCell(4).getStringCellValue());
-			p.setKuantitas(row.getCell(5).getNumericCellValue());
-			p.setUkuran(row.getCell(6).getStringCellValue());
-			p.setHpp(row.getCell(7).getNumericCellValue());
-    		p.setTotal_hpp((row.getCell(5).getNumericCellValue()) * (row.getCell(7).getNumericCellValue()));
-    		p.setRowstatus(1);
-    		p.setKeterangan(row.getCell(8).getStringCellValue());
-    		p.setTanggal_transaksi(row.getCell(0).getDateCellValue());
+			p.setKuantitas_masuk(kuantitas_masuk);
+			p.setKuantitas_keluar(kuantitas_keluar);
+			p.setStock(stock);
+			p.setStock_opname(row.getCell(5).getNumericCellValue());
+			p.setTanggal_so(date);
+			p.setKeterangan(keterangan);
+			p.setRowstatus(1);
     		eRepo.save(p);
         }
         

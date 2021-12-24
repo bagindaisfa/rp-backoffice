@@ -1,6 +1,6 @@
 package com.gbsystem.rpbackoffice.controllers;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -45,27 +45,35 @@ public class PenjualanOfficeController {
     	return new ResponseEntity<>(penjualanOfficeService.search(keyword), HttpStatus.OK);
     }
 	
-	@PostMapping("/add")
-	public String savePenjualan_office(@RequestParam("tanggal_transaksi") Date tanggal_transaksi,
-			@RequestParam("id_transaksi") String id_transaksi,
-			@RequestParam("id_office") String id_office,
-			@RequestParam("lokasi_office") String lokasi_office,
-			@RequestParam("kuantitas") double kuantitas,
-			@RequestParam("total") double total) 
+	@PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public String savePenjualan_office(@RequestParam("id_office") String id_office,
+    		@RequestParam("lokasi_office") String lokasi_office, @RequestParam("artikel") String artikel,
+    		@RequestParam("tipe") String tipe, @RequestParam("kategori") String kategori, 
+    		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
+    		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang, 
+    		@RequestParam("metode_pembayaran") String metode_pembayaran, @RequestParam("harga_satuan_barang") double harga_satuan_barang, 
+    		@RequestParam("ongkos_kirim") double ongkos_kirim, @RequestParam("pajak_biaya") double pajak_biaya, 
+    		@RequestParam("total") double total) 
 	{
-		penjualanOfficeService.savePenjualanOffice(tanggal_transaksi, id_transaksi, id_office, lokasi_office, kuantitas, total);
+		penjualanOfficeService.savePenjualanOffice(id_office, lokasi_office, artikel, tipe, kategori, 
+				nama_barang, kuantitas, ukuran, foto_barang, metode_pembayaran, 
+				harga_satuan_barang, ongkos_kirim, pajak_biaya, total);
 		return "redirect:/penjualan";
 	}
 	
-	@PostMapping(value = "/update")
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_transaksi") Date tanggal_transaksi, 
-    		@RequestParam("id_transaksi") String id_transaksi,
-    		@RequestParam("id_office") String id_office,@RequestParam("lokasi_office") String lokasi_office,
-    		@RequestParam("kuantitas") double kuantitas,@RequestParam("total") double total) throws Exception {
+	@PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("id_office") String id_office,
+    		@RequestParam("lokasi_office") String lokasi_office, @RequestParam("artikel") String artikel,
+    		@RequestParam("tipe") String tipe, @RequestParam("kategori") String kategori, 
+    		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
+    		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang, 
+    		@RequestParam("metode_pembayaran") String metode_pembayaran, @RequestParam("harga_satuan_barang") double harga_satuan_barang, 
+    		@RequestParam("ongkos_kirim") double ongkos_kirim, @RequestParam("pajak_biaya") double pajak_biaya, 
+    		@RequestParam("total") double total) throws Exception {
     	
-    	if (id_transaksi != "") {
-    		penjualanOfficeService.update(id, tanggal_transaksi, id_transaksi, id_office, lokasi_office, kuantitas, total);
-    	}
+    	penjualanOfficeService.update(id, id_office, lokasi_office, artikel, tipe, kategori, 
+    				nama_barang, kuantitas, ukuran, foto_barang, metode_pembayaran, 
+    				harga_satuan_barang, ongkos_kirim, pajak_biaya, total);
     	return "Update Data Successs!";
 		
     }
@@ -79,11 +87,23 @@ public class PenjualanOfficeController {
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	PenjualanOffice p = new PenjualanOffice();
         	XSSFRow row = worksheet.getRow(i);
-        	p.setId_transaksi(row.getCell(1).getStringCellValue());
-        	p.setId_office(row.getCell(2).getStringCellValue());
-        	p.setLokasi_office(row.getCell(3).getStringCellValue());
-			p.setKuantitas(row.getCell(4).getNumericCellValue());
-			p.setTotal(row.getCell(5).getNumericCellValue());
+        	
+        	String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(row.getCell(0).getDateCellValue()) + "-O" + (eRepo.count() + i);
+        	
+        	p.setId_transaksi(id_transaksi);
+        	p.setId_office(row.getCell(1).getStringCellValue());
+        	p.setLokasi_office(row.getCell(2).getStringCellValue());
+        	p.setArtikel(row.getCell(3).getStringCellValue());
+        	p.setTipe(row.getCell(4).getStringCellValue());
+        	p.setKategori(row.getCell(5).getStringCellValue());
+        	p.setNama_barang(row.getCell(6).getStringCellValue());
+        	p.setKuantitas(row.getCell(7).getNumericCellValue());
+        	p.setUkuran(row.getCell(8).getStringCellValue());
+        	p.setMetode_pembayaran(row.getCell(9).getStringCellValue());
+        	p.setHarga_satuan_barang(row.getCell(10).getNumericCellValue());
+        	p.setOngkos_kirim(row.getCell(11).getNumericCellValue());
+        	p.setPajak_biaya(row.getCell(12).getNumericCellValue());
+        	p.setTotal(row.getCell(13).getNumericCellValue());
     		p.setRowstatus(1);
     		p.setTanggal_transaksi(row.getCell(0).getDateCellValue());
     		eRepo.save(p);
@@ -97,42 +117,5 @@ public class PenjualanOfficeController {
     	penjualanOfficeService.deletePenjualanById(id);
     	return "redirect:/penjualan";
     }
-	
-//	@PostMapping("/changeTanggal_transaksi")
-//    public String changeTanggal_transaksi(@RequestParam("id") Long id ,@RequestParam("newTanggal_transaksi") Date tanggal_transaksi)
-//    {
-//    	penjualanOfficeService.changePenjualanTanggal_transaksi(id, tanggal_transaksi);
-//    	return "redirect:/penjualan"; 
-//    }
-//	@PostMapping("/changeId_transaksi")
-//    public String changeId_transaksi(@RequestParam("id") Long id ,@RequestParam("newId_transaksi") String id_transaksi)
-//    {
-//    	penjualanOfficeService.changePenjualanId_transaksi(id, id_transaksi);
-//    	return "redirect:/penjualan"; 
-//    }
-//	@PostMapping("/changeId_office")
-//    public String changeId_office(@RequestParam("id") Long id ,@RequestParam("newId_office") String id_office)
-//    {
-//    	penjualanOfficeService.changePenjualanId_office(id, id_office);
-//    	return "redirect:/penjualan"; 
-//    }
-//	@PostMapping("/changeLokasi_office")
-//    public String changeLokasi_office(@RequestParam("id") Long id ,@RequestParam("newLokasi_office") String lokasi_office)
-//    {
-//    	penjualanOfficeService.changePenjualanLokasi_office(id, lokasi_office);
-//    	return "redirect:/penjualan"; 
-//    }
-//	@PostMapping("/changeKuantitas")
-//    public String changeKuantitas(@RequestParam("id") Long id ,@RequestParam("newKuantitas") int kuantitas)
-//    {
-//    	penjualanOfficeService.changePenjualanKuantitas(id, kuantitas);
-//    	return "redirect:/penjualan"; 
-//    }
-//	@PostMapping("/changeTotal")
-//    public String changeTotal(@RequestParam("id") Long id ,@RequestParam("newTotal") double total)
-//    {
-//    	penjualanOfficeService.changePenjualanTotal(id, total);
-//    	return "redirect:/penjualan"; 
-//    }
-    
+	    
 }
