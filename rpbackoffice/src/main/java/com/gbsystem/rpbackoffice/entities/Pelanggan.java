@@ -110,7 +110,7 @@ public class Pelanggan {
 		return "Pelanggan [id=" + id + ","
 				+ " tanggal_join=" + tanggal_join + ", "
 				+ " nama_pelanggan=" + nama_pelanggan + ", "
-				+ "no_hp=" + no_hp + ","
+				+ " no_hp=" + no_hp + ","
 				+ " email=" + email + ","
 	            + " alamat=" + alamat + ","
 	            + " total_kunjungan=" + total_kunjungan + ","
