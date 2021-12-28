@@ -54,7 +54,9 @@ public class User implements UserDetails {
 
 	@Column(name = "enabled")
 	private boolean enabled=true;
-
+	
+	@Column(name = "akses_modul")
+	private String[] akses_modul;
 	
 	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinTable(name = "AUTH_USER_AUTHORITY", joinColumns = @JoinColumn(referencedColumnName = "id"),inverseJoinColumns = @JoinColumn(referencedColumnName ="id"))
@@ -177,8 +179,14 @@ public class User implements UserDetails {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-	
-	
 
+	public String[] getAkses_modul() {
+		return akses_modul;
+	}
+
+	public void setAkses_modul(String[] akses_modul) {
+		this.akses_modul = akses_modul;
+	}
+	
 }
 

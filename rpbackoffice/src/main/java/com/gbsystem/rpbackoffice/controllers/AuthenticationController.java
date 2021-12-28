@@ -65,6 +65,7 @@ public class AuthenticationController {
 		LoginResponse response=new LoginResponse();
 		response.setToken(jwtToken);
 		response.setNamaPengguna(userObj.getFirstName()+" "+userObj.getLastName());
+		response.setAkses_modul(userObj.getAkses_modul());
 		
 
 		return ResponseEntity.ok(response);
@@ -88,12 +89,21 @@ public class AuthenticationController {
 	public @ResponseBody String  saveUser(
 			@RequestParam("userName") String userName,@RequestParam("password") String password,
     		@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
-    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber) throws Exception{
+    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
 		
-		customUserService.saveUser(userName, password, firstName, lastName, email, phoneNumber);
+		customUserService.saveUser(userName, password, firstName, lastName, email, phoneNumber, akses_modul);
 			return "Success!";
 		
 	}
-	
+	@PostMapping(value = "/auth/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public @ResponseBody String  saveUser(
+			@RequestParam("id") long id, @RequestParam("userName") String userName,@RequestParam("password") String password,
+    		@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
+    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
+		
+		customUserService.update(id, userName, password, firstName, lastName, email, phoneNumber, akses_modul);
+			return "Success!";
+		
+	}
 }
 

@@ -34,7 +34,7 @@ public class CustomUserService implements UserDetailsService {
 		return user;
 	}
 	
-	public User saveUser(String userName, String password,String firstName,String lastName,String email,String phoneNumber ) {
+	public User saveUser(String userName, String password,String firstName,String lastName,String email,String phoneNumber, String[] akses_modul ) {
 		
 		User user = new User();
 		List<Authority> authorityList=new ArrayList<>();
@@ -46,9 +46,30 @@ public class CustomUserService implements UserDetailsService {
 		user.setEmail(email);
 		user.setPhoneNumber(phoneNumber);
 		user.setEnabled(true);
+		user.setAkses_modul(akses_modul);
 		user.setAuthorities(authorityList);
 		return userDetailsRepository.save(user);
 	}
+	
+	public User update( long id, String userName, String password,String firstName,String lastName,String email,String phoneNumber, String[] akses_modul  ) {
+		User user = new User();
+		user = userDetailsRepository.findById(id);
+		List<Authority> authorityList=new ArrayList<>();
+		authorityList.add(createAuthority("USER","User role"));
+		
+		user.setUserName(userName);
+		user.setPassword(passwordEncoder.encode(password));
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setEmail(email);
+		user.setPhoneNumber(phoneNumber);
+		user.setEnabled(true);
+		user.setAkses_modul(akses_modul);
+		user.setAuthorities(authorityList);
+		return userDetailsRepository.save(user);
+		
+	}
+	
 	private Authority createAuthority(String roleCode,String roleDescription) {
 		Authority authority=new Authority();
 		authority.setRoleCode(roleCode);
