@@ -12,6 +12,8 @@ import com.gbsystem.rpbackoffice.entities.MasterProject;
 public interface MasterProjectRepository extends JpaRepository<MasterProject, Long> {
 	List<MasterProject> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
+	public MasterProject findById(String id);
+	
 	@Query(value = "SELECT * FROM master_project WHERE rowstatus = 1 AND "
 			+ "MATCH(project_name) "
 			+ "AGAINST (?1)", nativeQuery = true)
