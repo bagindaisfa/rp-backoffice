@@ -10,61 +10,86 @@ public class ChartOfAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nama_akun;
+	private String noAkun;
+	private String namaAkun;
 	private String kelompok;
 	private String tipe;
-	private String relasi;
-	private String jenis_beban;
+	private String saldo_normal;
+	private double saldo_awal;
 	private int rowstatus;
+	
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNama_akun() {
-		return nama_akun;
+
+	public String getNoAkun() {
+		return noAkun;
 	}
-	public void setNama_akun(String nama_akun) {
-		this.nama_akun = nama_akun;
+
+	public void setNoAkun(String noAkun) {
+		this.noAkun = noAkun;
 	}
+
+	public String getNamaAkun() {
+		return namaAkun;
+	}
+
+	public void setNamaAkun(String namaAkun) {
+		this.namaAkun = namaAkun;
+	}
+
 	public String getKelompok() {
 		return kelompok;
 	}
+
 	public void setKelompok(String kelompok) {
 		this.kelompok = kelompok;
 	}
+
 	public String getTipe() {
 		return tipe;
 	}
+
 	public void setTipe(String tipe) {
 		this.tipe = tipe;
 	}
-	public String getRelasi() {
-		return relasi;
+
+	public String getSaldo_normal() {
+		return saldo_normal;
 	}
-	public void setRelasi(String relasi) {
-		this.relasi = relasi;
+
+	public void setSaldo_normal(String saldo_normal) {
+		this.saldo_normal = saldo_normal;
 	}
-	public String getJenis_beban() {
-		return jenis_beban;
+
+	public double getSaldo_awal() {
+		return saldo_awal;
 	}
-	public void setJenis_beban(String jenis_beban) {
-		this.jenis_beban = jenis_beban;
+
+	public void setSaldo_awal(double saldo_awal) {
+		this.saldo_awal = saldo_awal;
 	}
+
 	public int getRowstatus() {
 		return rowstatus;
 	}
+
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
 	@Override
 	public String toString() {
 		return "ChartOfAccount [id=" + id + ","
-				+ " nama_akun=" + nama_akun + ", "
+				+ " noAkun=" + noAkun + ", "
+				+ " namaAkun=" + namaAkun + ", "
 				+ " kelompok=" + kelompok + ", "
 				+ " tipe=" + tipe + ", "
-				+ " relasi=" + relasi + ", "
+				+ " saldo_normal=" + saldo_normal + ", "
+				+ " saldo_awal=" + saldo_awal + ", "
 				+ " rowstatus=" + rowstatus + "]";
 	}
 }

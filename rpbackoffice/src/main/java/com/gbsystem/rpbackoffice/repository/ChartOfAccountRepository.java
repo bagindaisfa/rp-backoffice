@@ -12,12 +12,13 @@ import com.gbsystem.rpbackoffice.entities.ChartOfAccount;
 public interface ChartOfAccountRepository extends JpaRepository<ChartOfAccount, Long> {
 	List<ChartOfAccount> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-
-	@Query(value= "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND artikel_product IN :nama_akun", nativeQuery = true )
-	List<ChartOfAccount> findByChartOfAccountNama_akun(@Param("nama_akun") List<String> chartOfAccountNama_akunList);
+	public ChartOfAccount findByNoAkun(String noAkun);
+	
+	@Query(value= "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND no_akun IN :no_akun", nativeQuery = true )
+	List<ChartOfAccount> findByChartOfAccountNo_akun(@Param("no_akun") List<String> chartOfAccountNama_akunList);
 	
 	@Query(value = "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_akun, tipe, kelompok) "
+			+ "MATCH(no_akun, nama_akun, tipe, kelompok) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<ChartOfAccount> search(String keyword);
 }

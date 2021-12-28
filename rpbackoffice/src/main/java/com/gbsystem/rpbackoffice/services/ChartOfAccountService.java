@@ -14,17 +14,16 @@ public class ChartOfAccountService {
 	private ChartOfAccountRepository eRepo;
 	
 	public ChartOfAccount saveChartOfAccount(
-			String nama_akun, String kelompok, 
-			String tipe, String relasi, String jenis_beban
+			String noAkun,String namaAkun, String kelompok, 
+			String tipe, String saldo_normal, double saldo_awal
 			) {
-		
 		ChartOfAccount p = new ChartOfAccount();
-		
-		p.setNama_akun(nama_akun);
+		p.setNoAkun(noAkun);
+		p.setNamaAkun(namaAkun);
 		p.setKelompok(kelompok);
 		p.setTipe(tipe);
-		p.setRelasi(relasi);
-		p.setJenis_beban(jenis_beban);
+		p.setSaldo_normal(saldo_normal);
+		p.setSaldo_awal(saldo_awal);
 		p.setRowstatus(1);
 		return eRepo.save(p);
 	}
@@ -40,7 +39,7 @@ public class ChartOfAccountService {
 	
 	public List<ChartOfAccount> getChartOfAccount(List<String> nama_akun){
 
-		return eRepo.findByChartOfAccountNama_akun(nama_akun);
+		return eRepo.findByChartOfAccountNo_akun(nama_akun);
 	}
 	
 	public void deleteChartOfAccountById(Long id)
@@ -52,16 +51,16 @@ public class ChartOfAccountService {
     }
 	
 	public void update(
-			Long id, String nama_akun, String kelompok, 
-			String tipe, String relasi, String jenis_beban ) {
+			Long id, String noAkun,String namaAkun, String kelompok, 
+			String tipe, String saldo_normal, double saldo_awal ) {
 		ChartOfAccount p = new ChartOfAccount();
     	p = eRepo.findById(id).get();
-    	p.setNama_akun(nama_akun);
+    	p.setNoAkun(noAkun);
+		p.setNamaAkun(namaAkun);
 		p.setKelompok(kelompok);
 		p.setTipe(tipe);
-		p.setRelasi(relasi);
-		p.setJenis_beban(jenis_beban);
-		p.setRowstatus(1);
+		p.setSaldo_normal(saldo_normal);
+		p.setSaldo_awal(saldo_awal);
     	eRepo.save(p);
 	}
 }

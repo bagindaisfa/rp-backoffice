@@ -39,9 +39,9 @@ public class CharOfAccountController {
     }
     
     @GetMapping("/dropdown")
-	public ResponseEntity<List<ChartOfAccount>> getAllDropdown(@RequestParam List<String> nama_akun) {
+	public ResponseEntity<List<ChartOfAccount>> getAllByNo_akun(@RequestParam List<String> noAkun) {
     	
-        return new ResponseEntity<>(chartOfAccountService.getChartOfAccount(nama_akun), HttpStatus.OK);
+        return new ResponseEntity<>(chartOfAccountService.getChartOfAccount(noAkun), HttpStatus.OK);
     }
     
     @GetMapping("/search")
@@ -51,29 +51,31 @@ public class CharOfAccountController {
 
     @PostMapping(value = "/add")
     public @ResponseBody String saveChartOfAccount(
-    		@RequestParam("nama_akun") String nama_akun,
+    		@RequestParam("noAkun") String noAkun,
+    		@RequestParam("nama_akun") String namaAkun,
     		@RequestParam("kelompok") String kelompok,
     		@RequestParam("tipe") String tipe,
-    		@RequestParam("relasi") String relasi,
-    		@RequestParam("jenis_beban") String jenis_beban
+    		@RequestParam("saldo_normal") String saldo_normal,
+    		@RequestParam("saldo_awal") double saldo_awal
     		) 
 	{
-    	chartOfAccountService.saveChartOfAccount(nama_akun,kelompok,tipe,relasi,jenis_beban);
+    	chartOfAccountService.saveChartOfAccount(noAkun,namaAkun,kelompok,tipe,saldo_normal, saldo_awal);
 		return "redirect:/akutanasi/coa/all";
 	}
     
     @PostMapping(value = "/update")
     public @ResponseBody String update(
     		@RequestParam("id") Long id,
-    		@RequestParam("nama_akun") String nama_akun,
+    		@RequestParam("noAkun") String noAkun,
+    		@RequestParam("nama_akun") String namaAkun,
     		@RequestParam("kelompok") String kelompok,
     		@RequestParam("tipe") String tipe,
-    		@RequestParam("relasi") String relasi,
-    		@RequestParam("jenis_beban") String jenis_beban
+    		@RequestParam("saldo_normal") String saldo_normal,
+    		@RequestParam("saldo_awal") double saldo_awal
     		) throws Exception {
     	
-    	if (nama_akun != "") {
-    		chartOfAccountService.update(id, nama_akun, kelompok,tipe,relasi,jenis_beban);
+    	if (namaAkun != "") {
+    		chartOfAccountService.update(id, noAkun,namaAkun,kelompok,tipe,saldo_normal, saldo_awal);
     	}
     	return "Update Data Successs!";
 		
@@ -88,11 +90,12 @@ public class CharOfAccountController {
         for(int i=1; i<worksheet.getPhysicalNumberOfRows(); i++) {
         	ChartOfAccount chartOfAccount = new ChartOfAccount();
         	XSSFRow row = worksheet.getRow(i);
-        	chartOfAccount.setNama_akun(row.getCell(0).getStringCellValue());
-        	chartOfAccount.setKelompok(row.getCell(1).getStringCellValue());
-        	chartOfAccount.setTipe(row.getCell(2).getStringCellValue());
-        	chartOfAccount.setRelasi(row.getCell(3).getStringCellValue());
-        	chartOfAccount.setJenis_beban(row.getCell(4).getStringCellValue());
+        	chartOfAccount.setNoAkun(row.getCell(0).getStringCellValue());
+        	chartOfAccount.setNamaAkun(row.getCell(1).getStringCellValue());
+        	chartOfAccount.setKelompok(row.getCell(2).getStringCellValue());
+        	chartOfAccount.setTipe(row.getCell(3).getStringCellValue());
+        	chartOfAccount.setSaldo_normal(row.getCell(4).getStringCellValue());
+        	chartOfAccount.setSaldo_awal(row.getCell(6).getNumericCellValue());
         	chartOfAccount.setRowstatus(1);
     		eRepo.save(chartOfAccount);
         }
