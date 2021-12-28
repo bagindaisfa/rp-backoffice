@@ -1,58 +1,88 @@
 package com.gbsystem.rpbackoffice.entities;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Where;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class GeneralJournal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String nomorJournal;
-	private LocalDateTime tanggal_transaksi;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date tanggal_transaksi;
+	private String noAkun;
+	private String nama_akun;
+	private String kelompok;
+	private String rincian_transaksi;
+	private double debit_amount;
+	private double credit_amount;
 	private String project;
 	private String project_name;
-	private String rincian_transaksi;
+	@Column(updatable=false, insertable=false)
+	private double saldo_akhir;
 	private int rowstatus;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "generalJournal", cascade = CascadeType.ALL)
-	@Where(clause = "rowstatus = 1")
-	@JsonIgnoreProperties("general_journal")
-	private List<JournalDetail> journalDetail = new ArrayList<>();
 	
-
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getNomorJournal() {
 		return nomorJournal;
 	}
-
 	public void setNomorJournal(String nomorJournal) {
 		this.nomorJournal = nomorJournal;
 	}
-
-	public LocalDateTime getTanggal_transaksi() {
+	public Date getTanggal_transaksi() {
 		return tanggal_transaksi;
 	}
-	public void setTanggal_transaksi(LocalDateTime tanggal_transaksi) {
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
+	}
+	public String getNoAkun() {
+		return noAkun;
+	}
+	public void setNoAkun(String noAkun) {
+		this.noAkun = noAkun;
+	}
+	public String getNama_akun() {
+		return nama_akun;
+	}
+	public void setNama_akun(String nama_akun) {
+		this.nama_akun = nama_akun;
+	}
+	public String getKelompok() {
+		return kelompok;
+	}
+	public void setKelompok(String kelompok) {
+		this.kelompok = kelompok;
+	}
+	public String getRincian_transaksi() {
+		return rincian_transaksi;
+	}
+	public void setRincian_transaksi(String rincian_transaksi) {
+		this.rincian_transaksi = rincian_transaksi;
+	}
+	public double getDebit_amount() {
+		return debit_amount;
+	}
+	public void setDebit_amount(double debit_amount) {
+		this.debit_amount = debit_amount;
+	}
+	public double getCredit_amount() {
+		return credit_amount;
+	}
+	public void setCredit_amount(double credit_amount) {
+		this.credit_amount = credit_amount;
 	}
 	public String getProject() {
 		return project;
@@ -66,24 +96,14 @@ public class GeneralJournal {
 	public void setProject_name(String project_name) {
 		this.project_name = project_name;
 	}
-	public String getRincian_transaksi() {
-		return rincian_transaksi;
-	}
-	public void setRincian_transaksi(String rincian_transaksi) {
-		this.rincian_transaksi = rincian_transaksi;
-	}
 	public int getRowstatus() {
 		return rowstatus;
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	
-	public List<JournalDetail> getJournalDetail() {
-		return journalDetail;
-	}
-	public void setJournalDetail(List<JournalDetail> journalDetail) {
-		this.journalDetail = journalDetail;
+	public double getSaldo_akhir() {
+		return saldo_akhir;
 	}
 	
 }
