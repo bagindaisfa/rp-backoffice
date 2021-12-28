@@ -12,6 +12,8 @@ import com.gbsystem.rpbackoffice.entities.MasterProduct;
 public interface MasterProductRepository extends JpaRepository<MasterProduct, Long> {
 	List<MasterProduct> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
+	MasterProduct findById(String id);
+	
 	@Query(value= "SELECT * FROM master_product WHERE rowstatus = 1 AND artikel_product IN :artikel_product", nativeQuery = true )
 	List<MasterProduct> findByMasterProductArtikel_product(@Param("artikel_product") List<String> masterProductArtikel_productList);
 	
