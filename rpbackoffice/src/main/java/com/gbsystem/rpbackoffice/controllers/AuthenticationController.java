@@ -52,16 +52,19 @@ public class AuthenticationController {
 	@PostMapping("/auth/login")
 	public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) throws InvalidKeySpecException, NoSuchAlgorithmException {
 
-		final Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-				authenticationRequest.getUserName(), authenticationRequest.getPassword()));
+		final Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(authenticationRequest.getUserName(), authenticationRequest.getPassword()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		User user=(User)authentication.getPrincipal();
 		String jwtToken=jWTTokenHelper.generateToken(user.getUsername());
 		
+		User userObj=(User) userDetailsService.loadUserByUsername(authenticationRequest.getUserName());
+		
 		LoginResponse response=new LoginResponse();
 		response.setToken(jwtToken);
+		response.setNamaPengguna(userObj.getFirstName()+" "+userObj.getLastName());
 		
 
 		return ResponseEntity.ok(response);
