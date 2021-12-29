@@ -39,7 +39,7 @@ public class MasterOfficeController {
     		@RequestParam("alamat") String alamat, @RequestParam("kepala_office") String kepala_office ) 
 	{
     	masterOfficeService.saveMasterOffice(office_name, no_tlpn, alamat, kepala_office);
-		return "redirect:/tipe";
+		return "redirect:/office";
 	}
     
     @PostMapping("/update")
@@ -57,6 +57,6 @@ public class MasterOfficeController {
     {
     	
     	masterOfficeService.deleteMasterOfficeById(id);
-    	return "redirect:/kategori";
+    	return "redirect:/office";
     }
 }
