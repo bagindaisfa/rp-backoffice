@@ -8,8 +8,14 @@ public class PenjualanResponse {
 	private String id_transaksi;
 	private String id_store;
 	private String lokasi_store;
-	private double kuantitas;
+	private String nama_pelanggan;
+	private String nama_karyawan;
+	private double diskon;
+	private String metode_bayar;
+	private String ekspedisi;
+	private double ongkir;
 	private double total;
+	private double kembalian;
 	
 	public Long getId() {
 		return id;
@@ -41,16 +47,52 @@ public class PenjualanResponse {
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
 	}
-	public double getKuantitas() {
-		return kuantitas;
+	public double getDiskon() {
+		return diskon;
 	}
-	public void setKuantitas(int kuantitas) {
-		this.kuantitas = kuantitas;
+	public void setDiskon(double diskon) {
+		this.diskon = diskon;
+	}
+	public String getMetode_bayar() {
+		return metode_bayar;
+	}
+	public void setMetode_bayar(String metode_bayar) {
+		this.metode_bayar = metode_bayar;
+	}
+	public String getEkspedisi() {
+		return ekspedisi;
+	}
+	public void setEkspedisi(String ekspedisi) {
+		this.ekspedisi = ekspedisi;
+	}
+	public double getOngkir() {
+		return ongkir;
+	}
+	public void setOngkir(double ongkir) {
+		this.ongkir = ongkir;
 	}
 	public double getTotal() {
 		return total;
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	public double getKembalian() {
+		return kembalian;
+	}
+	public void setKembalian(double kembalian) {
+		this.kembalian = kembalian;
+	}
+	public String getNama_pelanggan() {
+		return nama_pelanggan;
+	}
+	public void setNama_pelanggan(String nama_pelanggan) {
+		this.nama_pelanggan = nama_pelanggan;
+	}
+	public String getNama_karyawan() {
+		return nama_karyawan;
+	}
+	public void setNama_karyawan(String nama_karyawan) {
+		this.nama_karyawan = nama_karyawan;
 	}
 }

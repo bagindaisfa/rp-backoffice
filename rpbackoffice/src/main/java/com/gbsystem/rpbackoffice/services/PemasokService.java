@@ -35,8 +35,8 @@ public class PemasokService {
 		return eRepo.search(keyword);
 	}
 	
-	public List<Pemasok> download(String oe){
-		return eRepo.download(oe);
+	public void download(){
+		eRepo.download();
 	}
 	
 	public List<Pemasok> getAllPemasok(){

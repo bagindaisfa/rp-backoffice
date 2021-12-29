@@ -45,8 +45,9 @@ public class PelangganController {
     }
     
     @GetMapping("/download")
-    public ResponseEntity<List<Pelanggan>> download(@Param("oe") String oe) {
-    	return new ResponseEntity<>(pelangganService.download(oe), HttpStatus.OK);
+    public ResponseEntity<String> download() {
+    	pelangganService.download();
+    	return new ResponseEntity<>("OK GAN", HttpStatus.OK);
     }
     
     @PostMapping(value = "/add")

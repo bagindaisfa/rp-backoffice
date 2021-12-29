@@ -16,8 +16,7 @@ public class PenyimpananKeluar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonFormat(pattern="yyyy MMMM dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_keluar;
 	private String id_store;
 	private String lokasi_store;

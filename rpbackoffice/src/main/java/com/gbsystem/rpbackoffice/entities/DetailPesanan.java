@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Penjualan {
+public class DetailPesanan {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,14 +20,10 @@ public class Penjualan {
 	private String id_transaksi;
 	private String id_store;
 	private String lokasi_store;
-	private String nama_pelanggan;
-	private String nama_karyawan;
-	private Double diskon;
-	private String metode_bayar;
-	private String ekspedisi;
-	private Double ongkir;
+	private String nama_barang;
+	private Double harga;
+	private Double kuantitas;
 	private Double total;
-	private Double kembalian;
 	private int rowstatus;
 	
 	public Long getId() {
@@ -60,53 +56,29 @@ public class Penjualan {
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
 	}
-	public double getDiskon() {
-		return diskon;
+	public String getNama_barang() {
+		return nama_barang;
 	}
-	public void setDiskon(double diskon) {
-		this.diskon = diskon;
+	public void setNama_barang(String nama_barang) {
+		this.nama_barang = nama_barang;
 	}
-	public String getMetode_bayar() {
-		return metode_bayar;
+	public double getHarga() {
+		return harga;
 	}
-	public void setMetode_bayar(String metode_bayar) {
-		this.metode_bayar = metode_bayar;
+	public void setHarga(double harga) {
+		this.harga = harga;
 	}
-	public String getEkspedisi() {
-		return ekspedisi;
+	public double getKuantitas() {
+		return kuantitas;
 	}
-	public void setEkspedisi(String ekspedisi) {
-		this.ekspedisi = ekspedisi;
-	}
-	public double getOngkir() {
-		return ongkir;
-	}
-	public void setOngkir(double ongkir) {
-		this.ongkir = ongkir;
+	public void setKuantitas(double kuantitas) {
+		this.kuantitas = kuantitas;
 	}
 	public double getTotal() {
 		return total;
 	}
 	public void setTotal(double total) {
 		this.total = total;
-	}
-	public double getKembalian() {
-		return kembalian;
-	}
-	public void setKembalian(double kembalian) {
-		this.kembalian = kembalian;
-	}
-	public String getNama_pelanggan() {
-		return nama_pelanggan;
-	}
-	public void setNama_pelanggan(String nama_pelanggan) {
-		this.nama_pelanggan = nama_pelanggan;
-	}
-	public String getNama_karyawan() {
-		return nama_karyawan;
-	}
-	public void setNama_karyawan(String nama_karyawan) {
-		this.nama_karyawan = nama_karyawan;
 	}
 	public int getRowstatus() {
 		return rowstatus;
@@ -122,14 +94,11 @@ public class Penjualan {
 				+ " id_transaksi=" + id_transaksi + ", "
 				+ "id_store=" + id_store + ","
 				+ " lokasi_store=" + lokasi_store + ","
-	            + " diskon=" + diskon + ","
-	            + " metode_bayar=" + metode_bayar + ","
-	            + " ekspedisi=" + ekspedisi + ","
-	            + " ongkir=" + ongkir + ","
+	            + " nama_barang=" + nama_barang + ","
+	            + " harga=" + harga + ","
+	            + " kuantitas=" + kuantitas + ","
 	            + " total=" + total + ","
-	            + " kembalian=" + kembalian + ","
-	            + " nama_pelanggan=" + nama_pelanggan + ","
-	            + " nama_karyawan=" + nama_karyawan + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}
+	
 }

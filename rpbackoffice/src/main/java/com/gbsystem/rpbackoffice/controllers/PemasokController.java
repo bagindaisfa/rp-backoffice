@@ -45,8 +45,9 @@ public class PemasokController {
     }
     
     @GetMapping("/download")
-    public ResponseEntity<List<Pemasok>> download(@Param("oe") String oe) {
-    	return new ResponseEntity<>(pemasokService.download(oe), HttpStatus.OK);
+    public ResponseEntity<String> download() {
+    	pemasokService.download();
+    	return new ResponseEntity<>("OK GAN", HttpStatus.OK);
     }
     
     @PostMapping(value = "/add")

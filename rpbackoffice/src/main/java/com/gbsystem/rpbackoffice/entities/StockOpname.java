@@ -15,8 +15,7 @@ public class StockOpname {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonFormat(pattern="yyyy MMMM dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_so;
 	private String artikel;
 	private String kategori;

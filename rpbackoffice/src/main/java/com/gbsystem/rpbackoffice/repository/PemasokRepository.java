@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,9 @@ List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<Pemasok> search(String keyword);
 	
-	@Query(value = "SELECT * INTO OUTFILE 'D:/test.csv' FROM pemasok where rowstatus = 1", nativeQuery = true)
-	List<Pemasok> download(String oe);
+//	@Query(value = "SELECT * INTO OUTFILE 'D:/test.csv' FROM pemasok where rowstatus = 1", nativeQuery = true)
+//	List<Pemasok> download(String oe);
+	
+	@Procedure(procedureName = "download_pemasok")
+	void download();
 }

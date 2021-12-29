@@ -15,8 +15,7 @@ public class Pelanggan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonFormat(pattern="yyyy MMMM dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_join;
 	private String nama_pelanggan;
 	private String no_hp;

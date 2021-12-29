@@ -15,8 +15,7 @@ public class PenyimpananMasuk {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@JsonFormat(pattern="yyyy MMMM dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_masuk;
 	private String artikel;
 	private String kategori;

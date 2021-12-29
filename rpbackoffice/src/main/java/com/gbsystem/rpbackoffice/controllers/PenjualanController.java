@@ -46,25 +46,30 @@ public class PenjualanController {
     }
 	
 	@PostMapping("/add")
-	public String savePenjualan(@RequestParam("tanggal_transaksi") Date tanggal_transaksi,
-			@RequestParam("id_transaksi") String id_transaksi,
-			@RequestParam("id_store") String id_store,
-			@RequestParam("lokasi_store") String lokasi_store,
-			@RequestParam("kuantitas") double kuantitas,
-			@RequestParam("total") double total) 
+	public String savePenjualan(@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
+			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_pelanggan") String nama_pelanggan,
+			@RequestParam("nama_karyawan") String nama_karyawan, @RequestParam("diskon") double diskon,
+			@RequestParam("metode_bayar") String metode_bayar, @RequestParam("ekspedisi") String ekspedisi,
+			@RequestParam("ongkir") double ongkir, @RequestParam("total") double total,
+			@RequestParam("kembalian") double kembalian) 
 	{
-		penjualanService.savePenjualan(tanggal_transaksi, id_transaksi, id_store, lokasi_store, kuantitas, total);
+		penjualanService.savePenjualan(id_transaksi, id_store, lokasi_store, nama_pelanggan,
+				nama_karyawan, diskon, metode_bayar, ekspedisi, ongkir, total, kembalian);
 		return "redirect:/penjualan";
 	}
 	
 	@PostMapping(value = "/update")
     public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_transaksi") Date tanggal_transaksi, 
-    		@RequestParam("id_transaksi") String id_transaksi,
-    		@RequestParam("id_store") String id_store,@RequestParam("lokasi_store") String lokasi_store,
-    		@RequestParam("kuantitas") double kuantitas,@RequestParam("total") double total) throws Exception {
+    		@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
+			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_pelanggan") String nama_pelanggan,
+			@RequestParam("nama_karyawan") String nama_karyawan, @RequestParam("diskon") double diskon,
+			@RequestParam("metode_bayar") String metode_bayar, @RequestParam("ekspedisi") String ekspedisi,
+			@RequestParam("ongkir") double ongkir, @RequestParam("total") double total,
+			@RequestParam("kembalian") double kembalian) throws Exception {
     	
     	if (id_transaksi != "") {
-    		penjualanService.update(id, tanggal_transaksi, id_transaksi, id_store, lokasi_store, kuantitas, total);
+    		penjualanService.update(id, tanggal_transaksi, id_transaksi, id_store, lokasi_store, nama_pelanggan,
+    				nama_karyawan, diskon, metode_bayar, ekspedisi, ongkir, total, kembalian);
     	}
     	return "Update Data Successs!";
 		
@@ -82,8 +87,14 @@ public class PenjualanController {
         	p.setId_transaksi(row.getCell(1).getStringCellValue());
         	p.setId_store(row.getCell(2).getStringCellValue());
         	p.setLokasi_store(row.getCell(3).getStringCellValue());
-			p.setKuantitas(row.getCell(4).getNumericCellValue());
-			p.setTotal(row.getCell(5).getNumericCellValue());
+        	p.setNama_pelanggan(row.getCell(4).getStringCellValue());
+        	p.setNama_karyawan(row.getCell(5).getStringCellValue());
+        	p.setDiskon(row.getCell(6).getNumericCellValue());
+        	p.setMetode_bayar(row.getCell(7).getStringCellValue());
+        	p.setEkspedisi(row.getCell(8).getStringCellValue());
+			p.setOngkir(row.getCell(9).getNumericCellValue());
+			p.setTotal(row.getCell(10).getNumericCellValue());
+			p.setKembalian(row.getCell(11).getNumericCellValue());
     		p.setRowstatus(1);
     		p.setTanggal_transaksi(row.getCell(0).getDateCellValue());
     		eRepo.save(p);

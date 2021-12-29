@@ -37,8 +37,8 @@ public class PelangganService {
 		return eRepo.search(keyword);
 	}
 	
-	public List<Pelanggan> download(String oe){
-		return eRepo.download(oe);
+	public void download(){
+		eRepo.download();
 	}
 	
 	public List<Pelanggan> getAllPelanggan(){
