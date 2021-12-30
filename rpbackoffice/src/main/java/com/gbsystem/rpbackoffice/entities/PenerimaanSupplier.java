@@ -127,7 +127,7 @@ public class PenerimaanSupplier {
 	}
 	@Override
 	public String toString() {
-		return "PenyimpananKeluar [id=" + id + ","
+		return "PenerimaanSupplier [id=" + id + ","
 				+ " tanggal_penerimaan=" + tanggal_penerimaan + ", "
 				+ " lokasi_penerimaan=" + lokasi_penerimaan + ", "
 				+ " id_supplier=" + id_supplier + ", "

@@ -12,16 +12,16 @@ import javax.persistence.Lob;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class PenerimaanStore {
-	
+public class PengirimanStore {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date tanggal_penerimaan;
-	private String lokasi_penerimaan;
-	private String id_pelanggan;
-	private String nama_pelanggan;
+	private Date tanggal_pengiriman;
+	private String lokasi_store_asal;
+	private String id_store_tujuan;
+	private String lokasi_store_tujuan;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -41,29 +41,29 @@ public class PenerimaanStore {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_penerimaan() {
-		return tanggal_penerimaan;
+	public Date getTanggal_pengiriman() {
+		return tanggal_pengiriman;
 	}
-	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
-		this.tanggal_penerimaan = tanggal_penerimaan;
+	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
+		this.tanggal_pengiriman = tanggal_pengiriman;
 	}
-	public String getLokasi_penerimaan() {
-		return lokasi_penerimaan;
+	public String getLokasi_store_asal() {
+		return lokasi_store_asal;
 	}
-	public void setLokasi_penerimaan(String lokasi_penerimaan) {
-		this.lokasi_penerimaan = lokasi_penerimaan;
+	public void setLokasi_store_asal(String lokasi_store_asal) {
+		this.lokasi_store_asal = lokasi_store_asal;
 	}
-	public String getId_pelanggan() {
-		return id_pelanggan;
+	public String getId_store_tujuan() {
+		return id_store_tujuan;
 	}
-	public void setId_pelanggan(String id_pelanggan) {
-		this.id_pelanggan = id_pelanggan;
+	public void setId_store_tujuan(String id_store_tujuan) {
+		this.id_store_tujuan = id_store_tujuan;
 	}
-	public String getNama_pelanggan() {
-		return nama_pelanggan;
+	public String getLokasi_store_tujuan() {
+		return lokasi_store_tujuan;
 	}
-	public void setNama_pelanggan(String nama_pelanggan) {
-		this.nama_pelanggan = nama_pelanggan;
+	public void setLokasi_store_tujuan(String lokasi_store_tujuan) {
+		this.lokasi_store_tujuan = lokasi_store_tujuan;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -127,11 +127,11 @@ public class PenerimaanStore {
 	}
 	@Override
 	public String toString() {
-		return "PenerimaanStore [id=" + id + ","
-				+ " tanggal_penerimaan=" + tanggal_penerimaan + ", "
-				+ " lokasi_penerimaan=" + lokasi_penerimaan + ", "
-				+ " id_pelanggan=" + id_pelanggan + ", "
-				+ " nama_pelanggan=" + nama_pelanggan + ", "
+		return "PengirimanStore [id=" + id + ","
+				+ " tanggal_pengiriman=" + tanggal_pengiriman + ", "
+				+ " lokasi_store_asal=" + lokasi_store_asal + ", "
+				+ " id_store_tujuan=" + id_store_tujuan + ", "
+				+ " lokasi_store_tujuan=" + lokasi_store_tujuan + ", "
 				+ " artikel=" + artikel + ", "
 				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
@@ -143,5 +143,5 @@ public class PenerimaanStore {
 	            + " harga_jual=" + harga_jual + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}
-
+	
 }

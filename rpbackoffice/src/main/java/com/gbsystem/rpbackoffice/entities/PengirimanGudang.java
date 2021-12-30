@@ -12,16 +12,15 @@ import javax.persistence.Lob;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class PenerimaanStore {
+public class PengirimanGudang {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date tanggal_penerimaan;
-	private String lokasi_penerimaan;
-	private String id_pelanggan;
-	private String nama_pelanggan;
+	private Date tanggal_pengiriman;
+	private String nama_gudang;
+	private String lokasi_store;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -41,29 +40,23 @@ public class PenerimaanStore {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_penerimaan() {
-		return tanggal_penerimaan;
+	public Date getTanggal_pengiriman() {
+		return tanggal_pengiriman;
 	}
-	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
-		this.tanggal_penerimaan = tanggal_penerimaan;
+	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
+		this.tanggal_pengiriman = tanggal_pengiriman;
 	}
-	public String getLokasi_penerimaan() {
-		return lokasi_penerimaan;
+	public String getNama_gudang() {
+		return nama_gudang;
 	}
-	public void setLokasi_penerimaan(String lokasi_penerimaan) {
-		this.lokasi_penerimaan = lokasi_penerimaan;
+	public void setNama_gudang(String nama_gudang) {
+		this.nama_gudang = nama_gudang;
 	}
-	public String getId_pelanggan() {
-		return id_pelanggan;
+	public String getLokasi_store() {
+		return lokasi_store;
 	}
-	public void setId_pelanggan(String id_pelanggan) {
-		this.id_pelanggan = id_pelanggan;
-	}
-	public String getNama_pelanggan() {
-		return nama_pelanggan;
-	}
-	public void setNama_pelanggan(String nama_pelanggan) {
-		this.nama_pelanggan = nama_pelanggan;
+	public void setLokasi_store(String lokasi_store) {
+		this.lokasi_store = lokasi_store;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -127,11 +120,10 @@ public class PenerimaanStore {
 	}
 	@Override
 	public String toString() {
-		return "PenerimaanStore [id=" + id + ","
-				+ " tanggal_penerimaan=" + tanggal_penerimaan + ", "
-				+ " lokasi_penerimaan=" + lokasi_penerimaan + ", "
-				+ " id_pelanggan=" + id_pelanggan + ", "
-				+ " nama_pelanggan=" + nama_pelanggan + ", "
+		return "PengirimanGudang [id=" + id + ","
+				+ " tanggal_pengiriman=" + tanggal_pengiriman + ", "
+				+ " nama_gudang=" + nama_gudang + ", "
+				+ " lokasi_store=" + lokasi_store + ", "
 				+ " artikel=" + artikel + ", "
 				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
