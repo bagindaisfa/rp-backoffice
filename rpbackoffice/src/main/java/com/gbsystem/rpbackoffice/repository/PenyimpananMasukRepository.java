@@ -12,7 +12,10 @@ import com.gbsystem.rpbackoffice.entities.PenyimpananMasuk;
 
 @Repository
 public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMasuk, Long> {
-List<PenyimpananMasuk> findByRowstatus(@Param("rowstatus") int rowstatus);
+	List<PenyimpananMasuk> findByRowstatus(@Param("rowstatus") int rowstatus);
+	
+	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
+	List<PenyimpananMasuk> findByPenerimaan_code(String penerimaan_code);
 	
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND "
 			+ "MATCH(nama_barang) "
