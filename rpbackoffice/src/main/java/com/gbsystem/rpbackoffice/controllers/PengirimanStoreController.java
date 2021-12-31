@@ -63,7 +63,7 @@ public class PengirimanStoreController {
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_pengiriman") Date tanggal_pengiriman,
+    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_pengiriman") Date tanggal_pengiriman, @RequestParam("pengiriman_code") String pengiriman_code,
     		@RequestParam("lokasi_store_asal") String lokasi_store_asal, @RequestParam("id_store_tujuan") String id_store_tujuan,
     		@RequestParam("lokasi_store_tujuan") String lokasi_store_tujuan, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori, @RequestParam("tipe") String tipe,
@@ -72,7 +72,7 @@ public class PengirimanStoreController {
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		pengirimanStoreService.update(id, tanggal_pengiriman, lokasi_store_asal, id_store_tujuan, lokasi_store_tujuan, artikel, kategori, tipe, nama_barang, 
+    		pengirimanStoreService.update(id,pengiriman_code, tanggal_pengiriman, lokasi_store_asal, id_store_tujuan, lokasi_store_tujuan, artikel, kategori, tipe, nama_barang, 
     				kuantitas, ukuran, foto_barang, hpp, harga_jual);
     	}
     	return "Update Data Successs!";
