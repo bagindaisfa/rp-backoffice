@@ -16,6 +16,7 @@ public class PenyimpananKeluar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_keluar;
 	private String id_store;
@@ -38,6 +39,12 @@ public class PenyimpananKeluar {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getPengiriman_code() {
+		return pengiriman_code;
+	}
+	public void setPengiriman_code(String pengiriman_code) {
+		this.pengiriman_code = pengiriman_code;
 	}
 	public Date getTanggal_keluar() {
 		return tanggal_keluar;
@@ -111,7 +118,7 @@ public class PenyimpananKeluar {
 //	public void setHarga_jual(double harga_jual) {
 //		this.harga_jual = harga_jual;
 //	}
-	public double getTHarga_jual() {
+	public double getHarga_jual() {
 		return harga_jual;
 	}
 	public void setHarga_jual(double harga_jual) {
