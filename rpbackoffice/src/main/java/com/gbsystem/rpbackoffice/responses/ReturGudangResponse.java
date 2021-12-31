@@ -2,12 +2,12 @@ package com.gbsystem.rpbackoffice.responses;
 
 import java.util.Date;
 
-public class PengirimanGudangResponse {
+public class ReturGudangResponse {
 	
 	private Long id;
-	private Date tanggal_pengiriman;
-	private String nama_gudang;
-	private String lokasi_store;
+	private Date tanggal_retur;
+	private String lokasi_store_asal;
+	private String nama_gudang_tujuan;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -23,23 +23,23 @@ public class PengirimanGudangResponse {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_pengiriman() {
-		return tanggal_pengiriman;
+	public Date getTanggal_retur() {
+		return tanggal_retur;
 	}
-	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
-		this.tanggal_pengiriman = tanggal_pengiriman;
+	public void setTanggal_retur(Date tanggal_retur) {
+		this.tanggal_retur = tanggal_retur;
 	}
-	public String getNama_gudang() {
-		return nama_gudang;
+	public String getLokasi_store_asal() {
+		return lokasi_store_asal;
 	}
-	public void setNama_gudang(String nama_gudang) {
-		this.nama_gudang = nama_gudang;
+	public void setLokasi_store_asal(String lokasi_store_asal) {
+		this.lokasi_store_asal = lokasi_store_asal;
 	}
-	public String getLokasi_store() {
-		return lokasi_store;
+	public String getNama_gudang_tujuan() {
+		return nama_gudang_tujuan;
 	}
-	public void setLokasi_store(String lokasi_store) {
-		this.lokasi_store = lokasi_store;
+	public void setNama_gudang_tujuan(String nama_gudang_tujuan) {
+		this.nama_gudang_tujuan = nama_gudang_tujuan;
 	}
 	public String getArtikel() {
 		return artikel;
