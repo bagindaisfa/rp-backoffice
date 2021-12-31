@@ -63,7 +63,7 @@ public class PenerimaanSupplierController {
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,
+    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,@RequestParam("penerimaan_code") String penerimaan_code,
     		@RequestParam("lokasi_penerimaan") String lokasi_penerimaan, @RequestParam("id_supplier") String id_supplier,
     		@RequestParam("nama_supplier") String nama_supplier, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
@@ -72,7 +72,7 @@ public class PenerimaanSupplierController {
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		penerimaanSupplierService.update(id, tanggal_penerimaan, lokasi_penerimaan, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
+    		penerimaanSupplierService.update(id, penerimaan_code, tanggal_penerimaan, lokasi_penerimaan, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
     				kuantitas, ukuran, foto_barang, hpp, harga_jual);
     	}
     	return "Update Data Successs!";
@@ -107,9 +107,9 @@ public class PenerimaanSupplierController {
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanSupplier(@RequestParam("id") Long id)
+    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("artikel") String artikel)
     {
-    	penerimaanSupplierService.deletePenerimaanSupplierById(id);
+    	penerimaanSupplierService.deletePenerimaanSupplierById(id,artikel);
     	return "redirect:/all";
     }
 

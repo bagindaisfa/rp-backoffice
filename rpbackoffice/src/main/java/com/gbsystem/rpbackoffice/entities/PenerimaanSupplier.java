@@ -17,11 +17,13 @@ public class PenerimaanSupplier {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private String lokasi_penerimaan;
 	private String id_supplier;
 	private String nama_supplier;
+	
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -41,6 +43,14 @@ public class PenerimaanSupplier {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getPenerimaan_code() {
+		return penerimaan_code;
+	}
+	public void setPenerimaan_code(String penerimaan_code) {
+		this.penerimaan_code = penerimaan_code;
+	}
+	
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;
 	}
@@ -119,6 +129,7 @@ public class PenerimaanSupplier {
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
+	
 	public int getRowstatus() {
 		return rowstatus;
 	}
