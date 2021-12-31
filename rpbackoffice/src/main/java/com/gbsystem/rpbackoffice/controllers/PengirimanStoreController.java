@@ -107,9 +107,9 @@ public class PengirimanStoreController {
     }
     
     @GetMapping("/delete")
-    public String deletePengirimanStore(@RequestParam("id") Long id)
+    public String deletePengirimanStore(@RequestParam("id") Long id, @RequestParam("artikel") String artikel)
     {
-    	pengirimanStoreService.deletePengirimanStoreById(id);
+    	pengirimanStoreService.deletePengirimanStoreById(id, artikel);
     	return "redirect:/all";
     }
 
