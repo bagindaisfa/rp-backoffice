@@ -30,13 +30,25 @@ public class PenerimaanSupplierService {
 	@Autowired
 	private PenyimpananMasukRepository ePenyimpananRepo;
 	
-	public PenerimaanSupplier savePenerimaanSupplier(String lokasi_penerimaan, String id_supplier, String nama_supplier,
+	public PenerimaanSupplier savePenerimaanSupplier(int id_office, String lokasi_office, String id_supplier, String nama_supplier,
 			String artikel, String kategori,String tipe, String nama_barang, double kuantitas, String ukuran, 
 			MultipartFile foto_barang, double hpp, double harga_jual) {
 		
 		PenerimaanSupplier p = new PenerimaanSupplier();
+		
 		StockOffice d = new StockOffice();
-		d = eStockRepo.findByArtikel(artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d.setKuantitas(d.getKuantitas() + kuantitas);
+		d.setUkuran(ukuran);
+		d.setKategori(kategori);
+		d.setTipe(tipe);
+		d.setNama_barang(nama_barang);
+		d.setUkuran(ukuran);
+		d.setHpp(hpp);
+		d.setHarga_jual(harga_jual);
+		d.setRowstatus(1);
+		eStockRepo.save(d);
+		
 		PenyimpananMasuk f = new PenyimpananMasuk();
 		
 		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
@@ -52,7 +64,8 @@ public class PenerimaanSupplierService {
 		}
 		p.setPenerimaan_code(code_penerimaan);
 		p.setTanggal_penerimaan(new Date());
-		p.setLokasi_penerimaan(lokasi_penerimaan);
+		p.setId_office(id_office);
+		p.setLokasi_office(lokasi_office);
 		p.setId_supplier(id_supplier);
 		p.setNama_supplier(nama_supplier);
 		p.setArtikel(artikel);
@@ -64,18 +77,6 @@ public class PenerimaanSupplierService {
 		p.setHpp(hpp);
 		p.setHarga_jual(harga_jual);
 		p.setRowstatus(1);
-		
-		// region add stock
-		d.setKategori(kategori);
-		d.setTipe(tipe);
-		d.setNama_barang(nama_barang);
-		d.setKuantitas(d.getKuantitas() + kuantitas);
-		d.setUkuran(ukuran);
-		d.setHpp(hpp);
-		d.setHarga_jual(harga_jual);
-		d.setRowstatus(1);
-		eStockRepo.save(d);
-		// end region add stock
 		
 		// region penyimpanan barang masuk
 		f.setPenerimaan_code(code_penerimaan);
@@ -104,28 +105,30 @@ public class PenerimaanSupplierService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public void deletePenerimaanSupplierById(Long id, String artikel)
+	public PenerimaanSupplier deletePenerimaanSupplierById(Long id, int id_office, String artikel)
     {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(id).get();
+    	p.setRowstatus(0);
     	
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findByArtikel(artikel).get(0);
-		
-    	p.setRowstatus(0);
-    	d.setKuantitas(d.getKuantitas()-p.getKuantitas());
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+    	d.setKuantitas(d.getKuantitas()-p.getKuantitas());  
     	
-    	eRepo.save(p);   
     	eStockRepo.save(d);
+    	return eRepo.save(p);
     }
 	
-	public void update(Long id, String penerimaan_code, Date tanggal_penerimaan, String lokasi_penerimaan, String id_supplier, String nama_supplier,
+	public PenerimaanSupplier update(Long id, String penerimaan_code, Date tanggal_penerimaan, int id_office, String lokasi_office, String id_supplier, String nama_supplier,
 			String artikel, String kategori,String tipe, String nama_barang, double kuantitas, String ukuran, 
 			MultipartFile foto_barang, double hpp, double harga_jual) {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(id).get();
+    	
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findByArtikel(artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d.setKuantitas((d.getKuantitas()-p.getKuantitas()) + kuantitas);
+		
 		PenyimpananMasuk f = new PenyimpananMasuk();
 		f = ePenyimpananRepo.findByPenerimaan_code(penerimaan_code).get(0);
 		
@@ -140,7 +143,8 @@ public class PenerimaanSupplierService {
 		}
     	
 		p.setTanggal_penerimaan(tanggal_penerimaan);
-		p.setLokasi_penerimaan(lokasi_penerimaan);
+		p.setId_office(id_office);
+		p.setLokasi_office(lokasi_office);
 		p.setId_supplier(id_supplier);
 		p.setNama_supplier(nama_supplier);
 		p.setArtikel(artikel);
@@ -152,18 +156,16 @@ public class PenerimaanSupplierService {
 		p.setHpp(hpp);
 		p.setHarga_jual(harga_jual);
 		p.setRowstatus(1);
-		eRepo.save(p);
-
+		
 		// region add stock
 		d.setKategori(kategori);
 		d.setTipe(tipe);
 		d.setNama_barang(nama_barang);
-		d.setKuantitas((d.getKuantitas()-p.getKuantitas()) + kuantitas);
 		d.setUkuran(ukuran);
 		d.setHpp(hpp);
 		d.setHarga_jual(harga_jual);
 		d.setRowstatus(1);
-		eStockRepo.save(d);
+		
 		// end region add stock
 		
 		// region penyimpanan barang masuk
@@ -179,9 +181,11 @@ public class PenerimaanSupplierService {
 		f.setKeterangan("Barang Masuk Dari Supplier");
 		f.setRowstatus(1);
 		ePenyimpananRepo.save(f);
+		eStockRepo.save(d);
+		
 		// end region 
 		
-    	
+		return eRepo.save(p);
 	}
 	
 }

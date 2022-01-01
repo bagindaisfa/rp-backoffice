@@ -17,11 +17,13 @@ public class PenerimaanStore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
-	private String lokasi_penerimaan;
-	private String id_pelanggan;
-	private String nama_pelanggan;
+	private int id_office;
+	private String lokasi_office;
+	private int id_store;
+	private String lokasi_store;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -38,100 +40,147 @@ public class PenerimaanStore {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public String getPenerimaan_code() {
+		return penerimaan_code;
+	}
+
+	public void setPenerimaan_code(String penerimaan_code) {
+		this.penerimaan_code = penerimaan_code;
+	}
+
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;
 	}
+
 	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
 		this.tanggal_penerimaan = tanggal_penerimaan;
 	}
-	public String getLokasi_penerimaan() {
-		return lokasi_penerimaan;
+
+	public int getId_office() {
+		return id_office;
 	}
-	public void setLokasi_penerimaan(String lokasi_penerimaan) {
-		this.lokasi_penerimaan = lokasi_penerimaan;
+
+	public void setId_office(int id_office) {
+		this.id_office = id_office;
 	}
-	public String getId_pelanggan() {
-		return id_pelanggan;
+
+	public String getLokasi_office() {
+		return lokasi_office;
 	}
-	public void setId_pelanggan(String id_pelanggan) {
-		this.id_pelanggan = id_pelanggan;
+
+	public void setLokasi_office(String lokasi_office) {
+		this.lokasi_office = lokasi_office;
 	}
-	public String getNama_pelanggan() {
-		return nama_pelanggan;
+
+	public int getId_store() {
+		return id_store;
 	}
-	public void setNama_pelanggan(String nama_pelanggan) {
-		this.nama_pelanggan = nama_pelanggan;
+
+	public void setId_store(int id_store) {
+		this.id_store = id_store;
 	}
+
+	public String getLokasi_store() {
+		return lokasi_store;
+	}
+
+	public void setLokasi_store(String lokasi_store) {
+		this.lokasi_store = lokasi_store;
+	}
+
 	public String getArtikel() {
 		return artikel;
 	}
+
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
+
 	public String getKategori() {
 		return kategori;
 	}
+
 	public void setKategori(String kategori) {
 		this.kategori = kategori;
 	}
+
 	public String getTipe() {
 		return tipe;
 	}
+
 	public void setTipe(String tipe) {
 		this.tipe = tipe;
 	}
+
 	public String getNama_barang() {
 		return nama_barang;
 	}
+
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
+
 	public double getKuantitas() {
 		return kuantitas;
 	}
+
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
+
 	public String getUkuran() {
 		return ukuran;
 	}
+
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
+
 	public String getFoto_barang() {
 		return foto_barang;
 	}
+
 	public void setFoto_barang(String foto_barang) {
 		this.foto_barang = foto_barang;
 	}
+
 	public double getHpp() {
 		return hpp;
 	}
+
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_juala() {
+
+	public double getHarga_jual() {
 		return harga_jual;
 	}
+
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
+
 	public int getRowstatus() {
 		return rowstatus;
 	}
+
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
+
 	@Override
 	public String toString() {
 		return "PenerimaanStore [id=" + id + ","
 				+ " tanggal_penerimaan=" + tanggal_penerimaan + ", "
-				+ " lokasi_penerimaan=" + lokasi_penerimaan + ", "
-				+ " id_pelanggan=" + id_pelanggan + ", "
-				+ " nama_pelanggan=" + nama_pelanggan + ", "
+				+ " id_office=" + id_office + ", "
+				+ " lokasi_office=" + lokasi_office + ", "
+				+ " id_store=" + id_store + ", "
+				+ " lokasi_store=" + lokasi_store + ", "
 				+ " artikel=" + artikel + ", "
 				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","

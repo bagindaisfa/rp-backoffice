@@ -46,7 +46,7 @@ public class PenyimpananKeluarController {
     }
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveProduct(@RequestParam("id_store") String id_store,
+    public @ResponseBody String saveProduct(@RequestParam("id_store") int id_store,
     		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori, @RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
@@ -63,7 +63,7 @@ public class PenyimpananKeluarController {
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_keluar") Date tanggal_keluar, @RequestParam("id_store") String id_store,
+    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_keluar") Date tanggal_keluar, @RequestParam("id_store") int id_store,
     		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
@@ -88,7 +88,7 @@ public class PenyimpananKeluarController {
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	PenyimpananKeluar p = new PenyimpananKeluar();
         	XSSFRow row = worksheet.getRow(i);
-        	p.setId_store(row.getCell(1).getStringCellValue());
+        	p.setId_store((int)row.getCell(1).getNumericCellValue());
         	p.setLokasi_store(row.getCell(2).getStringCellValue());
     		p.setArtikel(row.getCell(3).getStringCellValue());
     		p.setKategori(row.getCell(4).getStringCellValue());

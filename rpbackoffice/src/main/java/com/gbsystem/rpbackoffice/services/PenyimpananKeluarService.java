@@ -19,7 +19,7 @@ public class PenyimpananKeluarService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepo;
 	
-	public PenyimpananKeluar savePenyimpananKeluar(String id_store, String lokasi_store, String artikel, String kategori
+	public PenyimpananKeluar savePenyimpananKeluar(int id_store, String lokasi_store, String artikel, String kategori
 			,String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
 			double harga_jual, String keterangan ) {
 		
@@ -68,7 +68,7 @@ public class PenyimpananKeluarService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Date tanggal_keluar, String id_store, String lokasi_store, String artikel, String kategori, 
+	public void update(Long id, Date tanggal_keluar, int id_store, String lokasi_store, String artikel, String kategori, 
 			String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
 			double harga_jual, String keterangan ) {
 		PenyimpananKeluar p = new PenyimpananKeluar();

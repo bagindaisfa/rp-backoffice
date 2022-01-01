@@ -1,7 +1,5 @@
 package com.gbsystem.rpbackoffice.entities;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,16 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 @Entity
-public class PenyimpananKeluar {
+public class StockStore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String pengiriman_code;
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date tanggal_keluar;
 	private int id_store;
 	private String lokasi_store;
 	private String artikel;
@@ -32,25 +25,12 @@ public class PenyimpananKeluar {
 	private String foto_barang;
 	private double hpp;
 	private double harga_jual;
-	private String keterangan;
 	private int rowstatus;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getPengiriman_code() {
-		return pengiriman_code;
-	}
-	public void setPengiriman_code(String pengiriman_code) {
-		this.pengiriman_code = pengiriman_code;
-	}
-	public Date getTanggal_keluar() {
-		return tanggal_keluar;
-	}
-	public void setTanggal_keluar(Date tanggal_keluar) {
-		this.tanggal_keluar = tanggal_keluar;
 	}
 	public int getId_store() {
 		return id_store;
@@ -112,23 +92,11 @@ public class PenyimpananKeluar {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-//	public double getHarga_jual() {
-//		return harga_jual;
-//	}
-//	public void setHarga_jual(double harga_jual) {
-//		this.harga_jual = harga_jual;
-//	}
 	public double getHarga_jual() {
 		return harga_jual;
 	}
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
-	}
-	public String getKeterangan() {
-		return keterangan;
-	}
-	public void setKeterangan(String keterangan) {
-		this.keterangan = keterangan;
 	}
 	public int getRowstatus() {
 		return rowstatus;
@@ -136,22 +104,5 @@ public class PenyimpananKeluar {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	@Override
-	public String toString() {
-		return "PenyimpananKeluar [id=" + id + ","
-				+ " tanggal_keluar=" + tanggal_keluar + ", "
-				+ " id_store=" + id_store + ", "
-				+ " lokasi_store=" + lokasi_store + ", "
-				+ " artikel=" + artikel + ", "
-				+ " kategori=" + kategori + ","
-				+ " tipe=" + tipe + ","
-	            + " nama_barang=" + nama_barang + ","
-	            + " kuantitas=" + kuantitas + ","
-	            + " ukuran=" + ukuran + ","
-	            + " hpp=" + hpp + ","
-	            + " foto_barang=" + foto_barang + ","
-	            + " harga_jual=" + harga_jual + ","
-	            + " keterangan=" + keterangan + ","
-	            + " rowstatus=" + rowstatus + "]";
-	}
+	
 }

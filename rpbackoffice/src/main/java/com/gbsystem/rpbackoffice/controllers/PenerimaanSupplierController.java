@@ -46,8 +46,8 @@ public class PenerimaanSupplierController {
     }
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveProduct(
-    		@RequestParam("lokasi_penerimaan") String lokasi_penerimaan, @RequestParam("id_supplier") String id_supplier,
+    public @ResponseBody String saveProduct(@RequestParam("id_office") int id_office,
+    		@RequestParam("lokasi_office") String lokasi_office, @RequestParam("id_supplier") String id_supplier,
     		@RequestParam("nama_supplier") String nama_supplier, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori, @RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
@@ -55,7 +55,7 @@ public class PenerimaanSupplierController {
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		penerimaanSupplierService.savePenerimaanSupplier(lokasi_penerimaan, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
+    		penerimaanSupplierService.savePenerimaanSupplier(id_office,lokasi_office, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
     				kuantitas, ukuran, foto_barang, hpp, harga_jual);
     	}
     	return "Insert Data Successs!";
@@ -64,7 +64,7 @@ public class PenerimaanSupplierController {
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,@RequestParam("penerimaan_code") String penerimaan_code,
-    		@RequestParam("lokasi_penerimaan") String lokasi_penerimaan, @RequestParam("id_supplier") String id_supplier,
+    		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office, @RequestParam("id_supplier") String id_supplier,
     		@RequestParam("nama_supplier") String nama_supplier, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
@@ -72,7 +72,7 @@ public class PenerimaanSupplierController {
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		penerimaanSupplierService.update(id, penerimaan_code, tanggal_penerimaan, lokasi_penerimaan, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
+    		penerimaanSupplierService.update(id, penerimaan_code, tanggal_penerimaan, id_office, lokasi_office, id_supplier, nama_supplier, artikel, kategori, tipe, nama_barang, 
     				kuantitas, ukuran, foto_barang, hpp, harga_jual);
     	}
     	return "Update Data Successs!";
@@ -88,17 +88,18 @@ public class PenerimaanSupplierController {
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	PenerimaanSupplier p = new PenerimaanSupplier();
         	XSSFRow row = worksheet.getRow(i);
-        	p.setLokasi_penerimaan(row.getCell(1).getStringCellValue());
-        	p.setId_supplier(row.getCell(2).getStringCellValue());
-        	p.setNama_supplier(row.getCell(3).getStringCellValue());
-    		p.setArtikel(row.getCell(4).getStringCellValue());
-    		p.setKategori(row.getCell(5).getStringCellValue());
-			p.setTipe(row.getCell(6).getStringCellValue());
-			p.setNama_barang(row.getCell(7).getStringCellValue());
-			p.setKuantitas(row.getCell(8).getNumericCellValue());
-			p.setUkuran(row.getCell(9).getStringCellValue());
-			p.setHpp(row.getCell(10).getNumericCellValue());
-			p.setHarga_jual(row.getCell(11).getNumericCellValue());
+        	p.setId_office((int)row.getCell(1).getNumericCellValue());
+        	p.setLokasi_office(row.getCell(2).getStringCellValue());
+        	p.setId_supplier(row.getCell(3).getStringCellValue());
+        	p.setNama_supplier(row.getCell(4).getStringCellValue());
+    		p.setArtikel(row.getCell(5).getStringCellValue());
+    		p.setKategori(row.getCell(6).getStringCellValue());
+			p.setTipe(row.getCell(7).getStringCellValue());
+			p.setNama_barang(row.getCell(8).getStringCellValue());
+			p.setKuantitas(row.getCell(9).getNumericCellValue());
+			p.setUkuran(row.getCell(10).getStringCellValue());
+			p.setHpp(row.getCell(11).getNumericCellValue());
+			p.setHarga_jual(row.getCell(12).getNumericCellValue());
     		p.setRowstatus(1);
     		p.setTanggal_penerimaan(row.getCell(0).getDateCellValue());
     		eRepo.save(p);
@@ -107,9 +108,9 @@ public class PenerimaanSupplierController {
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("artikel") String artikel)
+    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("id_office") int id_office, @RequestParam("artikel") String artikel)
     {
-    	penerimaanSupplierService.deletePenerimaanSupplierById(id,artikel);
+    	penerimaanSupplierService.deletePenerimaanSupplierById(id,id_office,artikel);
     	return "redirect:/all";
     }
 

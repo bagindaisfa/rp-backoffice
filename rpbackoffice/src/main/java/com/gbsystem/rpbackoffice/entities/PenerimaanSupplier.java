@@ -20,7 +20,8 @@ public class PenerimaanSupplier {
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
-	private String lokasi_penerimaan;
+	private int id_office;
+	private String lokasi_office;
 	private String id_supplier;
 	private String nama_supplier;
 	
@@ -36,32 +37,35 @@ public class PenerimaanSupplier {
 	private double hpp;
 	private double harga_jual;
 	private int rowstatus;
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getPenerimaan_code() {
 		return penerimaan_code;
 	}
 	public void setPenerimaan_code(String penerimaan_code) {
 		this.penerimaan_code = penerimaan_code;
 	}
-	
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;
 	}
 	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
 		this.tanggal_penerimaan = tanggal_penerimaan;
 	}
-	public String getLokasi_penerimaan() {
-		return lokasi_penerimaan;
+	public int getId_office() {
+		return id_office;
 	}
-	public void setLokasi_penerimaan(String lokasi_penerimaan) {
-		this.lokasi_penerimaan = lokasi_penerimaan;
+	public void setId_office(int id_office) {
+		this.id_office = id_office;
+	}
+	public String getLokasi_office() {
+		return lokasi_office;
+	}
+	public void setLokasi_office(String lokasi_office) {
+		this.lokasi_office = lokasi_office;
 	}
 	public String getId_supplier() {
 		return id_supplier;
@@ -123,13 +127,12 @@ public class PenerimaanSupplier {
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_juala() {
+	public double getHarga_jual() {
 		return harga_jual;
 	}
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
-	
 	public int getRowstatus() {
 		return rowstatus;
 	}
@@ -140,7 +143,7 @@ public class PenerimaanSupplier {
 	public String toString() {
 		return "PenerimaanSupplier [id=" + id + ","
 				+ " tanggal_penerimaan=" + tanggal_penerimaan + ", "
-				+ " lokasi_penerimaan=" + lokasi_penerimaan + ", "
+				+ " lokasi_office=" + lokasi_office + ", "
 				+ " id_supplier=" + id_supplier + ", "
 				+ " nama_supplier=" + nama_supplier + ", "
 				+ " artikel=" + artikel + ", "

@@ -12,17 +12,18 @@ import javax.persistence.Lob;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class PengirimanStore {
-
+public class PengirimanOfiiceToStore {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_pengiriman;
-	private String lokasi_store_asal;
-	private String id_store_tujuan;
-	private String lokasi_store_tujuan;
+	private int id_office;
+	private String office_name;
+	private int id_store;
+	private String store_name;
 	private String artikel;
 	private String kategori;
 	private String tipe;
@@ -39,107 +40,145 @@ public class PengirimanStore {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public String getPengiriman_code() {
 		return pengiriman_code;
 	}
+
 	public void setPengiriman_code(String pengiriman_code) {
 		this.pengiriman_code = pengiriman_code;
 	}
+
 	public Date getTanggal_pengiriman() {
 		return tanggal_pengiriman;
 	}
+
 	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
 		this.tanggal_pengiriman = tanggal_pengiriman;
 	}
-	public String getLokasi_store_asal() {
-		return lokasi_store_asal;
+
+	public int getId_office() {
+		return id_office;
 	}
-	public void setLokasi_store_asal(String lokasi_store_asal) {
-		this.lokasi_store_asal = lokasi_store_asal;
+
+	public void setId_office(int id_office) {
+		this.id_office = id_office;
 	}
-	public String getId_store_tujuan() {
-		return id_store_tujuan;
+
+	public String getOffice_name() {
+		return office_name;
 	}
-	public void setId_store_tujuan(String id_store_tujuan) {
-		this.id_store_tujuan = id_store_tujuan;
+
+	public void setOffice_name(String office_name) {
+		this.office_name = office_name;
 	}
-	public String getLokasi_store_tujuan() {
-		return lokasi_store_tujuan;
+
+	public int getId_store() {
+		return id_store;
 	}
-	public void setLokasi_store_tujuan(String lokasi_store_tujuan) {
-		this.lokasi_store_tujuan = lokasi_store_tujuan;
+
+	public void setId_store(int id_store) {
+		this.id_store = id_store;
 	}
+
+	public String getStore_name() {
+		return store_name;
+	}
+
+	public void setStore_name(String store_name) {
+		this.store_name = store_name;
+	}
+
 	public String getArtikel() {
 		return artikel;
 	}
+
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
+
 	public String getKategori() {
 		return kategori;
 	}
+
 	public void setKategori(String kategori) {
 		this.kategori = kategori;
 	}
+
 	public String getTipe() {
 		return tipe;
 	}
+
 	public void setTipe(String tipe) {
 		this.tipe = tipe;
 	}
+
 	public String getNama_barang() {
 		return nama_barang;
 	}
+
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
+
 	public double getKuantitas() {
 		return kuantitas;
 	}
+
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
+
 	public String getUkuran() {
 		return ukuran;
 	}
+
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
+
 	public String getFoto_barang() {
 		return foto_barang;
 	}
+
 	public void setFoto_barang(String foto_barang) {
 		this.foto_barang = foto_barang;
 	}
+
 	public double getHpp() {
 		return hpp;
 	}
+
 	public void setHpp(double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_juala() {
+
+	public double getHarga_jual() {
 		return harga_jual;
 	}
+
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
+
 	public int getRowstatus() {
 		return rowstatus;
 	}
+
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
+
 	@Override
 	public String toString() {
-		return "PengirimanStore [id=" + id + ","
+		return "PengirimanGudang [id=" + id + ","
 				+ " tanggal_pengiriman=" + tanggal_pengiriman + ", "
-				+ " lokasi_store_asal=" + lokasi_store_asal + ", "
-				+ " id_store_tujuan=" + id_store_tujuan + ", "
-				+ " lokasi_store_tujuan=" + lokasi_store_tujuan + ", "
+				+ " office_name=" + office_name + ", "
+				+ " store_name=" + store_name + ", "
 				+ " artikel=" + artikel + ", "
 				+ " kategori=" + kategori + ","
 				+ " tipe=" + tipe + ","
@@ -151,5 +190,5 @@ public class PengirimanStore {
 	            + " harga_jual=" + harga_jual + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}
-	
+
 }

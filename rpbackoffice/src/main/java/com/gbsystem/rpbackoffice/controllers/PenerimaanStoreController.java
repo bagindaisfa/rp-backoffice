@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -47,32 +48,34 @@ public class PenerimaanStoreController {
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String saveProduct(
-    		@RequestParam("lokasi_penerimaan") String lokasi_penerimaan, @RequestParam("id_pelanggan") String id_pelanggan,
-    		@RequestParam("nama_pelanggan") String nama_pelanggan, @RequestParam("artikel") String artikel,
+    		@RequestParam("id_office") int id_office,
+    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("id_store") int id_store,
+    		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori, @RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
     		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang, 
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		penerimaanStoreService.savePenerimaanStore(lokasi_penerimaan, id_pelanggan, nama_pelanggan, artikel, kategori, tipe, nama_barang, 
-    				kuantitas, ukuran, foto_barang, hpp, harga_jual);
+    		penerimaanStoreService.savePenerimaanStore(id_office, lokasi_office, id_store, lokasi_store,
+    			 artikel, kategori, tipe, nama_barang, kuantitas, ukuran,foto_barang, hpp, harga_jual);
     	}
     	return "Insert Data Successs!";
 		
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,
-    		@RequestParam("lokasi_penerimaan") String lokasi_penerimaan, @RequestParam("id_pelanggan") String id_pelanggan,
-    		@RequestParam("nama_pelanggan") String nama_pelanggan, @RequestParam("artikel") String artikel,
+    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("penerimaan_code") String penerimaan_code,
+    		@RequestParam("id_office") int id_office,@RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,
+    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("id_store") int id_store,
+    		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang,
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
     	
     	if (artikel != "") {
-    		penerimaanStoreService.update(id, tanggal_penerimaan, lokasi_penerimaan, id_pelanggan, nama_pelanggan, artikel, kategori, tipe, nama_barang, 
+    		penerimaanStoreService.update(id, penerimaan_code, tanggal_penerimaan, id_office, lokasi_office, id_store, lokasi_store, artikel, kategori, tipe, nama_barang, 
     				kuantitas, ukuran, foto_barang, hpp, harga_jual);
     	}
     	return "Update Data Successs!";
@@ -84,21 +87,23 @@ public class PenerimaanStoreController {
     	
         XSSFWorkbook workbook = new XSSFWorkbook(readExcelDataFile.getInputStream());
         XSSFSheet worksheet = workbook.getSheetAt(0);
-        
+        String code_penerimaan = "RT-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
         for(int i=1;i<worksheet.getPhysicalNumberOfRows() ;i++) {
         	PenerimaanStore p = new PenerimaanStore();
         	XSSFRow row = worksheet.getRow(i);
-        	p.setLokasi_penerimaan(row.getCell(1).getStringCellValue());
-        	p.setId_pelanggan(row.getCell(2).getStringCellValue());
-        	p.setNama_pelanggan(row.getCell(3).getStringCellValue());
-    		p.setArtikel(row.getCell(4).getStringCellValue());
-    		p.setKategori(row.getCell(5).getStringCellValue());
-			p.setTipe(row.getCell(6).getStringCellValue());
-			p.setNama_barang(row.getCell(7).getStringCellValue());
-			p.setKuantitas(row.getCell(8).getNumericCellValue());
-			p.setUkuran(row.getCell(9).getStringCellValue());
-			p.setHpp(row.getCell(10).getNumericCellValue());
-			p.setHarga_jual(row.getCell(11).getNumericCellValue());
+        	p.setPenerimaan_code(code_penerimaan);
+    		p.setId_office((int)row.getCell(1).getNumericCellValue());
+    		p.setLokasi_office(row.getCell(2).getStringCellValue());
+    		p.setId_store((int)row.getCell(3).getNumericCellValue());
+    		p.setLokasi_store(row.getCell(4).getStringCellValue());
+    		p.setArtikel(row.getCell(5).getStringCellValue());
+    		p.setKategori(row.getCell(6).getStringCellValue());
+			p.setTipe(row.getCell(7).getStringCellValue());
+			p.setNama_barang(row.getCell(8).getStringCellValue());
+			p.setKuantitas(row.getCell(9).getNumericCellValue());
+			p.setUkuran(row.getCell(10).getStringCellValue());
+			p.setHpp(row.getCell(11).getNumericCellValue());
+			p.setHarga_jual(row.getCell(12).getNumericCellValue());
     		p.setRowstatus(1);
     		p.setTanggal_penerimaan(row.getCell(0).getDateCellValue());
     		eRepo.save(p);
@@ -107,9 +112,9 @@ public class PenerimaanStoreController {
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanStore(@RequestParam("id") Long id)
+    public String deletePenerimaanStore(@RequestParam("id") Long id,@RequestParam("id_office") int id_office,@RequestParam("artikel") String artikel)
     {
-    	penerimaanStoreService.deletePenerimaanStoreById(id);
+    	penerimaanStoreService.deletePenerimaanStoreById(id,id_office, artikel);
     	return "redirect:/all";
     }
 
