@@ -16,6 +16,8 @@ public class PenyimpananKeluar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private int id_office;
+	private String lokasi_office;
 	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_keluar;
@@ -39,6 +41,18 @@ public class PenyimpananKeluar {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public int getId_office() {
+		return id_office;
+	}
+	public void setId_office(int id_office) {
+		this.id_office = id_office;
+	}
+	public String getLokasi_office() {
+		return lokasi_office;
+	}
+	public void setLokasi_office(String lokasi_office) {
+		this.lokasi_office = lokasi_office;
 	}
 	public String getPengiriman_code() {
 		return pengiriman_code;
