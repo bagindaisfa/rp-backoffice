@@ -1,13 +1,19 @@
 package com.gbsystem.rpbackoffice.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Penjualan {
@@ -29,7 +35,9 @@ public class Penjualan {
 	private Double total;
 	private Double kembalian;
 	private int rowstatus;
-	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualan", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("penjualan")
+    private List<DetailPesanan> detailPesananList = new ArrayList<>();
 	public Long getId() {
 		return id;
 	}
@@ -113,6 +121,13 @@ public class Penjualan {
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
+	}
+	
+	public List<DetailPesanan> getDetailPesananList() {
+		return detailPesananList;
+	}
+	public void setDetailPesananList(List<DetailPesanan> detailPesananList) {
+		this.detailPesananList = detailPesananList;
 	}
 	
 	@Override

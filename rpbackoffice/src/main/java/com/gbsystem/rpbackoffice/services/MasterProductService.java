@@ -25,7 +25,7 @@ public class MasterProductService {
 	public MasterProduct saveMasterProduct( MultipartFile image,
 			String artikel_product, String nama_product, 
 			String type, String type_name, String kategori, 
-			String nama_kategori, String artikel_frame, String artikel_lens,
+			String nama_kategori, String artikel_frame, String artikel_lens,String ukuran,
 			double kuantitas,double hpp,double harga_jual, String remarks
 			) {
 		
@@ -49,6 +49,7 @@ public class MasterProductService {
 		p.setNama_kategori(nama_kategori);
 		p.setArtikel_frame(artikel_frame);
 		p.setArtikel_lens(artikel_lens);
+		p.setUkuran(ukuran);
 		p.setKuantitas(kuantitas);
 		p.setHpp(hpp);
 		p.setHarga_jual(harga_jual);
@@ -62,7 +63,7 @@ public class MasterProductService {
 		q.setTipe(type);
 		q.setNama_barang(nama_product);
 		q.setKuantitas(kuantitas);
-		q.setUkuran("");
+		q.setUkuran(ukuran);
 		
 		q.setHpp(hpp);
 		q.setHarga_jual(harga_jual);
@@ -94,14 +95,16 @@ public class MasterProductService {
     	eRepo.save(p);    
     }
 	
-	public void update(
+	public String update(
 			Long id, MultipartFile image, String artikel_product,
 			String nama_product, String type, String type_name,
-			String kategori, String artikel_frame, String artikel_lens,
+			String kategori, String artikel_frame, String artikel_lens,String ukuran,
 			String nama_kategori, double kuantitas,double hpp,
 			double harga_jual, String remarks ) {
 		MasterProduct p = new MasterProduct();
     	p = eRepo.findById(id).get();
+    	StockOffice q = new StockOffice();
+    	q = eStockRepo.findById_officeAndArtikel(1,artikel_product).get(0);
     	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");
@@ -111,19 +114,38 @@ public class MasterProductService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
-    	p.setArtikel_product(artikel_product);
-		p.setNama_product(nama_product);
-		p.setType(type);
-		p.setType_name(type_name);
-		p.setKategori(kategori);
-		p.setNama_kategori(nama_kategori);
-		p.setArtikel_frame(artikel_frame);
-		p.setArtikel_lens(artikel_lens);
-		
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setRemarks(remarks);
-		p.setRowstatus(1);
-    	eRepo.save(p);
+		String response = "";
+		if (q.getKuantitas() > kuantitas) {
+			response = "Kuantitas lebih kecil dari sebelumnya, Stockopname terlebih dahulu!";
+		} else {
+	    	p.setArtikel_product(artikel_product);
+			p.setNama_product(nama_product);
+			p.setType(type);
+			p.setType_name(type_name);
+			p.setKategori(kategori);
+			p.setNama_kategori(nama_kategori);
+			p.setArtikel_frame(artikel_frame);
+			p.setArtikel_lens(artikel_lens);
+			p.setUkuran(ukuran);
+			p.setKuantitas(kuantitas);
+			p.setHpp(hpp);
+			p.setHarga_jual(harga_jual);
+			p.setRemarks(remarks);
+			p.setRowstatus(1);
+			eRepo.save(p);
+			q.setArtikel(artikel_product);
+			q.setKategori(kategori);
+			q.setTipe(type);
+			q.setNama_barang(nama_product);
+			q.setKuantitas(kuantitas);
+			q.setUkuran(ukuran);
+			q.setHpp(hpp);
+			q.setHarga_jual(harga_jual);
+			q.setRowstatus(1);
+			eStockRepo.save(q);
+			
+			response = "Update success";
+    	}
+		return response;
 	}
 }

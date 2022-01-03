@@ -1,6 +1,5 @@
 package com.gbsystem.rpbackoffice.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -14,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,32 +46,19 @@ public class PenjualanController {
     }
 	
 	@PostMapping("/add")
-	public String savePenjualan(@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
-			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_pelanggan") String nama_pelanggan,
-			@RequestParam("nama_karyawan") String nama_karyawan, @RequestParam("diskon") double diskon,
-			@RequestParam("metode_bayar") String metode_bayar, @RequestParam("ekspedisi") String ekspedisi,
-			@RequestParam("ongkir") double ongkir, @RequestParam("total") double total,
-			@RequestParam("kembalian") double kembalian) 
+	@ResponseBody
+	public Penjualan savePenjualan(@RequestBody Penjualan penjualan) 
 	{
-		penjualanService.savePenjualan(id_transaksi, id_store, lokasi_store, nama_pelanggan,
-				nama_karyawan, diskon, metode_bayar, ekspedisi, ongkir, total, kembalian);
-		return "redirect:/penjualan";
+		Penjualan penjualanResponse = penjualanService.savePenjualan(penjualan);
+		return penjualanResponse;
 	}
 	
 	@PostMapping(value = "/update")
-    public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_transaksi") Date tanggal_transaksi, 
-    		@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
-			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_pelanggan") String nama_pelanggan,
-			@RequestParam("nama_karyawan") String nama_karyawan, @RequestParam("diskon") double diskon,
-			@RequestParam("metode_bayar") String metode_bayar, @RequestParam("ekspedisi") String ekspedisi,
-			@RequestParam("ongkir") double ongkir, @RequestParam("total") double total,
-			@RequestParam("kembalian") double kembalian) throws Exception {
+	@ResponseBody
+    public Penjualan update(@RequestBody Penjualan penjualan) throws Exception {
     	
-    	if (id_transaksi != "") {
-    		penjualanService.update(id, tanggal_transaksi, id_transaksi, id_store, lokasi_store, nama_pelanggan,
-    				nama_karyawan, diskon, metode_bayar, ekspedisi, ongkir, total, kembalian);
-    	}
-    	return "Update Data Successs!";
+		Penjualan penjualanResponse = penjualanService.update(penjualan);
+    	return penjualanResponse;
 		
     }
 	

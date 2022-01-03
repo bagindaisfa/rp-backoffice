@@ -48,35 +48,20 @@ public class PenerimaanStoreController {
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String saveProduct(
-    		@RequestParam("id_office") int id_office,
-    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("id_store") int id_store,
-    		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori, @RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
-    		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang, 
-    		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
+    		@RequestParam("penerimaan_code") String penerimaan_code) throws Exception {
     	
-    	if (artikel != "") {
-    		penerimaanStoreService.savePenerimaanStore(id_office, lokasi_office, id_store, lokasi_store,
-    			 artikel, kategori, tipe, nama_barang, kuantitas, ukuran,foto_barang, hpp, harga_jual);
+    	if (penerimaan_code != "") {
+    		penerimaanStoreService.savePenerimaanStore(penerimaan_code);
     	}
     	return "Insert Data Successs!";
 		
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("penerimaan_code") String penerimaan_code,
-    		@RequestParam("id_office") int id_office,@RequestParam("tanggal_penerimaan") Date tanggal_penerimaan,
-    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("id_store") int id_store,
-    		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
-    		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang,
-    		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual) throws Exception {
+    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("penerimaan_code") String penerimaan_code) throws Exception {
     	
-    	if (artikel != "") {
-    		penerimaanStoreService.update(id, penerimaan_code, tanggal_penerimaan, id_office, lokasi_office, id_store, lokasi_store, artikel, kategori, tipe, nama_barang, 
-    				kuantitas, ukuran, foto_barang, hpp, harga_jual);
+    	if (penerimaan_code != "") {
+    		penerimaanStoreService.update(id, penerimaan_code);
     	}
     	return "Update Data Successs!";
 		

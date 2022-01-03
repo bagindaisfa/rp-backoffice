@@ -1,5 +1,7 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.Penjualan;
+import com.gbsystem.rpbackoffice.entities.DetailPesanan;
+import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
+import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 
 @Service
 public class PenjualanService {
@@ -15,26 +20,43 @@ public class PenjualanService {
 	@Autowired
 	private PenjualanRepository eRepo;
 	
-	public void savePenjualan(String id_transaksi, String id_store, String lokasi_store, 
-			String nama_pelanggan, String nama_karyawan,
-			double diskon, String metode_bayar, String ekspedisi, double ongkir,
-			double total, double kembalian) {
+	@Autowired
+	private StockStoreRepository eStockRepo;
+	
+	public Penjualan savePenjualan( Penjualan penjualan) {
 		
-		Penjualan p = new Penjualan();
-		p.setTanggal_transaksi(new Date());
-		p.setId_transaksi(id_transaksi);
-		p.setId_store(id_store);
-		p.setLokasi_store(lokasi_store);
-		p.setDiskon(diskon);
-		p.setMetode_bayar(metode_bayar);
-		p.setEkspedisi(ekspedisi);
-		p.setOngkir(ongkir);
-		p.setTotal(total);
-		p.setKembalian(kembalian);
-		p.setNama_pelanggan(nama_pelanggan);
-		p.setNama_karyawan(nama_karyawan);
-		p.setRowstatus(1);
-		eRepo.save(p);
+		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-S" + (eRepo.count() + 1);
+		Date tanggal_transaksi = new Date();
+		List<DetailPesanan> details = new ArrayList<>();
+		penjualan.setTanggal_transaksi(tanggal_transaksi);
+		penjualan.setId_transaksi(id_transaksi);
+		penjualan.setRowstatus(1);
+		
+		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
+			DetailPesanan d = new DetailPesanan();
+			StockStore check = new StockStore();
+			
+			check = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel()).get(0);
+			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
+			eStockRepo.save(check);
+			
+			d.setTanggal_transaksi(tanggal_transaksi);
+			d.setId_transaksi(id_transaksi);
+			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
+			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
+			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
+			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
+			d.setRowstatus(1);
+			d.setPenjualan(penjualan);
+			details.add(d);
+		}
+		penjualan.setDetailPesananList(details);
+		eRepo.save(penjualan);
+		
+		return penjualan;
 	}
 	public List<Penjualan> getAllPenjualan(){
 
@@ -48,80 +70,72 @@ public class PenjualanService {
 	public void deletePenjualanById(Long id)
     {
 		Penjualan p = new Penjualan();
+		List<DetailPesanan> details = new ArrayList<>();
     	p = eRepo.findById(id).get();
+    	for(int i = 0; i < p.getDetailPesananList().size(); i++) {
+			DetailPesanan d = new DetailPesanan();
+			
+			StockStore prevStoreAsal = new StockStore();
+	    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(p.getDetailPesananList().get(i).getId_store(),p.getDetailPesananList().get(i).getArtikel()).get(0);
+			double prev_qty_store_asal = prevStoreAsal.getKuantitas();
+			StockStore check = new StockStore();
+			check = eStockRepo.findById_storeAndArtikel(p.getDetailPesananList().get(i).getId_store(),p.getDetailPesananList().get(i).getArtikel()).get(0);
+			check.setKuantitas(prev_qty_store_asal + p.getDetailPesananList().get(i).getKuantitas());
+			eStockRepo.save(check);
+			
+			d.setRowstatus(0);
+			details.add(d);
+		}
     	p.setRowstatus(0);
+    	p.setDetailPesananList(details);
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Date tanggal_transaksi, String id_transaksi, String id_store, String lokasi_store,
-			String nama_pelanggan, String nama_karyawan,
-			double diskon, String metode_bayar, String ekspedisi, double ongkir,
-			double total, double kembalian) {
+	public Penjualan update( Penjualan penjualan) {
 		Penjualan p = new Penjualan();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(penjualan.getId()).get();
+    	List<DetailPesanan> details = new ArrayList<>();
     	
-		p.setTanggal_transaksi(tanggal_transaksi);
-		p.setId_transaksi(id_transaksi);
-		p.setId_store(id_store);
-		p.setLokasi_store(lokasi_store);
-		p.setDiskon(diskon);
-		p.setMetode_bayar(metode_bayar);
-		p.setEkspedisi(ekspedisi);
-		p.setOngkir(ongkir);
-		p.setTotal(total);
-		p.setKembalian(kembalian);
-		p.setNama_pelanggan(nama_pelanggan);
-		p.setNama_karyawan(nama_karyawan);
+    	p.setTanggal_transaksi(new Date());
+		p.setId_transaksi(penjualan.getId_transaksi());
+		p.setId_store(penjualan.getId_store());
+		p.setLokasi_store(penjualan.getLokasi_store());
+		p.setDiskon(penjualan.getDiskon());
+		p.setMetode_bayar(penjualan.getMetode_bayar());
+		p.setEkspedisi(penjualan.getEkspedisi());
+		p.setOngkir(penjualan.getOngkir());
+		p.setTotal(penjualan.getTotal());
+		p.setKembalian(penjualan.getKembalian());
+		p.setNama_pelanggan(penjualan.getNama_pelanggan());
+		p.setNama_karyawan(penjualan.getNama_karyawan());
 		p.setRowstatus(1);
+		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
+			DetailPesanan d = new DetailPesanan();
+			
+			StockStore prevStoreAsal = new StockStore();
+	    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel()).get(0);
+			double prev_qty_store_asal = prevStoreAsal.getKuantitas();
+			StockStore check = new StockStore();
+			check = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel()).get(0);
+			check.setKuantitas((prev_qty_store_asal + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
+			eStockRepo.save(check);
+			
+			d.setTanggal_transaksi(new Date());
+			d.setId_transaksi(p.getDetailPesananList().get(i).getId_transaksi());
+			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
+			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
+			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
+			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
+			d.setRowstatus(1);
+			d.setPenjualan(penjualan);
+			details.add(d);
+		}
+		p.setDetailPesananList(details);
     	eRepo.save(p);
+    	
+    	return penjualan;
 	}
-	
-//	public void changePenjualanTanggal_transaksi(Long id ,Date tanggal_transaksi)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setTanggal_transaksi(tanggal_transaksi);
-//    	eRepo.save(p);    
-//    }
-//	
-//	public void changePenjualanId_transaksi(Long id ,String id_transaksi)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setId_transaksi(id_transaksi);
-//    	eRepo.save(p);    
-//    }
-//	
-//	public void changePenjualanId_store(Long id ,String id_store)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setId_store(id_store);
-//    	eRepo.save(p);    
-//    }
-//	
-//	public void changePenjualanLokasi_store(Long id ,String lokasi_store)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setLokasi_store(lokasi_store);
-//    	eRepo.save(p);    
-//    }
-//	
-//	public void changePenjualanKuantitas(Long id ,int kuantitas)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setKuantitas(kuantitas);
-//    	eRepo.save(p);    
-//    }
-//	
-//	public void changePenjualanTotal(Long id ,double total)
-//    {
-//		Penjualan p = new Penjualan();
-//    	p = eRepo.findById(id).get();
-//    	p.setTotal(total);
-//    	eRepo.save(p);    
-//    }
-
 }

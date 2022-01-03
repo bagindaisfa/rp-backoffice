@@ -11,11 +11,13 @@ import com.gbsystem.rpbackoffice.entities.PenerimaanStore;
 
 @Repository
 public interface PenerimaanStoreRepository extends JpaRepository<PenerimaanStore, Long> {
-List<PenerimaanStore> findByRowstatus(@Param("rowstatus") int rowstatus);
+   List<PenerimaanStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penerimaan_store WHERE rowstatus = 1 AND  "
 			+ "MATCH(nama_barang, nama_pelanggan) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<PenerimaanStore> search(String keyword);
-
+	
+	@Query(value = "SELECT * FROM penerimaan_store WHERE rowstatus = 1 AND penerimaan_code = :penerimaan_code", nativeQuery = true)
+	List<PenerimaanStore> findByPenerimaan_code(String penerimaan_code);
 }

@@ -19,6 +19,8 @@ public class PenerimaanStore {
 	private Long id;
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date tanggal_retur;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private int id_office;
 	private String lokasi_office;
@@ -53,6 +55,14 @@ public class PenerimaanStore {
 		this.penerimaan_code = penerimaan_code;
 	}
 
+	public Date getTanggal_retur() {
+		return tanggal_retur;
+	}
+
+	public void setTanggal_retur(Date tanggal_retur) {
+		this.tanggal_retur = tanggal_retur;
+	}
+	
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;
 	}

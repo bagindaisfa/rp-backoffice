@@ -20,6 +20,7 @@ public class MasterProduct {
 	private String nama_kategori;
 	private String artikel_frame;
 	private String artikel_lens;
+	private String ukuran;
 	private double kuantitas;
 	private double hpp;
 	private double harga_jual;
@@ -83,6 +84,12 @@ public class MasterProduct {
 	}
 	public void setArtikel_lens(String artikel_lens) {
 		this.artikel_lens = artikel_lens;
+	}
+	public String getUkuran() {
+		return ukuran;
+	}
+	public void setUkuran(String ukuran) {
+		this.ukuran = ukuran;
 	}
 	public double getKuantitas() {
 		return kuantitas;

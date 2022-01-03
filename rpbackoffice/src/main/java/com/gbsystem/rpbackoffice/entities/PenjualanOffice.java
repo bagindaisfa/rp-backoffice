@@ -19,7 +19,7 @@ public class PenjualanOffice {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_transaksi;
 	private String id_transaksi;
-	private String id_office;
+	private int id_office;
 	private String lokasi_office;
 	private String artikel;
 	private String tipe;
@@ -55,10 +55,10 @@ public class PenjualanOffice {
 	public void setId_transaksi(String id_transaksi) {
 		this.id_transaksi = id_transaksi;
 	}
-	public String getId_office() {
+	public int getId_office() {
 		return id_office;
 	}
-	public void setId_office(String id_office) {
+	public void setId_office(int id_office) {
 		this.id_office = id_office;
 	}
 	public String getLokasi_office() {

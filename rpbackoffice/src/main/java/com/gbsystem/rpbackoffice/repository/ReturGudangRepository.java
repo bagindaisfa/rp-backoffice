@@ -10,7 +10,10 @@ import com.gbsystem.rpbackoffice.entities.ReturGudang;
 
 public interface ReturGudangRepository extends JpaRepository<ReturGudang, Long> {
 	
-List<ReturGudang> findByRowstatus(@Param("rowstatus") int rowstatus);
+	List<ReturGudang> findByRowstatus(@Param("rowstatus") int rowstatus);
+	
+	@Query(value = "SELECT * FROM retur_gudang WHERE rowstatus = 1 AND pengiriman_code = :pengiriman_code", nativeQuery = true)
+	ReturGudang findByPengiriman_code(String pengiriman_code);
 	
 	@Query(value = "SELECT * FROM retur_gudang WHERE rowstatus = 1 AND  "
 			+ "MATCH(nama_barang, nama_gudang) "

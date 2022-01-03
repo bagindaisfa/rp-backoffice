@@ -15,7 +15,7 @@ public class DetailPesananService {
 	@Autowired
 	private DetailPesananRepository eRepo;
 	
-	public void saveDetailPesanan(String id_transaksi, String id_store, String lokasi_store, 
+	public void saveDetailPesanan(String id_transaksi, int id_store, String lokasi_store, 
 			String nama_barang, double harga, double kuantitas, double total) {
 		
 		DetailPesanan p = new DetailPesanan();
@@ -51,7 +51,7 @@ public class DetailPesananService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Date tanggal_transaksi, String id_transaksi, String id_store, String lokasi_store, 
+	public void update(Long id, Date tanggal_transaksi, String id_transaksi, int id_store, String lokasi_store, 
 			String nama_barang, double harga, double kuantitas, double total) {
 		DetailPesanan p = new DetailPesanan();
     	p = eRepo.findById(id).get();

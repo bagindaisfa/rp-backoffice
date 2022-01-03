@@ -34,10 +34,14 @@ public class PenerimaanSupplierService {
 			String artikel, String kategori,String tipe, String nama_barang, double kuantitas, String ukuran, 
 			MultipartFile foto_barang, double hpp, double harga_jual) {
 		
-		String code_penerimaan = "PM-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
+		String code_penerimaan = "PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
 		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
 		
 		PenerimaanSupplier p = new PenerimaanSupplier();
+		StockOffice prev = new StockOffice();
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		
+		double prev_qty = prev.getKuantitas();
 		
 		StockOffice d = new StockOffice();
 		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
@@ -50,7 +54,7 @@ public class PenerimaanSupplierService {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		d.setKuantitas(d.getKuantitas() + kuantitas);
+		d.setKuantitas(prev_qty + kuantitas);
 		d.setUkuran(ukuran);
 		d.setKategori(kategori);
 		d.setTipe(tipe);
@@ -110,9 +114,14 @@ public class PenerimaanSupplierService {
     	p = eRepo.findById(id).get();
     	p.setRowstatus(0);
     	
+    	StockOffice prev = new StockOffice();
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		
+		double prev_qty = prev.getKuantitas();
+		
     	StockOffice d = new StockOffice();
 		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
-    	d.setKuantitas(d.getKuantitas()-p.getKuantitas());
+    	d.setKuantitas(prev_qty - p.getKuantitas());
     	eStockRepo.save(d);
     	
     	return eRepo.save(p);
@@ -123,10 +132,14 @@ public class PenerimaanSupplierService {
 			MultipartFile foto_barang, double hpp, double harga_jual) {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(id).get();
-    	
+    	StockOffice prev = new StockOffice();
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		
+		double prev_qty = prev.getKuantitas();
+		
     	StockOffice d = new StockOffice();
 		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
-		d.setKuantitas((d.getKuantitas()-p.getKuantitas()) + kuantitas);
+		d.setKuantitas((prev_qty - p.getKuantitas()) + kuantitas);
 		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");

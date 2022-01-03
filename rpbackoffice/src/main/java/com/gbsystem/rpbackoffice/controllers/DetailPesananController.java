@@ -37,7 +37,7 @@ public class DetailPesananController {
     }
 	
 	@PostMapping("/add")
-	public String saveDetailPesanan(@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
+	public String saveDetailPesanan(@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") int id_store,
 			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_barang") String nama_barang,
 			@RequestParam("harga") double harga,
 			@RequestParam("kuantitas") double kuantitas, @RequestParam("total") double total) 
@@ -49,7 +49,7 @@ public class DetailPesananController {
 	
 	@PostMapping(value = "/update")
     public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_transaksi") Date tanggal_transaksi, 
-    		@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") String id_store,
+    		@RequestParam("id_transaksi") String id_transaksi, @RequestParam("id_store") int id_store,
 			@RequestParam("lokasi_store") String lokasi_store, @RequestParam("nama_barang") String nama_barang,
 			@RequestParam("harga") double harga,
 			@RequestParam("kuantitas") double kuantitas, @RequestParam("total") double total) throws Exception {

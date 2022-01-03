@@ -14,8 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gbsystem.rpbackoffice.entities.ReturGudang;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.entities.PenerimaanStore;
 import com.gbsystem.rpbackoffice.entities.PenyimpananMasuk;
+import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
+import com.gbsystem.rpbackoffice.repository.PenerimaanStoreRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananMasukRepository;
+import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.ReturGudangRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
@@ -35,26 +39,49 @@ public class ReturGudangService {
 	@Autowired
 	private PenyimpananMasukRepository ePenyimpananRepo;
 	
+	@Autowired
+	private PenerimaanStoreRepository ePenerimaanRepo;
+	
+	@Autowired
+	private PenyimpananStoreKeluarRepository ePenyimpananStoreKeluarRepo;
+	
 	public ReturGudang saveReturGudang(int id_store_asal,String lokasi_store_asal,int id_office_tujuan, String lokasi_office_tujuan,
 			String artikel, String kategori,String tipe, String nama_barang, double kuantitas, String ukuran, 
 			MultipartFile foto_barang, double hpp, double harga_jual) {
 		
 		ReturGudang p = new ReturGudang();
+		String code_retur = "RT-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
+		String code_pengiriman_store = code_retur + "S";
+		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
+		
+		PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
+		store_asal.setPengiriman_code(code_pengiriman_store);
+		store_asal.setId_office(id_office_tujuan);
+		store_asal.setLokasi_office(lokasi_office_tujuan);
+		store_asal.setTanggal_keluar(new Date());
+		store_asal.setId_store(id_store_asal);
+		store_asal.setLokasi_store(lokasi_store_asal);
+		store_asal.setArtikel(artikel);
+		store_asal.setKategori(kategori);
+		store_asal.setTipe(tipe);
+		store_asal.setNama_barang(nama_barang);
+		store_asal.setKuantitas(kuantitas);
+		store_asal.setUkuran(ukuran);
+		store_asal.setHpp(hpp);
+		store_asal.setHarga_jual(harga_jual);
+		store_asal.setRowstatus(1);
+		ePenyimpananStoreKeluarRepo.save(store_asal);
+
+    	StockStore prevStoreAsal = new StockStore();
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+		
+		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 		
 		StockStore d = new StockStore();
 		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
-		d.setKuantitas(d.getKuantitas() - kuantitas);
+		d.setKuantitas(prev_qty_store_asal - kuantitas);
 		eStockRepo.save(d);
 		
-		StockOffice g = new StockOffice();
-		g = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel).get(0);
-		g.setKuantitas(g.getKuantitas() + kuantitas);
-		eStockOfficeRepo.save(g);
-		
-		PenyimpananMasuk f = new PenyimpananMasuk();
-		
-		String code_retur = "RT-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
-		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");
 		}
@@ -80,21 +107,6 @@ public class ReturGudangService {
 		p.setHarga_jual(harga_jual);
 		p.setRowstatus(1);
 		
-		// region penyimpanan barang masuk
-		f.setPenerimaan_code(code_retur);
-		f.setTanggal_masuk(new Date());
-		f.setArtikel(artikel);
-		f.setKategori(kategori);
-		f.setTipe(tipe);
-		f.setNama_barang(nama_barang);
-		f.setKuantitas(kuantitas);
-		f.setUkuran(ukuran);
-		f.setHpp(hpp);
-		f.setHarga_jual(harga_jual);
-		f.setKeterangan("Pengembalian Barang Dari Store");
-		f.setRowstatus(1);
-		ePenyimpananRepo.save(f);
-		// end region
 		return eRepo.save(p);
 	}
 
@@ -112,21 +124,47 @@ public class ReturGudangService {
 		ReturGudang p = new ReturGudang();
     	p = eRepo.findById(id).get();
     	p.setRowstatus(0);
-    	
+
+    	// region add stock store
+    	StockStore prevStoreAsal = new StockStore();
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store, artikel).get(0);
+		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
     	StockStore d = new StockStore();
 		d = eStockRepo.findById_storeAndArtikel(id_store, artikel).get(0);
-		d.setKuantitas(d.getKuantitas() + p.getKuantitas());
+		d.setKuantitas(prev_qty_store_asal + p.getKuantitas());
 		eStockRepo.save(d);
+		// end region add stock store
 		
+		// region reduce stock office
+		StockOffice prev = new StockOffice();
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		double prev_qty = prev.getKuantitas();
 		StockOffice e = new StockOffice();
 		eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
-		e.setKuantitas(e.getKuantitas() - p.getKuantitas());
+		e.setKuantitas(prev_qty - p.getKuantitas());
 		eStockOfficeRepo.save(e);
+		// end region reduce stock office
 		
+		// region remove penyimpanan masuk
 		PenyimpananMasuk f = new PenyimpananMasuk();
 		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code).get(0);
     	f.setRowstatus(0);
     	ePenyimpananRepo.save(f);
+    	// end region remove penyimpanan masuk
+    	
+    	// region remove penyimpanan store keluar
+    	PenyimpananStoreKeluar i = new PenyimpananStoreKeluar();
+		i = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		i.setRowstatus(0);
+		ePenyimpananStoreKeluarRepo.save(i);
+		// region remove penyimpanan store keluar
+		
+		// region remove penerimaan store
+		PenerimaanStore a = new PenerimaanStore();
+    	a = ePenerimaanRepo.findByPenerimaan_code(pengiriman_code).get(0);
+    	a.setRowstatus(0);
+    	ePenerimaanRepo.save(a);
+    	// end region remove penerimaan store
     	
     	return eRepo.save(p);    
     }
@@ -138,18 +176,56 @@ public class ReturGudangService {
 		ReturGudang p = new ReturGudang();
     	p = eRepo.findById(id).get();
     	
+    	StockStore prevStoreAsal = new StockStore();
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
     	StockStore d = new StockStore();
 		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
-		d.setKuantitas((d.getKuantitas()-p.getKuantitas()) - kuantitas);
+		d.setKuantitas((prev_qty_store_asal + p.getKuantitas()) - kuantitas);
 		eStockRepo.save(d);
     	
+		StockOffice prev = new StockOffice();
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel).get(0);
+		double prev_qty = prev.getKuantitas();
+		
 		StockOffice g = new StockOffice();
 		g = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel).get(0);
-		g.setKuantitas((g.getKuantitas()-p.getKuantitas()) + kuantitas);
+		g.setKuantitas((prev_qty - p.getKuantitas()) + kuantitas);
 		eStockOfficeRepo.save(g);
 		
 		PenyimpananMasuk f = new PenyimpananMasuk();
 		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code).get(0);
+		f.setPenerimaan_code(pengiriman_code);
+		f.setTanggal_masuk(new Date());
+		f.setArtikel(artikel);
+		f.setKategori(kategori);
+		f.setTipe(tipe);
+		f.setNama_barang(nama_barang);
+		f.setKuantitas(kuantitas);
+		f.setUkuran(ukuran);
+		f.setHpp(hpp);
+		f.setHarga_jual(harga_jual);
+		f.setKeterangan("Pengembalian Barang Dari Store");
+		f.setRowstatus(1);
+		ePenyimpananRepo.save(f);
+		
+		PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
+		store_asal = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		store_asal.setId_office(id_office_tujuan);
+		store_asal.setLokasi_office(lokasi_office_tujuan);
+		store_asal.setTanggal_keluar(tanggal_retur);
+		store_asal.setId_store(id_store_asal);
+		store_asal.setLokasi_store(lokasi_store_asal);
+		store_asal.setArtikel(artikel);
+		store_asal.setKategori(kategori);
+		store_asal.setTipe(tipe);
+		store_asal.setNama_barang(nama_barang);
+		store_asal.setKuantitas(kuantitas);
+		store_asal.setUkuran(ukuran);
+		store_asal.setHpp(hpp);
+		store_asal.setHarga_jual(harga_jual);
+		store_asal.setRowstatus(1);
+		ePenyimpananStoreKeluarRepo.save(store_asal);
 		
     	String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
 		if(fileName.contains("..")) {
@@ -175,21 +251,6 @@ public class ReturGudangService {
 		p.setHpp(hpp);
 		p.setHarga_jual(harga_jual);
 		p.setRowstatus(1);
-		
-		// region penyimpanan barang masuk
-		f.setPenerimaan_code(pengiriman_code);
-		f.setTanggal_masuk(new Date());
-		f.setArtikel(artikel);
-		f.setKategori(kategori);
-		f.setTipe(tipe);
-		f.setNama_barang(nama_barang);
-		f.setKuantitas(kuantitas);
-		f.setUkuran(ukuran);
-		f.setHpp(hpp);
-		f.setHarga_jual(harga_jual);
-		f.setKeterangan("Pengembalian Barang Dari Store");
-		f.setRowstatus(1);
-		ePenyimpananRepo.save(f);
 		
 		return eRepo.save(p);
 	}
