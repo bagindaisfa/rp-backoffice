@@ -25,16 +25,16 @@ public class PenjualanOffice {
 	private String tipe;
 	private String kategori;
 	private String nama_barang;
-	private Double kuantitas;
+	private double kuantitas;
 	private String ukuran;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String foto_barang;
 	private String metode_pembayaran;
-	private Double harga_satuan_barang;
-	private Double ongkos_kirim;
-	private Double pajak_biaya;
-	private Double total;
+	private double harga_satuan_barang;
+	private double ongkos_kirim;
+	private double pajak_biaya;
+	private double total;
 	private int rowstatus;
 	
 	public Long getId() {

@@ -13,6 +13,15 @@ import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
 public interface PenjualanOfficeRepository extends JpaRepository<PenjualanOffice, Long> {
 	List<PenjualanOffice> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
+	@Query(value = "SELECT COUNT(id) FROM penjualan_office WHERE rowstatus = :rowstatus", nativeQuery = true)
+	double counting(int rowstatus);
+	
+	@Query(value = "SELECT SUM(total) AS total FROM penjualan_office WHERE rowstatus = :rowstatus", nativeQuery = true)
+	double total(int rowstatus);
+	
+	@Query(value = "SELECT SUM(B.hpp) AS total FROM penjualan_office A LEFT JOIN master_product B ON A.artikel=B.artikel_product WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	double totalHpp(int rowstatus);
+	
 	@Query(value = "SELECT * FROM penjualan_office WHERE rowstatus=1 AND "
 			+ "MATCH(id_transaksi, id_office, lokasi_office) "
 			+ "AGAINST (?1)", nativeQuery = true)

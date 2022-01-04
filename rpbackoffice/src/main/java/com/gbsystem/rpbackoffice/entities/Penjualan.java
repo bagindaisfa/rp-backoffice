@@ -28,12 +28,12 @@ public class Penjualan {
 	private String lokasi_store;
 	private String nama_pelanggan;
 	private String nama_karyawan;
-	private Double diskon;
+	private double diskon;
 	private String metode_bayar;
 	private String ekspedisi;
-	private Double ongkir;
-	private Double total;
-	private Double kembalian;
+	private double ongkir;
+	private double total;
+	private double kembalian;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualan", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("penjualan")
