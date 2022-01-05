@@ -17,4 +17,10 @@ public interface PembelianRepository extends JpaRepository<Pembelian, Long> {
 			+ "MATCH(artikel, tipe, kategori, nama_barang, ukuran) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<Pembelian> search(String keyword);
+	
+	@Query(value = "SELECT COUNT(id) AS total FROM pembelian WHERE rowstatus = :rowstatus", nativeQuery = true)
+	double totalPembelian(int rowstatus);
+	
+	@Query(value = "SELECT SUM(A.hpp) AS total FROM pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	double totalHpp(int rowstatus);
 }

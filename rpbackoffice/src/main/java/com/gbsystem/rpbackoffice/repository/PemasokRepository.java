@@ -20,6 +20,9 @@ List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<Pemasok> search(String keyword);
 	
+	@Query(value = "SELECT COUNT(id) AS id FROM pemasok WHERE rowstatus = :rowstatus ", nativeQuery = true)
+	Long totalPemasok(int rowstatus);
+	
 //	@Query(value = "SELECT * INTO OUTFILE 'D:/test.csv' FROM pemasok where rowstatus = 1", nativeQuery = true)
 //	List<Pemasok> download(String oe);
 	

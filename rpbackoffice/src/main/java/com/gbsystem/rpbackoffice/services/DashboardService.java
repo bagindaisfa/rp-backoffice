@@ -4,14 +4,12 @@ package com.gbsystem.rpbackoffice.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gbsystem.rpbackoffice.entities.Pelanggan;
-import com.gbsystem.rpbackoffice.entities.Pemasok;
-import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
-import com.gbsystem.rpbackoffice.entities.Penjualan;
-import com.gbsystem.rpbackoffice.entities.Pembelian;
 import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
+import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
+import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 import com.gbsystem.rpbackoffice.repository.PembelianRepository;
+import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PemasokRepository;
 
@@ -24,10 +22,17 @@ public class DashboardService {
 	@Autowired
 	private PembelianRepository ePembelianRepo;
 	@Autowired
+	private MasterProductRepository eProductRepo;
+	@Autowired
 	private PelangganRepository ePelangganRepo;
 	@Autowired
 	private PemasokRepository ePemasokRepo;
+	@Autowired
+	private StockOfficeRepository eStockOfficeRepo;
+	@Autowired
+	private StockStoreRepository eStockStoreRepo;
 	
+	// Region Penjualan
 	public double getAllPenjualan(){
 		
 		double office = ePenjualanOfficeRepo.counting(1);
@@ -69,4 +74,68 @@ public class DashboardService {
 		
 		return total;
 	}
+	// end region penjualan
+	
+	
+	// region pembelian
+	public double getAllPembelian(){
+		
+		double office = ePembelianRepo.totalPembelian(1);
+		
+		
+		return office;
+	}
+	
+	public double getAllBiayaPembelian(){
+		
+		double office = ePembelianRepo.totalHpp(1);
+		
+		
+		return office;
+	}
+	// end region pembelian
+	
+	
+	// region product
+	public double totalProduct(){
+		
+		double product = eProductRepo.totalProduct(1);
+		
+		
+		return product;
+	}
+	
+	public double totalStockOffice(){
+		
+		double office = eStockOfficeRepo.totalStockOffice(1);
+		
+		
+		return office;
+	}
+	
+	public double totalStockStore(){
+		
+		double store = eStockStoreRepo.totalStockStore(1);
+		
+		
+		return store;
+	}
+	// end region product
+	
+	// region pemasok and pelanggan
+	public Long totalPemasok(){
+			
+			Long pemasok = ePemasokRepo.totalPemasok(1);
+			
+			
+			return pemasok;
+	}
+	public Long totalPelanggan(){
+		
+		Long pelanggan = ePelangganRepo.totalPelanggan(1);
+		
+		
+		return pelanggan;
+	}
+	// end region pemasok and pelanggan
 }
