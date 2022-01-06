@@ -88,49 +88,11 @@ public class PenjualanController {
         }
     }
 	
-	@GetMapping("/delete")
-    public String deletePenjualan(@RequestParam("id") Long id)
+	@PostMapping("/delete")
+    public Penjualan deletePenjualan(@RequestParam("id") Long id)
     {
-    	
-    	penjualanService.deletePenjualanById(id);
-    	return "redirect:/penjualanStore";
+		Penjualan penjualanResponse = penjualanService.deletePenjualanById(id);
+    	return penjualanResponse;
     }
-	
-//	@PostMapping("/changeTanggal_transaksi")
-//    public String changeTanggal_transaksi(@RequestParam("id") Long id ,@RequestParam("newTanggal_transaksi") Date tanggal_transaksi)
-//    {
-//    	penjualanService.changePenjualanTanggal_transaksi(id, tanggal_transaksi);
-//    	return "redirect:/penjualanStore"; 
-//    }
-//	@PostMapping("/changeId_transaksi")
-//    public String changeId_transaksi(@RequestParam("id") Long id ,@RequestParam("newId_transaksi") String id_transaksi)
-//    {
-//    	penjualanService.changePenjualanId_transaksi(id, id_transaksi);
-//    	return "redirect:/penjualanStore"; 
-//    }
-//	@PostMapping("/changeId_store")
-//    public String changeId_store(@RequestParam("id") Long id ,@RequestParam("newId_store") String id_store)
-//    {
-//    	penjualanService.changePenjualanId_store(id, id_store);
-//    	return "redirect:/penjualanStore"; 
-//    }
-//	@PostMapping("/changeLokasi_store")
-//    public String changeLokasi_store(@RequestParam("id") Long id ,@RequestParam("newLokasi_store") String lokasi_store)
-//    {
-//    	penjualanService.changePenjualanLokasi_store(id, lokasi_store);
-//    	return "redirect:/penjualanStore"; 
-//    }
-//	@PostMapping("/changeKuantitas")
-//    public String changeKuantitas(@RequestParam("id") Long id ,@RequestParam("newKuantitas") int kuantitas)
-//    {
-//    	penjualanService.changePenjualanKuantitas(id, kuantitas);
-//    	return "redirect:/penjualanStore"; 
-//    }
-//	@PostMapping("/changeTotal")
-//    public String changeTotal(@RequestParam("id") Long id ,@RequestParam("newTotal") double total)
-//    {
-//    	penjualanService.changePenjualanTotal(id, total);
-//    	return "redirect:/penjualanStore"; 
-//    }
-    
+	    
 }

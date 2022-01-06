@@ -12,7 +12,7 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	List<StockStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store= :id_store AND artikel =:artikel ", nativeQuery = true)
-	List<StockStore> findById_storeAndArtikel(int id_store,String artikel);
+	StockStore findById_storeAndArtikel(int id_store,String artikel);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_store WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	double totalStockStore(int rowstatus);

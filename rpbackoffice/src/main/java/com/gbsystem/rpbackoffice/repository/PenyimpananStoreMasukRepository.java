@@ -15,7 +15,7 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	List<PenyimpananStoreMasuk> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
-	List<PenyimpananStoreMasuk> findByPenerimaan_code(String penerimaan_code);
+	PenyimpananStoreMasuk findByPenerimaan_code(String penerimaan_code);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND "
 			+ "MATCH(nama_barang) "

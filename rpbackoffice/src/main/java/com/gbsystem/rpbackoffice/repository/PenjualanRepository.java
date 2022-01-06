@@ -14,6 +14,9 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	
 	List<Penjualan> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
+	@Query(value = "SELECT * FROM penjualan WHERE id = :id", nativeQuery = true)
+	Penjualan getById(Long id);
+	
 	@Query(value = "SELECT COUNT(id) FROM penjualan WHERE rowstatus = :rowstatus", nativeQuery = true)
 	double counting(int rowstatus);
 	

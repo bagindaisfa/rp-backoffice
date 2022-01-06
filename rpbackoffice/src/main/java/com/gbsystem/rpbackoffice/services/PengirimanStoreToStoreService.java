@@ -61,12 +61,12 @@ public class PengirimanStoreToStoreService {
 		ePenyimpananStoreKeluarRepo.save(store_asal);
 
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel);
 		
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 		
 		StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel);
 		d.setKuantitas(prev_qty_store_asal - kuantitas);
 		d.setId_store(id_store_asal);
 		d.setLokasi_store(lokasi_store_asal);
@@ -98,12 +98,12 @@ public class PengirimanStoreToStoreService {
 		ePenyimpananStoreMasukRepo.save(store_tujuan);
 
     	StockStore prevStoreTujuan = new StockStore();
-    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel).get(0);
+    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel);
 		
 		double prev_qty_store_tujuan = prevStoreTujuan.getKuantitas();
 		
 		StockStore g = new StockStore();
-		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel).get(0);
+		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel);
 		g.setKuantitas(prev_qty_store_tujuan + kuantitas);
 		g.setId_store(id_store_tujuan);
 		g.setLokasi_store(lokasi_store_tujuan);
@@ -161,32 +161,32 @@ public class PengirimanStoreToStoreService {
     	p.setRowstatus(0);
 
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel);
 		
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 		
     	StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel);
 		d.setKuantitas(prev_qty_store_asal + p.getKuantitas());
 		eStockRepo.save(d);
 
     	StockStore prevStoreTujuan = new StockStore();
-    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel).get(0);
+    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel);
 		
 		double prev_qty_store_tujuan = prevStoreTujuan.getKuantitas();
 		
 		StockStore g = new StockStore();
-		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel).get(0);
+		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel);
     	g.setKuantitas(prev_qty_store_tujuan - p.getKuantitas());
     	eStockRepo.save(g);
     	
     	PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-		h = ePenyimpananStoreMasukRepo.findByPenerimaan_code("PK-"+(pengiriman_code.substring(3))+"S").get(0);
+		h = ePenyimpananStoreMasukRepo.findByPenerimaan_code("PK-"+(pengiriman_code.substring(3))+"S");
 		h.setRowstatus(0);
 		ePenyimpananStoreMasukRepo.save(h);
     	
 		PenyimpananStoreKeluar i = new PenyimpananStoreKeluar();
-		i = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		i = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S");
 		i.setRowstatus(0);
 		ePenyimpananStoreKeluarRepo.save(i);
 		
@@ -201,12 +201,12 @@ public class PengirimanStoreToStoreService {
     	p = eRepo.findById(id).get();
 
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel);
 		
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 		
     	StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel);
 		d.setKuantitas((prev_qty_store_asal + p.getKuantitas()) - kuantitas);
 		d.setId_store(id_store_asal);
 		d.setLokasi_store(lokasi_store_asal);
@@ -221,12 +221,12 @@ public class PengirimanStoreToStoreService {
 		eStockRepo.save(d);
 
     	StockStore prevStoreTujuan = new StockStore();
-    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel).get(0);
+    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(id_store_tujuan, artikel);
 		
 		double prev_qty_store_tujuan = prevStoreTujuan.getKuantitas();
 		
 		StockStore g = new StockStore();
-		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel).get(0);
+		g = eStockRepo.findById_storeAndArtikel(id_store_tujuan,artikel);
 		g.setKuantitas((prev_qty_store_tujuan - p.getKuantitas()) + kuantitas);
 		g.setId_store(id_store_tujuan);
 		g.setLokasi_store(lokasi_store_tujuan);
@@ -242,7 +242,7 @@ public class PengirimanStoreToStoreService {
 		eStockRepo.save(g);
 		
 		PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();		
-		store_asal = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		store_asal = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S");
 		store_asal.setLokasi_office("-");
 		store_asal.setTanggal_keluar(tanggal_pengiriman);
 		store_asal.setId_store(id_store_tujuan);
@@ -259,7 +259,7 @@ public class PengirimanStoreToStoreService {
 		ePenyimpananStoreKeluarRepo.save(store_asal);
 		
 		PenyimpananStoreMasuk store_tujuan = new PenyimpananStoreMasuk();
-		store_tujuan = ePenyimpananStoreMasukRepo.findByPenerimaan_code("PK-"+(pengiriman_code.substring(3))+"S").get(0);
+		store_tujuan = ePenyimpananStoreMasukRepo.findByPenerimaan_code("PK-"+(pengiriman_code.substring(3))+"S");
 		store_tujuan.setLokasi_office("-");
 		store_tujuan.setTanggal_masuk(tanggal_pengiriman);
 		store_tujuan.setId_store(id_store_tujuan);

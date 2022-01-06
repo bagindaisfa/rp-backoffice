@@ -37,12 +37,12 @@ public class PenerimaanStoreService {
 		
 		PenerimaanStore p = new PenerimaanStore();
 		StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel()).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel());
 		
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel()).get(0);
+		d = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel());
 		d.setKuantitas(prev_qty + get_retur.getKuantitas());
 		eStockRepo.save(d);
 		
@@ -98,16 +98,16 @@ public class PenerimaanStoreService {
     	p.setRowstatus(0);
     	
     	PenyimpananMasuk f = new PenyimpananMasuk();
-		f = ePenyimpananRepo.findByPenerimaan_code(p.getPenerimaan_code()).get(0);
+		f = ePenyimpananRepo.findByPenerimaan_code(p.getPenerimaan_code());
 		f.setRowstatus(0);
 		ePenyimpananRepo.save(f);
 		StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
     	d.setKuantitas(prev_qty-p.getKuantitas());
     	eStockRepo.save(d);
     	
@@ -119,17 +119,17 @@ public class PenerimaanStoreService {
     	p = eRepo.findById(id).get();
     	
     	PenyimpananMasuk f = new PenyimpananMasuk();
-		f = ePenyimpananRepo.findByPenerimaan_code(p.getPenerimaan_code()).get(0);
+		f = ePenyimpananRepo.findByPenerimaan_code(p.getPenerimaan_code());
     	
     	ReturGudang get_retur = new ReturGudang();
 		get_retur = eReturRepo.findByPengiriman_code(penerimaan_code);
 		StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel()).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel());
 		
 		double prev_qty = prev.getKuantitas();
 		
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel()).get(0);
+		d = eStockRepo.findById_officeAndArtikel(get_retur.getId_office_tujuan(),get_retur.getArtikel());
 		d.setKuantitas((prev_qty - p.getKuantitas()) + get_retur.getKuantitas());
 		eStockRepo.save(d);
     	

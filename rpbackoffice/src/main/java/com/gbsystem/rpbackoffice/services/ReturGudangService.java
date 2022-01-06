@@ -73,12 +73,12 @@ public class ReturGudangService {
 		ePenyimpananStoreKeluarRepo.save(store_asal);
 
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel);
 		
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 		
 		StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel);
 		d.setKuantitas(prev_qty_store_asal - kuantitas);
 		eStockRepo.save(d);
 		
@@ -127,34 +127,34 @@ public class ReturGudangService {
 
     	// region add stock store
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store, artikel);
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
     	StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store, artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store, artikel);
 		d.setKuantitas(prev_qty_store_asal + p.getKuantitas());
 		eStockRepo.save(d);
 		// end region add stock store
 		
 		// region reduce stock office
 		StockOffice prev = new StockOffice();
-		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		double prev_qty = prev.getKuantitas();
 		StockOffice e = new StockOffice();
-		eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		e.setKuantitas(prev_qty - p.getKuantitas());
 		eStockOfficeRepo.save(e);
 		// end region reduce stock office
 		
 		// region remove penyimpanan masuk
 		PenyimpananMasuk f = new PenyimpananMasuk();
-		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code).get(0);
+		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code);
     	f.setRowstatus(0);
     	ePenyimpananRepo.save(f);
     	// end region remove penyimpanan masuk
     	
     	// region remove penyimpanan store keluar
     	PenyimpananStoreKeluar i = new PenyimpananStoreKeluar();
-		i = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		i = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S");
 		i.setRowstatus(0);
 		ePenyimpananStoreKeluarRepo.save(i);
 		// region remove penyimpanan store keluar
@@ -177,24 +177,24 @@ public class ReturGudangService {
     	p = eRepo.findById(id).get();
     	
     	StockStore prevStoreAsal = new StockStore();
-    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel).get(0);
+    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(id_store_asal, artikel);
 		double prev_qty_store_asal = prevStoreAsal.getKuantitas();
     	StockStore d = new StockStore();
-		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel).get(0);
+		d = eStockRepo.findById_storeAndArtikel(id_store_asal,artikel);
 		d.setKuantitas((prev_qty_store_asal + p.getKuantitas()) - kuantitas);
 		eStockRepo.save(d);
     	
 		StockOffice prev = new StockOffice();
-		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel).get(0);
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel);
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice g = new StockOffice();
-		g = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel).get(0);
+		g = eStockOfficeRepo.findById_officeAndArtikel(id_office_tujuan, artikel);
 		g.setKuantitas((prev_qty - p.getKuantitas()) + kuantitas);
 		eStockOfficeRepo.save(g);
 		
 		PenyimpananMasuk f = new PenyimpananMasuk();
-		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code).get(0);
+		f = ePenyimpananRepo.findByPenerimaan_code(pengiriman_code);
 		f.setPenerimaan_code(pengiriman_code);
 		f.setTanggal_masuk(new Date());
 		f.setArtikel(artikel);
@@ -210,7 +210,7 @@ public class ReturGudangService {
 		ePenyimpananRepo.save(f);
 		
 		PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
-		store_asal = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S").get(0);
+		store_asal = ePenyimpananStoreKeluarRepo.findByPengiriman_code(pengiriman_code+"S");
 		store_asal.setId_office(id_office_tujuan);
 		store_asal.setLokasi_office(lokasi_office_tujuan);
 		store_asal.setTanggal_keluar(tanggal_retur);

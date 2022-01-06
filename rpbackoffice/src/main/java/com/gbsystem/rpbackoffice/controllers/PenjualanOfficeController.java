@@ -103,12 +103,12 @@ public class PenjualanOfficeController {
         	String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(row.getCell(0).getDateCellValue()) + "-O" + (eRepo.count() + i);
         	PenjualanOffice p = new PenjualanOffice();
         	StockOffice prev = new StockOffice();
-    		prev = eStockOfficeRepo.findById_officeAndArtikel((int)row.getCell(1).getNumericCellValue(), row.getCell(3).getStringCellValue()).get(0);
+    		prev = eStockOfficeRepo.findById_officeAndArtikel((int)row.getCell(1).getNumericCellValue(), row.getCell(3).getStringCellValue());
     		
     		double prev_qty = prev.getKuantitas();
     		
     		StockOffice g = new StockOffice();
-    		g = eStockOfficeRepo.findById_officeAndArtikel((int)row.getCell(1).getNumericCellValue(), row.getCell(3).getStringCellValue()).get(0);
+    		g = eStockOfficeRepo.findById_officeAndArtikel((int)row.getCell(1).getNumericCellValue(), row.getCell(3).getStringCellValue());
     		g.setKuantitas(prev_qty - row.getCell(7).getNumericCellValue());
     		
     		PenyimpananKeluar f = new PenyimpananKeluar();

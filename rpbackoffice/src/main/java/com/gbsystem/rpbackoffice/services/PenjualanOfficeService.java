@@ -36,12 +36,12 @@ public class PenjualanOfficeService {
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-O" + (eRepo.count() + 1);
 		PenjualanOffice p = new PenjualanOffice();
 		StockOffice prev = new StockOffice();
-		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice g = new StockOffice();
-		g = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		g = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		g.setKuantitas(prev_qty - kuantitas);
 		
 		PenyimpananKeluar f = new PenyimpananKeluar();
@@ -106,17 +106,17 @@ public class PenjualanOfficeService {
     	p.setRowstatus(0);
     	
     	StockOffice prev = new StockOffice();
-		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice e = new StockOffice();
-		eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		e.setKuantitas(prev_qty + p.getKuantitas());
 		eStockOfficeRepo.save(e);
 		
 		PenyimpananKeluar f = new PenyimpananKeluar();
-		f = ePenyimpananRepo.findByPengiriman_code(id_transaksi).get(0);
+		f = ePenyimpananRepo.findByPengiriman_code(id_transaksi);
     	f.setRowstatus(0);
     	ePenyimpananRepo.save(f); 
     	
@@ -129,16 +129,16 @@ public class PenjualanOfficeService {
 		PenjualanOffice p = new PenjualanOffice();
     	p = eRepo.findById(id).get();
     	StockOffice prev = new StockOffice();
-		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		prev = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice g = new StockOffice();
-		g = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel).get(0);
+		g = eStockOfficeRepo.findById_officeAndArtikel(id_office, artikel);
 		g.setKuantitas((prev_qty + p.getKuantitas()) - kuantitas);
 		
 		PenyimpananKeluar f = new PenyimpananKeluar();
-		f = ePenyimpananRepo.findByPengiriman_code(id_transaksi).get(0);
+		f = ePenyimpananRepo.findByPengiriman_code(id_transaksi);
 		f.setTanggal_keluar(new Date());
 		f.setId_office(id_office);
 		f.setLokasi_office(lokasi_office);

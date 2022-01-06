@@ -39,12 +39,12 @@ public class PenerimaanSupplierService {
 		
 		PenerimaanSupplier p = new PenerimaanSupplier();
 		StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
 		StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");
 		}
@@ -115,12 +115,12 @@ public class PenerimaanSupplierService {
     	p.setRowstatus(0);
     	
     	StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
     	d.setKuantitas(prev_qty - p.getKuantitas());
     	eStockRepo.save(d);
     	
@@ -133,12 +133,12 @@ public class PenerimaanSupplierService {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(id).get();
     	StockOffice prev = new StockOffice();
-		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		prev = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		
 		double prev_qty = prev.getKuantitas();
 		
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel).get(0);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
 		d.setKuantitas((prev_qty - p.getKuantitas()) + kuantitas);
 		String fileName = StringUtils.cleanPath(foto_barang.getOriginalFilename());
 		if(fileName.contains("..")) {
@@ -160,7 +160,7 @@ public class PenerimaanSupplierService {
 		eStockRepo.save(d);
 		
 		PenyimpananMasuk f = new PenyimpananMasuk();
-		f = ePenyimpananRepo.findByPenerimaan_code(penerimaan_code).get(0);
+		f = ePenyimpananRepo.findByPenerimaan_code(penerimaan_code);
 		f.setTanggal_masuk(tanggal_penerimaan);
 		f.setArtikel(artikel);
 		f.setKategori(kategori);
