@@ -34,7 +34,7 @@ public class MasterOfficeController {
     }
     
     @PostMapping("/add")
-    public String saveMaster_tipe(
+    public String saveMaster_office(
     		@RequestParam("office_name") String office_name,@RequestParam("no_tlpn") String no_tlpn,
     		@RequestParam("alamat") String alamat, @RequestParam("kepala_office") String kepala_office ) 
 	{
@@ -53,7 +53,7 @@ public class MasterOfficeController {
 		
     }
     @GetMapping("/delete")
-    public String deleteTipe(@RequestParam("id") Long id)
+    public String deleteOffice(@RequestParam("id") Long id)
     {
     	
     	masterOfficeService.deleteMasterOfficeById(id);
