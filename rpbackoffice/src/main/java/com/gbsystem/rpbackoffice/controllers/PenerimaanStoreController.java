@@ -58,10 +58,10 @@ public class PenerimaanStoreController {
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("penerimaan_code") String penerimaan_code) throws Exception {
+    public @ResponseBody String update(@RequestParam("penerimaan_code") String penerimaan_code) throws Exception {
     	
     	if (penerimaan_code != "") {
-    		penerimaanStoreService.update(id, penerimaan_code);
+    		penerimaanStoreService.update(penerimaan_code);
     	}
     	return "Update Data Successs!";
 		
@@ -97,9 +97,9 @@ public class PenerimaanStoreController {
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanStore(@RequestParam("id") Long id,@RequestParam("id_office") int id_office,@RequestParam("artikel") String artikel)
+    public String deletePenerimaanStore(@RequestParam("penerimaan_code") String penerimaan_code)
     {
-    	penerimaanStoreService.deletePenerimaanStoreById(id,id_office, artikel);
+    	penerimaanStoreService.deletePenerimaanStoreById(penerimaan_code);
     	return "redirect:/all";
     }
 

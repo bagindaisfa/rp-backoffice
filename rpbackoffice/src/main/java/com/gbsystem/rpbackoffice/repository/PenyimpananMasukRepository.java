@@ -15,12 +15,15 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 	List<PenyimpananMasuk> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
-	PenyimpananMasuk findByPenerimaan_code(String penerimaan_code);
+	List<PenyimpananMasuk> findByPenerimaan_code(String penerimaan_code);
 	
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND "
 			+ "MATCH(nama_barang) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<PenyimpananMasuk> search(String keyword);
+	
+	@Query(value = "delete from penyimpanan_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
+	void deleteStockMasuk(String penerimaan_code);
 	
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND artikel = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"

@@ -1,42 +1,33 @@
 package com.gbsystem.rpbackoffice.controllers;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.gbsystem.rpbackoffice.entities.Pembelian;
-import com.gbsystem.rpbackoffice.repository.PembelianRepository;
 import com.gbsystem.rpbackoffice.services.PembelianService;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/pembelian")
 @CrossOrigin
 public class PembelianController {
 	
 	@Autowired
 	private PembelianService pembelianService;
 	
-	@Autowired
-	private PembelianRepository eRepo;
-
-    @GetMapping("/pembelian")
+    @GetMapping("/all")
 	public ResponseEntity<List<Pembelian>> getAll() {
         return new ResponseEntity<>(pembelianService.getAllPembelian(), HttpStatus.OK);
     }
@@ -46,33 +37,25 @@ public class PembelianController {
     	return new ResponseEntity<>(pembelianService.search(keyword), HttpStatus.OK);
     }
     
-    @PostMapping(value = "/addPembelian", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveProduct(@RequestParam("image") MultipartFile image,@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    @PostMapping("/add")
+    @ResponseBody
+    public Pembelian saveProduct(@RequestBody Pembelian pembelian) throws Exception {
     	
-    	if (artikel != "") {
-    		pembelianService.savePembelian(image, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
-    	}
-    	return "Insert Data Successs!";
+    	Pembelian pembelianResponse = pembelianService.savePembelian(pembelian);
+    	return pembelianResponse;
 		
     }
     
-    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("image") MultipartFile image,@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("tipe") String tipe,
-    		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    @PostMapping("/update")
+    @ResponseBody
+    public Pembelian update(@RequestBody Pembelian pembelian) throws Exception {
     	
-    	if (artikel != "") {
-    		pembelianService.update(id, image, artikel, kategori, tipe, nama_barang, kuantitas, ukuran, hpp, harga_jual);
-    	}
-    	return "Update Data Successs!";
+    	Pembelian pembelianResponse = pembelianService.update(pembelian);
+    	return pembelianResponse;
 		
     }
     
-    @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    /*@PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void mapReapExcelDatatoDB(@RequestParam("file") MultipartFile readExcelDataFile) throws Exception {
     	
         XSSFWorkbook workbook = new XSSFWorkbook(readExcelDataFile.getInputStream());
@@ -96,14 +79,14 @@ public class PembelianController {
     		eRepo.save(pembelian);
         }
         
-    }
+    }*/
     
     @GetMapping("/deletePembelian")
-    public String deletePembelian(@RequestParam("id") Long id)
+    public Pembelian deletePembelian(@RequestParam("id") Long id)
     {
     	
-    	pembelianService.deletePembelianById(id);
-    	return "redirect:/pembelian";
+    	Pembelian pembelianResponse = pembelianService.deletePembelianById(id);
+    	return pembelianResponse;
     }
     
     

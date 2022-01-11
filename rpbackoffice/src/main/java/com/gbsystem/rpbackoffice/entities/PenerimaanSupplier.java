@@ -2,12 +2,10 @@ package com.gbsystem.rpbackoffice.entities;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,6 +16,7 @@ public class PenerimaanSupplier {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String penerimaan_code;
+	private String pembelian_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private int id_office;
@@ -31,9 +30,6 @@ public class PenerimaanSupplier {
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
-	@Lob
-	@Column(columnDefinition = "MEDIUMBLOB")
-	private String foto_barang;
 	private double hpp;
 	private double harga_jual;
 	private int rowstatus;
@@ -42,6 +38,12 @@ public class PenerimaanSupplier {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getPembelian_code() {
+		return pembelian_code;
+	}
+	public void setPembelian_code(String pembelian_code) {
+		this.pembelian_code = pembelian_code;
 	}
 	public String getPenerimaan_code() {
 		return penerimaan_code;
@@ -115,12 +117,6 @@ public class PenerimaanSupplier {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public String getFoto_barang() {
-		return foto_barang;
-	}
-	public void setFoto_barang(String foto_barang) {
-		this.foto_barang = foto_barang;
-	}
 	public double getHpp() {
 		return hpp;
 	}
@@ -153,7 +149,6 @@ public class PenerimaanSupplier {
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","
 	            + " hpp=" + hpp + ","
-	            + " foto_barang=" + foto_barang + ","
 	            + " harga_jual=" + harga_jual + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}

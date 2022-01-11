@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.Penjualan;
+import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.DetailPesanan;
 import com.gbsystem.rpbackoffice.entities.StockStore;
-import com.gbsystem.rpbackoffice.repository.DetailPesananRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
+import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 
 @Service
@@ -22,10 +23,10 @@ public class PenjualanService {
 	private PenjualanRepository eRepo;
 	
 	@Autowired
-	private DetailPesananRepository eDetailRepo;
+	private StockStoreRepository eStockRepo;
 	
 	@Autowired
-	private StockStoreRepository eStockRepo;
+	private PenyimpananStoreKeluarRepository ePenyimpananStoreKeluarRepo;
 	
 	public Penjualan savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
@@ -48,24 +49,45 @@ public class PenjualanService {
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
-			StockStore check = new StockStore();
-			
-			check = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel());
-			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
-			eStockRepo.save(check);
-			
 			d.setTanggal_transaksi(tanggal_transaksi);
 			d.setId_transaksi(id_transaksi);
 			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
 			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
 			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
 			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+			d.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
 			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(1);
 			d.setPenjualan(item);
 			details.add(d);
+			
+			StockStore check = new StockStore();
+			check = eStockRepo.findById_storeAndArtikel(
+					penjualan.getId_store(),
+					penjualan.getDetailPesananList().get(i).getArtikel(),
+					penjualan.getDetailPesananList().get(i).getUkuran());
+			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
+			eStockRepo.save(check);
+			
+			PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
+			store_asal.setPengiriman_code(id_transaksi);
+			store_asal.setLokasi_office("-");
+			store_asal.setTanggal_keluar(new Date());
+			store_asal.setId_store(penjualan.getId_store());
+			store_asal.setLokasi_store(penjualan.getLokasi_store());
+			store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+			store_asal.setKategori(check.getKategori());
+			store_asal.setTipe(check.getTipe());
+			store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+			store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+			store_asal.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
+			store_asal.setHpp(check.getHpp());
+			store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
+			store_asal.setRowstatus(1);
+			ePenyimpananStoreKeluarRepo.save(store_asal);
+			
 		}
 		item.setDetailPesananList(details);
 		eRepo.save(item);
@@ -85,52 +107,58 @@ public class PenjualanService {
     {
 		Penjualan p = new Penjualan();
     	p = eRepo.findById(id).get();
-    	List<DetailPesanan> details = new ArrayList<>();
-    	
-    	p.setTanggal_transaksi(p.getTanggal_transaksi());
-		p.setId_transaksi(p.getId_transaksi());
-		p.setId_store(p.getId_store());
-		p.setLokasi_store(p.getLokasi_store());
-		p.setDiskon(p.getDiskon());
-		p.setMetode_bayar(p.getMetode_bayar());
-		p.setEkspedisi(p.getEkspedisi());
-		p.setOngkir(p.getOngkir());
-		p.setTotal(p.getTotal());
-		p.setKembalian(p.getKembalian());
-		p.setNama_pelanggan(p.getNama_pelanggan());
-		p.setNama_karyawan(p.getNama_karyawan());
 		p.setRowstatus(0);
+		
+		List<PenyimpananStoreKeluar> j = new ArrayList<>();
+		j = ePenyimpananStoreKeluarRepo.findByPengiriman_code(p.getId_transaksi());
+		for (int y = 0; y < j.size(); y++) {
+			j.get(y).setRowstatus(0);
+			ePenyimpananStoreKeluarRepo.save(j.get(y));
+		}
+		
+		List<DetailPesanan> details = new ArrayList<>();
 		for(int i = 0; i < p.getDetailPesananList().size(); i++) {
-			DetailPesanan d = new DetailPesanan();
-			d = eDetailRepo.getByPenjualan_id(id);
+			p.getDetailPesananList().get(i).setRowstatus(0);
+			p.getDetailPesananList().get(i).setPenjualan(p);
+			details.add(p.getDetailPesananList().get(i));
 			
-			StockStore prevStoreAsal = new StockStore();
-	    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(p.getDetailPesananList().get(i).getId_store(),p.getDetailPesananList().get(i).getArtikel());
-			double prev_qty_store_asal = prevStoreAsal.getKuantitas();
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(p.getDetailPesananList().get(i).getId_store(),p.getDetailPesananList().get(i).getArtikel());
-			check.setKuantitas(prev_qty_store_asal + p.getDetailPesananList().get(i).getKuantitas());
+			check = eStockRepo.findById_storeAndArtikel(
+					p.getDetailPesananList().get(i).getId_store(),
+					p.getDetailPesananList().get(i).getArtikel(),
+					p.getDetailPesananList().get(i).getUkuran()
+					);
+			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
 			
-			d.setTanggal_transaksi(p.getTanggal_transaksi());
-			d.setId_transaksi(p.getId_transaksi());
-			d.setId_store(p.getDetailPesananList().get(i).getId_store());
-			d.setLokasi_store(p.getDetailPesananList().get(i).getLokasi_store());
-			d.setArtikel(p.getDetailPesananList().get(i).getArtikel());
-			d.setNama_barang(p.getDetailPesananList().get(i).getNama_barang());
-			d.setHarga(p.getDetailPesananList().get(i).getHarga());
-			d.setKuantitas(p.getDetailPesananList().get(i).getKuantitas());
-			d.setTotal(p.getDetailPesananList().get(i).getTotal());
-			d.setRowstatus(0);
-			d.setPenjualan(p);
-			details.add(d);
+			
 		}
     	p.setDetailPesananList(details);
-    	eRepo.save(p);    
-    	return eRepo.getById(id);
+    	return eRepo.save(p);
     }
 	
-	public Penjualan update( Penjualan penjualan) {
+	public Penjualan update(Penjualan penjualan) {
+		Penjualan p = new Penjualan();
+		p = eRepo.findById(penjualan.getId()).get();
+		
+		ePenyimpananStoreKeluarRepo.deleteStoreKeluar(penjualan.getId_transaksi());
+		
+		for(int i = 0; i < p.getDetailPesananList().size(); i++) {
+			StockStore check = new StockStore();
+			check = eStockRepo.findById_storeAndArtikel(
+					p.getDetailPesananList().get(i).getId_store(),
+					p.getDetailPesananList().get(i).getArtikel(),
+					p.getDetailPesananList().get(i).getUkuran()
+					);
+			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
+			eStockRepo.save(check);
+		}
+		
+		return saveUpdate(penjualan);
+		
+	}
+	
+	private Penjualan saveUpdate( Penjualan penjualan) {
 		Penjualan p = new Penjualan();
     	p = eRepo.findById(penjualan.getId()).get();
     	List<DetailPesanan> details = new ArrayList<>();
@@ -151,25 +179,46 @@ public class PenjualanService {
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
 			d = p.getDetailPesananList().get(i);
-			StockStore prevStoreAsal = new StockStore();
-	    	prevStoreAsal = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel());
-			double prev_qty_store_asal = prevStoreAsal.getKuantitas();
-			
-			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(penjualan.getDetailPesananList().get(i).getId_store(),penjualan.getDetailPesananList().get(i).getArtikel());
-			check.setKuantitas((prev_qty_store_asal + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
-			eStockRepo.save(check);
-			
 			d.setTanggal_transaksi(penjualan.getTanggal_transaksi());
 			d.setId_transaksi(penjualan.getId_transaksi());
 			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
 			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
 			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
 			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+			d.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
 			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
-			d.setRowstatus(1);
+			d.setRowstatus(penjualan.getDetailPesananList().get(i).getRowstatus());
+			
+			
+			if (penjualan.getDetailPesananList().get(i).getRowstatus() == 1) {
+				StockStore check = new StockStore();
+				check = eStockRepo.findById_storeAndArtikel(
+						penjualan.getDetailPesananList().get(i).getId_store(),
+						penjualan.getDetailPesananList().get(i).getArtikel(),
+						penjualan.getDetailPesananList().get(i).getUkuran()
+						);
+				check.setKuantitas((check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
+			
+				PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
+				store_asal.setPengiriman_code(penjualan.getId_transaksi());
+				store_asal.setLokasi_office("-");
+				store_asal.setTanggal_keluar(penjualan.getTanggal_transaksi());
+				store_asal.setId_store(penjualan.getId_store());
+				store_asal.setLokasi_store(penjualan.getLokasi_store());
+				store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+				store_asal.setKategori(check.getKategori());
+				store_asal.setTipe(check.getTipe());
+				store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+				store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+				store_asal.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
+				store_asal.setHpp(check.getHpp());
+				store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
+				store_asal.setRowstatus(1);
+				ePenyimpananStoreKeluarRepo.save(store_asal);
+				eStockRepo.save(check);
+			}
 			d.setPenjualan(p);
 			details.add(d);
 		}

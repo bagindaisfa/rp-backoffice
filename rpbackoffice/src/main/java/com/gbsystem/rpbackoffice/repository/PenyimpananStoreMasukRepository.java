@@ -15,7 +15,7 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	List<PenyimpananStoreMasuk> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
-	PenyimpananStoreMasuk findByPenerimaan_code(String penerimaan_code);
+	List<PenyimpananStoreMasuk> findByPenerimaan_code(String penerimaan_code);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND "
 			+ "MATCH(nama_barang) "
@@ -26,4 +26,7 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
 	Float generateKuantitasMasuk(String artikel, Date tanggal_awal, Date tanggal_akhir);
+	
+	@Query(value = "delete from penyimpanan_store_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
+	void deleteStoreMasuk(String penerimaan_code);
 }

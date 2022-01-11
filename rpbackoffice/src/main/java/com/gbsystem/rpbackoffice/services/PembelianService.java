@@ -1,17 +1,16 @@
 package com.gbsystem.rpbackoffice.services;
 
-import java.io.IOException;
-import java.util.Base64;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 
 import com.gbsystem.rpbackoffice.repository.PembelianRepository;
+import com.gbsystem.rpbackoffice.entities.DetailPembelian;
 import com.gbsystem.rpbackoffice.entities.Pembelian;
 
 @Service
@@ -19,30 +18,36 @@ public class PembelianService {
 	@Autowired
 	private PembelianRepository eRepo;
 	
-	public Pembelian savePembelian(MultipartFile image, String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual ) {
+	public Pembelian savePembelian(Pembelian pembelian ) {
 		
 		Pembelian p = new Pembelian();
-		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-		if(fileName.contains("..")) {
-			System.out.println("not a valid file");
-		}
-		try {
-			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		p.setTanggal_transaksi(new Date());
-		p.setArtikel(artikel);
-		p.setKategori(kategori);
-		p.setTipe(tipe);
-		p.setNama_barang(nama_barang);
-		p.setKuantitas(kuantitas);
-		p.setUkuran(ukuran);
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
+		String pembelian_code = "PO-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
+		Date tanggal_transaksi = pembelian.getTanggal_transaksi();
+		List<DetailPembelian> details = new ArrayList<>();
+		
+		p.setPembelian_code(pembelian_code);
+		p.setTanggal_transaksi(tanggal_transaksi);
+		p.setId_supplier(pembelian.getId_supplier());
+		p.setNama_supplier(pembelian.getNama_supplier());
 		p.setRowstatus(1);
+		for(int i = 0; i < pembelian.getDetail_pembelian().size(); i++) {
+			DetailPembelian d = new DetailPembelian();
+			d.setPembelian_code(pembelian_code);
+			d.setTanggal_transaksi(tanggal_transaksi);
+			d.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
+			d.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
+			d.setTipe(pembelian.getDetail_pembelian().get(i).getTipe());
+			d.setNama_barang(pembelian.getDetail_pembelian().get(i).getNama_barang());
+			d.setKuantitas(pembelian.getDetail_pembelian().get(i).getKuantitas());
+			d.setUkuran(pembelian.getDetail_pembelian().get(i).getUkuran());
+			d.setHpp(pembelian.getDetail_pembelian().get(i).getHpp());
+			d.setHarga_jual(pembelian.getDetail_pembelian().get(i).getHarga_jual());
+			d.setTotal_hpp(pembelian.getDetail_pembelian().get(i).getKuantitas()* pembelian.getDetail_pembelian().get(i).getHpp());
+			d.setRowstatus(1);
+			d.setPembelian(p);
+			details.add(d);
+		}
+		p.setDetail_pembelian(details);
 		return eRepo.save(p);
 	}
 
@@ -55,38 +60,54 @@ public class PembelianService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public void deletePembelianById(Long id)
+	public Pembelian deletePembelianById(Long id)
     {
 		Pembelian p = new Pembelian();
     	p = eRepo.findById(id).get();
+    	List<DetailPembelian> details = new ArrayList<>();
     	p.setRowstatus(0);
-    	eRepo.save(p);    
+    	for(int i = 0; i < p.getDetail_pembelian().size(); i++) {
+			DetailPembelian d = new DetailPembelian();
+			d = p.getDetail_pembelian().get(i);
+			d.setRowstatus(0);
+			d.setPembelian(p);
+			details.add(d);
+		}
+    	p.setDetail_pembelian(details);
+    	return eRepo.save(p);
     }
 	
-	public void update(Long id, MultipartFile image, String artikel, String kategori, String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual ) {
+	public Pembelian update(Pembelian pembelian ) {
 		Pembelian p = new Pembelian();
-    	p = eRepo.findById(id).get();
-    	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-		if(fileName.contains("..")) {
-			System.out.println("not a valid file");
+		p = eRepo.findById(pembelian.getId()).get();
+		List<DetailPembelian> details = new ArrayList<>();
+		
+		p.setPembelian_code(pembelian.getPembelian_code());
+		p.setTanggal_transaksi(pembelian.getTanggal_transaksi());
+		
+		p.setId_supplier(pembelian.getId_supplier());
+		p.setNama_supplier(pembelian.getNama_supplier());
+		p.setRowstatus(pembelian.getRowstatus());
+		for(int i = 0; i < pembelian.getDetail_pembelian().size(); i++) {
+			DetailPembelian d = new DetailPembelian();
+			d = p.getDetail_pembelian().get(i);
+			d.setPembelian_code(pembelian.getPembelian_code());
+			d.setTanggal_transaksi(pembelian.getTanggal_transaksi());
+			d.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
+			d.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
+			d.setTipe(pembelian.getDetail_pembelian().get(i).getTipe());
+			d.setNama_barang(pembelian.getDetail_pembelian().get(i).getNama_barang());
+			d.setKuantitas(pembelian.getDetail_pembelian().get(i).getKuantitas());
+			d.setUkuran(pembelian.getDetail_pembelian().get(i).getUkuran());
+			d.setHpp(pembelian.getDetail_pembelian().get(i).getHpp());
+			d.setHarga_jual(pembelian.getDetail_pembelian().get(i).getHarga_jual());
+			d.setTotal_hpp(pembelian.getDetail_pembelian().get(i).getKuantitas()* pembelian.getDetail_pembelian().get(i).getHpp());
+			d.setRowstatus(pembelian.getDetail_pembelian().get(i).getRowstatus());
+			d.setPembelian(p);
+			details.add(d);
 		}
-		try {
-			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		p.setTanggal_transaksi(new Date());
-		p.setArtikel(artikel);
-		p.setKategori(kategori);
-		p.setTipe(tipe);
-		p.setNama_barang(nama_barang);
-		p.setKuantitas(kuantitas);
-		p.setUkuran(ukuran);
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setTotal_hpp(kuantitas * harga_jual);
-		p.setRowstatus(1);
-    	eRepo.save(p);
+		p.setDetail_pembelian(details);
+		return eRepo.save(p);
 	}
 	
 }

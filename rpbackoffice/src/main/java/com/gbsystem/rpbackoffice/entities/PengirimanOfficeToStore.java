@@ -18,37 +18,40 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class PenjualanOffice {
+public class PengirimanOfficeToStore {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date tanggal_transaksi;
-	private String id_transaksi;
+	private Date tanggal_pengiriman;
 	private int id_office;
 	private String lokasi_office;
+	private int id_store;
+	private String lokasi_store;
 	private int rowstatus;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualanOffice", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pengirimanOfficeToStore", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
-	@JsonIgnoreProperties("penjualanOffice")
-    private List<DetailPenjualanOffice> detail_penjualan = new ArrayList<>();
+	@JsonIgnoreProperties("pengirimanOfficeToStore")
+    private List<DetailPengirimanOfficeToStore> detailPengirimanList = new ArrayList<>();
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getTanggal_transaksi() {
-		return tanggal_transaksi;
+	public String getPengiriman_code() {
+		return pengiriman_code;
 	}
-	public void setTanggal_transaksi(Date tanggal_transaksi) {
-		this.tanggal_transaksi = tanggal_transaksi;
+	public void setPengiriman_code(String pengiriman_code) {
+		this.pengiriman_code = pengiriman_code;
 	}
-	public String getId_transaksi() {
-		return id_transaksi;
+	public Date getTanggal_pengiriman() {
+		return tanggal_pengiriman;
 	}
-	public void setId_transaksi(String id_transaksi) {
-		this.id_transaksi = id_transaksi;
+	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
+		this.tanggal_pengiriman = tanggal_pengiriman;
 	}
 	public int getId_office() {
 		return id_office;
@@ -62,17 +65,29 @@ public class PenjualanOffice {
 	public void setLokasi_office(String lokasi_office) {
 		this.lokasi_office = lokasi_office;
 	}
+	public int getId_store() {
+		return id_store;
+	}
+	public void setId_store(int id_store) {
+		this.id_store = id_store;
+	}
+	public String getLokasi_store() {
+		return lokasi_store;
+	}
+	public void setLokasi_store(String lokasi_store) {
+		this.lokasi_store = lokasi_store;
+	}
 	public int getRowstatus() {
 		return rowstatus;
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	public List<DetailPenjualanOffice> getDetail_penjualan() {
-		return detail_penjualan;
+	public List<DetailPengirimanOfficeToStore> getDetailPengirimanList() {
+		return detailPengirimanList;
 	}
-	public void setDetail_penjualan(List<DetailPenjualanOffice> detail_penjualan) {
-		this.detail_penjualan = detail_penjualan;
+	public void setDetailPengirimanList(List<DetailPengirimanOfficeToStore> detailPengirimanList) {
+		this.detailPengirimanList = detailPengirimanList;
 	}
 	
 }

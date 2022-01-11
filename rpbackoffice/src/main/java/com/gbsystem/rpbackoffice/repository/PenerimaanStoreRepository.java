@@ -20,4 +20,7 @@ public interface PenerimaanStoreRepository extends JpaRepository<PenerimaanStore
 	
 	@Query(value = "SELECT * FROM penerimaan_store WHERE rowstatus = 1 AND penerimaan_code = :penerimaan_code", nativeQuery = true)
 	List<PenerimaanStore> findByPenerimaan_code(String penerimaan_code);
+	
+	@Query(value = "delete from penerimaan_store where penerimaan_code=:penerimaan_code", nativeQuery = true)
+	PenerimaanStore deletePenerimaan(String penerimaan_code);
 }

@@ -1,48 +1,61 @@
 package com.gbsystem.rpbackoffice.entities;
 
-import javax.persistence.Column;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Where;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class StockOffice {
+public class DetailPembelian {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int id_office;
-	private String lokasi_office;
+	private String pembelian_code;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date tanggal_transaksi;
 	private String artikel;
 	private String kategori;
 	private String tipe;
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
-	@Lob
-	@Column(columnDefinition = "MEDIUMBLOB")
-	private String foto_barang;
 	private double hpp;
 	private double harga_jual;
+	private double total_hpp;
 	private int rowstatus;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pembelian_id", referencedColumnName = "id")
+	@Where(clause="rowstatus = 1")
+    @JsonIgnoreProperties("detailPembelianList")
+    private Pembelian pembelian;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getId_office() {
-		return id_office;
+	public String getPembelian_code() {
+		return pembelian_code;
 	}
-	public void setId_office(int id_office) {
-		this.id_office = id_office;
+	public void setPembelian_code(String pembelian_code) {
+		this.pembelian_code = pembelian_code;
 	}
-	public String getLokasi_office() {
-		return lokasi_office;
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
 	}
-	public void setLokasi_office(String lokasi_office) {
-		this.lokasi_office = lokasi_office;
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -80,12 +93,6 @@ public class StockOffice {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public String getFoto_barang() {
-		return foto_barang;
-	}
-	public void setFoto_barang(String foto_barang) {
-		this.foto_barang = foto_barang;
-	}
 	public double getHpp() {
 		return hpp;
 	}
@@ -98,24 +105,22 @@ public class StockOffice {
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
+	public double getTotal_hpp() {
+		return total_hpp;
+	}
+	public void setTotal_hpp(double total_hpp) {
+		this.total_hpp = total_hpp;
+	}
 	public int getRowstatus() {
 		return rowstatus;
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	@Override
-	public String toString() {
-		return "PenerimaanSupplier [id=" + id + ","
-				+ " artikel=" + artikel + ", "
-				+ " kategori=" + kategori + ","
-				+ " tipe=" + tipe + ","
-	            + " nama_barang=" + nama_barang + ","
-	            + " kuantitas=" + kuantitas + ","
-	            + " ukuran=" + ukuran + ","
-	            + " hpp=" + hpp + ","
-	            + " foto_barang=" + foto_barang + ","
-	            + " harga_jual=" + harga_jual + ","
-	            + " rowstatus=" + rowstatus + "]";
+	public Pembelian getPembelian() {
+		return pembelian;
+	}
+	public void setPembelian(Pembelian pembelian) {
+		this.pembelian = pembelian;
 	}
 }

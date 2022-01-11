@@ -1,48 +1,57 @@
 package com.gbsystem.rpbackoffice.entities;
 
-import javax.persistence.Column;
+import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class StockOffice {
+public class DetailPengirimanOfficeToStore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int id_office;
-	private String lokasi_office;
+	private String pengiriman_code;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date tanggal_pengiriman;
 	private String artikel;
 	private String kategori;
 	private String tipe;
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
-	@Lob
-	@Column(columnDefinition = "MEDIUMBLOB")
-	private String foto_barang;
 	private double hpp;
 	private double harga_jual;
 	private int rowstatus;
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "pengiriman_office_to_store_id", referencedColumnName = "id")
+	@JsonIgnoreProperties("detailPengirimanList")
+    private PengirimanOfficeToStore pengirimanOfficeToStore;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getId_office() {
-		return id_office;
+	public String getPengiriman_code() {
+		return pengiriman_code;
 	}
-	public void setId_office(int id_office) {
-		this.id_office = id_office;
+	public void setPengiriman_code(String pengiriman_code) {
+		this.pengiriman_code = pengiriman_code;
 	}
-	public String getLokasi_office() {
-		return lokasi_office;
+	public Date getTanggal_pengiriman() {
+		return tanggal_pengiriman;
 	}
-	public void setLokasi_office(String lokasi_office) {
-		this.lokasi_office = lokasi_office;
+	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
+		this.tanggal_pengiriman = tanggal_pengiriman;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -80,12 +89,6 @@ public class StockOffice {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public String getFoto_barang() {
-		return foto_barang;
-	}
-	public void setFoto_barang(String foto_barang) {
-		this.foto_barang = foto_barang;
-	}
 	public double getHpp() {
 		return hpp;
 	}
@@ -104,18 +107,11 @@ public class StockOffice {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	@Override
-	public String toString() {
-		return "PenerimaanSupplier [id=" + id + ","
-				+ " artikel=" + artikel + ", "
-				+ " kategori=" + kategori + ","
-				+ " tipe=" + tipe + ","
-	            + " nama_barang=" + nama_barang + ","
-	            + " kuantitas=" + kuantitas + ","
-	            + " ukuran=" + ukuran + ","
-	            + " hpp=" + hpp + ","
-	            + " foto_barang=" + foto_barang + ","
-	            + " harga_jual=" + harga_jual + ","
-	            + " rowstatus=" + rowstatus + "]";
+	public PengirimanOfficeToStore getPengirimanOfiiceToStore() {
+		return pengirimanOfficeToStore;
 	}
+	public void setPengirimanOfficeToStore(PengirimanOfficeToStore pengirimanOfficeToStore) {
+		this.pengirimanOfficeToStore = pengirimanOfficeToStore;
+	}
+	
 }

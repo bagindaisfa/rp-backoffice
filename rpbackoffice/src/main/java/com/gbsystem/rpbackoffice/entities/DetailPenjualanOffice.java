@@ -11,34 +11,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Where;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class DetailPesanan {
-
+public class DetailPenjualanOffice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_transaksi;
 	private String id_transaksi;
-	private int id_store;
-	private String lokasi_store;
 	private String artikel;
+	private String tipe;
+	private String kategori;
 	private String nama_barang;
+	private double kuantitas;
 	private String ukuran;
-	private Double harga;
-	private Double kuantitas;
-	private Double total;
+	private String metode_pembayaran;
+	private double harga_satuan_barang;
+	private double ongkos_kirim;
+	private double pajak_biaya;
+	private double total;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "penjualan_id", referencedColumnName = "id")
-	@Where(clause="rowstatus = 1")
-    @JsonIgnoreProperties("detailPesananList")
-    private Penjualan penjualan;
+    @JoinColumn(name = "penjualan_office_id", referencedColumnName = "id")
+	@JsonIgnoreProperties("detailPenjualanList")
+    private PenjualanOffice penjualanOffice;
 	public Long getId() {
 		return id;
 	}
@@ -57,23 +56,23 @@ public class DetailPesanan {
 	public void setId_transaksi(String id_transaksi) {
 		this.id_transaksi = id_transaksi;
 	}
-	public int getId_store() {
-		return id_store;
-	}
-	public void setId_store(int id_store) {
-		this.id_store = id_store;
-	}
-	public String getLokasi_store() {
-		return lokasi_store;
-	}
-	public void setLokasi_store(String lokasi_store) {
-		this.lokasi_store = lokasi_store;
-	}
 	public String getArtikel() {
 		return artikel;
 	}
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
+	}
+	public String getTipe() {
+		return tipe;
+	}
+	public void setTipe(String tipe) {
+		this.tipe = tipe;
+	}
+	public String getKategori() {
+		return kategori;
+	}
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
 	}
 	public String getNama_barang() {
 		return nama_barang;
@@ -81,23 +80,41 @@ public class DetailPesanan {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
+	public double getKuantitas() {
+		return kuantitas;
+	}
+	public void setKuantitas(double kuantitas) {
+		this.kuantitas = kuantitas;
+	}
 	public String getUkuran() {
 		return ukuran;
 	}
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public double getHarga() {
-		return harga;
+	public String getMetode_pembayaran() {
+		return metode_pembayaran;
 	}
-	public void setHarga(double harga) {
-		this.harga = harga;
+	public void setMetode_pembayaran(String metode_pembayaran) {
+		this.metode_pembayaran = metode_pembayaran;
 	}
-	public double getKuantitas() {
-		return kuantitas;
+	public double getHarga_satuan_barang() {
+		return harga_satuan_barang;
 	}
-	public void setKuantitas(double kuantitas) {
-		this.kuantitas = kuantitas;
+	public void setHarga_satuan_barang(double harga_satuan_barang) {
+		this.harga_satuan_barang = harga_satuan_barang;
+	}
+	public double getOngkos_kirim() {
+		return ongkos_kirim;
+	}
+	public void setOngkos_kirim(double ongkos_kirim) {
+		this.ongkos_kirim = ongkos_kirim;
+	}
+	public double getPajak_biaya() {
+		return pajak_biaya;
+	}
+	public void setPajak_biaya(double pajak_biaya) {
+		this.pajak_biaya = pajak_biaya;
 	}
 	public double getTotal() {
 		return total;
@@ -111,25 +128,10 @@ public class DetailPesanan {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	
-	public Penjualan getPenjualan() {
-		return penjualan;
+	public PenjualanOffice getPenjualanOffice() {
+		return penjualanOffice;
 	}
-	public void setPenjualan(Penjualan penjualan) {
-		this.penjualan = penjualan;
+	public void setPenjualanOffice(PenjualanOffice penjualanOffice) {
+		this.penjualanOffice = penjualanOffice;
 	}
-	@Override
-	public String toString() {
-		return "Penjualan [id=" + id + ","
-				+ " tanggal_transaksi=" + tanggal_transaksi + ", "
-				+ " id_transaksi=" + id_transaksi + ", "
-				+ "id_store=" + id_store + ","
-				+ " lokasi_store=" + lokasi_store + ","
-	            + " nama_barang=" + nama_barang + ","
-	            + " harga=" + harga + ","
-	            + " kuantitas=" + kuantitas + ","
-	            + " total=" + total + ","
-	            + " rowstatus=" + rowstatus + "]";
-	}
-	
 }

@@ -12,7 +12,7 @@ import com.gbsystem.rpbackoffice.entities.DetailPesanan;
 @Repository
 public interface DetailPesananRepository extends JpaRepository<DetailPesanan, Long>{
 
-List<DetailPesanan> findByRowstatus(@Param("rowstatus") int rowstatus); 
+	List<DetailPesanan> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
 	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1"
 			+ "MATCH(id_transaksi) "

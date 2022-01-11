@@ -54,7 +54,7 @@ public class MasterProductController {
     }
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveMaster_product(
+    public @ResponseBody MasterProduct saveMaster_product(
     		@RequestParam("image") MultipartFile image,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
@@ -71,8 +71,8 @@ public class MasterProductController {
     		@RequestParam("remarks") String remarks
     		) 
 	{
-    	masterProductService.saveMasterProduct(image,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
-		return "redirect:/product";
+    	MasterProduct masterProductResponse = masterProductService.saveMasterProduct(image,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
+		return masterProductResponse;
 	}
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

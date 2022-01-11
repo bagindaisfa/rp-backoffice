@@ -24,7 +24,7 @@ public class Penjualan {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_transaksi;
 	private String id_transaksi;
-	private String id_store;
+	private int id_store;
 	private String lokasi_store;
 	private String nama_pelanggan;
 	private String nama_karyawan;
@@ -56,10 +56,10 @@ public class Penjualan {
 	public void setId_transaksi(String id_transaksi) {
 		this.id_transaksi = id_transaksi;
 	}
-	public String getId_store() {
+	public int getId_store() {
 		return id_store;
 	}
-	public void setId_store(String id_store) {
+	public void setId_store(int id_store) {
 		this.id_store = id_store;
 	}
 	public String getLokasi_store() {
