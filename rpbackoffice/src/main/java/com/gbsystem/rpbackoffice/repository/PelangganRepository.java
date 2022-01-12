@@ -13,7 +13,7 @@ import com.gbsystem.rpbackoffice.entities.Pelanggan;
 @Repository
 public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	
-List<Pelanggan> findByRowstatus(@Param("rowstatus") int rowstatus);
+	List<Pelanggan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 AND "
 			+ "MATCH(nama_pelanggan) "
@@ -28,5 +28,7 @@ List<Pelanggan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Procedure(procedureName = "download_pelanggan")
 	void download();
-
+	
+	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 and no_hp_pelanggan =:no_hp_pelanggan ", nativeQuery = true)
+	List<Pelanggan> findByNoHp(String no_hp_pelanggan);
 }

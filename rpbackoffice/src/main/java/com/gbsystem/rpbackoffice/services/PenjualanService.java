@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.gbsystem.rpbackoffice.entities.Penjualan;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.DetailPesanan;
+import com.gbsystem.rpbackoffice.entities.Pelanggan;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
@@ -27,6 +29,9 @@ public class PenjualanService {
 	
 	@Autowired
 	private PenyimpananStoreKeluarRepository ePenyimpananStoreKeluarRepo;
+	
+	@Autowired
+	private PelangganRepository ePelangganRepo;
 	
 	public Penjualan savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
@@ -46,6 +51,28 @@ public class PenjualanService {
 		item.setTotal(penjualan.getTotal());
 		item.setKembalian(penjualan.getKembalian());
 		item.setRowstatus(1);
+		
+		if (penjualan.getTotal() > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+				
+				int daysdiff = 0;
+			    long diff = pembeli.get(i).getTanggal_join().getTime() - tanggal_transaksi.getTime();
+			    long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
+			    daysdiff = (int) diffDays;
+			    
+			    if (daysdiff != 365) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.01));
+					ePelangganRepo.save(pembeli.get(i));
+			    } else if (daysdiff == 365) {
+			    	pembeli.get(i).setPoin(0.0000);
+					ePelangganRepo.save(pembeli.get(i));
+			    }
+				
+					
+			}
+		}
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
@@ -109,6 +136,14 @@ public class PenjualanService {
     	p = eRepo.findById(id).get();
 		p.setRowstatus(0);
 		
+		if (p.getTotal() > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+				pembeli.get(i).setPoin(pembeli.get(i).getPoin() - (p.getTotal() * 0.01));
+				ePelangganRepo.save(pembeli.get(i));	
+			}
+		}
 		List<PenyimpananStoreKeluar> j = new ArrayList<>();
 		j = ePenyimpananStoreKeluarRepo.findByPengiriman_code(p.getId_transaksi());
 		for (int y = 0; y < j.size(); y++) {
@@ -143,6 +178,15 @@ public class PenjualanService {
 		
 		ePenyimpananStoreKeluarRepo.deleteStoreKeluar(penjualan.getId_transaksi());
 		
+		if (p.getTotal() > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+				pembeli.get(i).setPoin(pembeli.get(i).getPoin() - (p.getTotal() * 0.01));
+				ePelangganRepo.save(pembeli.get(i));	
+			}
+		}
+		
 		for(int i = 0; i < p.getDetailPesananList().size(); i++) {
 			StockStore check = new StockStore();
 			check = eStockRepo.findById_storeAndArtikel(
@@ -176,6 +220,27 @@ public class PenjualanService {
 		p.setNama_pelanggan(penjualan.getNama_pelanggan());
 		p.setNama_karyawan(penjualan.getNama_karyawan());
 		p.setRowstatus(1);
+		
+		if (penjualan.getTotal() > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+				
+				int daysdiff = 0;
+			    long diff = pembeli.get(i).getTanggal_join().getTime() - p.getTanggal_transaksi().getTime();
+			    long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
+			    daysdiff = (int) diffDays;
+			    
+			    if (daysdiff != 365) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.01));
+					ePelangganRepo.save(pembeli.get(i));
+			    } else if (daysdiff == 365) {
+			    	pembeli.get(i).setPoin(0.0000);
+					ePelangganRepo.save(pembeli.get(i));
+			    }
+			}
+		}
+		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
 			d = p.getDetailPesananList().get(i);

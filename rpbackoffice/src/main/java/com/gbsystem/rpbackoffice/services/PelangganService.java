@@ -57,7 +57,7 @@ public class PelangganService {
 	public void update(Long id, String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
 			double kuantitas, double poin, double total_pembelian) {
 		Pelanggan p = new Pelanggan();
-    	
+		p = eRepo.findById(id).get();
 		p.setNama_pelanggan(nama_pelanggan);
 		p.setNo_hp(no_hp);
 		p.setEmail(email);

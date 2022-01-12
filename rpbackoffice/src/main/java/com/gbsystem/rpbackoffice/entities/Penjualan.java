@@ -26,6 +26,7 @@ public class Penjualan {
 	private String id_transaksi;
 	private int id_store;
 	private String lokasi_store;
+	private String no_hp_pelanggan;
 	private String nama_pelanggan;
 	private String nama_karyawan;
 	private double diskon;
@@ -67,6 +68,12 @@ public class Penjualan {
 	}
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
+	}
+	public String getNo_hp_pelanggan() {
+		return no_hp_pelanggan;
+	}
+	public void setNo_hp_pelanggan(String no_hp_pelanggan) {
+		this.no_hp_pelanggan = no_hp_pelanggan;
 	}
 	public double getDiskon() {
 		return diskon;
