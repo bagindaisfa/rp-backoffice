@@ -29,6 +29,6 @@ public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	@Procedure(procedureName = "download_pelanggan")
 	void download();
 	
-	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 and no_hp_pelanggan =:no_hp_pelanggan ", nativeQuery = true)
+	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 and no_hp =:no_hp_pelanggan ", nativeQuery = true)
 	List<Pelanggan> findByNoHp(String no_hp_pelanggan);
 }
