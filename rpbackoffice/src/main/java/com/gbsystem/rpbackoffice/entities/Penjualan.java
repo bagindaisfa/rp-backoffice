@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -37,6 +39,7 @@ public class Penjualan {
 	private double kembalian;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualan", cascade = CascadeType.ALL)
+	@Where(clause = "rowstatus=1")
     @JsonIgnoreProperties("penjualan")
     private List<DetailPesanan> detailPesananList = new ArrayList<>();
 	public Long getId() {

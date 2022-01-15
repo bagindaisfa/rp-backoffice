@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8765d30b-dda5-4459-8232-5142f772aadc">
+	<subDataset name="DatasetDetailPesanan" uuid="746bc92b-d545-4c37-805d-f5de58a5520e">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="lokasi_store" class="java.lang.String"/>
+	<field name="artikel" class="java.lang.String"/>
+	<field name="nama_barang" class="java.lang.String"/>
+	<field name="ukuran" class="java.lang.String"/>
+	<field name="harga" class="java.lang.Double"/>
+	<field name="kuantitas" class="java.lang.Double"/>
+	<field name="nama_pelanggan" class="java.lang.String"/>
+	<field name="alamat" class="java.lang.String"/>
+	<field name="no_hp_pelanggan" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image>
+				<reportElement x="-10" y="8" width="191" height="71" uuid="29db5b27-b425-45a1-8477-2634303bc4d9"/>
+				<imageExpression><![CDATA["C:\\Users\\bagin\\OneDrive\\Pictures\\LOGO RP.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="181" y="-14" width="388" height="30" uuid="ddf4be5b-2eac-446b-ab26-ed3940f3dde0"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rudy Project - Indonesia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="16" width="388" height="44" uuid="4b3590c9-70ba-47e6-b9a5-8b6a15a28a8c"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Ruko Golden Boulevard, Blok W2 No. 12 Jl. Pahlawan Seribu BSD City Tangerang.
+Phone: +62-2153163512 Fax: +39.0422.431978 
+E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="109" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="56" width="79" height="17" uuid="e7bfd97f-b215-4520-a2ee-87760b9afaf3"/>
+				<text><![CDATA[Nama Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="74" width="79" height="17" uuid="dc087d4e-0efe-48f6-b906-7f9772e1aca0"/>
+				<text><![CDATA[Alamat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="92" width="79" height="17" uuid="86416df1-52bc-4b08-8252-6bcfd6ea35ff"/>
+				<text><![CDATA[No Telpon]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="3" width="199" height="27" uuid="68fde491-f4b3-464b-8e63-310010a118c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Report Purchase Store]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="30" width="199" height="17" uuid="d6b3a16d-9394-4274-afcb-de7a9b928684"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dealer By Summary]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="56" width="10" height="17" uuid="425bafc7-ad5d-47a3-8e42-20638a52a931"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="74" width="10" height="17" uuid="3f654603-d5e6-42a3-9413-a38d2e87fe0e"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="92" width="10" height="17" uuid="efc112ee-140a-40e4-b167-461387ad44b8"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="90" y="56" width="287" height="18" isPrintInFirstWholeBand="true" uuid="7b080486-14c4-4e3e-94f7-ff1fb0fb6de6"/>
+				<textFieldExpression><![CDATA[$F{nama_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="90" y="73" width="287" height="18" isPrintInFirstWholeBand="true" uuid="1f8fe468-17e3-4586-a03e-92f38154eed0"/>
+				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="90" y="90" width="287" height="18" isPrintInFirstWholeBand="true" uuid="bc5bcb7c-b773-428f-b37a-27ab852a61cc"/>
+				<textFieldExpression><![CDATA[$F{no_hp_pelanggan}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="-11" y="10" width="85" height="20" uuid="93d9e0f5-ec22-4d3d-b9e2-4dd575dca975">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tanggal Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="10" width="85" height="20" uuid="7e57e977-3426-4b87-82f0-b76aa2286d7d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Store]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="10" width="67" height="20" uuid="f17686b4-5a48-4aa2-bdf9-6370450c5bf9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Artikel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="10" width="122" height="20" uuid="2acff0f8-d046-43b0-ab67-9e7b7b977765">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="10" width="59" height="20" uuid="65ee4d0b-3c05-4ffd-a78a-57afde1a0a10">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Kuantitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="10" width="56" height="20" uuid="d052a60c-bdc9-48dc-8660-a36711704f8f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Ukuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="10" width="102" height="20" uuid="df4ce0ce-2e07-4a64-bf4f-e39bb7202ea9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Harga Jual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="-10" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="630ca60c-e8a6-4641-a6a4-bd51db6db4f0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_transaksi})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="74" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="3b761fe1-2682-49cf-89da-9be245542c0e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{lokasi_store}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="159" y="0" width="67" height="20" isPrintInFirstWholeBand="true" uuid="1ee58c95-3125-482f-881f-ac6c186f3ee2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{artikel}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="226" y="0" width="122" height="20" isPrintInFirstWholeBand="true" uuid="7d4ddb35-5c81-4e26-aedd-7ad5280b767f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="fbb2fd2c-04c0-4831-b5d2-e55e87399a63"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="407" y="0" width="56" height="20" isPrintInFirstWholeBand="true" uuid="76255af1-3322-426b-bc91-90c0db104b3b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="0" width="102" height="20" isPrintInFirstWholeBand="true" uuid="d06bb1f7-4fa7-4fd0-adbf-300018eb76bd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="67" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="3" y="35" width="100" height="30" uuid="b6b55ebd-ac4f-41cc-835c-943ae20161bb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="37" width="100" height="30" uuid="75f007de-b3cf-4962-a708-61ba7aa1b935"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="492" y="37" width="77" height="30" uuid="97d14735-f0b8-4d25-b2c1-5b9a58d7ea33"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

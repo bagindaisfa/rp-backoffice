@@ -26,7 +26,11 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	@Query(value = "SELECT SUM(B.hpp) AS total FROM detail_pesanan A LEFT JOIN master_product B ON A.artikel=B.artikel_product WHERE A.rowstatus = :rowstatus", nativeQuery = true)
 	double totalHpp(int rowstatus);
 	
-	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_transaksi LIKE %:keyword% OR id_store LIKE %:keyword% OR lokasi_store LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND "
+			+ "id_transaksi LIKE %:keyword% OR "
+			+ "id_store LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword% OR "
+			+ "nama_pelanggan LIKE %:keyword%", nativeQuery = true)
 	List<Penjualan> search(String keyword);
 	
 }
