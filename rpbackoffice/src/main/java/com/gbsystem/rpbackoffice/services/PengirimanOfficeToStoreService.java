@@ -59,7 +59,9 @@ public class PengirimanOfficeToStoreService {
 			detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
 			detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			detail.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-			detail.setTipe(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getTipe());
+			detail.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
+			detail.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
+			detail.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
 			detail.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
 			detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 			detail.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
@@ -79,7 +81,9 @@ public class PengirimanOfficeToStoreService {
 				new_insert.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
 				new_insert.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 				new_insert.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-				new_insert.setTipe(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getTipe());
+				new_insert.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
+				new_insert.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
+				new_insert.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
 				new_insert.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
 				new_insert.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 				new_insert.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
@@ -109,7 +113,9 @@ public class PengirimanOfficeToStoreService {
 			f.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
 			f.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			f.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-			f.setTipe(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getTipe());
+			f.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
+			f.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
+			f.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
 			f.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
 			f.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 			f.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
@@ -128,7 +134,9 @@ public class PengirimanOfficeToStoreService {
 			h.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
 			h.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			h.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-			h.setTipe(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getTipe());
+			h.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
+			h.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
+			h.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
 			h.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
 			h.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 			h.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
@@ -245,7 +253,9 @@ public class PengirimanOfficeToStoreService {
 			DetailPengirimanOfficeToStore detail_update = new DetailPengirimanOfficeToStore();
 			detail_update.setArtikel(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 			detail_update.setKategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKategori());
-			detail_update.setTipe(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getTipe());
+			detail_update.setNama_kategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_kategori());
+			detail_update.setType(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType());
+			detail_update.setType_name(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType_name());
 			detail_update.setNama_barang(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_barang());
 			detail_update.setKuantitas(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 			detail_update.setUkuran(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getUkuran());
@@ -280,7 +290,9 @@ public class PengirimanOfficeToStoreService {
 				f.setLokasi_store(pengirimanOfficeToStoreNew.getLokasi_store());
 				f.setArtikel(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				f.setKategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKategori());
-				f.setTipe(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getTipe());
+				f.setNama_kategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_kategori());
+				f.setType(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType());
+				f.setType_name(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType_name());
 				f.setNama_barang(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_barang());
 				f.setKuantitas(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				f.setUkuran(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getUkuran());
@@ -299,7 +311,9 @@ public class PengirimanOfficeToStoreService {
 				h.setLokasi_store(pengirimanOfficeToStoreNew.getLokasi_store());
 				h.setArtikel(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				h.setKategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKategori());
-				h.setTipe(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getTipe());
+				h.setNama_kategori(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_kategori());
+				h.setType(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType());
+				h.setType_name(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getType_name());
 				h.setNama_barang(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getNama_barang());
 				h.setKuantitas(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				h.setUkuran(pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getUkuran());

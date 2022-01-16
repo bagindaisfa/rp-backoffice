@@ -27,8 +27,10 @@ public class PenerimaanStore {
 	private int id_store;
 	private String lokasi_store;
 	private String artikel;
+	private String type;
+	private String type_name;
 	private String kategori;
-	private String tipe;
+	private String nama_kategori;
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
@@ -111,6 +113,22 @@ public class PenerimaanStore {
 		this.artikel = artikel;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType_name() {
+		return type_name;
+	}
+
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
+
 	public String getKategori() {
 		return kategori;
 	}
@@ -119,12 +137,12 @@ public class PenerimaanStore {
 		this.kategori = kategori;
 	}
 
-	public String getTipe() {
-		return tipe;
+	public String getNama_kategori() {
+		return nama_kategori;
 	}
 
-	public void setTipe(String tipe) {
-		this.tipe = tipe;
+	public void setNama_kategori(String nama_kategori) {
+		this.nama_kategori = nama_kategori;
 	}
 
 	public String getNama_barang() {
@@ -193,7 +211,7 @@ public class PenerimaanStore {
 				+ " lokasi_store=" + lokasi_store + ", "
 				+ " artikel=" + artikel + ", "
 				+ " kategori=" + kategori + ","
-				+ " tipe=" + tipe + ","
+				+ " type=" + type + ","
 	            + " nama_barang=" + nama_barang + ","
 	            + " kuantitas=" + kuantitas + ","
 	            + " ukuran=" + ukuran + ","

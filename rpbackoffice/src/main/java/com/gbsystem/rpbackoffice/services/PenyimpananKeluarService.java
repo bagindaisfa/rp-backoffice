@@ -19,8 +19,8 @@ public class PenyimpananKeluarService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepo;
 	
-	public PenyimpananKeluar savePenyimpananKeluar(int id_store, String lokasi_store, String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
+	public PenyimpananKeluar savePenyimpananKeluar(int id_store, String lokasi_store, String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
 			double harga_jual, String keterangan ) {
 		
 		PenyimpananKeluar p = new PenyimpananKeluar();
@@ -40,7 +40,9 @@ public class PenyimpananKeluarService {
 		p.setLokasi_store(lokasi_store);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
@@ -68,8 +70,8 @@ public class PenyimpananKeluarService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Date tanggal_keluar, int id_store, String lokasi_store, String artikel, String kategori, 
-			String tipe, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
+	public void update(Long id, Date tanggal_keluar, int id_store, String lokasi_store, String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, double kuantitas, String ukuran, MultipartFile foto_barang, double hpp, 
 			double harga_jual, String keterangan ) {
 		PenyimpananKeluar p = new PenyimpananKeluar();
     	p = eRepo.findById(id).get();
@@ -89,7 +91,9 @@ public class PenyimpananKeluarService {
 		p.setLokasi_store(lokasi_store);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);

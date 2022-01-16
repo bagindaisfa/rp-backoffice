@@ -53,7 +53,9 @@ public class PenerimaanStoreService {
 			f.setLokasi_office(get_retur.getLokasi_office_tujuan());
 			f.setArtikel(get_retur.getDetail_pengiriman().get(i).getArtikel());
 			f.setKategori(get_retur.getDetail_pengiriman().get(i).getKategori());
-			f.setTipe(get_retur.getDetail_pengiriman().get(i).getTipe());
+			f.setNama_kategori(get_retur.getDetail_pengiriman().get(i).getNama_kategori());
+			f.setType(get_retur.getDetail_pengiriman().get(i).getType());
+			f.setType_name(get_retur.getDetail_pengiriman().get(i).getType_name());
 			f.setNama_barang(get_retur.getDetail_pengiriman().get(i).getNama_barang());
 			f.setKuantitas(get_retur.getDetail_pengiriman().get(i).getKuantitas());
 			f.setUkuran(get_retur.getDetail_pengiriman().get(i).getUkuran());
@@ -72,7 +74,9 @@ public class PenerimaanStoreService {
 			p.setLokasi_store(get_retur.getLokasi_store_asal());
 			p.setArtikel(get_retur.getDetail_pengiriman().get(i).getArtikel());
 			p.setKategori(get_retur.getDetail_pengiriman().get(i).getKategori());
-			p.setTipe(get_retur.getDetail_pengiriman().get(i).getTipe());
+			p.setNama_kategori(get_retur.getDetail_pengiriman().get(i).getNama_kategori());
+			p.setType(get_retur.getDetail_pengiriman().get(i).getType());
+			p.setType_name(get_retur.getDetail_pengiriman().get(i).getType_name());
 			p.setNama_barang(get_retur.getDetail_pengiriman().get(i).getNama_barang());
 			p.setKuantitas(get_retur.getDetail_pengiriman().get(i).getKuantitas());
 			p.setUkuran(get_retur.getDetail_pengiriman().get(i).getUkuran());
@@ -166,7 +170,9 @@ public class PenerimaanStoreService {
 			f.setLokasi_office(get_retur_new.getLokasi_office_tujuan());
 			f.setArtikel(get_retur_new.getDetail_pengiriman().get(i).getArtikel());
 			f.setKategori(get_retur_new.getDetail_pengiriman().get(i).getKategori());
-			f.setTipe(get_retur_new.getDetail_pengiriman().get(i).getTipe());
+			f.setNama_kategori(get_retur_new.getDetail_pengiriman().get(i).getNama_kategori());
+			f.setType(get_retur_new.getDetail_pengiriman().get(i).getType());
+			f.setType_name(get_retur_new.getDetail_pengiriman().get(i).getType_name());
 			f.setNama_barang(get_retur_new.getDetail_pengiriman().get(i).getNama_barang());
 			f.setKuantitas(get_retur_new.getDetail_pengiriman().get(i).getKuantitas());
 			f.setUkuran(get_retur_new.getDetail_pengiriman().get(i).getUkuran());
@@ -185,7 +191,9 @@ public class PenerimaanStoreService {
 			p.setLokasi_store(get_retur_new.getLokasi_store_asal());
 			p.setArtikel(get_retur_new.getDetail_pengiriman().get(i).getArtikel());
 			p.setKategori(get_retur_new.getDetail_pengiriman().get(i).getKategori());
-			p.setTipe(get_retur_new.getDetail_pengiriman().get(i).getTipe());
+			p.setNama_kategori(get_retur_new.getDetail_pengiriman().get(i).getNama_kategori());
+			p.setType(get_retur_new.getDetail_pengiriman().get(i).getType());
+			p.setType_name(get_retur_new.getDetail_pengiriman().get(i).getType_name());
 			p.setNama_barang(get_retur_new.getDetail_pengiriman().get(i).getNama_barang());
 			p.setKuantitas(get_retur_new.getDetail_pengiriman().get(i).getKuantitas());
 			p.setUkuran(get_retur_new.getDetail_pengiriman().get(i).getUkuran());

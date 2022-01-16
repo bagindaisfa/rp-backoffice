@@ -105,8 +105,10 @@ public class PenjualanService {
 			store_asal.setId_store(penjualan.getId_store());
 			store_asal.setLokasi_store(penjualan.getLokasi_store());
 			store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
-			store_asal.setKategori(check.getKategori());
-			store_asal.setTipe(check.getTipe());
+			store_asal.setKategori(penjualan.getDetailPesananList().get(i).getKategori());
+			store_asal.setNama_kategori(penjualan.getDetailPesananList().get(i).getNama_kategori());
+			store_asal.setType(penjualan.getDetailPesananList().get(i).getType());
+			store_asal.setType_name(penjualan.getDetailPesananList().get(i).getType_name());
 			store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
 			store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			store_asal.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
@@ -249,6 +251,10 @@ public class PenjualanService {
 			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
 			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
 			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+			d.setKategori(penjualan.getDetailPesananList().get(i).getKategori());
+			d.setNama_kategori(penjualan.getDetailPesananList().get(i).getNama_kategori());
+			d.setType(penjualan.getDetailPesananList().get(i).getType());
+			d.setType_name(penjualan.getDetailPesananList().get(i).getType_name());
 			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
 			d.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());
 			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
@@ -273,8 +279,10 @@ public class PenjualanService {
 				store_asal.setId_store(penjualan.getId_store());
 				store_asal.setLokasi_store(penjualan.getLokasi_store());
 				store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
-				store_asal.setKategori(check.getKategori());
-				store_asal.setTipe(check.getTipe());
+				store_asal.setKategori(penjualan.getDetailPesananList().get(i).getKategori());
+				store_asal.setNama_kategori(penjualan.getDetailPesananList().get(i).getNama_kategori());
+				store_asal.setType(penjualan.getDetailPesananList().get(i).getType());
+				store_asal.setType_name(penjualan.getDetailPesananList().get(i).getType_name());
 				store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
 				store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 				store_asal.setUkuran(penjualan.getDetailPesananList().get(i).getUkuran());

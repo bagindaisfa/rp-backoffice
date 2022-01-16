@@ -65,7 +65,9 @@ public class ReturGudangService {
 			d.setTanggal_retur(tanggal_pengiriman);
 			d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
 			d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
-			d.setTipe(returGudang.getDetail_pengiriman().get(i).getTipe());
+			d.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
+			d.setType(returGudang.getDetail_pengiriman().get(i).getType());
+			d.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
 			d.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
 			d.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
 			d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
@@ -84,7 +86,9 @@ public class ReturGudangService {
 			store_asal.setLokasi_store(returGudang.getLokasi_store_asal());
 			store_asal.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
 			store_asal.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
-			store_asal.setTipe(returGudang.getDetail_pengiriman().get(i).getTipe());
+			store_asal.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
+			store_asal.setType(returGudang.getDetail_pengiriman().get(i).getType());
+			store_asal.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
 			store_asal.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
 			store_asal.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
 			store_asal.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
@@ -234,7 +238,9 @@ public class ReturGudangService {
 			d.setTanggal_retur(returGudang.getTanggal_retur());
 			d.setArtikel(returGudang.getDetail_pengiriman().get(j).getArtikel());
 			d.setKategori(returGudang.getDetail_pengiriman().get(j).getKategori());
-			d.setTipe(returGudang.getDetail_pengiriman().get(j).getTipe());
+			d.setNama_kategori(returGudang.getDetail_pengiriman().get(j).getNama_kategori());
+			d.setType(returGudang.getDetail_pengiriman().get(j).getType());
+			d.setType_name(returGudang.getDetail_pengiriman().get(j).getType_name());
 			d.setNama_barang(returGudang.getDetail_pengiriman().get(j).getNama_barang());
 			d.setKuantitas(returGudang.getDetail_pengiriman().get(j).getKuantitas());
 			d.setUkuran(returGudang.getDetail_pengiriman().get(j).getUkuran());
@@ -266,7 +272,9 @@ public class ReturGudangService {
 				f.setTanggal_masuk(returGudang.getTanggal_retur());
 				f.setArtikel(returGudang.getDetail_pengiriman().get(j).getArtikel());
 				f.setKategori(returGudang.getDetail_pengiriman().get(j).getKategori());
-				f.setTipe(returGudang.getDetail_pengiriman().get(j).getTipe());
+				f.setNama_kategori(returGudang.getDetail_pengiriman().get(j).getNama_kategori());
+				f.setType(returGudang.getDetail_pengiriman().get(j).getType());
+				f.setType_name(returGudang.getDetail_pengiriman().get(j).getType_name());
 				f.setNama_barang(returGudang.getDetail_pengiriman().get(j).getNama_barang());
 				f.setKuantitas(returGudang.getDetail_pengiriman().get(j).getKuantitas());
 				f.setUkuran(returGudang.getDetail_pengiriman().get(j).getUkuran());
@@ -285,7 +293,9 @@ public class ReturGudangService {
 				store_asal.setLokasi_store(returGudang.getLokasi_store_asal());
 				store_asal.setArtikel(returGudang.getDetail_pengiriman().get(j).getArtikel());
 				store_asal.setKategori(returGudang.getDetail_pengiriman().get(j).getKategori());
-				store_asal.setTipe(returGudang.getDetail_pengiriman().get(j).getTipe());
+				store_asal.setNama_kategori(returGudang.getDetail_pengiriman().get(j).getNama_kategori());
+				store_asal.setType(returGudang.getDetail_pengiriman().get(j).getType());
+				store_asal.setType_name(returGudang.getDetail_pengiriman().get(j).getType_name());
 				store_asal.setNama_barang(returGudang.getDetail_pengiriman().get(j).getNama_barang());
 				store_asal.setKuantitas(returGudang.getDetail_pengiriman().get(j).getKuantitas());
 				store_asal.setUkuran(returGudang.getDetail_pengiriman().get(j).getUkuran());
@@ -304,7 +314,9 @@ public class ReturGudangService {
 	    		penerimaan.setLokasi_store(returGudang.getLokasi_store_asal());
 	    		penerimaan.setArtikel(returGudang.getDetail_pengiriman().get(j).getArtikel());
 	    		penerimaan.setKategori(returGudang.getDetail_pengiriman().get(j).getKategori());
-	    		penerimaan.setTipe(returGudang.getDetail_pengiriman().get(j).getTipe());
+	    		penerimaan.setNama_kategori(returGudang.getDetail_pengiriman().get(j).getNama_kategori());
+	    		penerimaan.setType(returGudang.getDetail_pengiriman().get(j).getType());
+	    		penerimaan.setType_name(returGudang.getDetail_pengiriman().get(j).getType_name());
 	    		penerimaan.setNama_barang(returGudang.getDetail_pengiriman().get(j).getNama_barang());
 	    		penerimaan.setKuantitas(returGudang.getDetail_pengiriman().get(j).getKuantitas());
 	    		penerimaan.setUkuran(returGudang.getDetail_pengiriman().get(j).getUkuran());

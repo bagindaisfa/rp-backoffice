@@ -28,6 +28,10 @@ public class DetailPesanan {
 	private int id_store;
 	private String lokasi_store;
 	private String artikel;
+	private String type;
+	private String type_name;
+	private String kategori;
+	private String nama_kategori;
 	private String nama_barang;
 	private String ukuran;
 	private Double harga;
@@ -74,6 +78,31 @@ public class DetailPesanan {
 	}
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
+	public String getKategori() {
+		return kategori;
+	}
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
+	}
+	public String getNama_kategori() {
+		return nama_kategori;
+	}
+	public void setNama_kategori(String nama_kategori) {
+		this.nama_kategori = nama_kategori;
 	}
 	public String getNama_barang() {
 		return nama_barang;

@@ -49,7 +49,9 @@ public class PenerimaanSupplierService {
 			p.setNama_supplier(pembelian.getNama_supplier());
 			p.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
 			p.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
-			p.setTipe(pembelian.getDetail_pembelian().get(i).getTipe());
+			p.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());
+			p.setType(pembelian.getDetail_pembelian().get(i).getType());
+			p.setType_name(pembelian.getDetail_pembelian().get(i).getType_name());
 			p.setNama_barang(pembelian.getDetail_pembelian().get(i).getNama_barang());
 			p.setKuantitas(pembelian.getDetail_pembelian().get(i).getKuantitas());
 			p.setUkuran(pembelian.getDetail_pembelian().get(i).getUkuran());
@@ -74,7 +76,9 @@ public class PenerimaanSupplierService {
 			f.setTanggal_masuk(new Date());
 			f.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
 			f.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
-			f.setTipe(pembelian.getDetail_pembelian().get(i).getTipe());
+			f.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());
+			f.setType(pembelian.getDetail_pembelian().get(i).getType());
+			f.setType_name(pembelian.getDetail_pembelian().get(i).getType_name());
 			f.setNama_barang(pembelian.getDetail_pembelian().get(i).getNama_barang());
 			f.setKuantitas(pembelian.getDetail_pembelian().get(i).getKuantitas());
 			f.setUkuran(pembelian.getDetail_pembelian().get(i).getUkuran());

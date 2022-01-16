@@ -23,8 +23,10 @@ public class DetailPengirimanOfficeToStore {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_pengiriman;
 	private String artikel;
+	private String type;
+	private String type_name;
 	private String kategori;
-	private String tipe;
+	private String nama_kategori;
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
@@ -59,17 +61,33 @@ public class DetailPengirimanOfficeToStore {
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
 	public String getKategori() {
 		return kategori;
 	}
 	public void setKategori(String kategori) {
 		this.kategori = kategori;
 	}
-	public String getTipe() {
-		return tipe;
+	public String getNama_kategori() {
+		return nama_kategori;
 	}
-	public void setTipe(String tipe) {
-		this.tipe = tipe;
+	public void setNama_kategori(String nama_kategori) {
+		this.nama_kategori = nama_kategori;
+	}
+	public PengirimanOfficeToStore getPengirimanOfficeToStore() {
+		return pengirimanOfficeToStore;
 	}
 	public String getNama_barang() {
 		return nama_barang;

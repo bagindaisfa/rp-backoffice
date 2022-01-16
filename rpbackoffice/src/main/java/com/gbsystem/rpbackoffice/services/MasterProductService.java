@@ -60,7 +60,9 @@ public class MasterProductService {
 		q.setLokasi_office("Kantor Pusat");
 		q.setArtikel(artikel_product);
 		q.setKategori(kategori);
-		q.setTipe(type);
+		q.setNama_kategori(nama_kategori);
+		q.setType(type);
+		q.setType_name(type_name);
 		q.setNama_barang(nama_product);
 		q.setKuantitas(kuantitas);
 		q.setUkuran(ukuran);
@@ -135,7 +137,9 @@ public class MasterProductService {
 			eRepo.save(p);
 			q.setArtikel(artikel_product);
 			q.setKategori(kategori);
-			q.setTipe(type);
+			q.setNama_kategori(nama_kategori);
+			q.setType(type);
+			q.setType_name(type_name);
 			q.setNama_barang(nama_product);
 			q.setKuantitas(kuantitas);
 			q.setUkuran(ukuran);

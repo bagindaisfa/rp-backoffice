@@ -23,8 +23,8 @@ public class StockOpnameService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepoKeluar;
 	
-	public StockOpname saveStockOpname(String artikel, String kategori
-			,String tipe, String nama_barang, double stock_opname) {
+	public StockOpname saveStockOpname(String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, double stock_opname) {
 		
 		StockOpname p = new StockOpname();
 		
@@ -50,7 +50,9 @@ public class StockOpnameService {
 		p.setTanggal_so(date);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas_masuk(kuantitas_masuk);
 		p.setKuantitas_keluar(kuantitas_keluar);
@@ -78,7 +80,8 @@ public class StockOpnameService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String artikel, String kategori, String tipe, String nama_barang, double stock_opname) {
+	public void update(Long id, String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, double stock_opname) {
 		StockOpname p = new StockOpname();
     	p = eRepo.findById(id).get();
     	
@@ -100,7 +103,9 @@ public class StockOpnameService {
 		p.setTanggal_so(date);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas_masuk(kuantitas_masuk);
 		p.setKuantitas_keluar(kuantitas_keluar);

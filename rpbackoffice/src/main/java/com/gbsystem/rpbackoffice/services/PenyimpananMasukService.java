@@ -15,15 +15,17 @@ public class PenyimpananMasukService {
 	@Autowired
 	private PenyimpananMasukRepository eRepo;
 	
-	public PenyimpananMasuk savePenyimpananMasuk(String artikel, String kategori
-			,String tipe, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+	public PenyimpananMasuk savePenyimpananMasuk(String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		
 		PenyimpananMasuk p = new PenyimpananMasuk();
 		
 		p.setTanggal_masuk(new Date());
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);
@@ -51,7 +53,8 @@ public class PenyimpananMasukService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, Date tanggal_masuk, String artikel, String kategori, String tipe, String nama_barang, 
+	public void update(Long id, Date tanggal_masuk, String artikel, String kategori, String nama_kategori
+			,String type,String type_name, String nama_barang, 
 			double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		PenyimpananMasuk p = new PenyimpananMasuk();
     	p = eRepo.findById(id).get();
@@ -59,7 +62,9 @@ public class PenyimpananMasukService {
 		p.setTanggal_masuk(tanggal_masuk);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
-		p.setTipe(tipe);
+		p.setNama_kategori(nama_kategori);
+		p.setType(type);
+		p.setType_name(type_name);
 		p.setNama_barang(nama_barang);
 		p.setKuantitas(kuantitas);
 		p.setUkuran(ukuran);

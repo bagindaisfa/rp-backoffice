@@ -131,7 +131,9 @@ public class MasterProductController {
     		q.setLokasi_office("Kantor Pusat");
     		q.setArtikel(row.getCell(0).getStringCellValue());
     		q.setKategori(row.getCell(4).getStringCellValue());
-    		q.setTipe(row.getCell(2).getStringCellValue());
+    		q.setNama_kategori(row.getCell(5).getStringCellValue());
+    		q.setType(row.getCell(2).getStringCellValue());
+    		q.setType_name(row.getCell(3).getStringCellValue());
     		q.setNama_barang(row.getCell(1).getStringCellValue());
     		q.setKuantitas(row.getCell(9).getNumericCellValue());
     		q.setUkuran(row.getCell(8).getStringCellValue());
