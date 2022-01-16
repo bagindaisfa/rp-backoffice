@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gbsystem.rpbackoffice.services.PurchaseStoreByArticleService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreBySummaryService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -30,8 +31,11 @@ public class ReportController {
 	@Autowired
 	private PurchaseStoreBySummaryService purchaseStoreBySummaryService;
 	
-	@GetMapping("/pdf")
-	public ResponseEntity<byte []> generatePdf(@Param("no_hp_pelanggan") String no_hp_pelanggan) throws Exception, JRException{
+	@Autowired
+	private PurchaseStoreByArticleService purchaseStoreByArticleService;
+	
+	@GetMapping("/purchaseStoreBySummary")
+	public ResponseEntity<byte []> generatePdfSummary(@Param("no_hp_pelanggan") String no_hp_pelanggan) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(purchaseStoreBySummaryService.PurchaseStoreBySummary(no_hp_pelanggan));
 		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PurchaseStoreBySummary.jrxml"));
 		
@@ -41,6 +45,20 @@ public class ReportController {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=PurchaseStoreBySummary.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/purchaseStoreByArticle")
+	public ResponseEntity<byte []> generatePdfArticle(@Param("artikel") String artikel) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(purchaseStoreByArticleService.PurchaseStoreByArticle(artikel));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PurchaseStoreByArticle.jrxml"));
+		
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=PurchaseStoreByArticle.pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 }
