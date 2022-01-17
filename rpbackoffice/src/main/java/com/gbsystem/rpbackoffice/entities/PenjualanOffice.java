@@ -27,6 +27,9 @@ public class PenjualanOffice {
 	private String id_transaksi;
 	private int id_office;
 	private String lokasi_office;
+	private String no_hp_pelanggan;
+	private String nama_pelanggan;
+	private double total_penjualan;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualanOffice", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
@@ -61,6 +64,26 @@ public class PenjualanOffice {
 	}
 	public void setLokasi_office(String lokasi_office) {
 		this.lokasi_office = lokasi_office;
+	}
+	
+	public String getNo_hp_pelanggan() {
+		return no_hp_pelanggan;
+	}
+	public void setNo_hp_pelanggan(String no_hp_pelanggan) {
+		this.no_hp_pelanggan = no_hp_pelanggan;
+	}
+	public String getNama_pelanggan() {
+		return nama_pelanggan;
+	}
+	public void setNama_pelanggan(String nama_pelanggan) {
+		this.nama_pelanggan = nama_pelanggan;
+	}
+	
+	public double getTotal_penjualan() {
+		return total_penjualan;
+	}
+	public void setTotal_penjualan(double total_penjualan) {
+		this.total_penjualan = total_penjualan;
 	}
 	public int getRowstatus() {
 		return rowstatus;

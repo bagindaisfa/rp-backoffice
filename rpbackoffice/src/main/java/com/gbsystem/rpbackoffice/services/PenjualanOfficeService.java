@@ -31,7 +31,7 @@ public class PenjualanOfficeService {
 		
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-O" + (eRepo.count() + 1);
 		Date tanggal_transaksi = penjualanOffice.getTanggal_transaksi();
-		
+		double total = 0;
 		PenjualanOffice p = new PenjualanOffice();
 		List<DetailPenjualanOffice> details = new ArrayList<>();
 		
@@ -39,7 +39,9 @@ public class PenjualanOfficeService {
 		p.setId_transaksi(id_transaksi);
 		p.setId_office(penjualanOffice.getId_office());
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
-		p.setRowstatus(1);
+		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
+		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
+		
 		for(int i = 0; i < penjualanOffice.getDetail_penjualan().size(); i++) {
 			DetailPenjualanOffice d = new DetailPenjualanOffice();
 			d.setTanggal_transaksi(tanggal_transaksi);
@@ -59,6 +61,7 @@ public class PenjualanOfficeService {
 			d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getTotal());
 			d.setRowstatus(1);
 			d.setPenjualanOffice(p);
+			total += penjualanOffice.getDetail_penjualan().get(i).getTotal();
 			details.add(d);
 			
 			StockOffice g = new StockOffice();
@@ -89,7 +92,8 @@ public class PenjualanOfficeService {
 			f.setRowstatus(1);
 			ePenyimpananRepo.save(f);
 		}
-		
+		p.setTotal_penjualan(total);
+		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
 		return eRepo.save(p);
 	}
@@ -158,13 +162,15 @@ public class PenjualanOfficeService {
 	}
 	
 	private PenjualanOffice saveUpdate(PenjualanOffice penjualanOffice) {
+		double total = 0;
 		PenjualanOffice p = new PenjualanOffice();
     	p = eRepo.findById(penjualanOffice.getId()).get();
     	p.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
 		p.setId_transaksi(penjualanOffice.getId_transaksi());
 		p.setId_office(penjualanOffice.getId_office());
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
-		p.setRowstatus(1);
+		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
+		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
 		
 		List<DetailPenjualanOffice> details = new ArrayList<>();
 		for(int k = 0; k < penjualanOffice.getDetail_penjualan().size(); k++) {
@@ -186,6 +192,7 @@ public class PenjualanOfficeService {
 			d.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
 			d.setRowstatus(penjualanOffice.getDetail_penjualan().get(k).getRowstatus());
 			d.setPenjualanOffice(p);
+			total += penjualanOffice.getDetail_penjualan().get(k).getTotal();
 			details.add(d);
 			if (penjualanOffice.getDetail_penjualan().get(k).getRowstatus() == 1) {
 				StockOffice l = new StockOffice();
@@ -217,6 +224,8 @@ public class PenjualanOfficeService {
 				ePenyimpananRepo.save(f);
 			}
 		}
+		p.setTotal_penjualan(total);
+		p.setRowstatus(1);
     	p.setDetail_penjualan(details);
     	return eRepo.save(p);
 	}
