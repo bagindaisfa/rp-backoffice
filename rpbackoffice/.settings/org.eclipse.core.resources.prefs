@@ -3,5 +3,6 @@ encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreByArticle.jrxml=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreBySummary.jrxml=UTF-8
+encoding//src/main/resources/templates/SalesByOffice.jrxml=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

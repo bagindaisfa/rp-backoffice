@@ -24,6 +24,7 @@ import com.gbsystem.rpbackoffice.services.PenyimpananBarangMasukReportService;
 import com.gbsystem.rpbackoffice.services.PenyimpananStockOpnameReportService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreByArticleService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreBySummaryService;
+import com.gbsystem.rpbackoffice.services.SalesByOfficeService;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -63,6 +64,9 @@ public class ReportController {
 
 	@Autowired
 	private PenerimaanBySupplierReportService penerimaanBySupplierReportService;
+
+	@Autowired
+	private SalesByOfficeService salesByOfficeService;
 	
 	@GetMapping("/purchaseStoreBySummary")
 	public ResponseEntity<byte []> generatePdfSummary(@Param("no_hp_pelanggan") String no_hp_pelanggan) throws Exception, JRException{
@@ -96,12 +100,13 @@ public class ReportController {
 	public ResponseEntity<byte []> generatePdfPenyimpananMasuk(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penyimpananBarangMasukReportService.PenyimpananBarangMasukReport(tanggal_transaksi));
 		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
-		
+
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
 		byte [] data = JasperExportManager.exportReportToPdf(report);
 		
 		HttpHeaders headers = new HttpHeaders();
+
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=PenyimpananBarangMasukReport.pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
@@ -190,4 +195,17 @@ public class ReportController {
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 	
+	@GetMapping("/salesByOffice")
+	public ResponseEntity<byte []> generatePdfSalesOffice(@Param("id_office") String id_office) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(salesByOfficeService.SalesByOffice(id_office));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/SalesByOffice.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=SalesByOffice.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
 }
