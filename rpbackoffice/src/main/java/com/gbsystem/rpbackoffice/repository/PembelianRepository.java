@@ -24,4 +24,5 @@ public interface PembelianRepository extends JpaRepository<Pembelian, Long> {
 	
 	@Query(value = "SELECT SUM(A.hpp) AS total FROM pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
 	double totalHpp(int rowstatus);
+	
 }

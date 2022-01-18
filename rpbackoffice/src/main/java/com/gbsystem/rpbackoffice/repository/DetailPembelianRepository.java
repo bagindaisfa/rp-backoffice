@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,8 @@ public interface DetailPembelianRepository extends JpaRepository<DetailPembelian
 	
 	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_id = :pembelian_id", nativeQuery = true)
 	DetailPembelian getByPembelian_id(Long pembelian_id);
+	
+
+	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) = :tanggal_transaksi ", nativeQuery = true)
+	List<DetailPembelian> LaporanPembelian(Date tanggal_transaksi);
 }

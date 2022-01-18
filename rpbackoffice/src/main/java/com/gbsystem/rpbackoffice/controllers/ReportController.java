@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gbsystem.rpbackoffice.services.PembelianService;
 import com.gbsystem.rpbackoffice.services.PenerimaanByStoreReportService;
 import com.gbsystem.rpbackoffice.services.PenerimaanBySupplierReportService;
 import com.gbsystem.rpbackoffice.services.PengirimanGudangToStoreReportService;
@@ -67,6 +68,9 @@ public class ReportController {
 
 	@Autowired
 	private SalesByOfficeService salesByOfficeService;
+	
+	@Autowired
+	private PembelianService pembelianService;
 	
 	@GetMapping("/purchaseStoreBySummary")
 	public ResponseEntity<byte []> generatePdfSummary(@Param("no_hp_pelanggan") String no_hp_pelanggan) throws Exception, JRException{
@@ -206,6 +210,48 @@ public class ReportController {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=SalesByOffice.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/bestArticleByStore")
+	public ResponseEntity<byte []> generatePdfBestArticleStore(@Param("id_store") String id_store) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(purchaseStoreByArticleService.BestArticle(id_store));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/BestArticleByStore.jrxml"));
+		
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=BestArticleByStore.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/bestArticleByOffice")
+	public ResponseEntity<byte []> generatePdfBestArticleOffice(@Param("id_office") String id_office) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(salesByOfficeService.BestArticle(id_office));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/BestArticleByOffice.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=BestArticleByOffice.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/laporanPembelian")
+	public ResponseEntity<byte []> generatePdfLaporanPembelian(@Param("tanggal_transaksi") Date tanggal_transaksi) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(pembelianService.laporanPembelian(tanggal_transaksi));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/LaporanPembelian.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=LaporanPembelian.pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 }

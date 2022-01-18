@@ -16,4 +16,8 @@ public class SalesByOfficeService {
 	public List<SalesByOffice> SalesByOffice(String id_office){
 		return eRepo.SalesByOffice(id_office);
 	}
+	
+	public List<SalesByOffice> BestArticle(String id_office){
+		return eRepo.BestArticle(id_office);
+	}
 }

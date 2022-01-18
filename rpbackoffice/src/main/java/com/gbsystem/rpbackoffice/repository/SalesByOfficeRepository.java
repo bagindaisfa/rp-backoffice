@@ -17,4 +17,12 @@ public interface SalesByOfficeRepository extends JpaRepository<SalesByOffice, Lo
 			+ "LEFT JOIN detail_penjualan_office B ON A.id = B.penjualan_office_id AND B.rowstatus=1 "
 			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office", nativeQuery = true)
 	List<SalesByOffice> SalesByOffice(String id_office);
+	
+	@Query(value = "SELECT A.id AS id, A.nama_pelanggan AS nama_pelanggan,A.lokasi_office AS lokasi_office, "
+			+ "B.tanggal_transaksi,B.artikel,B.kuantitas,B.nama_barang,"
+			+ "B.ukuran,B.harga_satuan_barang AS harga,B.type_name,B.nama_kategori "
+			+ "FROM penjualan_office A "
+			+ "LEFT JOIN detail_penjualan_office B ON A.id = B.penjualan_office_id AND B.rowstatus=1 "
+			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office ORDER BY B.kuantitas DESC", nativeQuery = true)
+	List<SalesByOffice> BestArticle(String id_office);
 }

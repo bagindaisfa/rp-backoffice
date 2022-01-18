@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BestArticleByOffice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62cd8ade-c54b-413e-aaac-0671945620bd">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nama_pelanggan" class="java.lang.String"/>
+	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="artikel" class="java.lang.String"/>
+	<field name="nama_barang" class="java.lang.String"/>
+	<field name="kuantitas" class="java.lang.Double"/>
+	<field name="ukuran" class="java.lang.String"/>
+	<field name="harga" class="java.lang.Double"/>
+	<field name="lokasi_office" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="-10" y="8" width="191" height="71" uuid="96ee377b-5639-46ab-a4fb-df1caa093890"/>
+				<imageExpression><![CDATA["/target/classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="181" y="-14" width="388" height="30" uuid="9af9d906-8b9d-4cdb-a917-33400f1bfa2f"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rudy Project - Indonesia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="16" width="388" height="44" uuid="4ee36da8-099e-4261-89a7-17b3f1b5958e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Ruko Golden Boulevard, Blok W2 No. 12 Jl. Pahlawan Seribu BSD City Tangerang.
+Phone: +62-2153163512 Fax: +39.0422.431978 
+E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="178" y="30" width="199" height="17" uuid="c10c87ff-cca1-4fba-8ea7-820b7adb2162"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[By Office]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="3" width="199" height="27" uuid="7d031f0f-38e8-4514-bd3f-70c4cd70d7de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Laporan Best Article]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="90" y="48" width="287" height="17" isPrintInFirstWholeBand="true" uuid="4bfde7f7-b092-4875-b78d-61a839153c84"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="48" width="10" height="17" uuid="f06192ed-05e5-4111-8dca-e3b81adef805"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="48" width="79" height="17" uuid="3a0fa702-1f30-4dba-9878-604fd261a294"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Lokasi Office]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="252" y="10" width="96" height="20" uuid="8ace388b-a0c8-4984-bb28-65d165a61665">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="348" y="10" width="59" height="20" uuid="55dff942-5880-4f45-8206-ce5e5ac1615e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Kuantitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-10" y="10" width="85" height="20" uuid="d85475c0-9179-4db4-b367-8b06d4fd1455">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Tanggal Transaksi]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="10" width="102" height="20" uuid="da792fd9-6fa8-4117-b354-0365b28888ae">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Harga Jual]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="10" width="85" height="20" uuid="d98227a0-632e-4215-a28c-8ed03bde4acd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Artikel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="10" width="56" height="20" uuid="2b969b5f-4592-47d0-a69b-a3331def3ba1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Ukuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="74" y="10" width="93" height="20" uuid="97bc790a-fd2a-4ce3-bdaa-e444a5d0ef4c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Pelanggan]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="-10" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="de790f12-ae23-430f-84ad-0fb18aef74a9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_transaksi})]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="463" y="0" width="102" height="20" isPrintInFirstWholeBand="true" uuid="be758cc7-aeee-4dc1-bddb-1028fb06b27e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="21d73c38-7737-4306-97c2-179d35c2b0e9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="254" y="0" width="94" height="20" isPrintInFirstWholeBand="true" uuid="434b6e5c-617a-4be1-aaa2-f38c70393925"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="407" y="0" width="56" height="20" isPrintInFirstWholeBand="true" uuid="c43e16e8-beea-4bf2-b8c7-d63ab8d9343c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="74" y="0" width="93" height="20" isPrintInFirstWholeBand="true" uuid="8849c9fe-d14c-4a0b-b1f2-754791cb385e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="168" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="23994f03-d981-439c-bae0-0754344faf87"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{artikel}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="492" y="3" width="77" height="30" uuid="b35adf29-76ea-4856-8f38-28f57211557c"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="3" y="1" width="100" height="30" uuid="3d08a6e8-bbfb-4455-aed9-9da00cc590ec"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="389" y="3" width="100" height="30" uuid="2d68028e-322c-434d-815f-661cbbc7e093"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

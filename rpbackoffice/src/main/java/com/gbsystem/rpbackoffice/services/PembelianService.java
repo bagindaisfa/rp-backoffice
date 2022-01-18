@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.gbsystem.rpbackoffice.repository.DetailPembelianRepository;
 import com.gbsystem.rpbackoffice.repository.PembelianRepository;
 import com.gbsystem.rpbackoffice.entities.DetailPembelian;
 import com.gbsystem.rpbackoffice.entities.Pembelian;
@@ -17,6 +17,9 @@ import com.gbsystem.rpbackoffice.entities.Pembelian;
 public class PembelianService {
 	@Autowired
 	private PembelianRepository eRepo;
+	
+	@Autowired
+	private DetailPembelianRepository eDetailRepo;
 	
 	public Pembelian savePembelian(Pembelian pembelian ) {
 		
@@ -60,6 +63,11 @@ public class PembelianService {
 	public List<Pembelian> getAllPembelian(){
 
 		return eRepo.findByRowstatus(1);
+	}
+	
+	public List<DetailPembelian> laporanPembelian(Date tanggal_transaksi){
+
+		return eDetailRepo.LaporanPembelian(tanggal_transaksi);
 	}
 	
 	public Pembelian deletePembelianById(Long id)

@@ -16,4 +16,8 @@ public class PurchaseStoreByArticleService {
 	public List<PurchaseStoreByArticle> PurchaseStoreByArticle(String artikel){
 		return eRepo.PurchaseStoreByArticle(artikel);
 	}
+	
+	public List<PurchaseStoreByArticle> BestArticle(String id_store){
+		return eRepo.BestArticle(id_store);
+	}
 }
