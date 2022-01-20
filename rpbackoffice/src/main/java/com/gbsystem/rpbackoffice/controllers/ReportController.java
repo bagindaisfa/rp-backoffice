@@ -118,7 +118,7 @@ public class ReportController {
 	@GetMapping("/penyimpananKeluar")
 	public ResponseEntity<byte []> generatePdfPenyimpananKeluar(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penyimpananBarangKeluarReportService.PenyimpananBarangKeluarReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananKeluar.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
@@ -132,7 +132,7 @@ public class ReportController {
 	@GetMapping("/stockOpname")
 	public ResponseEntity<byte []> generatePdfStockOpname(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penyimpananStockOpnameReportService.PenyimpananStockOpnameReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananStockOpname.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
@@ -146,7 +146,7 @@ public class ReportController {
 	@GetMapping("/pengirimanGudangToStore")
 	public ResponseEntity<byte []> generatePdfPengirimanGudangToStore(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(pengirimanGudangToStoreReportService.PengirimanGudangToStoreReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PengirimanGudangToStore.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
@@ -160,7 +160,7 @@ public class ReportController {
 	@GetMapping("/pengirimanStoreToStore")
 	public ResponseEntity<byte []> generatePdfPengirimanStoreToStore(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(pengirimanStoreToStoreReportService.PengirimanStoreToStoreReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PengirimanStoreToStore.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
@@ -174,7 +174,7 @@ public class ReportController {
 	@GetMapping("/penerimaanByStore")
 	public ResponseEntity<byte []> generatePdfPenerimaanByStore(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penerimaanByStoreReportService.PenerimaanByStoreReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenerimaanByStore.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
@@ -188,7 +188,7 @@ public class ReportController {
 	@GetMapping("/penerimaanBySupplier")
 	public ResponseEntity<byte []> generatePdfPenerimaanBySupplier(@Param("tanggal_transaksi") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_transaksi) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penerimaanBySupplierReportService.PenerimaanBySupplierReport(tanggal_transaksi));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenyimpananMasuk.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/PenerimaanBySupplier.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);

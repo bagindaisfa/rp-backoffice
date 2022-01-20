@@ -11,8 +11,9 @@ import com.gbsystem.rpbackoffice.entities.PenyimpananBarangMasukReport;
 
 @Repository
 public interface PenyimpananBarangMasukReportRepository extends JpaRepository<PenyimpananBarangMasukReport, Long> {
-	@Query(value = "select p.id, p.tanggal_masuk, p.penerimaan_code, p.artikel, p.kategori, p.tipe, p.nama_barang, p.ukuran, "
-			+ "p.kuantitas, p.hpp, p.harga_jual from penyimpanan_masuk p "
+	@Query(value = "select p.id, p.tanggal_masuk AS tanggal_masuk, date_format(:tanggal_transaksi,'%Y-%m-%d') AS tanggal_transaksi, p.penerimaan_code, p.artikel AS artikel, p.kategori AS kategori, "
+			+ "p.tipe AS tipe, p.nama_barang AS nama_barang, p.ukuran AS ukuran, "
+			+ "p.kuantitas AS kuantitas, p.hpp AS hpp, p.harga_jual AS harga_jual from penyimpanan_masuk p "
 			+ "WHERE p.rowstatus=1 AND date_format(p.tanggal_masuk,'%Y-%m-%d') != :tanggal_transaksi", nativeQuery = true)
 	List<PenyimpananBarangMasukReport> PenyimpananBarangMasukReport(Date tanggal_transaksi);	
 

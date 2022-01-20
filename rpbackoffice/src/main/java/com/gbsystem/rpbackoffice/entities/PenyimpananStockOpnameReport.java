@@ -19,6 +19,9 @@ public class PenyimpananStockOpnameReport {
 	private Date tanggal_so;
 	
 	@Column(updatable=false, insertable=false)
+	private Date tanggal_transaksi;
+	
+	@Column(updatable=false, insertable=false)
 	private String artikel;
 
 	@Column(updatable=false, insertable=false)
@@ -40,7 +43,7 @@ public class PenyimpananStockOpnameReport {
 	private Double stock;
 	
 	@Column(updatable=false, insertable=false)
-	private Double so;
+	private Double stock_opname;
 	
 	@Column(updatable=false, insertable=false)
 	private String keterangan;
@@ -59,6 +62,14 @@ public class PenyimpananStockOpnameReport {
 
 	public void setTanggal_so(Date tanggal_so) {
 		this.tanggal_so = tanggal_so;
+	}
+
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 
 	public String getArtikel() {
@@ -117,12 +128,12 @@ public class PenyimpananStockOpnameReport {
 		this.stock = stock;
 	}
 
-	public Double getSo() {
-		return so;
+	public Double getStock_opname() {
+		return stock_opname;
 	}
 
-	public void setSo(Double so) {
-		this.so = so;
+	public void setStock_opname(Double stock_opname) {
+		this.stock_opname = stock_opname;
 	}
 
 	public String getKeterangan() {

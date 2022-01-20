@@ -19,6 +19,9 @@ public class PenerimaanByStoreReport {
 	private Date tanggal_penerimaan;
 	
 	@Column(updatable=false, insertable=false)
+	private Date tanggal_transaksi;
+	
+	@Column(updatable=false, insertable=false)
 	private String kode_penerimaan;
 	
 	@Column(updatable=false, insertable=false)
@@ -67,6 +70,14 @@ public class PenerimaanByStoreReport {
 		this.tanggal_penerimaan = tanggal_penerimaan;
 	}
 
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
+	}
+
 	public String getId_store() {
 		return id_store;
 	}
@@ -81,6 +92,14 @@ public class PenerimaanByStoreReport {
 
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
+	}
+
+	public String getKode_penerimaan() {
+		return kode_penerimaan;
+	}
+
+	public void setKode_penerimaan(String kode_penerimaan) {
+		this.kode_penerimaan = kode_penerimaan;
 	}
 
 	public String getArtikel() {

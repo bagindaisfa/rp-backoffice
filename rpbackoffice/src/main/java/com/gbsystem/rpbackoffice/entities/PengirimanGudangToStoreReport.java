@@ -19,6 +19,9 @@ public class PengirimanGudangToStoreReport {
 	private Date tanggal_pengiriman;
 	
 	@Column(updatable=false, insertable=false)
+	private Date tanggal_transaksi;
+	
+	@Column(updatable=false, insertable=false)
 	private String kode_pengiriman;
 	
 	@Column(updatable=false, insertable=false)
@@ -65,6 +68,14 @@ public class PengirimanGudangToStoreReport {
 
 	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
 		this.tanggal_pengiriman = tanggal_pengiriman;
+	}
+
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 
 	public String getKode_pengiriman() {

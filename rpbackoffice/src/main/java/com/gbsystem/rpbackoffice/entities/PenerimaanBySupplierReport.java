@@ -19,6 +19,9 @@ public class PenerimaanBySupplierReport {
 	private Date tanggal_penerimaan;
 	
 	@Column(updatable=false, insertable=false)
+	private Date tanggal_transaksi;
+	
+	@Column(updatable=false, insertable=false)
 	private String kode_penerimaan;
 	
 	@Column(updatable=false, insertable=false)
@@ -65,6 +68,22 @@ public class PenerimaanBySupplierReport {
 
 	public void setTanggal_peneriman(Date tanggal_penerimaan) {
 		this.tanggal_penerimaan = tanggal_penerimaan;
+	}
+
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
+	}
+
+	public String getKode_penerimaan() {
+		return kode_penerimaan;
+	}
+
+	public void setKode_penerimaan(String kode_penerimaan) {
+		this.kode_penerimaan = kode_penerimaan;
 	}
 
 	public String getId_supplier() {

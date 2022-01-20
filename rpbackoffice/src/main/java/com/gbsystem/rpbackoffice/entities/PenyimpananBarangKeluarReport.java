@@ -17,6 +17,9 @@ public class PenyimpananBarangKeluarReport {
 	
 	@Column(updatable=false, insertable=false)
 	private Date tanggal_keluar;
+	
+	@Column(updatable=false, insertable=false)
+	private Date tanggal_transaksi;
 
 	@Column(updatable=false, insertable=false)
 	private String id_store;
@@ -62,6 +65,14 @@ public class PenyimpananBarangKeluarReport {
 
 	public void setTanggal_keluar(Date tanggal_keluar) {
 		this.tanggal_keluar = tanggal_keluar;
+	}
+
+	public Date getTanggal_transaksi() {
+		return tanggal_transaksi;
+	}
+
+	public void setTanggal_transaksi(Date tanggal_transaksi) {
+		this.tanggal_transaksi = tanggal_transaksi;
 	}
 
 	public String getId_store() {
