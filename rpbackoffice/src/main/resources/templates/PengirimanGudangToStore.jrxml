@@ -86,7 +86,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 	<columnHeader>
 		<band height="39" splitType="Stretch">
 			<staticText>
-				<reportElement x="385" y="14" width="31" height="20" uuid="6ae201dd-9346-4733-9bcb-30cb3df715e0">
+				<reportElement x="385" y="9" width="31" height="30" uuid="6ae201dd-9346-4733-9bcb-30cb3df715e0">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -100,7 +100,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Tipe]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="343" y="14" width="42" height="20" uuid="3c7901c1-2e77-49cc-bab7-9c9d8ec83b35">
+				<reportElement x="343" y="9" width="42" height="30" uuid="3c7901c1-2e77-49cc-bab7-9c9d8ec83b35">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -114,7 +114,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kategori]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="416" y="14" width="67" height="20" uuid="37317669-24cb-4528-9bbc-0ad430a87bf8">
+				<reportElement x="416" y="9" width="67" height="30" uuid="37317669-24cb-4528-9bbc-0ad430a87bf8">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -128,7 +128,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Nama Barang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="482" y="14" width="43" height="20" uuid="467ecc9a-94eb-401f-b1ea-cdf4d41cb269">
+				<reportElement x="482" y="9" width="43" height="30" uuid="467ecc9a-94eb-401f-b1ea-cdf4d41cb269">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -142,7 +142,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kuantitas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="307" y="14" width="36" height="20" uuid="50ab47a7-ab4a-4c3f-9536-568de7efe3ff">
+				<reportElement x="307" y="9" width="36" height="30" uuid="50ab47a7-ab4a-4c3f-9536-568de7efe3ff">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -156,7 +156,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Artikel]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-10" y="14" width="60" height="20" uuid="5ab6a3e7-ded2-42e9-b77e-2807de2f5731">
+				<reportElement x="-10" y="9" width="60" height="30" uuid="5ab6a3e7-ded2-42e9-b77e-2807de2f5731">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -170,7 +170,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Tanggal Pengiriman]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="524" y="14" width="39" height="20" uuid="dcebd5b0-b040-434b-bf63-407d9c89f157">
+				<reportElement x="524" y="9" width="39" height="30" uuid="dcebd5b0-b040-434b-bf63-407d9c89f157">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -184,7 +184,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Ukuran]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="192" y="14" width="60" height="20" uuid="d400ac1c-0587-4581-8aaa-d9232ad61f1f">
+				<reportElement x="192" y="9" width="60" height="30" uuid="d400ac1c-0587-4581-8aaa-d9232ad61f1f">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -198,7 +198,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kode Store]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="252" y="14" width="55" height="20" uuid="a395c26b-af76-49d3-8317-899672c65d67">
+				<reportElement x="252" y="9" width="55" height="30" uuid="a395c26b-af76-49d3-8317-899672c65d67">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -212,7 +212,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Lokasi Store]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="150" y="14" width="43" height="20" uuid="86ef2ac8-395d-4e26-8c73-e3010227651b">
+				<reportElement x="150" y="9" width="43" height="30" uuid="86ef2ac8-395d-4e26-8c73-e3010227651b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -226,7 +226,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Nama Gudang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="103" y="14" width="48" height="20" uuid="0e6b31ab-2897-4950-8dc3-31cb84ca1e36">
+				<reportElement x="103" y="9" width="48" height="30" uuid="0e6b31ab-2897-4950-8dc3-31cb84ca1e36">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -240,7 +240,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kode Gudang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="50" y="14" width="53" height="20" uuid="2d745034-3d91-4ff2-9e24-b5375827cd6c">
+				<reportElement x="50" y="9" width="53" height="30" uuid="2d745034-3d91-4ff2-9e24-b5375827cd6c">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

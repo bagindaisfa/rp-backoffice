@@ -10,9 +10,10 @@ import com.gbsystem.rpbackoffice.entities.PenyimpananBarangKeluarReport;
 
 public interface PenyimpananBarangKeluarReportRepository extends JpaRepository<PenyimpananBarangKeluarReport, Long> {
 	@Query(value = "select p.id, p.tanggal_keluar AS tanggal_keluar, date_format(:tanggal_transaksi,'%Y-%m-%d') AS tanggal_transaksi, "
-			+ "p.id_store AS id_store, p.lokasi_store AS lokasi_store, p.artikel, p.kategori, p.tipe, p.nama_barang, p.ukuran, "
+			+ "p.id_store AS id_store, p.lokasi_store AS lokasi_store, p.artikel, m.nama_kategori AS kategori, m.type_name AS tipe, p.nama_barang, p.ukuran, "
 			+ "p.kuantitas, p.hpp, p.harga_jual from penyimpanan_keluar p "
-			+ "WHERE p.rowstatus=1 AND date_format(p.tanggal_keluar,'%Y-%m-%d') != :tanggal_transaksi", nativeQuery = true)
+			+ "left join master_product m on m.artikel_product = p.artikel AND m.ukuran=p.ukuran AND m.rowstatus = 1 "
+			+ "WHERE p.rowstatus=1 AND date_format(p.tanggal_keluar,'%Y-%m-%d') = date_format(:tanggal_transaksi,'%Y-%m-%d')", nativeQuery = true)
 	List<PenyimpananBarangKeluarReport> PenyimpananBarangKeluarReport(Date tanggal_transaksi);
 
 }
