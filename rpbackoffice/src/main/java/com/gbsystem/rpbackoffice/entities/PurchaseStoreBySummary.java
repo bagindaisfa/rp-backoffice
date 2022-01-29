@@ -28,8 +28,6 @@ public class PurchaseStoreBySummary {
 	@Column(updatable=false, insertable=false)
 	private String nama_barang;
 	@Column(updatable=false, insertable=false)
-	private String ukuran;
-	@Column(updatable=false, insertable=false)
 	private Double harga;
 	@Column(updatable=false, insertable=false)
 	private Double kuantitas;
@@ -74,12 +72,6 @@ public class PurchaseStoreBySummary {
 	}
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
-	}
-	public String getUkuran() {
-		return ukuran;
-	}
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
 	}
 	public Double getHarga() {
 		return harga;

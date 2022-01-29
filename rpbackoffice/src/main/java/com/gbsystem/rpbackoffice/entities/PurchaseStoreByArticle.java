@@ -17,16 +17,7 @@ public class PurchaseStoreByArticle {
 	private String artikel;
 	
 	@Column(updatable=false, insertable=false)
-	private String type_name;
-	
-	@Column(updatable=false, insertable=false)
-	private String nama_kategori;
-	
-	@Column(updatable=false, insertable=false)
 	private String nama_barang;
-	
-	@Column(updatable=false, insertable=false)
-	private String ukuran;
 	
 	@Column(updatable=false, insertable=false)
 	private Date tanggal_transaksi;
@@ -59,36 +50,12 @@ public class PurchaseStoreByArticle {
 		this.artikel = artikel;
 	}
 
-	public String getType_name() {
-		return type_name;
-	}
-
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
-	}
-
-	public String getNama_kategori() {
-		return nama_kategori;
-	}
-
-	public void setNama_kategori(String nama_kategori) {
-		this.nama_kategori = nama_kategori;
-	}
-
 	public String getNama_barang() {
 		return nama_barang;
 	}
 
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
-	}
-
-	public String getUkuran() {
-		return ukuran;
-	}
-
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
 	}
 
 	public Date getTanggal_transaksi() {

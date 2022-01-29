@@ -76,7 +76,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 	<columnHeader>
 		<band height="42" splitType="Stretch">
 			<staticText>
-				<reportElement x="255" y="10" width="93" height="20" uuid="a6382117-611a-4782-aece-2fe3355003a4">
+				<reportElement x="298" y="10" width="93" height="20" uuid="a6382117-611a-4782-aece-2fe3355003a4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -90,7 +90,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Karyawan]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="348" y="10" width="59" height="20" uuid="9695d969-1558-437a-9eab-e98bc76b7fc3">
+				<reportElement x="391" y="10" width="59" height="20" uuid="9695d969-1558-437a-9eab-e98bc76b7fc3">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -104,21 +104,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kuantitas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="10" width="56" height="20" uuid="03094ab7-c64c-4be7-a987-a46216fd1927">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Ukuran]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="463" y="10" width="102" height="20" uuid="c9987c99-e926-4b81-8e8f-bdc971a9b228">
+				<reportElement x="450" y="10" width="115" height="20" uuid="c9987c99-e926-4b81-8e8f-bdc971a9b228">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -160,7 +146,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Article Code]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="157" y="10" width="98" height="20" uuid="f273c40a-8982-411b-a1a2-bb82eaa36cb6">
+				<reportElement x="157" y="10" width="141" height="20" uuid="f273c40a-8982-411b-a1a2-bb82eaa36cb6">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -178,17 +164,12 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="254" y="0" width="94" height="20" isPrintInFirstWholeBand="true" uuid="09128d2c-65da-485d-baeb-bb64c33416dd"/>
+				<reportElement stretchType="RelativeToTallestObject" x="297" y="0" width="94" height="20" isPrintInFirstWholeBand="true" uuid="09128d2c-65da-485d-baeb-bb64c33416dd"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nama_karyawan}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="407" y="0" width="56" height="20" isPrintInFirstWholeBand="true" uuid="bf632e05-e939-4b9b-96a7-5e6047532d3e"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
-			</textField>
 			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="463" y="0" width="102" height="20" isPrintInFirstWholeBand="true" uuid="227090ad-8032-49be-9b74-3e7cab7b3789"/>
+				<reportElement stretchType="RelativeToTallestObject" x="450" y="0" width="115" height="20" isPrintInFirstWholeBand="true" uuid="227090ad-8032-49be-9b74-3e7cab7b3789"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
 			</textField>
@@ -198,7 +179,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_transaksi})]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="f853ec38-3cbb-4fe3-9b90-55bd8a0e02de"/>
+				<reportElement stretchType="RelativeToTallestObject" x="391" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="f853ec38-3cbb-4fe3-9b90-55bd8a0e02de"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
 			</textField>
@@ -208,7 +189,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[$F{artikel}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="156" y="1" width="98" height="19" isPrintInFirstWholeBand="true" uuid="0924f178-a8ce-4e1b-bdd5-cf58f189456e"/>
+				<reportElement x="156" y="1" width="141" height="19" isPrintInFirstWholeBand="true" uuid="0924f178-a8ce-4e1b-bdd5-cf58f189456e"/>
 				<textElement textAlignment="Center" verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>

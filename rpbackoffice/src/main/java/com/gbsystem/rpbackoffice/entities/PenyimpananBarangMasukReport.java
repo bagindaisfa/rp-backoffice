@@ -23,24 +23,12 @@ public class PenyimpananBarangMasukReport {
 
 	@Column(updatable=false, insertable=false)
 	private String artikel;
-
-	@Column(updatable=false, insertable=false)
-	private String kategori;
-
-	@Column(updatable=false, insertable=false)
-	private String tipe;
-
+	
 	@Column(updatable=false, insertable=false)
 	private String nama_barang;
 
 	@Column(updatable=false, insertable=false)
 	private Double kuantitas;
-	
-	@Column(updatable=false, insertable=false)
-	private String ukuran;	
-
-	@Column(updatable=false, insertable=false)
-	private Double hpp;
 	
 	@Column(updatable=false, insertable=false)
 	private Double harga_jual;
@@ -76,22 +64,6 @@ public class PenyimpananBarangMasukReport {
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
-
-	public String getKategori() {
-		return kategori;
-	}
-
-	public void setKategori(String kategori) {
-		this.kategori = kategori;
-	}
-
-	public String getTipe() {
-		return tipe;
-	}
-
-	public void setTipe(String tipe) {
-		this.tipe = tipe;
-	}
 	
 	public String getNama_barang() {
 		return nama_barang;
@@ -107,22 +79,6 @@ public class PenyimpananBarangMasukReport {
 
 	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
-	}
-
-	public String getUkuran() {
-		return ukuran;
-	}
-
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
-	}
-
-	public Double getHpp() {
-		return hpp;
-	}
-
-	public void setHpp(Double hpp) {
-		this.hpp = hpp;
 	}
 
 	public Double getHarga_jual() {

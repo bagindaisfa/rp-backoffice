@@ -25,12 +25,6 @@ public class PenyimpananStockOpnameReport {
 	private String artikel;
 
 	@Column(updatable=false, insertable=false)
-	private String kategori;
-
-	@Column(updatable=false, insertable=false)
-	private String tipe;
-
-	@Column(updatable=false, insertable=false)
 	private String nama_barang;
 
 	@Column(updatable=false, insertable=false)
@@ -78,22 +72,6 @@ public class PenyimpananStockOpnameReport {
 
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
-	}
-
-	public String getKategori() {
-		return kategori;
-	}
-
-	public void setKategori(String kategori) {
-		this.kategori = kategori;
-	}
-
-	public String getTipe() {
-		return tipe;
-	}
-
-	public void setTipe(String tipe) {
-		this.tipe = tipe;
 	}
 	
 	public String getNama_barang() {

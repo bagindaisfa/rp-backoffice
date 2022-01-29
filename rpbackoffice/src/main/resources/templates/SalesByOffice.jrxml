@@ -10,7 +10,6 @@
 	<field name="artikel" class="java.lang.String"/>
 	<field name="nama_barang" class="java.lang.String"/>
 	<field name="kuantitas" class="java.lang.Double"/>
-	<field name="ukuran" class="java.lang.String"/>
 	<field name="harga" class="java.lang.Double"/>
 	<field name="lokasi_office" class="java.lang.String"/>
 	<background>
@@ -97,7 +96,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Artikel]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="348" y="10" width="59" height="20" uuid="e4b70855-aa69-4366-b583-abb082167cbb">
+				<reportElement x="391" y="10" width="59" height="20" uuid="e4b70855-aa69-4366-b583-abb082167cbb">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -111,21 +110,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kuantitas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="407" y="10" width="56" height="20" uuid="a9730e7c-2ee6-4cfb-9f21-1bea3d4cc0ba">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Ukuran]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="463" y="10" width="102" height="20" uuid="89a77b3c-2e5b-4080-a7cd-5bc4b40cc296">
+				<reportElement x="450" y="10" width="115" height="20" uuid="89a77b3c-2e5b-4080-a7cd-5bc4b40cc296">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -139,7 +124,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Harga Jual]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="252" y="10" width="96" height="20" uuid="700a01f1-f082-4abc-ab2e-81067f906a33">
+				<reportElement x="252" y="10" width="139" height="20" uuid="700a01f1-f082-4abc-ab2e-81067f906a33">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -171,12 +156,12 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="348" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="6034874c-4b65-49e6-93a4-51e6e56a8331"/>
+				<reportElement stretchType="RelativeToTallestObject" x="391" y="0" width="59" height="20" isPrintInFirstWholeBand="true" uuid="6034874c-4b65-49e6-93a4-51e6e56a8331"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="254" y="0" width="94" height="20" isPrintInFirstWholeBand="true" uuid="36711909-f0cd-4cc3-864c-9a0e52dc69f9"/>
+				<reportElement stretchType="RelativeToTallestObject" x="254" y="0" width="137" height="20" isPrintInFirstWholeBand="true" uuid="36711909-f0cd-4cc3-864c-9a0e52dc69f9"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>
@@ -186,17 +171,12 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_transaksi})]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="407" y="0" width="56" height="20" isPrintInFirstWholeBand="true" uuid="00593829-d936-47cc-932e-c07059f77b16"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{ukuran}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="168" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="5d18eaef-c2fc-4416-b4ad-2eb05df279ac"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{artikel}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="463" y="0" width="102" height="20" isPrintInFirstWholeBand="true" uuid="1f048f72-362b-4282-bb4f-9d2855777681"/>
+				<reportElement stretchType="RelativeToTallestObject" x="450" y="0" width="115" height="20" isPrintInFirstWholeBand="true" uuid="1f048f72-362b-4282-bb4f-9d2855777681"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
 			</textField>

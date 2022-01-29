@@ -32,9 +32,6 @@ public class SalesByOffice {
 	private double kuantitas;
 	
 	@Column(updatable=false, insertable=false)
-	private String ukuran;
-	
-	@Column(updatable=false, insertable=false)
 	private double harga;
 
 	public Long getId() {
@@ -91,14 +88,6 @@ public class SalesByOffice {
 
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
-	}
-
-	public String getUkuran() {
-		return ukuran;
-	}
-
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
 	}
 
 	public double getHarga() {
