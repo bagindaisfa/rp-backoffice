@@ -23,6 +23,12 @@ public class PurchaseStoreByArticle {
 	private Date tanggal_transaksi;
 	
 	@Column(updatable=false, insertable=false)
+	private Date date_from;
+	
+	@Column(updatable=false, insertable=false)
+	private Date date_to;
+	
+	@Column(updatable=false, insertable=false)
 	private String lokasi_store;
 
 	@Column(updatable=false, insertable=false)
@@ -64,6 +70,22 @@ public class PurchaseStoreByArticle {
 
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
+	}
+
+	public Date getDate_from() {
+		return date_from;
+	}
+
+	public void setDate_from(Date date_from) {
+		this.date_from = date_from;
+	}
+
+	public Date getDate_to() {
+		return date_to;
+	}
+
+	public void setDate_to(Date date_to) {
+		this.date_to = date_to;
 	}
 
 	public String getLokasi_store() {
