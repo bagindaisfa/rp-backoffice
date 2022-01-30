@@ -19,6 +19,8 @@
 	<field name="nama_kategori" class="java.lang.String"/>
 	<field name="type_name" class="java.lang.String"/>
 	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="date_from" class="java.util.Date"/>
+	<field name="date_to" class="java.util.Date"/>
 	<field name="lokasi_store" class="java.lang.String"/>
 	<field name="nama_karyawan" class="java.lang.String"/>
 	<field name="kuantitas" class="java.lang.Double"/>
@@ -127,6 +129,26 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nama_kategori}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="450" y="74" width="110" height="17" isPrintInFirstWholeBand="true" uuid="f2644510-408e-4207-a794-31235b798786"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_from}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="74" width="46" height="17" uuid="7d3a5686-e882-4b73-90bd-1739b392e3e4"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="450" y="92" width="110" height="17" isPrintInFirstWholeBand="true" uuid="b39c999d-bf39-4e49-828b-ca69cffd2cd5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_to}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="92" width="47" height="17" uuid="dd79276f-df18-438a-a577-d12603125ca8"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sampai]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>

@@ -15,8 +15,8 @@ public class PenyimpananStockOpnameReportService {
 	@Autowired
 	private PenyimpananStockOpnameReportRepository eRepo;
 	
-	public List<PenyimpananStockOpnameReport> PenyimpananStockOpnameReport(Date tanggal_transaksi){
-		return eRepo.PenyimpananStockOpnameReport(tanggal_transaksi);
+	public List<PenyimpananStockOpnameReport> PenyimpananStockOpnameReport(Date date_from, Date date_to){
+		return eRepo.PenyimpananStockOpnameReport(date_from, date_to);
 	}
 
 }

@@ -65,9 +65,9 @@ public class PembelianService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public List<DetailPembelian> laporanPembelian(Date tanggal_transaksi){
+	public List<DetailPembelian> laporanPembelian(Date date_from, Date date_to){
 
-		return eDetailRepo.LaporanPembelian(tanggal_transaksi);
+		return eDetailRepo.LaporanPembelian(date_from, date_to);
 	}
 	
 	public Pembelian deletePembelianById(Long id)

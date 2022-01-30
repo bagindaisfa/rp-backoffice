@@ -15,8 +15,8 @@ public class PenyimpananBarangKeluarReportService {
 	@Autowired
 	private PenyimpananBarangKeluarReportRepository eRepo;
 	
-	public List<PenyimpananBarangKeluarReport> PenyimpananBarangKeluarReport(Date tanggal_transaksi){
-		return eRepo.PenyimpananBarangKeluarReport(tanggal_transaksi);
+	public List<PenyimpananBarangKeluarReport> PenyimpananBarangKeluarReport(Date date_from, Date date_to){
+		return eRepo.PenyimpananBarangKeluarReport(date_from, date_to);
 	}
 
 }

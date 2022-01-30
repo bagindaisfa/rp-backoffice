@@ -7,6 +7,8 @@
 	</queryString>
 	<field name="nama_pelanggan" class="java.lang.String"/>
 	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="date_from" class="java.util.Date"/>
+	<field name="date_to" class="java.util.Date"/>
 	<field name="artikel" class="java.lang.String"/>
 	<field name="nama_barang" class="java.lang.String"/>
 	<field name="kuantitas" class="java.lang.Double"/>
@@ -40,7 +42,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="73" splitType="Stretch">
+		<band height="86" splitType="Stretch">
 			<staticText>
 				<reportElement x="178" y="3" width="199" height="27" uuid="715e8caf-6bc9-40a0-8df5-9193781ff7ec"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -49,19 +51,39 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Laporan Penjualan Office]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="44" width="79" height="17" uuid="c595267c-fb1d-4f78-98e4-452ca56a3ae6"/>
+				<reportElement x="-9" y="44" width="79" height="17" uuid="c595267c-fb1d-4f78-98e4-452ca56a3ae6"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Lokasi Office]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="90" y="44" width="287" height="17" isPrintInFirstWholeBand="true" uuid="17813e59-3e20-482e-8eee-35df3a7cfba0"/>
+				<reportElement isPrintRepeatedValues="false" x="80" y="44" width="140" height="17" isPrintInFirstWholeBand="true" uuid="17813e59-3e20-482e-8eee-35df3a7cfba0"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="80" y="44" width="10" height="17" uuid="95e835d6-5670-44be-bc4f-7edda997d289"/>
+				<reportElement x="70" y="44" width="10" height="17" uuid="95e835d6-5670-44be-bc4f-7edda997d289"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="44" width="31" height="17" uuid="f6e6f9fd-38df-4510-be6d-d944b5a11f82"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="450" y="44" width="110" height="17" isPrintInFirstWholeBand="true" uuid="4e1b3fd6-5083-4144-a62e-5340a4825f63"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_to}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="269" y="44" width="110" height="17" isPrintInFirstWholeBand="true" uuid="fd472a60-74e6-4c45-b427-ff3fe4830411"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_from}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="44" width="47" height="17" uuid="cae2ef85-aa67-476e-a386-291c6b257fe3"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sampai]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

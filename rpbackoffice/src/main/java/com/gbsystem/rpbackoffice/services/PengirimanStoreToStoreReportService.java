@@ -15,8 +15,8 @@ public class PengirimanStoreToStoreReportService {
 	@Autowired
 	private PengirimanStoreToStoreReportRepository eRepo;
 	
-	public List<PengirimanStoreToStoreReport> PengirimanStoreToStoreReport(Date tanggal_transaksi){
-		return eRepo.PengirimanStoreToStoreReport(tanggal_transaksi);
+	public List<PengirimanStoreToStoreReport> PengirimanStoreToStoreReport(Date date_from, Date date_to){
+		return eRepo.PengirimanStoreToStoreReport(date_from, date_to);
 	}
 
 }

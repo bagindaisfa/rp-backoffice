@@ -20,8 +20,8 @@ public class PengirimanGudangToStoreReportService {
 	@Autowired
 	private TransferRequestRepository eTFRepo;
 	
-	public List<PengirimanGudangToStoreReport> PengirimanGudangToStoreReport(Date tanggal_transaksi){
-		return eRepo.PengirimanGudangToStoreReport(tanggal_transaksi);
+	public List<PengirimanGudangToStoreReport> PengirimanGudangToStoreReport(Date date_from, Date date_to){
+		return eRepo.PengirimanGudangToStoreReport(date_from, date_to);
 	}
 	
 	public List<TransferRequest> TransferRequest(String pengiriman_code){

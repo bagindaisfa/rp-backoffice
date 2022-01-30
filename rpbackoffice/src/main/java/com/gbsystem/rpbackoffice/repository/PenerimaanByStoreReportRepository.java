@@ -11,10 +11,10 @@ import com.gbsystem.rpbackoffice.entities.PenerimaanByStoreReport;
 
 @Repository
 public interface PenerimaanByStoreReportRepository extends JpaRepository<PenerimaanByStoreReport, Long> {
-	@Query(value = "select p.id, p.tanggal_penerimaan, date_format(:tanggal_transaksi,'%Y-%m-%d') AS tanggal_transaksi, "
+	@Query(value = "select p.id, p.tanggal_penerimaan, :date_from AS date_from, :date_to AS date_to, "
 			+ "p.penerimaan_code AS kode_penerimaan, p.id_store, p.lokasi_store, "
 			+ "p.artikel, p.nama_barang, p.kuantitas, p.harga_jual from penerimaan_store p "
-			+ "where p.rowstatus=1 and date_format(p.tanggal_penerimaan,'%Y-%m-%d') = date_format(:tanggal_transaksi,'%Y-%m-%d')", nativeQuery = true)
-	List<PenerimaanByStoreReport> PenerimaanByStoreReport(Date tanggal_transaksi);
+			+ "where p.rowstatus=1 and DATE(p.tanggal_penerimaan) >= :date_from AND DATE(p.tanggal_penerimaan) <= :date_to", nativeQuery = true)
+	List<PenerimaanByStoreReport> PenerimaanByStoreReport(Date date_from, Date date_to);
 
 }

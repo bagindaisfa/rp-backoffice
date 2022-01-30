@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ public class PurchaseStoreBySummaryService {
 	@Autowired
 	private PurchaseStoreBySummaryRepository eRepo;
 	
-	public List<PurchaseStoreBySummary> PurchaseStoreBySummary(String no_hp_pelanggan){
-		return eRepo.PurchaseStoreBySummary(no_hp_pelanggan);
+	public List<PurchaseStoreBySummary> PurchaseStoreBySummary(String no_hp_pelanggan, Date date_from, Date date_to){
+		return eRepo.PurchaseStoreBySummary(no_hp_pelanggan, date_from, date_to);
 	}
 }

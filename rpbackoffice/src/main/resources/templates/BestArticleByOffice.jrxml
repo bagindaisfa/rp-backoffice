@@ -6,6 +6,8 @@
 	</queryString>
 	<field name="nama_pelanggan" class="java.lang.String"/>
 	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="date_from" class="java.util.Date"/>
+	<field name="date_to" class="java.util.Date"/>
 	<field name="artikel" class="java.lang.String"/>
 	<field name="nama_barang" class="java.lang.String"/>
 	<field name="kuantitas" class="java.lang.Double"/>
@@ -55,7 +57,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Laporan Best Article]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="90" y="48" width="287" height="17" isPrintInFirstWholeBand="true" uuid="4bfde7f7-b092-4875-b78d-61a839153c84"/>
+				<reportElement isPrintRepeatedValues="false" x="90" y="48" width="120" height="17" isPrintInFirstWholeBand="true" uuid="4bfde7f7-b092-4875-b78d-61a839153c84"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
 			</textField>
@@ -69,6 +71,26 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Lokasi Office]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="223" y="48" width="27" height="17" uuid="6dfc3bca-c52f-4f75-9387-97d5b0e86249"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="446" y="48" width="110" height="17" isPrintInFirstWholeBand="true" uuid="60150739-d7d1-4d92-8dfd-d30424fb5978"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_to}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="385" y="48" width="47" height="17" uuid="8b0962e7-df17-4df3-afeb-814f96a70d84"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sampai]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="260" y="48" width="110" height="17" isPrintInFirstWholeBand="true" uuid="8c67500a-cf26-4667-b89c-b131bb8495ac"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_from}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>

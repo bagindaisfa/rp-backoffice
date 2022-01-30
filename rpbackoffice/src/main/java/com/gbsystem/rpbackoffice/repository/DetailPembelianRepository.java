@@ -26,6 +26,6 @@ public interface DetailPembelianRepository extends JpaRepository<DetailPembelian
 	DetailPembelian getByPembelian_id(Long pembelian_id);
 	
 
-	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) = :tanggal_transaksi ", nativeQuery = true)
-	List<DetailPembelian> LaporanPembelian(Date tanggal_transaksi);
+	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) >= :date_from AND DATE(tanggal_transaksi) >= :date_to ", nativeQuery = true)
+	List<DetailPembelian> LaporanPembelian(Date date_from, Date date_to);
 }

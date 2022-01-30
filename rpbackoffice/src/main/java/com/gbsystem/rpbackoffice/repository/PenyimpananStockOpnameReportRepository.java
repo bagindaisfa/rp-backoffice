@@ -11,10 +11,10 @@ import com.gbsystem.rpbackoffice.entities.PenyimpananStockOpnameReport;
 
 @Repository
 public interface PenyimpananStockOpnameReportRepository extends JpaRepository<PenyimpananStockOpnameReport, Long> {
-	@Query(value = "select p.id, p.tanggal_so, date_format(:tanggal_transaksi,'%Y-%m-%d') AS tanggal_transaksi, "
+	@Query(value = "select p.id, p.tanggal_so, :date_from AS date_from, :date_to AS date_to, "
 			+ "p.artikel, p.nama_barang, p.kuantitas_masuk, p.kuantitas_keluar, p.stock, "
 			+ "p.stock_opname, p.keterangan from stock_opname p "
-			+ "where p.rowstatus=1 and date_format(p.tanggal_so,'%Y-%m-%d') = date_format(:tanggal_transaksi,'%Y-%m-%d')", nativeQuery = true)
-	List<PenyimpananStockOpnameReport> PenyimpananStockOpnameReport(Date tanggal_transaksi);
+			+ "where p.rowstatus=1 and DATE(p.tanggal_so) >= :date_from AND DATE(p.tanggal_so) <= :date_to", nativeQuery = true)
+	List<PenyimpananStockOpnameReport> PenyimpananStockOpnameReport(Date date_from, Date date_to);
 
 }

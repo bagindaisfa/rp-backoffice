@@ -15,8 +15,8 @@ public class PenerimaanBySupplierReportService {
 	@Autowired
 	private PenerimaanBySupplierReportRepository eRepo;
 	
-	public List<PenerimaanBySupplierReport> PenerimaanBySupplierReport(Date tanggal_transaksi){
-		return eRepo.PenerimaanBySupplierReport(tanggal_transaksi);
+	public List<PenerimaanBySupplierReport> PenerimaanBySupplierReport(Date date_from, Date date_to){
+		return eRepo.PenerimaanBySupplierReport(date_from, date_to);
 	}
 
 }

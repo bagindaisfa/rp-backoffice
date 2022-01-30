@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,11 @@ public class SalesByOfficeService {
 	@Autowired
 	private SalesByOfficeRepository eRepo;
 	
-	public List<SalesByOffice> SalesByOffice(String id_office){
-		return eRepo.SalesByOffice(id_office);
+	public List<SalesByOffice> SalesByOffice(String id_office, Date date_from, Date date_to){
+		return eRepo.SalesByOffice(id_office, date_from, date_to);
 	}
 	
-	public List<SalesByOffice> BestArticle(String id_office){
-		return eRepo.BestArticle(id_office);
+	public List<SalesByOffice> BestArticle(String id_office, Date date_from, Date date_to){
+		return eRepo.BestArticle(id_office, date_from, date_to);
 	}
 }

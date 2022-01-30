@@ -7,6 +7,8 @@
 	</queryString>
 	<field name="lokasi_store" class="java.lang.String"/>
 	<field name="tanggal_transaksi" class="java.util.Date"/>
+	<field name="date_from" class="java.util.Date"/>
+	<field name="date_to" class="java.util.Date"/>
 	<field name="artikel" class="java.lang.String"/>
 	<field name="nama_barang" class="java.lang.String"/>
 	<field name="nama_karyawan" class="java.lang.String"/>
@@ -67,10 +69,30 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="90" y="56" width="253" height="17" isPrintInFirstWholeBand="true" uuid="09f78556-2357-4c9d-9a74-78c5d0271786"/>
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="90" y="56" width="110" height="17" isPrintInFirstWholeBand="true" uuid="09f78556-2357-4c9d-9a74-78c5d0271786"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lokasi_store}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="254" y="56" width="110" height="17" isPrintInFirstWholeBand="true" uuid="f23a6e77-0abc-44d8-aa67-1c1c2770044c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_from}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="217" y="56" width="27" height="17" uuid="b49f0820-1ffe-4f9a-b5c7-87ceface1efc"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="440" y="56" width="110" height="17" isPrintInFirstWholeBand="true" uuid="7653b847-455a-4d9d-baff-cc2b596ec6ad"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{date_to}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="379" y="56" width="47" height="17" uuid="6032703d-d5c6-4953-9f12-0add0e350fe5"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Sampai]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
