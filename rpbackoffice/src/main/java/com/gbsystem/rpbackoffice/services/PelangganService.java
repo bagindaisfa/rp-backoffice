@@ -32,6 +32,23 @@ public class PelangganService {
 		p.setRowstatus(1);
 		return eRepo.save(p);
 	}
+	
+	public Pelanggan savePelangganMobile(Pelanggan pelanggan) {
+		
+		Pelanggan p = new Pelanggan();
+		
+		p.setTanggal_join(new Date());
+		p.setNama_pelanggan(pelanggan.getNama_pelanggan());
+		p.setNo_hp(pelanggan.getNo_hp());
+		p.setEmail(pelanggan.getEmail());
+		p.setAlamat(pelanggan.getAlamat());
+		p.setTotal_kunjungan(pelanggan.getTotal_kunjungan());
+		p.setKuantitas(pelanggan.getKuantitas());
+		p.setPoin(pelanggan.getPoin());
+		p.setTotal_pembelian(pelanggan.getTotal_pembelian());
+		p.setRowstatus(1);
+		return eRepo.save(p);
+	}
 
 	public List<Pelanggan> search(String keyword){
 		return eRepo.search(keyword);
@@ -66,6 +83,21 @@ public class PelangganService {
 		p.setKuantitas(kuantitas);
 		p.setPoin(poin);
 		p.setTotal_pembelian(total_pembelian);
+		p.setRowstatus(1);
+    	eRepo.save(p);
+	}
+	
+	public void updateMobile(Pelanggan pelanggan) {
+		Pelanggan p = new Pelanggan();
+		p = eRepo.findById(pelanggan.getId()).get();
+		p.setNama_pelanggan(pelanggan.getNama_pelanggan());
+		p.setNo_hp(pelanggan.getNo_hp());
+		p.setEmail(pelanggan.getEmail());
+		p.setAlamat(pelanggan.getAlamat());
+		p.setTotal_kunjungan(pelanggan.getTotal_kunjungan());
+		p.setKuantitas(pelanggan.getKuantitas());
+		p.setPoin(pelanggan.getPoin());
+		p.setTotal_pembelian(pelanggan.getTotal_pembelian());
 		p.setRowstatus(1);
     	eRepo.save(p);
 	}

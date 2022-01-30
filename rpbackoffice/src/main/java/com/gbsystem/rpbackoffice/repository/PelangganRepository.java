@@ -15,9 +15,7 @@ public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	
 	List<Pelanggan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_pelanggan) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 AND nama_pelanggan LIKE %:keyword% OR no_hp LIKE %:keyword% OR email LIKE %:keyword%", nativeQuery = true)
 	List<Pelanggan> search(String keyword);
 	
 	@Query(value = "SELECT COUNT(id) AS id FROM pelanggan WHERE rowstatus = :rowstatus ", nativeQuery = true)

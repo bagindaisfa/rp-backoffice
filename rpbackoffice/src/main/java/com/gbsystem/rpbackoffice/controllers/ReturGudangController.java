@@ -1,9 +1,12 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.io.FileInputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +20,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gbsystem.rpbackoffice.entities.ReturGudang;
+import com.gbsystem.rpbackoffice.services.DetailReturGudangService;
 import com.gbsystem.rpbackoffice.services.ReturGudangService;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @RestController
 @RequestMapping("/returGudang")
@@ -26,6 +38,9 @@ public class ReturGudangController {
 	
 	@Autowired
 	private ReturGudangService returGudangService;
+	
+	@Autowired
+	private DetailReturGudangService detailReturGudangService;
 
     @GetMapping("/all")
 	public ResponseEntity<List<ReturGudang>> getAll() {
@@ -60,5 +75,18 @@ public class ReturGudangController {
     	returGudangService.deleteReturGudangById(id);
     	return "redirect:/all";
     }
-
+    
+    @GetMapping("/deliveryReceipt")
+	public ResponseEntity<byte []> generatePdfReturGudang(@Param("pengiriman_code") String pengiriman_code) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(detailReturGudangService.ReturGudangReport(pengiriman_code));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/DeliveryReceipt.jrxml"));
+		
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=DeliveryReceipt.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
 }

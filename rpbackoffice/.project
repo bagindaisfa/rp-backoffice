@@ -20,16 +20,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.babel.editor.rbeBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>com.jaspersoft.studio.babel.editor.rbeNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src/main/resources/templates/LOGO RP.png</name>
-			<type>1</type>
-			<location>C:/Users/bagin/OneDrive/Pictures/LOGO RP.png</location>
-		</link>
-	</linkedResources>
 </projectDescription>

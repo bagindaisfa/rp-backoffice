@@ -19,5 +19,6 @@ public interface ReturGudangRepository extends JpaRepository<ReturGudang, Long> 
 			+ "MATCH(nama_barang, nama_gudang) "
 			+ "AGAINST (?1)", nativeQuery = true)
 	List<ReturGudang> search(String keyword);
-
+	
+	
 }

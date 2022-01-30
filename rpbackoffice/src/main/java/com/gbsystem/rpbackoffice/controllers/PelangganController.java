@@ -1,6 +1,8 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,10 +60,18 @@ public class PelangganController {
     		@RequestParam("poin") double poin,@RequestParam("pembelian") double total_pembelian) throws Exception {
     	
     	if (nama_pelanggan != "") {
-    		pelangganService.savePelanggan(nama_pelanggan, no_hp, email, alamat, total_kunjungan,
-    				kuantitas, poin, total_pembelian);
+    		pelangganService.savePelanggan(nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
     	}
     	return "Insert Data Successs!";
+    	}
+    
+    @PostMapping(value = "/addMobile")
+    public Map savePelangganMobile(@RequestBody Pelanggan pelanggan) {
+    	
+    	pelangganService.savePelangganMobile(pelanggan);
+    	Map<String,String> response = new HashMap<>();
+    	response.put("message", "Insert Success");
+    	return response;
 		
     }
     
@@ -75,6 +86,16 @@ public class PelangganController {
     				kuantitas, poin, total_pembelian);
     	}
     	return "Update Data Successs!";
+		
+    }
+    
+    @PostMapping(value = "/updateMobile")
+    public Map updatePelangganMobile(@RequestBody Pelanggan pelanggan) {
+    	
+    	pelangganService.updateMobile(pelanggan);
+    	Map<String,String> response = new HashMap<>();
+    	response.put("message", "Update Success");
+    	return response;
 		
     }
     
