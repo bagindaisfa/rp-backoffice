@@ -112,7 +112,7 @@ public class KaryawanController {
     public Map pindahStore(@RequestBody Karyawan karyawan) {
     	karyawanService.pindahStore(karyawan);
     	Map<String,String> response = new HashMap<>();
-    	response.put("message", "Insert Success");
+    	response.put("message", "Penjual "+ karyawan.getNama_karyawan() +" Berhasil Pindah");
     	return response;
     }
 }
