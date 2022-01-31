@@ -2,10 +2,12 @@ package com.gbsystem.rpbackoffice.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,13 +20,19 @@ public class Karyawan {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_join;
 	private String nama_karyawan;
+	private int id_office;
 	private String lokasi_office;
+	private int id_store;
+	private String lokasi_store;
 	private String jabatan;
 	private String no_hp;
 	private String email;
 	private String alamat;
 	private double total_transaksi;
 	private int rowstatus;
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String image;
 	
 	public Long getId() {
 		return id;
@@ -47,6 +55,24 @@ public class Karyawan {
 		this.nama_karyawan = nama_karyawan;
 	}
 	
+	public int getId_office() {
+		return id_office;
+	}
+	public void setId_office(int id_office) {
+		this.id_office = id_office;
+	}
+	public int getId_store() {
+		return id_store;
+	}
+	public void setId_store(int id_store) {
+		this.id_store = id_store;
+	}
+	public String getLokasi_store() {
+		return lokasi_store;
+	}
+	public void setLokasi_store(String lokasi_store) {
+		this.lokasi_store = lokasi_store;
+	}
 	public String getLokasi_office() {
 		return lokasi_office;	
 	}
@@ -96,6 +122,12 @@ public class Karyawan {
 		this.rowstatus = rowstatus;
 	}
 	
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	@Override
 	public String toString() {
 		return "Pelanggan [id=" + id + ","

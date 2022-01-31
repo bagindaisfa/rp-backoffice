@@ -1,6 +1,8 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,29 +47,31 @@ public class KaryawanController {
     	return new ResponseEntity<>(karyawanService.search(keyword), HttpStatus.OK);
     }
     
-    @PostMapping(value = "/add")
+    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String saveProduct(@RequestParam("nama_karyawan") String nama_karyawan,
-    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("jabatan") String jabatan,
+    		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
+    		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("total_transaksi") double total_transaksi) throws Exception {
+    		@RequestParam("total_transaksi") double total_transaksi, @RequestParam("image") MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
-    		karyawanService.saveKaryawan(nama_karyawan, lokasi_office, jabatan,
-    				no_hp, email, alamat, total_transaksi);
+    		karyawanService.saveKaryawan(nama_karyawan, id_office, lokasi_office, id_store, lokasi_store, jabatan,
+    				no_hp, email, alamat, total_transaksi, image);
     	}
     	return "Insert Data Successs!";
 		
     }
     
-    @PostMapping(value = "/update")
+    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("nama_karyawan") String nama_karyawan,
-    		@RequestParam("lokasi_office") String lokasi_office,@RequestParam("jabatan") String jabatan,
+    		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
+    		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("total_transaksi") double total_transaksi) throws Exception {
+    		@RequestParam("total_transaksi") double total_transaksi, @RequestParam("image") MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
-    		karyawanService.update(id, nama_karyawan, lokasi_office, jabatan,
-    				no_hp, email, alamat, total_transaksi);
+    		karyawanService.update(id, nama_karyawan, id_office, lokasi_office, id_store, lokasi_store, jabatan,
+    				no_hp, email, alamat, total_transaksi, image);
     	}
     	return "Update Data Successs!";
 		
@@ -103,4 +108,11 @@ public class KaryawanController {
     	return "redirect:/karyawan/all";
     }
 
+    @PostMapping("/pindahStore")
+    public Map pindahStore(@RequestBody Karyawan karyawan) {
+    	karyawanService.pindahStore(karyawan);
+    	Map<String,String> response = new HashMap<>();
+    	response.put("message", "Insert Success");
+    	return response;
+    }
 }
