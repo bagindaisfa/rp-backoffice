@@ -34,7 +34,7 @@ public class MasterStoreController {
     }
     
     @PostMapping("/add")
-    public String saveMaster_tipe(
+    public String saveMaster_store(
     		@RequestParam("store_name") String store_name,@RequestParam("no_tlpn") String no_tlpn,
     		@RequestParam("alamat") String alamat, @RequestParam("kepala_store") String kepala_store ) 
 	{
@@ -53,7 +53,7 @@ public class MasterStoreController {
 		
     }
     @GetMapping("/delete")
-    public String deleteTipe(@RequestParam("id") Long id)
+    public String deleteStore(@RequestParam("id") Long id)
     {
     	
     	masterStoreService.deleteMasterStoreById(id);
