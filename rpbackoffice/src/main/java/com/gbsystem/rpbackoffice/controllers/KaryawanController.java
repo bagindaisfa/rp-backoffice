@@ -42,9 +42,19 @@ public class KaryawanController {
         return new ResponseEntity<>(karyawanService.getAllKaryawan(), HttpStatus.OK);
     }
     
+    @GetMapping("/allByStore")
+	public ResponseEntity<List<Karyawan>> getAllByIdStore(@Param("id_store") int id_store) {
+        return new ResponseEntity<>(karyawanService.getAllByIdStore(id_store), HttpStatus.OK);
+    }
+    
     @GetMapping("/search")
     public ResponseEntity<List<Karyawan>> search(@Param("keyword") String keyword) {
     	return new ResponseEntity<>(karyawanService.search(keyword), HttpStatus.OK);
+    }
+    
+    @GetMapping("/searchForStore")
+    public ResponseEntity<List<Karyawan>> searchForStore(@Param("keyword") String keyword, @Param("id_store") int id_store) {
+    	return new ResponseEntity<>(karyawanService.searchForStore(keyword, id_store), HttpStatus.OK);
     }
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

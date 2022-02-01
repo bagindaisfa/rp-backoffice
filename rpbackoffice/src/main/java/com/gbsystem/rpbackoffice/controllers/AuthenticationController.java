@@ -65,6 +65,10 @@ public class AuthenticationController {
 		LoginResponse response=new LoginResponse();
 		response.setToken(jwtToken);
 		response.setNamaPengguna(userObj.getFirstName()+" "+userObj.getLastName());
+		response.setId_office(userObj.getId_office());
+		response.setLokasi_office(userObj.getLokasi_office());
+		response.setId_store(userObj.getId_store());
+		response.setLokasi_store(userObj.getLokasi_store());
 		response.setAkses_modul(userObj.getAkses_modul());
 		
 
@@ -89,9 +93,16 @@ public class AuthenticationController {
 	public @ResponseBody String  saveUser(
 			@RequestParam("userName") String userName,@RequestParam("password") String password,
     		@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
-    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
+    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber,
+    		@RequestParam("id_office") int id_office, @RequestParam("lokasi_office") String lokasi_office,
+    		@RequestParam("id_store") int id_store,@RequestParam("lokasi_store") String lokasi_store,
+    		@RequestParam("akses_modul") String[] akses_modul) throws Exception{
 		
-		customUserService.saveUser(userName, password, firstName, lastName, email, phoneNumber, akses_modul);
+		customUserService.saveUser(
+				userName, password, firstName,
+				lastName, email, phoneNumber,
+				id_office, lokasi_office, id_store,
+				lokasi_store, akses_modul);
 			return "Success!";
 		
 	}
@@ -99,9 +110,14 @@ public class AuthenticationController {
 	public @ResponseBody String  saveUser(
 			@RequestParam("id") long id, @RequestParam("userName") String userName,@RequestParam("password") String password,
     		@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
-    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
+    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber,@RequestParam("id_office") int id_office, @RequestParam("lokasi_office") String lokasi_office,
+    		@RequestParam("id_store") int id_store,@RequestParam("lokasi_store") String lokasi_store, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
 		
-		customUserService.update(id, userName, password, firstName, lastName, email, phoneNumber, akses_modul);
+		customUserService.update(id,
+				userName, password, firstName,
+				lastName, email, phoneNumber,
+				id_office, lokasi_office, id_store,
+				lokasi_store, akses_modul);
 			return "Success!";
 		
 	}

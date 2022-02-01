@@ -50,9 +50,18 @@ public class KaryawanService {
 		return eRepo.search(keyword);
 	}
 	
+	public List<Karyawan> searchForStore(String keyword, int id_store){
+		return eRepo.searchForStore(keyword, id_store);
+	}
+	
 	public List<Karyawan> getAllKaryawan(){
 
 		return eRepo.findByRowstatus(1);
+	}
+	
+	public List<Karyawan> getAllByIdStore(int id_store){
+
+		return eRepo.getAllByIdStore(id_store);
 	}
 	
 	public void deleteKaryawanById(Long id)

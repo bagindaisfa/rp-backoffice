@@ -14,9 +14,13 @@ public interface KaryawanRepository extends JpaRepository<Karyawan, Long> {
 	
 List<Karyawan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_karyawan) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND nama_karyawan LIKE %:keyword% OR lokasi_store LIKE %:keyword% OR lokasi_office LIKE %:keyword%", nativeQuery = true)
 	List<Karyawan> search(String keyword);
+	
+	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND id_store =:id_store AND nama_karyawan LIKE %:keyword% OR lokasi_store LIKE %:keyword% OR lokasi_office LIKE %:keyword%", nativeQuery = true)
+	List<Karyawan> searchForStore(String keyword, int id_store);
+	
+	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND id_store = :id_store", nativeQuery = true)
+	List<Karyawan> getAllByIdStore(int id_store);
 
 }

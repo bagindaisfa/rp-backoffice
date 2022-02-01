@@ -34,7 +34,11 @@ public class CustomUserService implements UserDetailsService {
 		return user;
 	}
 	
-	public User saveUser(String userName, String password,String firstName,String lastName,String email,String phoneNumber, String[] akses_modul ) {
+	public User saveUser(
+			String userName, String password,String firstName,
+			String lastName,String email,String phoneNumber,
+			int id_office, String lokasi_office, int id_store,
+			String lokasi_store, String[] akses_modul ) {
 		
 		User user = new User();
 		List<Authority> authorityList=new ArrayList<>();
@@ -46,12 +50,20 @@ public class CustomUserService implements UserDetailsService {
 		user.setEmail(email);
 		user.setPhoneNumber(phoneNumber);
 		user.setEnabled(true);
+		user.setId_office(id_office);
+		user.setLokasi_office(lokasi_office);
+		user.setId_store(id_store);
+		user.setLokasi_store(lokasi_store);
 		user.setAkses_modul(akses_modul);
 		user.setAuthorities(authorityList);
 		return userDetailsRepository.save(user);
 	}
 	
-	public User update( long id, String userName, String password,String firstName,String lastName,String email,String phoneNumber, String[] akses_modul  ) {
+	public User update( 
+			long id, String userName, String password,
+			String firstName,String lastName,String email,
+			String phoneNumber,int id_office, String lokasi_office, int id_store,
+			String lokasi_store, String[] akses_modul ) {
 		User user = new User();
 		user = userDetailsRepository.findById(id);
 		List<Authority> authorityList=new ArrayList<>();
@@ -64,6 +76,10 @@ public class CustomUserService implements UserDetailsService {
 		user.setEmail(email);
 		user.setPhoneNumber(phoneNumber);
 		user.setEnabled(true);
+		user.setId_office(id_office);
+		user.setLokasi_office(lokasi_office);
+		user.setId_store(id_store);
+		user.setLokasi_store(lokasi_store);
 		user.setAkses_modul(akses_modul);
 		user.setAuthorities(authorityList);
 		return userDetailsRepository.save(user);
