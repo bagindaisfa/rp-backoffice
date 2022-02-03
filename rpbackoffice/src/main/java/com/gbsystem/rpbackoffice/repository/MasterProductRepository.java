@@ -18,7 +18,7 @@ public interface MasterProductRepository extends JpaRepository<MasterProduct, Lo
 	List<MasterProduct> findByMasterProductArtikel_product(@Param("artikel_product") List<String> masterProductArtikel_productList);
 	
 	@Query(value = "SELECT COUNT(id) AS kuantitas FROM master_product WHERE rowstatus = :rowstatus ", nativeQuery = true)
-	double totalProduct(int rowstatus);
+	Double totalProduct(int rowstatus);
 	
 	@Query(value = "SELECT * FROM master_product WHERE rowstatus = 1 AND "
 			+ "MATCH(artikel_product, nama_product, type_name, nama_kategori) "

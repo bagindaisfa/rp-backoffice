@@ -33,44 +33,44 @@ public class DashboardService {
 	private StockStoreRepository eStockStoreRepo;
 	
 	// Region Penjualan
-	public double getAllPenjualan(){
+	public Double getAllPenjualan(){
 		
-		double office = ePenjualanOfficeRepo.counting(1);
-		double store = ePenjualanStoreRepo.counting(1);
+		Double office = ePenjualanOfficeRepo.counting(1) == null? 0.00 : ePenjualanOfficeRepo.counting(1);
+		Double store = ePenjualanStoreRepo.counting(1) == null? 0.00 : ePenjualanStoreRepo.counting(1);
 		
-		double total = office + store;
-		
-		return total;
-	}
-	
-	public double getAllPendapatan(){
-		
-		double office = ePenjualanOfficeRepo.total(1);
-		double store = ePenjualanStoreRepo.total(1);
-		
-		double total = office + store;
+		Double total = office + store;
 		
 		return total;
 	}
 	
-	public double getAllBiayaHPP(){
+	public Double getAllPendapatan(){
 		
-		double office = ePenjualanOfficeRepo.totalHpp(1);
-		double store = ePenjualanStoreRepo.totalHpp(1);
+		Double office = ePenjualanOfficeRepo.total(1) == null? 0.00 : ePenjualanOfficeRepo.total(1);
+		Double store = ePenjualanStoreRepo.total(1) == null? 0.00 : ePenjualanStoreRepo.total(1);
 		
-		double total = office + store;
+		Double total = office + store;
 		
 		return total;
 	}
 	
-	public double getKuntungan(){
-		double keuntunganOffice = ePenjualanOfficeRepo.total(1);
-		double keuntunganStore = ePenjualanStoreRepo.total(1);
-	
-		double hppOffice = ePenjualanOfficeRepo.totalHpp(1);
-		double hppStore = ePenjualanStoreRepo.totalHpp(1);
+	public Double getAllBiayaHPP(){
 		
-		double total = (keuntunganOffice + keuntunganStore) - (hppOffice + hppStore);
+		Double office = ePenjualanOfficeRepo.totalHpp(1) == null? 0.00 : ePenjualanOfficeRepo.totalHpp(1);
+		Double store = ePenjualanStoreRepo.totalHpp(1) == null? 0.00 : ePenjualanStoreRepo.totalHpp(1);
+		
+		Double total = office + store;
+		
+		return total;
+	}
+	
+	public Double getKuntungan(){
+		Double keuntunganOffice = ePenjualanOfficeRepo.total(1) == null? 0.00 : ePenjualanOfficeRepo.total(1);
+		Double keuntunganStore = ePenjualanStoreRepo.total(1) == null? 0.00 : ePenjualanStoreRepo.total(1);
+	
+		Double hppOffice = ePenjualanOfficeRepo.totalHpp(1) == null? 0.00 : ePenjualanOfficeRepo.totalHpp(1);
+		Double hppStore = ePenjualanStoreRepo.totalHpp(1) == null? 0.00 : ePenjualanStoreRepo.totalHpp(1);
+		
+		Double total = (keuntunganOffice + keuntunganStore) - (hppOffice + hppStore);
 		
 		return total;
 	}
@@ -78,18 +78,16 @@ public class DashboardService {
 	
 	
 	// region pembelian
-	public double getAllPembelian(){
+	public Double getAllPembelian(){
 		
-		double office = ePembelianRepo.totalPembelian(1);
-		
+		Double office = ePembelianRepo.totalPembelian(1) == null? 0.00 : ePembelianRepo.totalPembelian(1);
 		
 		return office;
 	}
 	
-	public double getAllBiayaPembelian(){
+	public Double getAllBiayaPembelian(){
 		
-		double office = ePembelianRepo.totalHpp(1);
-		
+		Double office = ePembelianRepo.totalHpp(1) == null? 0.00 : ePembelianRepo.totalHpp(1);
 		
 		return office;
 	}
@@ -97,27 +95,21 @@ public class DashboardService {
 	
 	
 	// region product
-	public double totalProduct(){
+	public Double totalProduct(){
 		
-		double product = eProductRepo.totalProduct(1);
-		
-		
+		Double product = eProductRepo.totalProduct(1) == null? 0.00 : eProductRepo.totalProduct(1);
 		return product;
 	}
 	
-	public double totalStockOffice(){
+	public Double totalStockOffice(){
 		
-		double office = eStockOfficeRepo.totalStockOffice(1);
-		
-		
+		Double office = eStockOfficeRepo.totalStockOffice(1) == null? 0.00 : eStockOfficeRepo.totalStockOffice(1);
 		return office;
 	}
 	
-	public double totalStockStore(){
+	public Double totalStockStore(){
 		
-		double store = eStockStoreRepo.totalStockStore(1);
-		
-		
+		Double store = eStockStoreRepo.totalStockStore(1) == null? 0.00 : eStockStoreRepo.totalStockStore(1);
 		return store;
 	}
 	// end region product
@@ -125,10 +117,10 @@ public class DashboardService {
 	// region pemasok and pelanggan
 	public Long totalPemasok(){
 			
-			Long pemasok = ePemasokRepo.totalPemasok(1);
+		Long pemasok = ePemasokRepo.totalPemasok(1);
 			
 			
-			return pemasok;
+		return pemasok;
 	}
 	public Long totalPelanggan(){
 		

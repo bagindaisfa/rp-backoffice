@@ -18,13 +18,13 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	Penjualan getById(Long id);
 	
 	@Query(value = "SELECT COUNT(id) FROM penjualan WHERE rowstatus = :rowstatus", nativeQuery = true)
-	double counting(int rowstatus);
+	Double counting(int rowstatus);
 	
 	@Query(value = "SELECT SUM(total) AS total FROM penjualan WHERE rowstatus = :rowstatus", nativeQuery = true)
-	double total(int rowstatus);
+	Double total(int rowstatus);
 	
 	@Query(value = "SELECT SUM(B.hpp) AS total FROM detail_pesanan A LEFT JOIN master_product B ON A.artikel=B.artikel_product WHERE A.rowstatus = :rowstatus", nativeQuery = true)
-	double totalHpp(int rowstatus);
+	Double totalHpp(int rowstatus);
 	
 	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND "
 			+ "id_transaksi LIKE %:keyword% OR "

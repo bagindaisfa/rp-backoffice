@@ -18,22 +18,22 @@ public class DashboardController {
 	
 	//region penjualan
 	@GetMapping("/penjualan")
-	public double getAllPenjualan(){
+	public Double getAllPenjualan(){
 		return dashboardService.getAllPenjualan();
 	}
 	
 	@GetMapping("/pendapatan")
-	public double getAllPendapatan(){
+	public Double getAllPendapatan(){
 		return dashboardService.getAllPendapatan();
 	}
 	
 	@GetMapping("/biaya")
-	public double getAllBiayaHPP(){
+	public Double getAllBiayaHPP(){
 		return dashboardService.getAllBiayaHPP();
 	}
 	
 	@GetMapping("/keuntungan")
-	public double getKuntungan(){
+	public Double getKuntungan(){
 		return dashboardService.getKuntungan();
 	}
 	// end region penjualan
@@ -41,12 +41,12 @@ public class DashboardController {
 	
 	// region pembelian
 	@GetMapping("/pembelian")
-	public double getAllPembelian(){
+	public Double getAllPembelian(){
 		return dashboardService.getAllPembelian();
 	}
 	
 	@GetMapping("/biayaPembelian")
-	public double getAllBiayaPembelian(){
+	public Double getAllBiayaPembelian(){
 		return dashboardService.getAllBiayaPembelian();
 	}
 	// end region pembelian
@@ -54,15 +54,15 @@ public class DashboardController {
 	
 	// region product
 	@GetMapping("/jmlProduct")
-	public double getALLtotalProduct(){
+	public Double getALLtotalProduct(){
 		return dashboardService.totalProduct();	
 	}
 	@GetMapping("/stockOffice")
-	public double getALLtotalStockOffice(){
+	public Double getALLtotalStockOffice(){
 		return dashboardService.totalStockOffice();
 	}
 	@GetMapping("/stockStore")
-	public double getALLtotalStockStore(){
+	public Double getALLtotalStockStore(){
 		return dashboardService.totalStockStore();
 	}
 	// end region product
