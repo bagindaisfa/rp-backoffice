@@ -8,7 +8,8 @@ import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
-import com.gbsystem.rpbackoffice.repository.PembelianRepository;
+import com.gbsystem.rpbackoffice.repository.DetailPembelianRepository;
+import com.gbsystem.rpbackoffice.repository.DetailPenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PemasokRepository;
@@ -18,9 +19,11 @@ public class DashboardService {
 	@Autowired
 	private PenjualanOfficeRepository ePenjualanOfficeRepo;
 	@Autowired
+	private DetailPenjualanOfficeRepository eDetailPenjualanOfficeRepo;
+	@Autowired
 	private PenjualanRepository ePenjualanStoreRepo;
 	@Autowired
-	private PembelianRepository ePembelianRepo;
+	private DetailPembelianRepository ePembelianRepo;
 	@Autowired
 	private MasterProductRepository eProductRepo;
 	@Autowired
@@ -45,7 +48,7 @@ public class DashboardService {
 	
 	public Double getAllPendapatan(){
 		
-		Double office = ePenjualanOfficeRepo.total(1) == null? 0.00 : ePenjualanOfficeRepo.total(1);
+		Double office = eDetailPenjualanOfficeRepo.total(1) == null? 0.00 : eDetailPenjualanOfficeRepo.total(1);
 		Double store = ePenjualanStoreRepo.total(1) == null? 0.00 : ePenjualanStoreRepo.total(1);
 		
 		Double total = office + store;
@@ -55,7 +58,7 @@ public class DashboardService {
 	
 	public Double getAllBiayaHPP(){
 		
-		Double office = ePenjualanOfficeRepo.totalHpp(1) == null? 0.00 : ePenjualanOfficeRepo.totalHpp(1);
+		Double office = eDetailPenjualanOfficeRepo.totalHpp(1) == null? 0.00 : eDetailPenjualanOfficeRepo.totalHpp(1);
 		Double store = ePenjualanStoreRepo.totalHpp(1) == null? 0.00 : ePenjualanStoreRepo.totalHpp(1);
 		
 		Double total = office + store;
@@ -64,10 +67,10 @@ public class DashboardService {
 	}
 	
 	public Double getKuntungan(){
-		Double keuntunganOffice = ePenjualanOfficeRepo.total(1) == null? 0.00 : ePenjualanOfficeRepo.total(1);
+		Double keuntunganOffice = eDetailPenjualanOfficeRepo.total(1) == null? 0.00 : eDetailPenjualanOfficeRepo.total(1);
 		Double keuntunganStore = ePenjualanStoreRepo.total(1) == null? 0.00 : ePenjualanStoreRepo.total(1);
 	
-		Double hppOffice = ePenjualanOfficeRepo.totalHpp(1) == null? 0.00 : ePenjualanOfficeRepo.totalHpp(1);
+		Double hppOffice = eDetailPenjualanOfficeRepo.totalHpp(1) == null? 0.00 : eDetailPenjualanOfficeRepo.totalHpp(1);
 		Double hppStore = ePenjualanStoreRepo.totalHpp(1) == null? 0.00 : ePenjualanStoreRepo.totalHpp(1);
 		
 		Double total = (keuntunganOffice + keuntunganStore) - (hppOffice + hppStore);

@@ -19,10 +19,4 @@ public interface PembelianRepository extends JpaRepository<Pembelian, Long> {
 	@Query(value = "SELECT * FROM pembelian WHERE rowstatus = 1 AND pembelian_code = :pembelian_code ", nativeQuery = true)
 	Pembelian findByPembelianCode(String pembelian_code);
 	
-	@Query(value = "SELECT COUNT(id) AS total FROM pembelian WHERE rowstatus = :rowstatus", nativeQuery = true)
-	Double totalPembelian(int rowstatus);
-	
-	@Query(value = "SELECT SUM(A.hpp) AS total FROM pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
-	Double totalHpp(int rowstatus);
-	
 }

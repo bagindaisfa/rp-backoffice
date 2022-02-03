@@ -28,4 +28,10 @@ public interface DetailPembelianRepository extends JpaRepository<DetailPembelian
 
 	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) >= :date_from AND DATE(tanggal_transaksi) >= :date_to ", nativeQuery = true)
 	List<DetailPembelian> LaporanPembelian(Date date_from, Date date_to);
+
+	@Query(value = "SELECT COUNT(id) AS total FROM detail_pembelian WHERE rowstatus = :rowstatus", nativeQuery = true)
+	Double totalPembelian(int rowstatus);
+	
+	@Query(value = "SELECT SUM(A.hpp) AS total FROM detail_pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	Double totalHpp(int rowstatus);
 }
