@@ -65,26 +65,34 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<text><![CDATA[Laporan Inventory]]></text>
 			</staticText>
-			<textField>
-				<reportElement isPrintRepeatedValues="false" x="358" y="56" width="110" height="17" isPrintInFirstWholeBand="true" uuid="96edd262-9281-4ef0-804c-aee4c380d8bb"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{date_to}]]></textFieldExpression>
-			</textField>
 			<staticText>
-				<reportElement x="297" y="56" width="47" height="17" uuid="6ead4a7f-fd47-4c88-9e22-89fc351ea6dd"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="393" y="13" width="27" height="17" uuid="fe0f624e-0cea-4eec-b0c3-6c04c4afc481"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="393" y="30" width="47" height="17" uuid="2f15f5b1-3275-4b5b-b73d-8906073f3ba6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[Sampai]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="147" y="56" width="110" height="17" isPrintInFirstWholeBand="true" uuid="1e8697f8-8afd-4f4f-9745-91c571417449"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{date_from}]]></textFieldExpression>
+				<reportElement isPrintRepeatedValues="false" x="446" y="13" width="110" height="17" isPrintInFirstWholeBand="true" uuid="f24d4a5f-14e2-40ef-af8e-d7025a2b8e6b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{date_from})]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="110" y="56" width="27" height="17" uuid="0901fa0a-cdfc-4404-aeb1-a9fe0dedffae"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Dari]]></text>
-			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="446" y="30" width="110" height="17" isPrintInFirstWholeBand="true" uuid="1f236b9b-8d2b-481e-8a17-ad0266c649a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{date_to})]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
