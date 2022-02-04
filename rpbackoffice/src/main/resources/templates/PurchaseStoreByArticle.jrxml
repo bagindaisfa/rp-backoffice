@@ -24,6 +24,7 @@
 	<field name="lokasi_store" class="java.lang.String"/>
 	<field name="nama_karyawan" class="java.lang.String"/>
 	<field name="kuantitas" class="java.lang.Double"/>
+	<field name="total" class="java.lang.Double"/>
 	<field name="harga" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -37,10 +38,6 @@
 				</textElement>
 				<text><![CDATA[Rudy Project - Indonesia]]></text>
 			</staticText>
-			<image>
-				<reportElement x="-10" y="8" width="191" height="71" uuid="30b4c70b-7477-4768-a75c-5f56ee9962c1"/>
-				<imageExpression><![CDATA["C:\\Users\\bagin\\OneDrive\\Pictures\\LOGO RP.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="181" y="16" width="388" height="44" uuid="6efbc651-a1a0-425d-874f-ac05467dd453"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -53,7 +50,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="126" splitType="Stretch">
+		<band height="127" splitType="Stretch">
 			<staticText>
 				<reportElement x="80" y="56" width="10" height="17" uuid="7c8d1c44-c373-404b-a7cd-de58fb96e3b6"/>
 				<textElement verticalAlignment="Middle"/>
@@ -155,6 +152,27 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="444" y="110" width="93" height="15" isPrintInFirstWholeBand="true" uuid="eeee8101-cd11-4e7b-adca-825825d0568e"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="386" y="107" width="50" height="20" uuid="dcf4ee61-21a3-41e9-8d82-bddf08cec855">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
 			</staticText>
 		</band>
 	</pageHeader>

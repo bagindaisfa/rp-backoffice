@@ -41,6 +41,9 @@ public class PurchaseStoreByArticle {
 	private Double kuantitas;
 	
 	@Column(updatable=false, insertable=false)
+	private Double total;
+	
+	@Column(updatable=false, insertable=false)
 	private Double harga;
 	
 	@Column(updatable=false, insertable=false)
@@ -124,6 +127,14 @@ public class PurchaseStoreByArticle {
 
 	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
+	}
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
 	public Double getHarga() {
