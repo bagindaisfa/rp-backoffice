@@ -22,11 +22,11 @@ public interface DetailPembelianRepository extends JpaRepository<DetailPembelian
 	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_code = (?1)", nativeQuery = true)
 	List<DetailPembelian> all(String pembelian_code);
 	
-	@Query(value = "SELECT *, :date_from AS date_from, :date_to AS date_to FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_id = :pembelian_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_id = :pembelian_id", nativeQuery = true)
 	DetailPembelian getByPembelian_id(Long pembelian_id);
 	
 
-	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) >= :date_from AND DATE(tanggal_transaksi) >= :date_to ", nativeQuery = true)
+	@Query(value = "SELECT *, :date_from AS date_from, :date_to AS date_to FROM detail_pembelian WHERE rowstatus = 1 AND DATE(tanggal_transaksi) >= :date_from AND DATE(tanggal_transaksi) <= :date_to", nativeQuery = true)
 	List<DetailPembelian> LaporanPembelian(Date date_from, Date date_to);
 
 	@Query(value = "SELECT COUNT(id) AS total FROM detail_pembelian WHERE rowstatus = :rowstatus", nativeQuery = true)

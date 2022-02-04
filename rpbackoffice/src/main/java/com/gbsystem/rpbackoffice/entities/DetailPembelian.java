@@ -3,6 +3,7 @@ package com.gbsystem.rpbackoffice.entities;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,13 @@ public class DetailPembelian {
 	private String pembelian_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_transaksi;
+
+	@Column(updatable=false, insertable=false)
+	private Date date_from;
+
+	@Column(updatable=false, insertable=false)
+	private Date date_to;
+	
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -58,6 +66,21 @@ public class DetailPembelian {
 	}
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
+	}
+	public Date getDate_from() {
+		return date_from;
+	}
+
+	public void setDate_from(Date date_from) {
+		this.date_from = date_from;
+	}
+
+	public Date getDate_to() {
+		return date_to;
+	}
+
+	public void setDate_to(Date date_to) {
+		this.date_to = date_to;
 	}
 	public String getArtikel() {
 		return artikel;
