@@ -17,10 +17,28 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
 	List<PenyimpananStoreMasuk> findByPenerimaan_code(String penerimaan_code);
 	
+	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND id_store= :id_store ", nativeQuery = true)
+	List<PenyimpananStoreMasuk> getAllPerStoreMasuk(int id_store);
+	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_barang) "
-			+ "AGAINST (?1)", nativeQuery = true)
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "penerimaan_code LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword% OR "
+			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
 	List<PenyimpananStoreMasuk> search(String keyword);
+	
+	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND id_store = :id_store AND "
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "penerimaan_code LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword% OR "
+			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
+	List<PenyimpananStoreMasuk> searchMobile(int id_store, String keyword);
 	
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_masuk where rowstatus = 1 AND artikel = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
@@ -29,4 +47,7 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	
 	@Query(value = "delete from penyimpanan_store_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
 	void deleteStoreMasuk(String penerimaan_code);
+	
+	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM penyimpanan_store_masuk WHERE rowstatus = :rowstatus AND id_store = :id_store", nativeQuery = true)
+	double totalQtyMasuk(int rowstatus, int id_store);
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,11 @@ public class PengirimanStoreToStore {
 	private int id_store_tujuan;
 	private String lokasi_store_tujuan;
 	private int rowstatus;
+	private int id_karyawan;
+	private String nama_karyawan;
+	private String keterangan;
+	@Column(updatable=false, insertable=false)
+	private Double total_pindah;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pengirimanStoreToStore", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
 	@JsonIgnoreProperties("pengirimanStoreToStore")
@@ -82,6 +88,31 @@ public class PengirimanStoreToStore {
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
+	}
+	
+	public int getId_karyawan() {
+		return id_karyawan;
+	}
+	public void setId_karyawan(int id_karyawan) {
+		this.id_karyawan = id_karyawan;
+	}
+	public String getNama_karyawan() {
+		return nama_karyawan;
+	}
+	public void setNama_karyawan(String nama_karyawan) {
+		this.nama_karyawan = nama_karyawan;
+	}
+	public String getKeterangan() {
+		return keterangan;
+	}
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
+	}
+	public Double getTotal_pindah() {
+		return total_pindah;
+	}
+	public void setTotal_pindah(Double total_pindah) {
+		this.total_pindah = total_pindah;
 	}
 	public List<DetailPengirimanStoreToStore> getDetailPengirimanList() {
 		return detailPengirimanList;

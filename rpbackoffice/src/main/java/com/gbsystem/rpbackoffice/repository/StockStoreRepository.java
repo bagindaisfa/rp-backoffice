@@ -17,8 +17,17 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_store WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockStore(int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND  "
-			+ "MATCH(artikel, nama_barang, tipe, kategori) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_store WHERE rowstatus = :rowstatus AND id_store= :id_store", nativeQuery = true)
+	Double totalStocPerkStore(int rowstatus, int id_store);
+	
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND "
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR"
+			+ "lokasi_store LIKE %:keyword% ", nativeQuery = true)
 	List<StockStore> search(String keyword);
+	
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kuantitas !=0 ", nativeQuery = true)
+	List<StockStore> stockAvailPerStore(int id_store);
 }
