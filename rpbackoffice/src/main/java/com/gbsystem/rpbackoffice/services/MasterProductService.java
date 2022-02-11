@@ -106,7 +106,7 @@ public class MasterProductService {
 		MasterProduct p = new MasterProduct();
     	p = eRepo.findById(id).get();
     	StockOffice q = new StockOffice();
-    	q = eStockRepo.findById_officeAndArtikel(1,artikel_product,ukuran);
+    	q = eStockRepo.findById_officeAndArtikel(1,artikel_product);
     	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");

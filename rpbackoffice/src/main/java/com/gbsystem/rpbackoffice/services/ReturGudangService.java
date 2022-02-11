@@ -100,8 +100,7 @@ public class ReturGudangService {
 			StockStore e = new StockStore();
 			e = eStockRepo.findById_storeAndArtikel(
 	    			returGudang.getId_store_asal(),
-	    			returGudang.getDetail_pengiriman().get(i).getArtikel(),
-	    			returGudang.getDetail_pengiriman().get(i).getUkuran());
+	    			returGudang.getDetail_pengiriman().get(i).getArtikel());
 			e.setKuantitas(e.getKuantitas() - returGudang.getDetail_pengiriman().get(i).getKuantitas());
 			eStockRepo.save(e);
 		}
@@ -161,8 +160,7 @@ public class ReturGudangService {
 	    	
 	    	StockStore g = new StockStore();
 			g = eStockRepo.findById_storeAndArtikel(p.getId_store_asal(),
-	    			p.getDetail_pengiriman().get(j).getArtikel(),
-	    			p.getDetail_pengiriman().get(j).getUkuran());
+	    			p.getDetail_pengiriman().get(j).getArtikel());
 			g.setKuantitas(g.getKuantitas() + p.getDetail_pengiriman().get(j).getKuantitas());
 			eStockRepo.save(g);
 			// end region add stock store
@@ -171,8 +169,7 @@ public class ReturGudangService {
 			StockOffice e = new StockOffice();
 			eStockOfficeRepo.findById_officeAndArtikel(
 					p.getId_office_tujuan(),
-	    			p.getDetail_pengiriman().get(j).getArtikel(),
-	    			p.getDetail_pengiriman().get(j).getUkuran());
+	    			p.getDetail_pengiriman().get(j).getArtikel());
 			e.setKuantitas(e.getKuantitas() - p.getDetail_pengiriman().get(j).getKuantitas());
 			eStockOfficeRepo.save(e);
 			// end region reduce stock office
@@ -199,16 +196,14 @@ public class ReturGudangService {
 	    	StockStore e = new StockStore();
 			e = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_asal(),
-	    			p.getDetail_pengiriman().get(i).getArtikel(),
-	    			p.getDetail_pengiriman().get(i).getUkuran());
+	    			p.getDetail_pengiriman().get(i).getArtikel());
 			e.setKuantitas(e.getKuantitas() + p.getDetail_pengiriman().get(i).getKuantitas());
 			eStockRepo.save(e);
 	    	
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(
 					p.getId_office_tujuan(),
-	    			p.getDetail_pengiriman().get(i).getArtikel(),
-	    			p.getDetail_pengiriman().get(i).getUkuran());
+	    			p.getDetail_pengiriman().get(i).getArtikel());
 			g.setKuantitas(g.getKuantitas() - p.getDetail_pengiriman().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 				
@@ -254,16 +249,14 @@ public class ReturGudangService {
 		    	StockStore e = new StockStore();
 				e = eStockRepo.findById_storeAndArtikel(
 						returGudang.getId_store_asal(),
-						returGudang.getDetail_pengiriman().get(j).getArtikel(),
-						returGudang.getDetail_pengiriman().get(j).getUkuran());
+						returGudang.getDetail_pengiriman().get(j).getArtikel());
 				e.setKuantitas(e.getKuantitas() - returGudang.getDetail_pengiriman().get(j).getKuantitas());
 				eStockRepo.save(e);
 		    	
 				StockOffice g = new StockOffice();
 				g = eStockOfficeRepo.findById_officeAndArtikel(
 						returGudang.getId_office_tujuan(),
-						returGudang.getDetail_pengiriman().get(j).getArtikel(),
-						returGudang.getDetail_pengiriman().get(j).getUkuran());
+						returGudang.getDetail_pengiriman().get(j).getArtikel());
 				g.setKuantitas(g.getKuantitas() + returGudang.getDetail_pengiriman().get(j).getKuantitas());
 				eStockOfficeRepo.save(g);
 				

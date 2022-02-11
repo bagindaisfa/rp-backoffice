@@ -13,8 +13,8 @@ import com.gbsystem.rpbackoffice.entities.StockOffice;
 public interface StockOfficeRepository extends JpaRepository<StockOffice, Long> {
 	List<StockOffice> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = :id_office AND artikel = :artikel AND ukuran = :ukuran", nativeQuery = true)
-	StockOffice findById_officeAndArtikel(int id_office, String artikel, String ukuran);
+	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = :id_office AND artikel = :artikel", nativeQuery = true)
+	StockOffice findById_officeAndArtikel(int id_office, String artikel);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_office WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockOffice(int rowstatus);

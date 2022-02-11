@@ -93,8 +93,7 @@ public class PenjualanService {
 			StockStore check = new StockStore();
 			check = eStockRepo.findById_storeAndArtikel(
 					penjualan.getId_store(),
-					penjualan.getDetailPesananList().get(i).getArtikel(),
-					penjualan.getDetailPesananList().get(i).getUkuran());
+					penjualan.getDetailPesananList().get(i).getArtikel());
 			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
 			
@@ -162,8 +161,7 @@ public class PenjualanService {
 			StockStore check = new StockStore();
 			check = eStockRepo.findById_storeAndArtikel(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getArtikel(),
-					p.getDetailPesananList().get(i).getUkuran()
+					p.getDetailPesananList().get(i).getArtikel()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -193,8 +191,7 @@ public class PenjualanService {
 			StockStore check = new StockStore();
 			check = eStockRepo.findById_storeAndArtikel(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getArtikel(),
-					p.getDetailPesananList().get(i).getUkuran()
+					p.getDetailPesananList().get(i).getArtikel()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -267,8 +264,7 @@ public class PenjualanService {
 				StockStore check = new StockStore();
 				check = eStockRepo.findById_storeAndArtikel(
 						penjualan.getDetailPesananList().get(i).getId_store(),
-						penjualan.getDetailPesananList().get(i).getArtikel(),
-						penjualan.getDetailPesananList().get(i).getUkuran()
+						penjualan.getDetailPesananList().get(i).getArtikel()
 						);
 				check.setKuantitas((check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
 			

@@ -70,16 +70,14 @@ public class PengirimanStoreToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					pengirimanStoreToStore.getId_store_asal(),
-	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel(),
-	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getUkuran());
+	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() - pengirimanStoreToStore.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 	    	StockStore prevStoreTujuan = new StockStore();
 	    	prevStoreTujuan = eStockRepo.findById_storeAndArtikel(
 	    			pengirimanStoreToStore.getId_store_tujuan(),
-	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel(),
-	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getUkuran());
+	    			pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 	    	if (prevStoreTujuan == null) {
 	    		StockStore new_insert = new StockStore();
 	    		new_insert.setKuantitas(pengirimanStoreToStore.getDetailPengirimanList().get(i).getKuantitas());
@@ -184,16 +182,14 @@ public class PengirimanStoreToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_asal(),
-	    			p.getDetailPengirimanList().get(i).getArtikel(),
-	    			p.getDetailPengirimanList().get(i).getUkuran());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
 			g = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_tujuan(),
-	    			p.getDetailPengirimanList().get(i).getArtikel(),
-	    			p.getDetailPengirimanList().get(i).getUkuran());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			 
 			g.setKuantitas(g.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(g);
@@ -214,16 +210,14 @@ public class PengirimanStoreToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_asal(),
-	    			p.getDetailPengirimanList().get(i).getArtikel(),
-	    			p.getDetailPengirimanList().get(i).getUkuran());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
 			g = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_tujuan(),
-	    			p.getDetailPengirimanList().get(i).getArtikel(),
-	    			p.getDetailPengirimanList().get(i).getUkuran());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			 
 			g.setKuantitas(g.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(g);
@@ -267,8 +261,7 @@ public class PengirimanStoreToStoreService {
 				StockStore e = new StockStore();
 				e = eStockRepo.findById_storeAndArtikel(
 						pengirimanStoreToStoreNew.getId_store_asal(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getUkuran());
+						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				
 				e.setKuantitas(e.getKuantitas() - pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(e);
@@ -276,8 +269,7 @@ public class PengirimanStoreToStoreService {
 				StockStore f = new StockStore();
 				f = eStockRepo.findById_storeAndArtikel(
 						pengirimanStoreToStoreNew.getId_store_tujuan(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getUkuran());
+						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				f.setKuantitas(f.getKuantitas() + pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(f);
 			

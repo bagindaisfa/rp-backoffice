@@ -63,8 +63,7 @@ public class PenerimaanSupplierService {
 			StockOffice d = new StockOffice();
 			d = eStockRepo.findById_officeAndArtikel(
 					1,
-					pembelian.getDetail_pembelian().get(i).getArtikel(),
-					pembelian.getDetail_pembelian().get(i).getUkuran());
+					pembelian.getDetail_pembelian().get(i).getArtikel());
 			
 			d.setKuantitas(d.getKuantitas() + pembelian.getDetail_pembelian().get(i).getKuantitas());
 			eStockRepo.save(d);
@@ -108,7 +107,7 @@ public class PenerimaanSupplierService {
     	p.setRowstatus(0);
     	
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel, ukuran);
+		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
     	d.setKuantitas(d.getKuantitas() - p.getKuantitas());
     	eStockRepo.save(d);
     	

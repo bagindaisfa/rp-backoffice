@@ -11,8 +11,8 @@ import com.gbsystem.rpbackoffice.entities.StockStore;
 public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	List<StockStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store= :id_store AND artikel =:artikel AND ukuran = :ukuran", nativeQuery = true)
-	StockStore findById_storeAndArtikel(int id_store,String artikel,String ukuran);
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store= :id_store AND artikel =:artikel", nativeQuery = true)
+	StockStore findById_storeAndArtikel(int id_store,String artikel);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_store WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockStore(int rowstatus);

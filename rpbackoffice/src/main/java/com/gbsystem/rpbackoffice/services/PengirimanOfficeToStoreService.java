@@ -73,8 +73,7 @@ public class PengirimanOfficeToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					pengirimanOfficeToStore.getId_store(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
+					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			if (d == null) {
 				StockStore new_insert = new StockStore();
 				new_insert.setId_store(pengirimanOfficeToStore.getId_store());
@@ -99,8 +98,7 @@ public class PengirimanOfficeToStoreService {
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(
 					pengirimanOfficeToStore.getId_office(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
+					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			g.setKuantitas(g.getKuantitas() - pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -188,16 +186,14 @@ public class PengirimanOfficeToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store(),
-					p.getDetailPengirimanList().get(i).getArtikel(),
-					p.getDetailPengirimanList().get(i).getUkuran());
+					p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(
 					p.getId_office(),
-					p.getDetailPengirimanList().get(i).getArtikel(),
-					p.getDetailPengirimanList().get(i).getUkuran());
+					p.getDetailPengirimanList().get(i).getArtikel());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -218,16 +214,14 @@ public class PengirimanOfficeToStoreService {
 			StockStore d = new StockStore();
 			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store(),
-					p.getDetailPengirimanList().get(i).getArtikel(),
-					p.getDetailPengirimanList().get(i).getUkuran());
+					p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(
 					p.getId_office(),
-					p.getDetailPengirimanList().get(i).getArtikel(),
-					p.getDetailPengirimanList().get(i).getUkuran());
+					p.getDetailPengirimanList().get(i).getArtikel());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 		}
@@ -268,16 +262,14 @@ public class PengirimanOfficeToStoreService {
 				StockStore d = new StockStore();
 				d = eStockRepo.findById_storeAndArtikel(
 						pengirimanOfficeToStoreNew.getId_store(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getUkuran());
+						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				d.setKuantitas(d.getKuantitas() + pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(d);
 				
 				StockOffice g = new StockOffice();
 				g = eStockOfficeRepo.findById_officeAndArtikel(
 						pengirimanOfficeToStoreNew.getId_office(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getUkuran());
+						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				g.setKuantitas(g.getKuantitas() - pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockOfficeRepo.save(g);
 			

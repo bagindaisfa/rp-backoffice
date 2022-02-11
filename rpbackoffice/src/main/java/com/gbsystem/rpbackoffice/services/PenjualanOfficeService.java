@@ -67,8 +67,7 @@ public class PenjualanOfficeService {
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(
 					penjualanOffice.getId_office(),
-					penjualanOffice.getDetail_penjualan().get(i).getArtikel(),
-					penjualanOffice.getDetail_penjualan().get(i).getUkuran());
+					penjualanOffice.getDetail_penjualan().get(i).getArtikel());
 			g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -129,8 +128,7 @@ public class PenjualanOfficeService {
     		StockOffice e = new StockOffice();
     		eStockOfficeRepo.findById_officeAndArtikel(
     				p.getId_office(),
-					p.getDetail_penjualan().get(i).getArtikel(),
-					p.getDetail_penjualan().get(i).getUkuran());
+					p.getDetail_penjualan().get(i).getArtikel());
     		e.setKuantitas(e.getKuantitas() + p.getDetail_penjualan().get(i).getKuantitas());
     		eStockOfficeRepo.save(e);
     		
@@ -151,8 +149,7 @@ public class PenjualanOfficeService {
 			StockOffice a = new StockOffice();
 			a = eStockOfficeRepo.findById_officeAndArtikel(
 					p.getId_office(),
-					p.getDetail_penjualan().get(i).getArtikel(),
-					p.getDetail_penjualan().get(i).getUkuran());
+					p.getDetail_penjualan().get(i).getArtikel());
 			a.setKuantitas(a.getKuantitas() + p.getDetail_penjualan().get(i).getKuantitas());
 			eStockOfficeRepo.save(a);
 				
@@ -198,8 +195,7 @@ public class PenjualanOfficeService {
 				StockOffice l = new StockOffice();
 				l = eStockOfficeRepo.findById_officeAndArtikel(
 						penjualanOffice.getId_office(),
-						penjualanOffice.getDetail_penjualan().get(k).getArtikel(),
-						penjualanOffice.getDetail_penjualan().get(k).getUkuran());
+						penjualanOffice.getDetail_penjualan().get(k).getArtikel());
 				l.setKuantitas(l.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
 				eStockOfficeRepo.save(l);
 			
