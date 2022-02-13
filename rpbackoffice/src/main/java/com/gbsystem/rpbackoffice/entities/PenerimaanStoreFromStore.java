@@ -62,7 +62,7 @@ public class PenerimaanStoreFromStore {
 	public String getLokasi_store_asal() {
 		return lokasi_store_asal;
 	}
-	public void setLokasi_office(String lokasi_store_asal) {
+	public void setLokasi_store_asal(String lokasi_store_asal) {
 		this.lokasi_store_asal = lokasi_store_asal;
 	}
 	public int getId_store_tujuan() {
