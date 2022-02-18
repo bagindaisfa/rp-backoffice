@@ -23,7 +23,7 @@ public class MasterProductService {
 	private StockOfficeRepository eStockRepo;
 	
 	public MasterProduct saveMasterProduct( MultipartFile image,
-			String artikel_product, String nama_product, 
+			String sku_code,String artikel_product, String nama_product, 
 			String type, String type_name, String kategori, 
 			String nama_kategori, String artikel_frame, String artikel_lens,String ukuran,
 			double kuantitas,double hpp,double harga_jual, String remarks
@@ -41,6 +41,7 @@ public class MasterProductService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		p.setSku_code(sku_code);
 		p.setArtikel_product(artikel_product);
 		p.setNama_product(nama_product);
 		p.setType(type);
@@ -98,7 +99,7 @@ public class MasterProductService {
     }
 	
 	public String update(
-			Long id, MultipartFile image, String artikel_product,
+			Long id, MultipartFile image, String sku_code, String artikel_product,
 			String nama_product, String type, String type_name,
 			String kategori, String artikel_frame, String artikel_lens,String ukuran,
 			String nama_kategori, double kuantitas,double hpp,
@@ -120,6 +121,7 @@ public class MasterProductService {
 		if (q.getKuantitas() > kuantitas) {
 			response = "Kuantitas lebih kecil dari sebelumnya, Stockopname terlebih dahulu!";
 		} else {
+			p.setSku_code(sku_code);
 	    	p.setArtikel_product(artikel_product);
 			p.setNama_product(nama_product);
 			p.setType(type);

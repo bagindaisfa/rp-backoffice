@@ -12,6 +12,7 @@ public class MasterProduct {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String sku_code;
 	private String artikel_product;
 	private String nama_product;
 	private String type;
@@ -36,6 +37,12 @@ public class MasterProduct {
 		this.id = id;
 	}
 	
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
+	}
 	public String getArtikel_product() {
 		return artikel_product;
 	}

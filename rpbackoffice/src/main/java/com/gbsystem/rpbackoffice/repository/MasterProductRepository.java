@@ -20,8 +20,9 @@ public interface MasterProductRepository extends JpaRepository<MasterProduct, Lo
 	@Query(value = "SELECT COUNT(id) AS kuantitas FROM master_product WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalProduct(int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_product WHERE rowstatus = 1 AND "
-			+ "MATCH(artikel_product, nama_product, type_name, nama_kategori) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_product "
+			+ "WHERE rowstatus = 1 AND "
+			+ "artikel_product LIKE %:keyword% OR nama_product LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR nama_kategori LIKE %:keyword%", nativeQuery = true)
 	List<MasterProduct> search(String keyword);
 }

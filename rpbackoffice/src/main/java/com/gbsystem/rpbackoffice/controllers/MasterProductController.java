@@ -2,6 +2,7 @@ package com.gbsystem.rpbackoffice.controllers;
 
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -56,6 +57,7 @@ public class MasterProductController {
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody MasterProduct saveMaster_product(
     		@RequestParam("image") MultipartFile image,
+    		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
     		@RequestParam("type") String type,
@@ -71,7 +73,7 @@ public class MasterProductController {
     		@RequestParam("remarks") String remarks
     		) 
 	{
-    	MasterProduct masterProductResponse = masterProductService.saveMasterProduct(image,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
+    	MasterProduct masterProductResponse = masterProductService.saveMasterProduct(image,sku_code,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
 		return masterProductResponse;
 	}
     
@@ -79,6 +81,7 @@ public class MasterProductController {
     public @ResponseBody String update(
     		@RequestParam("id") Long id,
     		@RequestParam("image") MultipartFile image,
+    		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
     		@RequestParam("type") String type,
@@ -95,7 +98,7 @@ public class MasterProductController {
     		) throws Exception {
     	
     	if (artikel_product != "") {
-    		masterProductService.update(id, image, artikel_product,nama_product,type,type_name,kategori,nama_kategori,artikel_frame,artikel_lens,ukuran,kuantitas,hpp,harga_jual,remarks);
+    		masterProductService.update(id, image,sku_code, artikel_product,nama_product,type,type_name,kategori,nama_kategori,artikel_frame,artikel_lens,ukuran,kuantitas,hpp,harga_jual,remarks);
     	}
     	return "Update Data Successs!";
 		
@@ -106,40 +109,41 @@ public class MasterProductController {
     	
         XSSFWorkbook workbook = new XSSFWorkbook(readExcelDataFile.getInputStream());
         XSSFSheet worksheet = workbook.getSheetAt(0);
-        
         for(int i=1; i<worksheet.getPhysicalNumberOfRows(); i++) {
             MasterProduct masterProduct = new MasterProduct();
             StockOffice q = new StockOffice();
         	XSSFRow row = worksheet.getRow(i);
+        	DataFormatter formatter = new DataFormatter();
         	masterProduct.setImage(null);
-        	masterProduct.setArtikel_product(row.getCell(0).getStringCellValue());
-        	masterProduct.setNama_product(row.getCell(1).getStringCellValue());
-        	masterProduct.setType(row.getCell(2).getStringCellValue());
-        	masterProduct.setType_name(row.getCell(3).getStringCellValue());
-        	masterProduct.setKategori(row.getCell(4).getStringCellValue());
-        	masterProduct.setNama_kategori(row.getCell(5).getStringCellValue());
-        	masterProduct.setArtikel_frame(row.getCell(6).getStringCellValue());
-        	masterProduct.setArtikel_lens(row.getCell(7).getStringCellValue());
-        	masterProduct.setUkuran(row.getCell(8).getStringCellValue());
-        	masterProduct.setKuantitas(row.getCell(9).getNumericCellValue());
-        	masterProduct.setHpp(row.getCell(10).getNumericCellValue());
-        	masterProduct.setHarga_jual(row.getCell(11).getNumericCellValue());
-        	masterProduct.setRemarks(row.getCell(12).getStringCellValue());
+        	masterProduct.setArtikel_product(formatter.formatCellValue(row.getCell(0)));
+        	masterProduct.setNama_product(formatter.formatCellValue(row.getCell(1)));
+        	masterProduct.setType(formatter.formatCellValue(row.getCell(2)));
+        	masterProduct.setType_name(formatter.formatCellValue(row.getCell(3)));
+        	masterProduct.setKategori(formatter.formatCellValue(row.getCell(4)));
+        	masterProduct.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+        	masterProduct.setArtikel_frame(formatter.formatCellValue(row.getCell(6)));
+        	masterProduct.setArtikel_lens(formatter.formatCellValue(row.getCell(7)));
+        	masterProduct.setUkuran(formatter.formatCellValue(row.getCell(8)));
+        	masterProduct.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+        	masterProduct.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+        	masterProduct.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+        	masterProduct.setRemarks(formatter.formatCellValue(row.getCell(12)));
+        	masterProduct.setSku_code(formatter.formatCellValue(row.getCell(14)));
         	masterProduct.setRowstatus(1);
         	
         	q.setId_office(1);
     		q.setLokasi_office("Kantor Pusat");
-    		q.setArtikel(row.getCell(0).getStringCellValue());
-    		q.setKategori(row.getCell(4).getStringCellValue());
-    		q.setNama_kategori(row.getCell(5).getStringCellValue());
-    		q.setType(row.getCell(2).getStringCellValue());
-    		q.setType_name(row.getCell(3).getStringCellValue());
-    		q.setNama_barang(row.getCell(1).getStringCellValue());
-    		q.setKuantitas(row.getCell(9).getNumericCellValue());
-    		q.setUkuran(row.getCell(8).getStringCellValue());
+    		q.setArtikel(formatter.formatCellValue(row.getCell(0)));
+    		q.setKategori(formatter.formatCellValue(row.getCell(4)));
+    		q.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+    		q.setType(formatter.formatCellValue(row.getCell(2)));
+    		q.setType_name(formatter.formatCellValue(row.getCell(3)));
+    		q.setNama_barang(formatter.formatCellValue(row.getCell(1)));
+    		q.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+    		q.setUkuran(formatter.formatCellValue(row.getCell(8)));
     		
-    		q.setHpp(row.getCell(10).getNumericCellValue());
-    		q.setHarga_jual(row.getCell(11).getNumericCellValue());
+    		q.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+    		q.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
     		q.setRowstatus(1);
     		eStockRepo.save(q);
     		eRepo.save(masterProduct);
