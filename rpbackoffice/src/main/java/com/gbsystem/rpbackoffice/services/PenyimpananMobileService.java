@@ -71,6 +71,21 @@ public class PenyimpananMobileService {
 		return eStockStoreRepo.stockAvailPerStore(id_store);
 	}
 	
+	public List<StockStore> stockAvailPerStoreByCategory(int id_store, String kategori) {
+		
+		return eStockStoreRepo.stockAvailPerStoreByCategory(id_store,kategori);
+	}
+	
+	public List<StockStore> searchStockStore(int id_store, String keyword) {
+		
+		return eStockStoreRepo.search(id_store, keyword);
+	}
+	
+	public List<StockStore> searchByCategory(int id_store, String kategori, String keyword) {
+		
+		return eStockStoreRepo.searchByCategory(id_store, kategori, keyword);
+	}
+	
 	public List<PenyimpananStoreKeluar> getAllPerStoreKeluar(int id_store) {
 		
 		return ePenyimpananStoreKeluarRepository.getAllPerStoreKeluar(id_store);

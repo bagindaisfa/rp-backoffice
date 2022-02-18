@@ -14,12 +14,10 @@ import com.gbsystem.rpbackoffice.entities.DetailPembelian;
 public interface DetailPembelianRepository extends JpaRepository<DetailPembelian, Long> {
 	List<DetailPembelian> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1"
-			+ "MATCH(pembelian_code) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_code LIKE %:keyword%", nativeQuery = true)
 	List<DetailPembelian> search(String keyword);
 	
-	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_code = (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_code = :pembelian_code", nativeQuery = true)
 	List<DetailPembelian> all(String pembelian_code);
 	
 	@Query(value = "SELECT * FROM detail_pembelian WHERE rowstatus = 1 AND pembelian_id = :pembelian_id", nativeQuery = true)

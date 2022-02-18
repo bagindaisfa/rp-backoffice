@@ -55,6 +55,24 @@ public class PenyimpananMobileController {
 		return penyimpananMobileService.stockAvailPerStore(id_store);
 	}
 	
+	@GetMapping("/availStockStoreByCategory")
+	public List<StockStore> stockAvailPerStoreByCategory(@Param("id_store") int id_store, @Param("kategori") String kategori){
+		
+		return penyimpananMobileService.stockAvailPerStoreByCategory(id_store, kategori);
+	}
+	
+	@GetMapping("/searchStockStore")
+	public List<StockStore> searchStockStore(@Param("id_store") int id_store, @Param("keyword") String keyword){
+		
+		return penyimpananMobileService.searchStockStore(id_store,keyword);
+	}
+	
+	@GetMapping("/searchStockStoreByCategory")
+	public List<StockStore> searchByCategory(@Param("id_store") int id_store, @Param("kategori") String kategori, @Param("keyword") String keyword){
+		
+		return penyimpananMobileService.searchByCategory(id_store,kategori,keyword);
+	}
+	
 	@GetMapping("/riwayatPemindahan")
 	public List<DetailPengirimanStoreToStore> allPindah(@Param("pengiriman_code") String pengiriman_code){
 		
