@@ -64,6 +64,7 @@ public class AuthenticationController {
 		
 		LoginResponse response=new LoginResponse();
 		response.setToken(jwtToken);
+		response.setId_pengguna(userObj.getId());
 		response.setNamaPengguna(userObj.getFirstName()+" "+userObj.getLastName());
 		response.setId_office(userObj.getId_office());
 		response.setLokasi_office(userObj.getLokasi_office());

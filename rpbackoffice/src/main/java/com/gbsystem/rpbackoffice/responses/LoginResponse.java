@@ -3,6 +3,7 @@ package com.gbsystem.rpbackoffice.responses;
 public class LoginResponse {
 	
 	private String token;
+	private Long id_pengguna;
 	private String namaPengguna;
 	private int id_office;
 	private String lokasi_office;
@@ -16,6 +17,14 @@ public class LoginResponse {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public Long getId_pengguna() {
+		return id_pengguna;
+	}
+
+	public void setId_pengguna(Long id_pengguna) {
+		this.id_pengguna = id_pengguna;
 	}
 
 	public String getNamaPengguna() {
