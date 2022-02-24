@@ -23,6 +23,7 @@ public class PenyimpananStoreMasuk {
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_masuk;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -78,6 +79,12 @@ public class PenyimpananStoreMasuk {
 	}
 	public void setTanggal_masuk(Date tanggal_masuk) {
 		this.tanggal_masuk = tanggal_masuk;
+	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

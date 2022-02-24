@@ -31,7 +31,7 @@ public class DetailPembelian {
 
 	@Column(updatable=false, insertable=false)
 	private Date date_to;
-	
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -81,6 +81,13 @@ public class DetailPembelian {
 
 	public void setDate_to(Date date_to) {
 		this.date_to = date_to;
+	}
+	
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

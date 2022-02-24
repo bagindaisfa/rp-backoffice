@@ -17,16 +17,14 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
 	List<PenyimpananMasuk> findByPenerimaan_code(String penerimaan_code);
 	
-	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_barang) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
 	List<PenyimpananMasuk> search(String keyword);
 	
 	@Query(value = "delete from penyimpanan_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
 	void deleteStockMasuk(String penerimaan_code);
 	
-	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND artikel = (?1)"
+	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND sku_code = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasMasuk(String artikel, Date tanggal_awal, Date tanggal_akhir);
+	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 }

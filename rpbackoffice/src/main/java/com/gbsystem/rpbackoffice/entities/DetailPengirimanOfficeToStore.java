@@ -22,6 +22,7 @@ public class DetailPengirimanOfficeToStore {
 	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_pengiriman;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -54,6 +55,13 @@ public class DetailPengirimanOfficeToStore {
 	}
 	public void setTanggal_pengiriman(Date tanggal_pengiriman) {
 		this.tanggal_pengiriman = tanggal_pengiriman;
+	}
+	
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

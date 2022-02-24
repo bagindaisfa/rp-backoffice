@@ -27,6 +27,7 @@ public class DetailPesanan {
 	private String id_transaksi;
 	private int id_store;
 	private String lokasi_store;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -73,6 +74,12 @@ public class DetailPesanan {
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
 	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
+	}
 	public String getArtikel() {
 		return artikel;
 	}
@@ -116,22 +123,23 @@ public class DetailPesanan {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public double getHarga() {
+	
+	public Double getHarga() {
 		return harga;
 	}
-	public void setHarga(double harga) {
+	public void setHarga(Double harga) {
 		this.harga = harga;
 	}
-	public double getKuantitas() {
+	public Double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(double kuantitas) {
+	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 	public int getRowstatus() {

@@ -64,9 +64,9 @@ public class PenerimaanStoreFromStoreService {
 			detail.setPenerimaanStoreFromStore(p);
 			details.add(detail);
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					penerimaanStoreFromStore.getId_store_tujuan(),
-					penerimaanStoreFromStore.getDetailPenerimaanList().get(i).getArtikel());
+					penerimaanStoreFromStore.getDetailPenerimaanList().get(i).getSku_code());
 			if (d == null) {
 				StockStore new_insert = new StockStore();
 				new_insert.setId_store(penerimaanStoreFromStore.getId_store_tujuan());
@@ -82,9 +82,9 @@ public class PenerimaanStoreFromStoreService {
 			}
 			
 			StockStore g = new StockStore();
-			g = eStockStoreRepo.findById_storeAndArtikel(
+			g = eStockStoreRepo.findById_storeAndSku_code(
 					penerimaanStoreFromStore.getId_store_asal(),
-					penerimaanStoreFromStore.getDetailPenerimaanList().get(i).getArtikel());
+					penerimaanStoreFromStore.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() - penerimaanStoreFromStore.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockStoreRepo.save(g);
 			
@@ -151,16 +151,16 @@ public class PenerimaanStoreFromStoreService {
 			details.add(p.getDetailPenerimaanList().get(i));
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store_asal(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
-			g = eStockStoreRepo.findById_storeAndArtikel(
+			g = eStockStoreRepo.findById_storeAndSku_code(
 					p.getId_store_tujuan(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockStoreRepo.save(g);
 			
@@ -179,16 +179,16 @@ public class PenerimaanStoreFromStoreService {
 		
 		for(int i = 0; i < p.getDetailPenerimaanList().size(); i++) {
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store_asal(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
-			g = eStockStoreRepo.findById_storeAndArtikel(
+			g = eStockStoreRepo.findById_storeAndSku_code(
 					p.getId_store_tujuan(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockStoreRepo.save(g);
 		}
@@ -222,16 +222,16 @@ public class PenerimaanStoreFromStoreService {
 			if (penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getRowstatus() == 1) {
 				
 				StockStore d = new StockStore();
-				d = eStockRepo.findById_storeAndArtikel(
+				d = eStockRepo.findById_storeAndSku_code(
 						penerimaanStoreFromStoreNew.getId_store_tujuan(),
-						penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getArtikel());
+						penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getSku_code());
 				d.setKuantitas(d.getKuantitas() + penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getKuantitas());
 				eStockRepo.save(d);
 				
 				StockStore g = new StockStore();
-				g = eStockStoreRepo.findById_storeAndArtikel(
+				g = eStockStoreRepo.findById_storeAndSku_code(
 						penerimaanStoreFromStoreNew.getId_store_asal(),
-						penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getArtikel());
+						penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getSku_code());
 				g.setKuantitas(g.getKuantitas() - penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getKuantitas());
 				eStockStoreRepo.save(g);
 			

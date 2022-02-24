@@ -91,9 +91,9 @@ public class PenjualanService {
 			details.add(d);
 			
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(
+			check = eStockRepo.findById_storeAndSku_code(
 					penjualan.getId_store(),
-					penjualan.getDetailPesananList().get(i).getArtikel());
+					penjualan.getDetailPesananList().get(i).getSku_code());
 			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
 			
@@ -159,9 +159,9 @@ public class PenjualanService {
 			details.add(p.getDetailPesananList().get(i));
 			
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(
+			check = eStockRepo.findById_storeAndSku_code(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getArtikel()
+					p.getDetailPesananList().get(i).getSku_code()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -189,9 +189,9 @@ public class PenjualanService {
 		
 		for(int i = 0; i < p.getDetailPesananList().size(); i++) {
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(
+			check = eStockRepo.findById_storeAndSku_code(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getArtikel()
+					p.getDetailPesananList().get(i).getSku_code()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -262,9 +262,9 @@ public class PenjualanService {
 			
 			if (penjualan.getDetailPesananList().get(i).getRowstatus() == 1) {
 				StockStore check = new StockStore();
-				check = eStockRepo.findById_storeAndArtikel(
+				check = eStockRepo.findById_storeAndSku_code(
 						penjualan.getDetailPesananList().get(i).getId_store(),
-						penjualan.getDetailPesananList().get(i).getArtikel()
+						penjualan.getDetailPesananList().get(i).getSku_code()
 						);
 				check.setKuantitas((check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
 			

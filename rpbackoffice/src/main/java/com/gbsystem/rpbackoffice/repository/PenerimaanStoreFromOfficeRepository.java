@@ -14,9 +14,9 @@ public interface PenerimaanStoreFromOfficeRepository extends JpaRepository<Pener
 	
 List<PenerimaanStoreFromOffice> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM penerimaan_store_from_office WHERE rowstatus = 1 AND  "
-			+ "MATCH(nama_barang, lokasi_store, lokasi_office) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM penerimaan_store_from_office WHERE rowstatus = 1 AND "
+			+ "lokasi_store LIKE %:keyword% OR "
+			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
 	List<PenerimaanStoreFromOffice> search(String keyword);
 
 }

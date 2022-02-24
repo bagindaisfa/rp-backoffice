@@ -14,12 +14,10 @@ public interface DetailPesananRepository extends JpaRepository<DetailPesanan, Lo
 
 	List<DetailPesanan> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1"
-			+ "MATCH(id_transaksi) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1 AND id_transaksi LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
 	List<DetailPesanan> search(String keyword);
 	
-	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1 AND id_transaksi = (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1 AND id_transaksi = :id_transaksi", nativeQuery = true)
 	List<DetailPesanan> all(String id_transaksi);
 	
 	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1 AND penjualan_id = :penjualan_id", nativeQuery = true)

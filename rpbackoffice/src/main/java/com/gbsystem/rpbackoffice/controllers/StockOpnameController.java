@@ -36,24 +36,24 @@ public class StockOpnameController {
     }
     
     @PostMapping(value = "/add")
-    public @ResponseBody String saveProduct(@RequestParam("artikel") String artikel,
+    public @ResponseBody String saveProduct(@RequestParam("sku_code") String sku_code,@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {
-    		stockOpnameService.saveStockOpname(artikel, kategori,nama_kategori, type,type_name, nama_barang, stock_opname);
+    		stockOpnameService.saveStockOpname(sku_code,artikel, kategori,nama_kategori, type,type_name, nama_barang, stock_opname);
     	}
     	return "Insert Data Successs!";
 		
     }
     
     @PostMapping(value = "/update")
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("artikel") String artikel,
+    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("sku_code") String sku_code,@RequestParam("artikel") String artikel,
     		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {
-    		stockOpnameService.update(id, artikel, kategori,nama_kategori, type,type_name, nama_barang, stock_opname);
+    		stockOpnameService.update(id, sku_code,artikel, kategori,nama_kategori, type,type_name, nama_barang, stock_opname);
     	}
     	return "Update Data Successs!";
 		

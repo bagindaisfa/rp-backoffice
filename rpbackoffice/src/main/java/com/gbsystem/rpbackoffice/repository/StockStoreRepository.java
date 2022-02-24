@@ -11,8 +11,8 @@ import com.gbsystem.rpbackoffice.entities.StockStore;
 public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	List<StockStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store= :id_store AND artikel =:artikel", nativeQuery = true)
-	StockStore findById_storeAndArtikel(int id_store,String artikel);
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store= :id_store AND sku_code =:sku_code", nativeQuery = true)
+	StockStore findById_storeAndSku_code(int id_store,String sku_code);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_store WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockStore(int rowstatus);
@@ -21,6 +21,7 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	Double totalStocPerkStore(int rowstatus, int id_store);
 	
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND "
+			+ "sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "type_name LIKE %:keyword% OR "
@@ -29,6 +30,7 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	List<StockStore> search(int id_store, String keyword);
 	
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kategori = :kategori AND "
+			+ "sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "type_name LIKE %:keyword% OR "

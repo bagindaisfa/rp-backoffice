@@ -21,6 +21,7 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 	List<PenyimpananStoreKeluar> getAllPerStoreKeluar(int id_store);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_keluar WHERE rowstatus = 1 AND "
+			+ "sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "pengiriman_code LIKE %:keyword% OR "
@@ -31,6 +32,7 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 	List<PenyimpananStoreKeluar> search(String keyword);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_keluar WHERE rowstatus = 1 AND id_store = :id_store AND "
+			+ "sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "pengiriman_code LIKE %:keyword% OR "
@@ -40,10 +42,10 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
 	List<PenyimpananStoreKeluar> searchMobile(int id_store, String keyword);
 	
-	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND artikel = (?1)"
+	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND sku_code = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasMasuk(String artikel, Date tanggal_awal, Date tanggal_akhir);
+	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "delete from penyimpanan_store_keluar b where b.pengiriman_code=:pengiriman_code", nativeQuery = true)
 	void deleteStoreKeluar(String pengiriman_code);

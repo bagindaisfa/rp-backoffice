@@ -57,6 +57,7 @@ public class PenerimaanStoreFromOfficeService {
 			DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
 			detail.setPenerimaan_code(code_penerimaan);
 			detail.setTanggal_penerimaan(penerimaanStoreFromOffice.getTanggal_penerimaan());
+			detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			detail.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 			detail.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 			detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
@@ -66,13 +67,14 @@ public class PenerimaanStoreFromOfficeService {
 			detail.setPenerimaanStoreFromOffice(p);
 			details.add(detail);
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					penerimaanStoreFromOffice.getId_store(),
-					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			if (d == null) {
 				StockStore new_insert = new StockStore();
 				new_insert.setId_store(penerimaanStoreFromOffice.getId_store());
 				new_insert.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+				new_insert.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 				new_insert.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 				new_insert.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 				new_insert.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
@@ -84,9 +86,9 @@ public class PenerimaanStoreFromOfficeService {
 			}
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					penerimaanStoreFromOffice.getId_office(),
-					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -97,6 +99,7 @@ public class PenerimaanStoreFromOfficeService {
 			f.setTanggal_keluar(new Date());
 			f.setId_store(penerimaanStoreFromOffice.getId_store());
 			f.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+			f.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			f.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 			f.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 			f.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
@@ -111,6 +114,7 @@ public class PenerimaanStoreFromOfficeService {
 			h.setTanggal_masuk(new Date());
 			h.setId_store(penerimaanStoreFromOffice.getId_store());
 			h.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+			h.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			h.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 			h.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 			h.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
@@ -158,16 +162,16 @@ public class PenerimaanStoreFromOfficeService {
 			details.add(p.getDetailPenerimaanList().get(i));
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					p.getId_office(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -186,16 +190,16 @@ public class PenerimaanStoreFromOfficeService {
 		
 		for(int i = 0; i < p.getDetailPenerimaanList().size(); i++) {
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					p.getId_office(),
-					p.getDetailPenerimaanList().get(i).getArtikel());
+					p.getDetailPenerimaanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPenerimaanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 		}
@@ -219,6 +223,7 @@ public class PenerimaanStoreFromOfficeService {
 		
 		for(int i = 0; i < penerimaanStoreFromOfficeNew.getDetailPenerimaanList().size(); i++) {
 			DetailPenerimaanStoreFromOffice detail_update = new DetailPenerimaanStoreFromOffice();
+			detail_update.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 			detail_update.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
 			detail_update.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
 			detail_update.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
@@ -229,16 +234,16 @@ public class PenerimaanStoreFromOfficeService {
 			if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus() == 1) {
 				
 				StockStore d = new StockStore();
-				d = eStockRepo.findById_storeAndArtikel(
+				d = eStockRepo.findById_storeAndSku_code(
 						penerimaanStoreFromOfficeNew.getId_store(),
-						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				d.setKuantitas(d.getKuantitas() + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
 				eStockRepo.save(d);
 				
 				StockOffice g = new StockOffice();
-				g = eStockOfficeRepo.findById_officeAndArtikel(
+				g = eStockOfficeRepo.findById_officeAndSku_code(
 						penerimaanStoreFromOfficeNew.getId_office(),
-						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
 				eStockOfficeRepo.save(g);
 			
@@ -249,6 +254,7 @@ public class PenerimaanStoreFromOfficeService {
 				f.setTanggal_keluar(new Date());
 				f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 				f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+				f.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				f.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
 				f.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
 				f.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
@@ -263,6 +269,7 @@ public class PenerimaanStoreFromOfficeService {
 				h.setTanggal_masuk(new Date());
 				h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 				h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+				h.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				h.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
 				h.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
 				h.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());

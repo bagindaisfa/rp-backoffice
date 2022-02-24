@@ -41,7 +41,6 @@ public class PengirimanOfficeToStoreService {
 	public PengirimanOfficeToStore savePengirimanOffice(PengirimanOfficeToStore pengirimanOfficeToStore) {
 		
 		String code_pengiriman = "POS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
-		String code_penerimaan_store = code_pengiriman + "S";
 		
 		PengirimanOfficeToStore p = new PengirimanOfficeToStore();
 		List<DetailPengirimanOfficeToStore> details = new ArrayList<>();
@@ -57,6 +56,7 @@ public class PengirimanOfficeToStoreService {
 			DetailPengirimanOfficeToStore detail = new DetailPengirimanOfficeToStore();
 			detail.setPengiriman_code(code_pengiriman);
 			detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
+			detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
 			detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 			detail.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
 			detail.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
@@ -70,79 +70,6 @@ public class PengirimanOfficeToStoreService {
 			detail.setRowstatus(1);
 			detail.setPengirimanOfficeToStore(p);
 			details.add(detail);
-			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
-					pengirimanOfficeToStore.getId_store(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			if (d == null) {
-				StockStore new_insert = new StockStore();
-				new_insert.setId_store(pengirimanOfficeToStore.getId_store());
-				new_insert.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
-				new_insert.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-				new_insert.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-				new_insert.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
-				new_insert.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
-				new_insert.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
-				new_insert.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
-				new_insert.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-				new_insert.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
-				new_insert.setHpp(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHpp());
-				new_insert.setHarga_jual(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHarga_jual());
-				new_insert.setRowstatus(1);
-				eStockRepo.save(new_insert);
-			} else {
-				d.setKuantitas(d.getKuantitas() + pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-				eStockRepo.save(d);
-			}
-			
-			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
-					pengirimanOfficeToStore.getId_office(),
-					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			g.setKuantitas(g.getKuantitas() - pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-			eStockOfficeRepo.save(g);
-			
-			PenyimpananKeluar f = new PenyimpananKeluar();
-			f.setId_office(pengirimanOfficeToStore.getId_office());
-			f.setLokasi_office(pengirimanOfficeToStore.getLokasi_office());
-			f.setPengiriman_code(code_pengiriman);
-			f.setTanggal_keluar(new Date());
-			f.setId_store(pengirimanOfficeToStore.getId_store());
-			f.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
-			f.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			f.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-			f.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
-			f.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
-			f.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
-			f.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
-			f.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-			f.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
-			f.setHpp(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHpp());
-			f.setHarga_jual(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHarga_jual());
-			f.setKeterangan("Barang Dikirim Ke Store");
-			f.setRowstatus(1);
-			ePenyimpananRepo.save(f);
-			
-			PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-			h.setId_office(pengirimanOfficeToStore.getId_office());
-			h.setLokasi_office(pengirimanOfficeToStore.getLokasi_office());
-			h.setPenerimaan_code(code_penerimaan_store);
-			h.setTanggal_masuk(new Date());
-			h.setId_store(pengirimanOfficeToStore.getId_store());
-			h.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
-			h.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			h.setKategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKategori());
-			h.setNama_kategori(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_kategori());
-			h.setType(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType());
-			h.setType_name(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getType_name());
-			h.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
-			h.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-			h.setUkuran(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getUkuran());
-			h.setHpp(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHpp());
-			h.setHarga_jual(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getHarga_jual());
-			h.setRowstatus(1);
-			ePenyimpananStoreRepo.save(h);
-			
 		}
 		
 		p.setDetailPengirimanList(details);
@@ -184,16 +111,16 @@ public class PengirimanOfficeToStoreService {
 			details.add(p.getDetailPengirimanList().get(i));
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store(),
-					p.getDetailPengirimanList().get(i).getArtikel());
+					p.getDetailPengirimanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					p.getId_office(),
-					p.getDetailPengirimanList().get(i).getArtikel());
+					p.getDetailPengirimanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -212,16 +139,16 @@ public class PengirimanOfficeToStoreService {
 		
 		for(int i = 0; i < p.getDetailPengirimanList().size(); i++) {
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
+			d = eStockRepo.findById_storeAndSku_code(
 					p.getId_store(),
-					p.getDetailPengirimanList().get(i).getArtikel());
+					p.getDetailPengirimanList().get(i).getSku_code());
 			d.setKuantitas(d.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					p.getId_office(),
-					p.getDetailPengirimanList().get(i).getArtikel());
+					p.getDetailPengirimanList().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 		}
@@ -260,16 +187,16 @@ public class PengirimanOfficeToStoreService {
 			if (pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getRowstatus() == 1) {
 				
 				StockStore d = new StockStore();
-				d = eStockRepo.findById_storeAndArtikel(
+				d = eStockRepo.findById_storeAndSku_code(
 						pengirimanOfficeToStoreNew.getId_store(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
+						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getSku_code());
 				d.setKuantitas(d.getKuantitas() + pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(d);
 				
 				StockOffice g = new StockOffice();
-				g = eStockOfficeRepo.findById_officeAndArtikel(
+				g = eStockOfficeRepo.findById_officeAndSku_code(
 						pengirimanOfficeToStoreNew.getId_office(),
-						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getArtikel());
+						pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getSku_code());
 				g.setKuantitas(g.getKuantitas() - pengirimanOfficeToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockOfficeRepo.save(g);
 			

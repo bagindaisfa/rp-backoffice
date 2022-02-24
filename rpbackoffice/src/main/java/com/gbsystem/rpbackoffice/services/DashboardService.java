@@ -99,20 +99,20 @@ public class DashboardService {
 	
 	// region product
 	public Double totalProduct(){
-		
-		Double product = eProductRepo.totalProduct(1) == null? 0.00 : eProductRepo.totalProduct(1);
+		Double res = eProductRepo.totalProduct(1);
+		Double product = res == null? 0.00 : res;
 		return product;
 	}
 	
 	public Double totalStockOffice(){
-		
-		Double office = eStockOfficeRepo.totalStockOffice(1) == null? 0.00 : eStockOfficeRepo.totalStockOffice(1);
+		Double res = eStockOfficeRepo.totalStockOffice(1);
+		Double office = res == null ? 0.00 : res;
 		return office;
 	}
 	
 	public Double totalStockStore(){
-		
-		Double store = eStockStoreRepo.totalStockStore(1) == null? 0.00 : eStockStoreRepo.totalStockStore(1);
+		Double res = eStockStoreRepo.totalStockStore(1);
+		Double store = res == null? 0.00 : res;
 		return store;
 	}
 	// end region product

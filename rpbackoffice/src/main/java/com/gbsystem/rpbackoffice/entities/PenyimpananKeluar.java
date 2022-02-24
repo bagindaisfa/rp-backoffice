@@ -23,6 +23,7 @@ public class PenyimpananKeluar {
 	private Date tanggal_keluar;
 	private int id_store;
 	private String lokasi_store;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -79,6 +80,12 @@ public class PenyimpananKeluar {
 	}
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
+	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

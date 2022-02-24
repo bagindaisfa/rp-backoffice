@@ -128,7 +128,7 @@ public class MasterProductController {
         	masterProduct.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
         	masterProduct.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
         	masterProduct.setRemarks(formatter.formatCellValue(row.getCell(12)));
-        	masterProduct.setSku_code(formatter.formatCellValue(row.getCell(14)));
+        	masterProduct.setSku_code(formatter.formatCellValue(row.getCell(13)));
         	masterProduct.setRowstatus(1);
         	
         	q.setId_office(1);

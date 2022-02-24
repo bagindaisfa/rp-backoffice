@@ -14,9 +14,7 @@ public interface DetailPengirimanStoreToStoreRepository extends JpaRepository<De
 
 	List<DetailPengirimanStoreToStore> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_pengiriman_store_to_store WHERE rowstatus = 1"
-			+ "MATCH(pengiriman_code) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pengiriman_store_to_store WHERE rowstatus = 1 AND pengiriman_code LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
 	List<DetailPengirimanStoreToStore> search(String keyword);
 	
 	@Query(value = "SELECT id AS id,artikel AS artikel,harga_jual AS harga_jual,"
@@ -24,7 +22,7 @@ public interface DetailPengirimanStoreToStoreRepository extends JpaRepository<De
 			+ "nama_barang AS nama_barang,pengiriman_code AS pengiriman_code,rowstatus AS rowstatus,"
 			+ "tanggal_pengiriman AS tanggal_pengiriman,ukuran AS ukuran,nama_kategori AS nama_kategori,"
 			+ "type AS type,type_name AS type_name,pengiriman_store_to_store_id AS pengiriman_store_to_store_id,"
-			+ " 0.0 as total_pindah "
+			+ " 0.0 as total_pindah, sku_code as sku_code "
 			+ "FROM detail_pengiriman_store_to_store "
 			+ "WHERE rowstatus = 1 AND pengiriman_code = :pengiriman_code", nativeQuery = true)
 	List<DetailPengirimanStoreToStore> all(String pengiriman_code);

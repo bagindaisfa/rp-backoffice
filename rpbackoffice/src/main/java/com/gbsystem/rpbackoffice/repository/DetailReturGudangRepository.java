@@ -14,9 +14,7 @@ public interface DetailReturGudangRepository extends JpaRepository<DetailReturGu
 
 	List<DetailReturGudang> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_retur_gudang WHERE rowstatus = 1"
-			+ "MATCH(pengiriman_code) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_retur_gudang WHERE rowstatus = 1 AND pengiriman_code LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
 	List<DetailReturGudang> search(String keyword);
 	
 	@Query(value = "SELECT * FROM detail_retur_gudang WHERE rowstatus = 1 AND pengiriman_code = (?1)", nativeQuery = true)

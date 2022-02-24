@@ -23,8 +23,8 @@ public class DetailPenerimaanStoreFromStore {
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
-	private String artikel;
 	private String sku_code;
+	private String artikel;
 	private String nama_barang;
 	private double kuantitas;
 	private String keterangan;

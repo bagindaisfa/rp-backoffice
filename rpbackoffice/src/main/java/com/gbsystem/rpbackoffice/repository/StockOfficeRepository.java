@@ -13,15 +13,18 @@ import com.gbsystem.rpbackoffice.entities.StockOffice;
 public interface StockOfficeRepository extends JpaRepository<StockOffice, Long> {
 	List<StockOffice> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = :id_office AND artikel = :artikel", nativeQuery = true)
-	StockOffice findById_officeAndArtikel(int id_office, String artikel);
+	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = :id_office AND sku_code = :sku_code", nativeQuery = true)
+	StockOffice findById_officeAndSku_code(int id_office, String sku_code);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_office WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockOffice(int rowstatus);
 	
-	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND  "
-			+ "MATCH(artikel, nama_barang, tipe, kategori) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND "
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR "
+			+ "sku_code LIKE %:keyword%", nativeQuery = true)
 	List<StockOffice> search(String keyword);
 
 }

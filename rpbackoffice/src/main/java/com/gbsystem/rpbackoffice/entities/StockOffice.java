@@ -14,6 +14,7 @@ public class StockOffice {
 	private Long id;
 	private int id_office;
 	private String lokasi_office;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -45,6 +46,12 @@ public class StockOffice {
 	}
 	public void setLokasi_office(String lokasi_office) {
 		this.lokasi_office = lokasi_office;
+	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

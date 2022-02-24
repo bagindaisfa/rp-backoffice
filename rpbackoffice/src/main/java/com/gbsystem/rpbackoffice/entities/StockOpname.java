@@ -17,6 +17,7 @@ public class StockOpname {
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_so;
+	private String sku_code;
 	private String artikel;
 	private String type;
 	private String type_name;
@@ -40,6 +41,12 @@ public class StockOpname {
 	}
 	public void setTanggal_so(Date tanggal_so) {
 		this.tanggal_so = tanggal_so;
+	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
 	}
 	public String getArtikel() {
 		return artikel;

@@ -16,8 +16,6 @@ public interface PenjualanOfficeRepository extends JpaRepository<PenjualanOffice
 	@Query(value = "SELECT COUNT(id) FROM penjualan_office WHERE rowstatus = :rowstatus", nativeQuery = true)
 	Double counting(int rowstatus);
 	
-	@Query(value = "SELECT * FROM penjualan_office WHERE rowstatus=1 AND "
-			+ "MATCH(id_transaksi, id_office, lokasi_office) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM penjualan_office WHERE rowstatus=1 AND id_transaksi LIKE %:keyword% OR id_office LIKE %:keyword% OR lokasi_office LIKE %:keyword%", nativeQuery = true)
 	List<PenjualanOffice> search(String keyword);
 }

@@ -61,9 +61,9 @@ public class PenerimaanSupplierService {
 			eRepo.save(p);
 			
 			StockOffice d = new StockOffice();
-			d = eStockRepo.findById_officeAndArtikel(
+			d = eStockRepo.findById_officeAndSku_code(
 					1,
-					pembelian.getDetail_pembelian().get(i).getArtikel());
+					pembelian.getDetail_pembelian().get(i).getSku_code());
 			
 			d.setKuantitas(d.getKuantitas() + pembelian.getDetail_pembelian().get(i).getKuantitas());
 			eStockRepo.save(d);
@@ -100,14 +100,14 @@ public class PenerimaanSupplierService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public PenerimaanSupplier deletePenerimaanSupplierById(Long id, int id_office, String artikel, String ukuran)
+	public PenerimaanSupplier deletePenerimaanSupplierById(Long id, int id_office, String sku_code)
     {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(id).get();
     	p.setRowstatus(0);
     	
     	StockOffice d = new StockOffice();
-		d = eStockRepo.findById_officeAndArtikel(id_office,artikel);
+		d = eStockRepo.findById_officeAndSku_code(id_office,sku_code);
     	d.setKuantitas(d.getKuantitas() - p.getKuantitas());
     	eStockRepo.save(d);
     	

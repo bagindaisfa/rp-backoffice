@@ -65,9 +65,9 @@ public class PenjualanOfficeService {
 			details.add(d);
 			
 			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			g = eStockOfficeRepo.findById_officeAndSku_code(
 					penjualanOffice.getId_office(),
-					penjualanOffice.getDetail_penjualan().get(i).getArtikel());
+					penjualanOffice.getDetail_penjualan().get(i).getSku_code());
 			g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
 			eStockOfficeRepo.save(g);
 			
@@ -126,9 +126,9 @@ public class PenjualanOfficeService {
 			details.add(p.getDetail_penjualan().get(i));
     		
     		StockOffice e = new StockOffice();
-    		eStockOfficeRepo.findById_officeAndArtikel(
+    		eStockOfficeRepo.findById_officeAndSku_code(
     				p.getId_office(),
-					p.getDetail_penjualan().get(i).getArtikel());
+					p.getDetail_penjualan().get(i).getSku_code());
     		e.setKuantitas(e.getKuantitas() + p.getDetail_penjualan().get(i).getKuantitas());
     		eStockOfficeRepo.save(e);
     		
@@ -147,9 +147,9 @@ public class PenjualanOfficeService {
 		for(int i = 0; i < p.getDetail_penjualan().size(); i++) {
 			
 			StockOffice a = new StockOffice();
-			a = eStockOfficeRepo.findById_officeAndArtikel(
+			a = eStockOfficeRepo.findById_officeAndSku_code(
 					p.getId_office(),
-					p.getDetail_penjualan().get(i).getArtikel());
+					p.getDetail_penjualan().get(i).getSku_code());
 			a.setKuantitas(a.getKuantitas() + p.getDetail_penjualan().get(i).getKuantitas());
 			eStockOfficeRepo.save(a);
 				
@@ -193,9 +193,9 @@ public class PenjualanOfficeService {
 			details.add(d);
 			if (penjualanOffice.getDetail_penjualan().get(k).getRowstatus() == 1) {
 				StockOffice l = new StockOffice();
-				l = eStockOfficeRepo.findById_officeAndArtikel(
+				l = eStockOfficeRepo.findById_officeAndSku_code(
 						penjualanOffice.getId_office(),
-						penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+						penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 				l.setKuantitas(l.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
 				eStockOfficeRepo.save(l);
 			

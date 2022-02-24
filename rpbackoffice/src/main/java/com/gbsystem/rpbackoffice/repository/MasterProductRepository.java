@@ -23,6 +23,6 @@ public interface MasterProductRepository extends JpaRepository<MasterProduct, Lo
 	@Query(value = "SELECT * FROM master_product "
 			+ "WHERE rowstatus = 1 AND "
 			+ "artikel_product LIKE %:keyword% OR nama_product LIKE %:keyword% OR "
-			+ "type_name LIKE %:keyword% OR nama_kategori LIKE %:keyword%", nativeQuery = true)
+			+ "type_name LIKE %:keyword% OR nama_kategori LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
 	List<MasterProduct> search(String keyword);
 }

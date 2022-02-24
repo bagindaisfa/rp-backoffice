@@ -23,7 +23,7 @@ public class StockOpnameService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepoKeluar;
 	
-	public StockOpname saveStockOpname(String artikel, String kategori, String nama_kategori
+	public StockOpname saveStockOpname(String sku_code,String artikel, String kategori, String nama_kategori
 			,String type,String type_name, String nama_barang, double stock_opname) {
 		
 		StockOpname p = new StockOpname();
@@ -31,12 +31,8 @@ public class StockOpnameService {
 		Date date = new Date();
 		Date date_before = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
 		
-		System.out.println(artikel);
-		System.out.println(date);
-		System.out.println(date_before);
-		
-		Float kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before);
-		Float kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before);
+		Float kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
+		Float kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
 		
 		Float stock = kuantitas_masuk - kuantitas_keluar;
 		
@@ -48,6 +44,7 @@ public class StockOpnameService {
 		}
 		
 		p.setTanggal_so(date);
+		p.setSku_code(sku_code);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setNama_kategori(nama_kategori);
@@ -80,7 +77,7 @@ public class StockOpnameService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String artikel, String kategori, String nama_kategori
+	public void update(Long id, String sku_code,String artikel, String kategori, String nama_kategori
 			,String type,String type_name, String nama_barang, double stock_opname) {
 		StockOpname p = new StockOpname();
     	p = eRepo.findById(id).get();
@@ -101,6 +98,7 @@ public class StockOpnameService {
 		}
     	
 		p.setTanggal_so(date);
+		p.setSku_code(sku_code);
 		p.setArtikel(artikel);
 		p.setKategori(kategori);
 		p.setNama_kategori(nama_kategori);
