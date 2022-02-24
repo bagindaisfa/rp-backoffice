@@ -24,10 +24,10 @@ public class StockOpname {
 	private String kategori;
 	private String nama_kategori;
 	private String nama_barang;
-	private double kuantitas_masuk;
-	private double kuantitas_keluar;
-	private Float stock;
-	private double stock_opname;
+	private Double kuantitas_masuk;
+	private Double kuantitas_keluar;
+	private Double stock;
+	private Double stock_opname;
 	private String keterangan;
 	private int rowstatus;
 	public Long getId() {
@@ -97,10 +97,10 @@ public class StockOpname {
 	public void setKuantitas_keluar(double kuantitas_keluar) {
 		this.kuantitas_keluar = kuantitas_keluar;
 	}
-	public Float getStock() {
+	public Double getStock() {
 		return stock;
 	}
-	public void setStock(Float stock) {
+	public void setStock(Double stock) {
 		this.stock = stock;
 	}
 	public double getStock_opname() {

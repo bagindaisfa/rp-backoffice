@@ -26,5 +26,5 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND sku_code = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Double generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 }

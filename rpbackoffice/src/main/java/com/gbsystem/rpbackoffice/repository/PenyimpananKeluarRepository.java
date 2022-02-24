@@ -27,5 +27,5 @@ public interface PenyimpananKeluarRepository extends JpaRepository<PenyimpananKe
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_keluar where rowstatus = 1 AND sku_code = (?1)"
 			+ "AND ((tanggal_keluar <= (?2) AND tanggal_keluar >= (?3))"
 			+ "OR tanggal_keluar = (?2) OR tanggal_keluar = (?3))", nativeQuery = true)
-	Float generateKuantitasKeluar(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Double generateKuantitasKeluar(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 }

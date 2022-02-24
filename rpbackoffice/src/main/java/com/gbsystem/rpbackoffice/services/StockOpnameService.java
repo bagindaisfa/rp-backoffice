@@ -24,17 +24,17 @@ public class StockOpnameService {
 	private PenyimpananKeluarRepository eRepoKeluar;
 	
 	public StockOpname saveStockOpname(String sku_code,String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, double stock_opname) {
+			,String type,String type_name, String nama_barang, Double stock_opname) {
 		
 		StockOpname p = new StockOpname();
 		
 		Date date = new Date();
 		Date date_before = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
 		
-		Float kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
-		Float kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
+		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
+		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
 		
-		Float stock = kuantitas_masuk - kuantitas_keluar;
+		Double stock = kuantitas_masuk - kuantitas_keluar;
 		
 		String keterangan = "";
 		if (stock == stock_opname) {
@@ -78,17 +78,17 @@ public class StockOpnameService {
     }
 	
 	public void update(Long id, String sku_code,String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, double stock_opname) {
+			,String type,String type_name, String nama_barang, Double stock_opname) {
 		StockOpname p = new StockOpname();
     	p = eRepo.findById(id).get();
     	
     	Date date = new Date();
 		Date date_before = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
 		
-		Float kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before);
-		Float kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before);
+		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before);
+		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before);
 		
-		Float stock = kuantitas_masuk - kuantitas_keluar;
+		Double stock = kuantitas_masuk - kuantitas_keluar;
 		
 		String keterangan = "";
 		if (stock == stock_opname) {
@@ -107,7 +107,7 @@ public class StockOpnameService {
 		p.setNama_barang(nama_barang);
 		p.setKuantitas_masuk(kuantitas_masuk);
 		p.setKuantitas_keluar(kuantitas_keluar);
-		p.setStock(kuantitas_masuk - kuantitas_keluar);
+		p.setStock(stock);
 		p.setStock_opname(stock_opname);
 		p.setKeterangan(keterangan);
 		p.setRowstatus(1);
