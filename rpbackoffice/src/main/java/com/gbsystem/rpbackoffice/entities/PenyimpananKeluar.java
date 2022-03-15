@@ -25,7 +25,7 @@ public class PenyimpananKeluar {
 	private String lokasi_store;
 	private String sku_code;
 	private String artikel;
-	private String type;
+	private int type;
 	private String type_name;
 	private String kategori;
 	private String nama_kategori;
@@ -94,10 +94,10 @@ public class PenyimpananKeluar {
 		this.artikel = artikel;
 	}
 	
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public String getType_name() {

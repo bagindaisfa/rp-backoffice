@@ -84,7 +84,7 @@ public class PenerimaanStoreController {
     		p.setArtikel(row.getCell(5).getStringCellValue());
     		p.setKategori(row.getCell(6).getStringCellValue());
     		p.setNama_kategori(row.getCell(7).getStringCellValue());
-			p.setType(row.getCell(8).getStringCellValue());
+			p.setType(Integer.valueOf(row.getCell(8).getStringCellValue()));
 			p.setType_name(row.getCell(9).getStringCellValue());
 			p.setNama_barang(row.getCell(10).getStringCellValue());
 			p.setKuantitas(row.getCell(11).getNumericCellValue());

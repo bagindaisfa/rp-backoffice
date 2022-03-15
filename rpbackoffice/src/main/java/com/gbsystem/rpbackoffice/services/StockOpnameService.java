@@ -24,7 +24,7 @@ public class StockOpnameService {
 	private PenyimpananKeluarRepository eRepoKeluar;
 	
 	public StockOpname saveStockOpname(String sku_code,String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, Double stock_opname) {
+			,int type,String type_name, String nama_barang, Double stock_opname) {
 		
 		StockOpname p = new StockOpname();
 		
@@ -78,7 +78,7 @@ public class StockOpnameService {
     }
 	
 	public void update(Long id, String sku_code,String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, Double stock_opname) {
+			,int type,String type_name, String nama_barang, Double stock_opname) {
 		StockOpname p = new StockOpname();
     	p = eRepo.findById(id).get();
     	

@@ -53,6 +53,7 @@ public class PengirimanStoreToStoreService {
 			DetailPengirimanStoreToStore detail = new DetailPengirimanStoreToStore();
 			detail.setTanggal_pengiriman(tanggal_pengiriman);
 			detail.setPengiriman_code(code_pengiriman);
+			detail.setSku_code(pengirimanStoreToStore.getDetailPengirimanList().get(i).getSku_code());
 			detail.setArtikel(pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 			detail.setKategori(pengirimanStoreToStore.getDetailPengirimanList().get(i).getKategori());
 			detail.setNama_kategori(pengirimanStoreToStore.getDetailPengirimanList().get(i).getNama_kategori());

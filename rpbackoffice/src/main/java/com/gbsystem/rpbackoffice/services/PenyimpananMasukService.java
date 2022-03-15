@@ -16,7 +16,7 @@ public class PenyimpananMasukService {
 	private PenyimpananMasukRepository eRepo;
 	
 	public PenyimpananMasuk savePenyimpananMasuk(String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
+			,int type,String type_name, String nama_barang, double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		
 		PenyimpananMasuk p = new PenyimpananMasuk();
 		
@@ -54,7 +54,7 @@ public class PenyimpananMasukService {
     }
 	
 	public void update(Long id, Date tanggal_masuk, String artikel, String kategori, String nama_kategori
-			,String type,String type_name, String nama_barang, 
+			,int type,String type_name, String nama_barang, 
 			double kuantitas, String ukuran, double hpp, double harga_jual, String keterangan ) {
 		PenyimpananMasuk p = new PenyimpananMasuk();
     	p = eRepo.findById(id).get();

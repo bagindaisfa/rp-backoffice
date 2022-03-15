@@ -15,7 +15,7 @@ public class MasterProduct {
 	private String sku_code;
 	private String artikel_product;
 	private String nama_product;
-	private String type;
+	private int type;
 	private String type_name;
 	private String kategori;
 	private String nama_kategori;
@@ -55,10 +55,10 @@ public class MasterProduct {
 	public void setNama_product(String nama_product) {
 		this.nama_product = nama_product;
 	}
-	public String getType() {
+	public int getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public String getType_name() {

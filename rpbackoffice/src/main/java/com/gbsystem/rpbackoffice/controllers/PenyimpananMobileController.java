@@ -61,6 +61,12 @@ public class PenyimpananMobileController {
 		return penyimpananMobileService.stockAvailPerStoreByCategory(id_store, kategori);
 	}
 	
+	@GetMapping("/availStockStoreByType")
+	public List<StockStore> stockAvailPerStoreByType(@Param("id_store") int id_store, @Param("type") String type){
+		
+		return penyimpananMobileService.stockAvailPerStoreByType(id_store, type);
+	}
+	
 	@GetMapping("/searchStockStore")
 	public List<StockStore> searchStockStore(@Param("id_store") int id_store, @Param("keyword") String keyword){
 		
@@ -73,6 +79,12 @@ public class PenyimpananMobileController {
 		return penyimpananMobileService.searchByCategory(id_store,kategori,keyword);
 	}
 	
+	@GetMapping("/searchStockStoreByType")
+	public List<StockStore> searchByType(@Param("id_store") int id_store, @Param("type") int type, @Param("keyword") String keyword){
+		
+		return penyimpananMobileService.searchByType(id_store,type,keyword);
+	}
+	
 	@GetMapping("/riwayatPemindahan")
 	public List<DetailPengirimanStoreToStore> allPindah(@Param("pengiriman_code") String pengiriman_code){
 		
@@ -82,7 +94,7 @@ public class PenyimpananMobileController {
 	@PostMapping("/updateStock")
 	public StockStore update(
 			@RequestParam("id") Long id,@RequestParam("id_store") int id_store,@RequestParam("lokasi_store") String lokasi_store,
-			@RequestParam("artikel") String artikel,@RequestParam("type") String type,@RequestParam("type_name") String type_name, 
+			@RequestParam("artikel") String artikel,@RequestParam("type") int type,@RequestParam("type_name") String type_name, 
 			@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori,@RequestParam("nama_barang") String nama_barang,
 			@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,@RequestParam("foto_barang") MultipartFile foto_barang,
 			@RequestParam("hpp")double hpp,@RequestParam("harga_jual") double harga_jual,@RequestParam("rowstatus") int rowstatus) {

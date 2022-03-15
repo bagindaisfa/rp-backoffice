@@ -76,6 +76,11 @@ public class PenyimpananMobileService {
 		return eStockStoreRepo.stockAvailPerStoreByCategory(id_store,kategori);
 	}
 	
+	public List<StockStore> stockAvailPerStoreByType(int id_store, String type) {
+		
+		return eStockStoreRepo.stockAvailPerStoreByType(id_store,type);
+	}
+	
 	public List<StockStore> searchStockStore(int id_store, String keyword) {
 		
 		return eStockStoreRepo.search(id_store, keyword);
@@ -84,6 +89,11 @@ public class PenyimpananMobileService {
 	public List<StockStore> searchByCategory(int id_store, String kategori, String keyword) {
 		
 		return eStockStoreRepo.searchByCategory(id_store, kategori, keyword);
+	}
+	
+	public List<StockStore> searchByType(int id_store, int type, String keyword) {
+		
+		return eStockStoreRepo.searchByType(id_store, type, keyword);
 	}
 	
 	public List<PenyimpananStoreKeluar> getAllPerStoreKeluar(int id_store) {
@@ -121,7 +131,7 @@ public class PenyimpananMobileService {
 	}
 	
 	public StockStore update(Long id,int id_store, String lokasi_store,
-			String artikel, String type, String type_name, 
+			String artikel, int type, String type_name, 
 			String kategori, String nama_kategori, String nama_barang,
 			double kuantitas, String ukuran, MultipartFile foto_barang,
 			double hpp, double harga_jual, int rowstatus) {

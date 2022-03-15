@@ -38,7 +38,7 @@ public class PenyimpananMasukController {
     
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("ukuran") String ukuran, @RequestParam("hpp") double hpp,
     		@RequestParam("harga_jual") double harga_jual, @RequestParam("keterangan") String keterangan) throws Exception {
@@ -52,7 +52,7 @@ public class PenyimpananMasukController {
     
     @PostMapping(value = "/update")
     public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_masuk") Date tanggal_masuk, @RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("ukuran") String ukuran, @RequestParam("hpp") double hpp,
     		@RequestParam("harga_jual") double harga_jual, @RequestParam("keterangan") String keterangan) throws Exception {

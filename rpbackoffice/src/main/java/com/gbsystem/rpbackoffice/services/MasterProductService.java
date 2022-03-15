@@ -24,7 +24,7 @@ public class MasterProductService {
 	
 	public MasterProduct saveMasterProduct( MultipartFile image,
 			String sku_code,String artikel_product, String nama_product, 
-			String type, String type_name, String kategori, 
+			int type, String type_name, String kategori, 
 			String nama_kategori, String artikel_frame, String artikel_lens,String ukuran,
 			double kuantitas,double hpp,double harga_jual, String remarks
 			) {
@@ -100,7 +100,7 @@ public class MasterProductService {
 	
 	public String update(
 			Long id, MultipartFile image, String sku_code, String artikel_product,
-			String nama_product, String type, String type_name,
+			String nama_product, int type, String type_name,
 			String kategori, String artikel_frame, String artikel_lens,String ukuran,
 			String nama_kategori, double kuantitas,double hpp,
 			double harga_jual, String remarks ) {

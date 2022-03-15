@@ -60,7 +60,7 @@ public class MasterProductController {
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
-    		@RequestParam("type") String type,
+    		@RequestParam("type") int type,
     		@RequestParam("type_name") String type_name,
     		@RequestParam("kategori") String kategori,
     		@RequestParam("nama_kategori") String nama_kategori,
@@ -84,7 +84,7 @@ public class MasterProductController {
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
-    		@RequestParam("type") String type,
+    		@RequestParam("type") int type,
     		@RequestParam("type_name") String type_name,
     		@RequestParam("kategori") String kategori,
     		@RequestParam("nama_kategori") String nama_kategori,
@@ -117,7 +117,7 @@ public class MasterProductController {
         	masterProduct.setImage(null);
         	masterProduct.setArtikel_product(formatter.formatCellValue(row.getCell(0)));
         	masterProduct.setNama_product(formatter.formatCellValue(row.getCell(1)));
-        	masterProduct.setType(formatter.formatCellValue(row.getCell(2)));
+        	masterProduct.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
         	masterProduct.setType_name(formatter.formatCellValue(row.getCell(3)));
         	masterProduct.setKategori(formatter.formatCellValue(row.getCell(4)));
         	masterProduct.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
@@ -136,7 +136,7 @@ public class MasterProductController {
     		q.setArtikel(formatter.formatCellValue(row.getCell(0)));
     		q.setKategori(formatter.formatCellValue(row.getCell(4)));
     		q.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
-    		q.setType(formatter.formatCellValue(row.getCell(2)));
+    		q.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
     		q.setType_name(formatter.formatCellValue(row.getCell(3)));
     		q.setNama_barang(formatter.formatCellValue(row.getCell(1)));
     		q.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));

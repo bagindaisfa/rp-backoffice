@@ -38,9 +38,21 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 			+ "lokasi_store LIKE %:keyword% ", nativeQuery = true)
 	List<StockStore> searchByCategory(int id_store, String kategori, String keyword);
 	
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND type = :type AND "
+			+ "sku_code LIKE %:keyword% OR "
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword% ", nativeQuery = true)
+	List<StockStore> searchByType(int id_store, int type, String keyword);
+	
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kuantitas !=0 ", nativeQuery = true)
 	List<StockStore> stockAvailPerStore(int id_store);
 	
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kategori = :kategori AND kuantitas !=0 ", nativeQuery = true)
 	List<StockStore> stockAvailPerStoreByCategory(int id_store, String kategori);
+	
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND type = :type AND kuantitas !=0 ", nativeQuery = true)
+	List<StockStore> stockAvailPerStoreByType(int id_store, String type);
 }

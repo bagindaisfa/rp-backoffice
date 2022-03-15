@@ -37,7 +37,7 @@ public class StockOpnameController {
     
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(@RequestParam("sku_code") String sku_code,@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {
@@ -49,7 +49,7 @@ public class StockOpnameController {
     
     @PostMapping(value = "/update")
     public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("sku_code") String sku_code,@RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("stock_opname") double stock_opname) throws Exception {
     	
     	if (artikel != "") {

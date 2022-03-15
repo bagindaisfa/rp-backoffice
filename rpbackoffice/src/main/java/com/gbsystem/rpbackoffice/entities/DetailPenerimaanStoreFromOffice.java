@@ -25,6 +25,10 @@ public class DetailPenerimaanStoreFromOffice {
 	private Date tanggal_penerimaan;
 	private String sku_code;
 	private String artikel;
+	private int type;
+	private String type_name;
+	private String kategori;
+	private String nama_kategori;
 	private String nama_barang;
 	private double kuantitas;
 	private String keterangan;
@@ -57,6 +61,31 @@ public class DetailPenerimaanStoreFromOffice {
 	}
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
+	}
+	
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
+	public String getKategori() {
+		return kategori;
+	}
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
+	}
+	public String getNama_kategori() {
+		return nama_kategori;
+	}
+	public void setNama_kategori(String nama_kategori) {
+		this.nama_kategori = nama_kategori;
 	}
 	public PenerimaanStoreFromOffice getPenerimaanStoreFromOffice() {
 		return penerimaanStoreFromOffice;

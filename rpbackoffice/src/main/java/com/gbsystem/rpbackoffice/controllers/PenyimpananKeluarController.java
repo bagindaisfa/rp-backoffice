@@ -39,13 +39,15 @@ public class PenyimpananKeluarController {
     }
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveProduct(@RequestParam("id_store") int id_store,
-    		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
-    		@RequestParam("nama_barang") String nama_barang, @RequestParam("kuantitas") double kuantitas, 
-    		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang, 
-    		@RequestParam("hpp") double hpp, @RequestParam("harga_total") double harga_total,
-    		@RequestParam("keterangan") String keterangan) throws Exception {
+    public @ResponseBody String save(
+    		@RequestParam("id_store") int id_store,@RequestParam("lokasi_store") String lokasi_store,
+    		@RequestParam("artikel") String artikel,@RequestParam("kategori") String kategori,
+    		@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,
+    		@RequestParam("type_name") String type_name,@RequestParam("nama_barang") String nama_barang,
+    		@RequestParam("kuantitas") double kuantitas,@RequestParam("ukuran") String ukuran,
+    		@RequestParam("foto_barang") MultipartFile foto_barang,@RequestParam("hpp") double hpp,
+    		@RequestParam("harga_total") double harga_total,@RequestParam("keterangan") String keterangan
+    		) throws Exception {
     	
     	if (artikel != "") {
     		penyimpananKeluarService.savePenyimpananKeluar(id_store, lokasi_store, artikel, kategori,nama_kategori, type,type_name, nama_barang, 
@@ -58,7 +60,7 @@ public class PenyimpananKeluarController {
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String update(@RequestParam("id") Long id, @RequestParam("tanggal_keluar") Date tanggal_keluar, @RequestParam("id_store") int id_store,
     		@RequestParam("lokasi_store") String lokasi_store, @RequestParam("artikel") String artikel,
-    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") String type,@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,@RequestParam("nama_kategori") String nama_kategori, @RequestParam("type") int type,@RequestParam("type_name") String type_name,
     		@RequestParam("nama_barang") String nama_barang,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("ukuran") String ukuran, @RequestParam("foto_barang") MultipartFile foto_barang,
     		@RequestParam("hpp") double hpp, @RequestParam("harga_jual") double harga_jual,

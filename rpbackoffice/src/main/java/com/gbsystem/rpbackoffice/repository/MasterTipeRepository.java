@@ -11,10 +11,9 @@ import com.gbsystem.rpbackoffice.entities.MasterTipe;
 
 @Repository
 public interface MasterTipeRepository extends JpaRepository<MasterTipe, Long> {
-	List<MasterTipe> findByRowstatus(@Param("rowstatus") int rowstatus);
+	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = :rowstatus ORDER BY id", nativeQuery = true)
+	List<MasterTipe> findByRowstatus(int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = 1 AND "
-			+ "MATCH(type_name) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = 1 AND type_name LIKE %:keyword%", nativeQuery = true)
 	List<MasterTipe> search(String keyword);
 }
