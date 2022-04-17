@@ -15,7 +15,7 @@ public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	
 	List<Pelanggan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 AND nama_pelanggan LIKE %:keyword% OR no_hp LIKE %:keyword% OR email LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 AND (nama_pelanggan LIKE %:keyword% OR no_hp LIKE %:keyword% OR email LIKE %:keyword%)", nativeQuery = true)
 	List<Pelanggan> search(String keyword);
 	
 	@Query(value = "SELECT COUNT(id) AS id FROM pelanggan WHERE rowstatus = :rowstatus ", nativeQuery = true)
@@ -29,4 +29,7 @@ public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	
 	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 and no_hp =:no_hp_pelanggan ", nativeQuery = true)
 	List<Pelanggan> findByNoHp(String no_hp_pelanggan);
+	
+	@Query(value = "SELECT SUM(poin) FROM pelanggan WHERE rowstatus = 1 and no_hp =:no_hp_pelanggan ", nativeQuery = true)
+	Double totalPoin(String no_hp_pelanggan);
 }

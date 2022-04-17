@@ -14,7 +14,7 @@ public interface DetailPenerimaanStoreFromStoreRepository extends JpaRepository<
 
 	List<DetailPenerimaanStoreFromStore> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_penerimaan_store_from_store WHERE rowstatus = 1 AND penerimaan_code LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_penerimaan_store_from_store WHERE rowstatus = 1 AND ( penerimaan_code LIKE %:keyword% OR sku_code LIKE %:keyword% )", nativeQuery = true)
 	List<DetailPenerimaanStoreFromStore> search(String keyword);
 	
 	@Query(value = "SELECT * FROM detail_penerimaan_store_from_store WHERE rowstatus = 1 AND penerimaan_code = (?1)", nativeQuery = true)

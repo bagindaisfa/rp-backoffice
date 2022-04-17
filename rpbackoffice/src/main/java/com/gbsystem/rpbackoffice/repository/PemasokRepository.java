@@ -15,9 +15,7 @@ public interface PemasokRepository extends JpaRepository<Pemasok, Long> {
 	
 List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND "
-			+ "MATCH(nama_pemasok) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND (nama_pemasok LIKE %:keyword%) ", nativeQuery = true)
 	List<Pemasok> search(String keyword);
 	
 	@Query(value = "SELECT COUNT(id) AS id FROM pemasok WHERE rowstatus = :rowstatus ", nativeQuery = true)

@@ -14,8 +14,6 @@ public interface MasterProjectRepository extends JpaRepository<MasterProject, Lo
 	
 	public MasterProject findById(String id);
 	
-	@Query(value = "SELECT * FROM master_project WHERE rowstatus = 1 AND "
-			+ "MATCH(project_name) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_project WHERE rowstatus = 1 AND (project_name LIKE %:keyword%) ", nativeQuery = true)
 	List<MasterProject> search(String keyword);
 }

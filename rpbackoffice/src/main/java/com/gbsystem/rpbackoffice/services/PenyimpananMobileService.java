@@ -71,6 +71,11 @@ public class PenyimpananMobileService {
 		return eStockStoreRepo.stockAvailPerStore(id_store);
 	}
 	
+	public List<StockStore> stockAllItemPerStore(int id_store) {
+		
+		return eStockStoreRepo.stockAllItemPerStore(id_store);
+	}
+	
 	public List<StockStore> stockAvailPerStoreByCategory(int id_store, String kategori) {
 		
 		return eStockStoreRepo.stockAvailPerStoreByCategory(id_store,kategori);
@@ -86,6 +91,11 @@ public class PenyimpananMobileService {
 		return eStockStoreRepo.search(id_store, keyword);
 	}
 	
+	public List<StockStore> searchAllStock(int id_store, String keyword) {
+		
+		return eStockStoreRepo.searchAllStock(id_store, keyword);
+	}
+	
 	public List<StockStore> searchByCategory(int id_store, String kategori, String keyword) {
 		
 		return eStockStoreRepo.searchByCategory(id_store, kategori, keyword);
@@ -94,6 +104,10 @@ public class PenyimpananMobileService {
 	public List<StockStore> searchByType(int id_store, int type, String keyword) {
 		
 		return eStockStoreRepo.searchByType(id_store, type, keyword);
+	}
+	
+	public List<StockStore> stockMinimum(int id_store) {
+		return eStockStoreRepo.stockMinimum(id_store);
 	}
 	
 	public List<PenyimpananStoreKeluar> getAllPerStoreKeluar(int id_store) {

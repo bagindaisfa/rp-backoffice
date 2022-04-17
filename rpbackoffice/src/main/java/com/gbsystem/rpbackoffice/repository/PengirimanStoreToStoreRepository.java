@@ -11,8 +11,8 @@ import com.gbsystem.rpbackoffice.entities.PengirimanStoreToStore;
 public interface PengirimanStoreToStoreRepository extends JpaRepository<PengirimanStoreToStore, Long> {
 	List<PengirimanStoreToStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pengiriman_store_to_store WHERE rowstatus = 1 AND pengiriman_code LIKE %:keyword% OR "
-			+ "lokasi_store_asal LIKE %:keyword% OR lokasi_store_tujuan LIKE %:keyword% ", nativeQuery = true)
+	@Query(value = "SELECT * FROM pengiriman_store_to_store WHERE rowstatus = 1 AND ( pengiriman_code LIKE %:keyword% OR "
+			+ "lokasi_store_asal LIKE %:keyword% OR lokasi_store_tujuan LIKE %:keyword% )", nativeQuery = true)
 	List<PengirimanStoreToStore> search( String keyword);
 	
 	@Query(value = "SELECT A.id AS id,A.id_store_asal AS id_store_asal,A.id_store_tujuan AS id_store_tujuan,"
@@ -20,8 +20,8 @@ public interface PengirimanStoreToStoreRepository extends JpaRepository<Pengirim
 			+ "A.rowstatus AS rowstatus,A.tanggal_pengiriman AS tanggal_pengiriman, A.id_karyawan AS id_karyawan, A.nama_karyawan AS nama_karyawan, A.keterangan AS keterangan,"
 			+ "(SELECT SUM(kuantitas) FROM detail_pengiriman_store_to_store WHERE pengiriman_store_to_store_id=A.id) AS total_pindah "
 			+ "FROM pengiriman_store_to_store A "
-			+ "WHERE A.rowstatus = 1 AND A.id_store_asal = :id_store AND A.pengiriman_code LIKE %:keyword% OR "
-			+ "A.lokasi_store_asal LIKE %:keyword% OR A.lokasi_store_tujuan LIKE %:keyword%", nativeQuery = true)
+			+ "WHERE A.rowstatus = 1 AND A.id_store_asal = :id_store AND ( A.pengiriman_code LIKE %:keyword% OR "
+			+ "A.lokasi_store_asal LIKE %:keyword% OR A.lokasi_store_tujuan LIKE %:keyword% )", nativeQuery = true)
 	List<PengirimanStoreToStore> searchMobile(int id_store, String keyword);
 	
 	@Query(value = "SELECT A.id AS id,A.id_store_asal AS id_store_asal,A.id_store_tujuan AS id_store_tujuan,"

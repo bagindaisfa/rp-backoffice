@@ -24,15 +24,15 @@ public class DetailPengirimanStoreToStore {
 	private Date tanggal_pengiriman;
 	private String sku_code;
 	private String artikel;
-	private int type;
+	private Integer type;
 	private String type_name;
 	private String kategori;
 	private String nama_kategori;
 	private String nama_barang;
-	private double kuantitas;
+	private Double kuantitas;
 	private String ukuran;
-	private double hpp;
-	private double harga_jual;
+	private Double hpp;
+	private Double harga_jual;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "pengiriman_store_to_store_id", referencedColumnName = "id")
@@ -70,10 +70,10 @@ public class DetailPengirimanStoreToStore {
 		this.artikel = artikel;
 	}
 	
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 	public String getType_name() {
@@ -100,10 +100,10 @@ public class DetailPengirimanStoreToStore {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
-	public double getKuantitas() {
+	public Double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(double kuantitas) {
+	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
 	public String getUkuran() {
@@ -112,16 +112,16 @@ public class DetailPengirimanStoreToStore {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public double getHpp() {
+	public Double getHpp() {
 		return hpp;
 	}
-	public void setHpp(double hpp) {
+	public void setHpp(Double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_jual() {
+	public Double getHarga_jual() {
 		return harga_jual;
 	}
-	public void setHarga_jual(double harga_jual) {
+	public void setHarga_jual(Double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
 	public int getRowstatus() {

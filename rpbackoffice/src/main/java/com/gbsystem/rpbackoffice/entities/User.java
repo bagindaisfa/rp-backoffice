@@ -66,6 +66,9 @@ public class User implements UserDetails {
 	
 	@Column(name = "lokasi_store")
 	private String lokasi_store;
+
+	@Column(name = "alamat_store")
+	private String alamat_store;
 	
 	@Column(name = "akses_modul")
 	private String[] akses_modul;
@@ -222,6 +225,15 @@ public class User implements UserDetails {
 
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
+	}
+
+	
+	public String getAlamat_store() {
+		return alamat_store;
+	}
+
+	public void setAlamat_store(String alamat_store) {
+		this.alamat_store = alamat_store;
 	}
 
 	public String[] getAkses_modul() {

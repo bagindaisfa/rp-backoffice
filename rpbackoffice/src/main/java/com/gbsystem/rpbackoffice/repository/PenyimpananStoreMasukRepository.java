@@ -21,25 +21,25 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	List<PenyimpananStoreMasuk> getAllPerStoreMasuk(int id_store);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND "
-			+ "sku_code LIKE %:keyword% OR "
+			+ "( sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "penerimaan_code LIKE %:keyword% OR "
 			+ "type_name LIKE %:keyword% OR "
 			+ "nama_kategori LIKE %:keyword% OR "
 			+ "lokasi_store LIKE %:keyword% OR "
-			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
+			+ "lokasi_office LIKE %:keyword% )", nativeQuery = true)
 	List<PenyimpananStoreMasuk> search(String keyword);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND id_store = :id_store AND "
-			+ "sku_code LIKE %:keyword% OR "
+			+ "( sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "penerimaan_code LIKE %:keyword% OR "
 			+ "type_name LIKE %:keyword% OR "
 			+ "nama_kategori LIKE %:keyword% OR "
 			+ "lokasi_store LIKE %:keyword% OR "
-			+ "lokasi_office LIKE %:keyword%", nativeQuery = true)
+			+ "lokasi_office LIKE %:keyword% )", nativeQuery = true)
 	List<PenyimpananStoreMasuk> searchMobile(int id_store, String keyword);
 	
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_masuk where rowstatus = 1 AND sku_code = (?1)"

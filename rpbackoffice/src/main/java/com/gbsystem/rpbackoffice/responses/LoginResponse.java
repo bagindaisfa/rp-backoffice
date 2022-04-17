@@ -9,6 +9,7 @@ public class LoginResponse {
 	private String lokasi_office;
 	private int id_store;
 	private String lokasi_store;
+	private String alamat_store;
 	private String[] akses_modul;
 
 	public String getToken() {
@@ -65,6 +66,15 @@ public class LoginResponse {
 
 	public void setLokasi_store(String lokasi_store) {
 		this.lokasi_store = lokasi_store;
+	}
+
+	
+	public String getAlamat_store() {
+		return alamat_store;
+	}
+
+	public void setAlamat_store(String alamat_store) {
+		this.alamat_store = alamat_store;
 	}
 
 	public String[] getAkses_modul() {

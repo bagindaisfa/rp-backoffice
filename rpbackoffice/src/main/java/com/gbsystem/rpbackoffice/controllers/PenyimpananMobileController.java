@@ -55,6 +55,12 @@ public class PenyimpananMobileController {
 		return penyimpananMobileService.stockAvailPerStore(id_store);
 	}
 	
+	@GetMapping("/stockAllItemPerStore")
+	public List<StockStore> stockAllItemPerStore(@Param("id_store") int id_store){
+		
+		return penyimpananMobileService.stockAllItemPerStore(id_store);
+	}
+	
 	@GetMapping("/availStockStoreByCategory")
 	public List<StockStore> stockAvailPerStoreByCategory(@Param("id_store") int id_store, @Param("kategori") String kategori){
 		
@@ -71,6 +77,12 @@ public class PenyimpananMobileController {
 	public List<StockStore> searchStockStore(@Param("id_store") int id_store, @Param("keyword") String keyword){
 		
 		return penyimpananMobileService.searchStockStore(id_store,keyword);
+	}
+	
+	@GetMapping("/searchAllStock")
+	public List<StockStore> searchAllStock(@Param("id_store") int id_store, @Param("keyword") String keyword){
+		
+		return penyimpananMobileService.searchAllStock(id_store,keyword);
 	}
 	
 	@GetMapping("/searchStockStoreByCategory")
@@ -139,6 +151,23 @@ public class PenyimpananMobileController {
 		List<PengirimanStoreToStore> pindah = penyimpananMobileService.searchStorePindah(id_store, keyword);
 		Map<String, Object> response = new HashMap<>();
 		response.put("result", pindah);
+		return response;
+	}
+	
+	@GetMapping("/notifikasi")
+	public Map notifikasi(@Param("id_store") int id_store){
+		List<PenyimpananStoreMasuk> stock_masuk = penyimpananMobileService.getAllPerStoreMasuk(id_store);
+		List<PenyimpananStoreKeluar> stock_keluar = penyimpananMobileService.getAllPerStoreKeluar(id_store);
+		List<StockStore> stockMinimum = penyimpananMobileService.stockMinimum(id_store);
+		
+		Map<String, Map<String, Object>> response = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("masuk", stock_masuk);
+		map.put("keluar", stock_keluar);
+		map.put("minimum", stockMinimum);
+		
+		response.put("result", map);
 		return response;
 	}
 }

@@ -13,7 +13,7 @@ import com.gbsystem.rpbackoffice.entities.PenerimaanSupplier;
 public interface PenerimaanSupplierRepository extends JpaRepository<PenerimaanSupplier, Long> {
 List<PenerimaanSupplier> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM penerimaan_supplier WHERE rowstatus = 1 AND nama_barang LIKE %:keyword% OR nama_supplier LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM penerimaan_supplier WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR nama_supplier LIKE %:keyword%)", nativeQuery = true)
 	List<PenerimaanSupplier> search(String keyword);
 
 }

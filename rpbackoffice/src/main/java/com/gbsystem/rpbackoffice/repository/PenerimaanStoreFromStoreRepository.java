@@ -15,8 +15,8 @@ public interface PenerimaanStoreFromStoreRepository extends JpaRepository<Peneri
 List<PenerimaanStoreFromStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM penerimaan_store_from_store WHERE rowstatus = 1 AND "
-			+ "lokasi_store_asal LIKE %:keyword% OR "
-			+ "lokasi_store_penerima LIKE %:keyword%", nativeQuery = true)
+			+ "(lokasi_store_asal LIKE %:keyword% OR "
+			+ "lokasi_store_penerima LIKE %:keyword%)", nativeQuery = true)
 	List<PenerimaanStoreFromStore> search(String keyword);
 
 }

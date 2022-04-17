@@ -128,17 +128,6 @@ public class Karyawan {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	@Override
-	public String toString() {
-		return "Pelanggan [id=" + id + ","
-				+ " tanggal_join=" + tanggal_join + ", "
-				+ " nama_karyawan=" + nama_karyawan + ", "
-				+ " lokasi_office=" + lokasi_office + ", "
-				+ " jabatan=" + jabatan + ", "
-				+ "no_hp=" + no_hp + ","
-				+ " email=" + email + ","
-	            + " alamat=" + alamat + ","
-	            + " rowstatus=" + rowstatus + "]";
-	}
+	
 	
 }

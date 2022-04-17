@@ -14,7 +14,7 @@ public interface DetailPengirimanStoreToStoreRepository extends JpaRepository<De
 
 	List<DetailPengirimanStoreToStore> findByRowstatus(@Param("rowstatus") int rowstatus); 
 	
-	@Query(value = "SELECT * FROM detail_pengiriman_store_to_store WHERE rowstatus = 1 AND pengiriman_code LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM detail_pengiriman_store_to_store WHERE rowstatus = 1 AND ( pengiriman_code LIKE %:keyword% OR sku_code LIKE %:keyword% )", nativeQuery = true)
 	List<DetailPengirimanStoreToStore> search(String keyword);
 	
 	@Query(value = "SELECT id AS id,artikel AS artikel,harga_jual AS harga_jual,"

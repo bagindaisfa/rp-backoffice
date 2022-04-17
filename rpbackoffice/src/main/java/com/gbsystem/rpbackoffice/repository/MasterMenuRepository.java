@@ -13,8 +13,6 @@ import com.gbsystem.rpbackoffice.entities.MasterMenu;
 public interface MasterMenuRepository extends JpaRepository<MasterMenu, Long>  {
 List<MasterMenu> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_menu WHERE rowstatus = 1 AND "
-			+ "MATCH(kode_menu, nama_menu) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_menu WHERE rowstatus = 1 AND (kode_menu LIKE %:keyword% OR nama_menu LIKE %:keyword%) ", nativeQuery = true)
 	List<MasterMenu> search(String keyword);
 }

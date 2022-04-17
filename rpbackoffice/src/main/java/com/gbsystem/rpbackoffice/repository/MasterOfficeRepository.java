@@ -13,8 +13,6 @@ import com.gbsystem.rpbackoffice.entities.MasterOffice;
 public interface MasterOfficeRepository extends JpaRepository<MasterOffice, Long> {
 	List<MasterOffice> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_office WHERE rowstatus = 1 AND "
-			+ "MATCH(office_name, alamat) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_office WHERE rowstatus = 1 AND (office_name LIKE %:keyword% OR alamat LIKE %:keyword%) ", nativeQuery = true)
 	List<MasterOffice> search(String keyword);
 }

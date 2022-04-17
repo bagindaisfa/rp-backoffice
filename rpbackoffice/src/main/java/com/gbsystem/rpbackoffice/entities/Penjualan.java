@@ -30,6 +30,7 @@ public class Penjualan {
 	private String lokasi_store;
 	private String no_hp_pelanggan;
 	private String nama_pelanggan;
+	private int id_karyawan;
 	private String nama_karyawan;
 	private double diskon;
 	private String metode_bayar;
@@ -42,6 +43,7 @@ public class Penjualan {
 	@Where(clause = "rowstatus=1")
     @JsonIgnoreProperties("penjualan")
     private List<DetailPesanan> detailPesananList = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -120,6 +122,13 @@ public class Penjualan {
 	public void setNama_pelanggan(String nama_pelanggan) {
 		this.nama_pelanggan = nama_pelanggan;
 	}
+	public int getId_karyawan() {
+		return id_karyawan;
+	}
+	public void setId_karyawan(int id_karyawan) {
+		this.id_karyawan = id_karyawan;
+	}
+	
 	public String getNama_karyawan() {
 		return nama_karyawan;
 	}
@@ -154,7 +163,7 @@ public class Penjualan {
 	            + " total=" + total + ","
 	            + " kembalian=" + kembalian + ","
 	            + " nama_pelanggan=" + nama_pelanggan + ","
-	            + " nama_karyawan=" + nama_karyawan + ","
+	            + " id_karyawan=" + id_karyawan + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}
 }

@@ -13,8 +13,6 @@ import com.gbsystem.rpbackoffice.entities.MasterStore;
 public interface MasterStoreRepository extends JpaRepository<MasterStore, Long> {
 	List<MasterStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_store WHERE rowstatus = 1 AND "
-			+ "MATCH(store_name, alamat) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_store WHERE rowstatus = 1 AND (store_name LIKE %:keyword% OR alamat LIKE %:keyword% ) ", nativeQuery = true)
 	List<MasterStore> search(String keyword);
 }

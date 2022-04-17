@@ -12,8 +12,6 @@ import com.gbsystem.rpbackoffice.entities.MasterAksesoris;
 public interface MasterAksesorisRepository extends JpaRepository<MasterAksesoris, Long> {
 	List<MasterAksesoris> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_aksesoris WHERE rowstatus = 1 AND "
-			+ "MATCH(artikel_aksesoris, nama_aksesoris, type_name, nama_kategori) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_aksesoris WHERE rowstatus = 1 AND (artikel_aksesoris LIKE %:keyword% OR nama_aksesoris LIKE %:keyword% OR type_name LIKE %:keyword% OR nama_kategori LIKE %:keyword% ) ", nativeQuery = true)
 	List<MasterAksesoris> search(String keyword);
 }

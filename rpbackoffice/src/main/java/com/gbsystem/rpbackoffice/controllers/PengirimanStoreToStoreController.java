@@ -1,6 +1,8 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -38,11 +40,11 @@ public class PengirimanStoreToStoreController {
     
     @PostMapping("/add")
     @ResponseBody
-    public PengirimanStoreToStore saveProduct(@RequestBody PengirimanStoreToStore pengirimanStoreToStore) throws Exception {
-    	
-    	PengirimanStoreToStore pengirimanStoreToStoreResponse = pengirimanStoreService.savePengirimanStore(pengirimanStoreToStore);
-    	return pengirimanStoreToStoreResponse;
-		
+    public Map saveProduct(@RequestBody PengirimanStoreToStore pengirimanStoreToStore) throws Exception {
+    	pengirimanStoreService.savePengirimanStore(pengirimanStoreToStore);
+    	Map<String,String> response = new HashMap<>();
+    	response.put("message", "Berhasil Dikirimkan");
+    	return response;
     }
     
     @PostMapping("/update")

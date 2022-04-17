@@ -18,7 +18,7 @@ public interface PenyimpananKeluarRepository extends JpaRepository<PenyimpananKe
 	@Query(value = "SELECT * FROM penyimpanan_keluar WHERE rowstatus = 1 AND pengiriman_code= :pengiriman_code ", nativeQuery = true)
 	List<PenyimpananKeluar> findByPengiriman_code(String pengiriman_code);
 	
-	@Query(value = "SELECT * FROM penyimpanan_keluar WHERE rowstatus = 1 AND nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM penyimpanan_keluar WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%)", nativeQuery = true)
 	List<PenyimpananKeluar> search(String keyword);
 	
 	@Query(value = "delete from penyimpanan_keluar b where b.pengiriman_code=:pengiriman_code", nativeQuery = true)

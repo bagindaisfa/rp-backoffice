@@ -1,21 +1,37 @@
 package com.gbsystem.rpbackoffice.services;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.Penjualan;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerArtikel;
 import com.gbsystem.rpbackoffice.entities.DetailPesanan;
 import com.gbsystem.rpbackoffice.entities.Pelanggan;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerKaryawan;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerKategori;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerPelanggan;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerProduk;
+import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerTipe;
+import com.gbsystem.rpbackoffice.repository.DetailPesananRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerArtikelRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerKaryawanRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerKategoriRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerPelangganRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerProdukRepository;
+import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerTipeRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 
 @Service
@@ -25,6 +41,9 @@ public class PenjualanService {
 	private PenjualanRepository eRepo;
 	
 	@Autowired
+	private DetailPesananRepository eDetailRepo;
+	
+	@Autowired
 	private StockStoreRepository eStockRepo;
 	
 	@Autowired
@@ -32,6 +51,24 @@ public class PenjualanService {
 	
 	@Autowired
 	private PelangganRepository ePelangganRepo;
+	
+	@Autowired
+	private RekapPenjualanPerKaryawanRepository eRekapPenjualanPerKaryawanRepository;
+	
+	@Autowired
+	private RekapPenjualanPerArtikelRepository eRekapPenjualanPerArtikelRepository;
+	
+	@Autowired
+	private RekapPenjualanPerTipeRepository eRekapPenjualanPerTipeRepository;
+	
+	@Autowired
+	private RekapPenjualanPerKategoriRepository eRekapPenjualanPerKategoriRepository;
+	
+	@Autowired
+	private RekapPenjualanPerProdukRepository eRekapPenjualanPerProdukRepository;
+	
+	@Autowired
+	private RekapPenjualanPerPelangganRepository eRekapPenjualanPerPelangganRepository;
 	
 	public Penjualan savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
@@ -43,6 +80,7 @@ public class PenjualanService {
 		item.setId_store(penjualan.getId_store());
 		item.setLokasi_store(penjualan.getLokasi_store());
 		item.setNama_pelanggan(penjualan.getNama_pelanggan());
+		item.setId_karyawan(penjualan.getId_karyawan());
 		item.setNama_karyawan(penjualan.getNama_karyawan());
 		item.setDiskon(penjualan.getDiskon());
 		item.setMetode_bayar(penjualan.getMetode_bayar());
@@ -56,21 +94,17 @@ public class PenjualanService {
 			List<Pelanggan> pembeli = new ArrayList<>();
 			pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
 			for (int i = 0; i < pembeli.size(); i++) {
-				
-				int daysdiff = 0;
-			    long diff = pembeli.get(i).getTanggal_join().getTime() - tanggal_transaksi.getTime();
-			    long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
-			    daysdiff = (int) diffDays;
+
+			    LocalDate now = LocalDate.now();
+			    LocalDate firstDay = now.with(firstDayOfYear());
 			    
-			    if (daysdiff != 365) {
-			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.01));
+			    if (now != firstDay) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
 					ePelangganRepo.save(pembeli.get(i));
-			    } else if (daysdiff == 365) {
-			    	pembeli.get(i).setPoin(0.0000);
+			    } else {
+			    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
 					ePelangganRepo.save(pembeli.get(i));
 			    }
-				
-					
 			}
 		}
 		
@@ -129,6 +163,18 @@ public class PenjualanService {
 	
 	public List<Penjualan> search(String keyword){
 		return eRepo.search(keyword);
+	}
+	
+	public List<Penjualan> subRiwayatPelanggan(int id_store, String start_date, String end_date, String no_hp_pelanggan){
+		return eRepo.subRiwayatPelanggan(id_store,start_date,end_date,no_hp_pelanggan);
+	}
+	
+	public List<Penjualan> riwayatPertanggal(int id_store, String start_date, String end_date){
+		return eRepo.riwayatPertanggal(id_store,start_date,end_date);
+	}
+	
+	public List<Penjualan> subRiwayatTerakhir(int id_store, String start_date, String end_date){
+		return eRepo.subRiwayatTerakhir(id_store,start_date,end_date);
 	}
 	
 	public Penjualan deletePenjualanById(Long id)
@@ -218,6 +264,7 @@ public class PenjualanService {
 		p.setKembalian(penjualan.getKembalian());
 		p.setNama_pelanggan(penjualan.getNama_pelanggan());
 		p.setNama_karyawan(penjualan.getNama_karyawan());
+		p.setId_karyawan(penjualan.getId_karyawan());
 		p.setRowstatus(1);
 		
 		if (penjualan.getTotal() > 1000000) {
@@ -225,16 +272,14 @@ public class PenjualanService {
 			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
 			for (int i = 0; i < pembeli.size(); i++) {
 				
-				int daysdiff = 0;
-			    long diff = pembeli.get(i).getTanggal_join().getTime() - p.getTanggal_transaksi().getTime();
-			    long diffDays = diff / (24 * 60 * 60 * 1000) + 1;
-			    daysdiff = (int) diffDays;
+			    LocalDate now = LocalDate.now();
+			    LocalDate firstDay = now.with(firstDayOfYear());
 			    
-			    if (daysdiff != 365) {
-			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.01));
+			    if (now != firstDay) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
 					ePelangganRepo.save(pembeli.get(i));
-			    } else if (daysdiff == 365) {
-			    	pembeli.get(i).setPoin(0.0000);
+			    } else {
+			    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
 					ePelangganRepo.save(pembeli.get(i));
 			    }
 			}
@@ -295,5 +340,134 @@ public class PenjualanService {
     	eRepo.save(p);
     	
     	return penjualan;
+	}
+
+	
+	public Double countingPenjualanMobile(int id_store, String start_date, String end_date){
+		
+		Double jmlTransaksi = eRepo.countingMobile(id_store, start_date, end_date) == null? 0.00 : eRepo.countingMobile(id_store, start_date, end_date);
+		
+		return jmlTransaksi;
+	}
+	
+	public Double pendapatanMobile(int id_store, String start_date, String end_date){
+		
+		Double omset = eRepo.totalMobile(id_store, start_date, end_date) == null? 0.00 : eRepo.totalMobile(id_store, start_date, end_date);
+		
+		return omset;
+	}
+	
+	
+	public Double countingArtikel(int id_store, String start_date, String end_date){
+		
+		Double jmlTransaksi = eRekapPenjualanPerArtikelRepository.countingArtikel(id_store, start_date, end_date) == null? 0.00 : eRekapPenjualanPerArtikelRepository.countingArtikel(id_store, start_date, end_date);
+		
+		return jmlTransaksi;
+	}
+	
+	public Double totalPerArtikel(int id_store, String start_date, String end_date){
+		
+		Double omset = eRekapPenjualanPerArtikelRepository.totalPerArtikel(id_store, start_date, end_date) == null? 0.00 : eRekapPenjualanPerArtikelRepository.totalPerArtikel(id_store, start_date, end_date);
+		
+		return omset;
+	}
+	
+	public Double countingTipe(int id_store, String start_date, String end_date){
+		
+		Double jmlTransaksi = eRekapPenjualanPerTipeRepository.countingTipe(id_store, start_date, end_date) == null? 0.00 : eRekapPenjualanPerArtikelRepository.countingArtikel(id_store, start_date, end_date);
+		
+		return jmlTransaksi;
+	}
+	
+	public Double totalPerTipe(int id_store, String start_date, String end_date){
+		
+		Double omset = eRekapPenjualanPerTipeRepository.totalPerTipe(id_store, start_date, end_date) == null? 0.00 : eRekapPenjualanPerArtikelRepository.totalPerArtikel(id_store, start_date, end_date);
+		
+		return omset;
+	}
+
+	public List<RekapPenjualanPerKaryawan> rekapKaryawan(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerKaryawan> rekapKaryawan = eRekapPenjualanPerKaryawanRepository.rekapKaryawan(id_store, start_date, end_date);
+		
+		return rekapKaryawan;
+	}
+	
+	public List<RekapPenjualanPerArtikel> rekapArtikel(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerArtikel> rekapArtikel = eRekapPenjualanPerArtikelRepository.rekapArtikel(id_store, start_date, end_date);
+		
+		return rekapArtikel;
+	}
+	
+	public List<RekapPenjualanPerTipe> rekapTipe(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerTipe> rekapTipe = eRekapPenjualanPerTipeRepository.rekapTipe(id_store, start_date, end_date);
+		
+		return rekapTipe;
+	}
+	
+	public List<RekapPenjualanPerTipe> rekapTipeTerlaris(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerTipe> rekapTipeTerlaris = eRekapPenjualanPerTipeRepository.rekapTipeTerlaris(id_store, start_date, end_date);
+		
+		return rekapTipeTerlaris;
+	}
+	
+	public List<RekapPenjualanPerKategori> rekapkategori(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerKategori> rekapkategori = eRekapPenjualanPerKategoriRepository.rekapkategori(id_store, start_date, end_date);
+		
+		return rekapkategori;
+	}
+	
+	public List<RekapPenjualanPerKategori> rekapkategoriTerlaris(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerKategori> rekapkategoriTerlaris = eRekapPenjualanPerKategoriRepository.rekapkategoriTerlaris(id_store, start_date, end_date);
+		
+		return rekapkategoriTerlaris;
+	}
+	
+	public List<RekapPenjualanPerProduk> rekapProduk(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerProduk> rekapProduk = eRekapPenjualanPerProdukRepository.rekapProduk(id_store, start_date, end_date );
+		
+		return rekapProduk;
+	}
+	
+	public List<RekapPenjualanPerProduk> rekapProdukShorted(int id_store, String start_date, String end_date, String orderBy, String sortDir) {
+		String data = orderBy.replace("%28", "(");
+		String last_value = data.replace("%29", ")");
+		List<RekapPenjualanPerProduk> rekapProdukShorted = eRekapPenjualanPerProdukRepository.rekapProdukShorted(id_store, start_date, end_date, last_value, sortDir );
+		
+		return rekapProdukShorted;
+	}
+	
+	public List<RekapPenjualanPerProduk> rekapProdukTerlaris(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerProduk> rekapProdukTerlaris = eRekapPenjualanPerProdukRepository.rekapProdukTerlaris(id_store, start_date, end_date);
+		
+		return rekapProdukTerlaris;
+	}
+	
+	public List<RekapPenjualanPerPelanggan> rekapPelanggan(int id_store, String start_date, String end_date) {
+		
+		List<RekapPenjualanPerPelanggan> rekapPelanggan = eRekapPenjualanPerPelangganRepository.rekapPelanggan(id_store, start_date, end_date);
+		
+		return rekapPelanggan;
+	}
+	
+	public List<Penjualan> rekapPelangganPerTanggal(int id_store, String start_date, String end_date, String no_hp_pelanggan) {
+		
+		List<Penjualan> rekapPelangganPerTanggal = eRepo.rekapPelangganPerTanggal(id_store, start_date, end_date, no_hp_pelanggan);
+		
+		return rekapPelangganPerTanggal;
+	}
+	
+	public List<DetailPesanan> findByKaryawanId(int id_store, int id_karyawan, String start_date, String end_date) {
+		
+		List<DetailPesanan> rekapKaryawan = eDetailRepo.findByKaryawanId(id_store,id_karyawan, start_date, end_date);
+		
+		return rekapKaryawan;
 	}
 }

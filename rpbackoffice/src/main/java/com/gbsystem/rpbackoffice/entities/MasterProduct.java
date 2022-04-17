@@ -15,16 +15,16 @@ public class MasterProduct {
 	private String sku_code;
 	private String artikel_product;
 	private String nama_product;
-	private int type;
+	private Integer type;
 	private String type_name;
 	private String kategori;
 	private String nama_kategori;
 	private String artikel_frame;
 	private String artikel_lens;
 	private String ukuran;
-	private double kuantitas;
-	private double hpp;
-	private double harga_jual;
+	private Double kuantitas;
+	private Double hpp;
+	private Double harga_jual;
 	private String remarks;
 	private int rowstatus;
 	@Lob
@@ -55,10 +55,10 @@ public class MasterProduct {
 	public void setNama_product(String nama_product) {
 		this.nama_product = nama_product;
 	}
-	public int getType() {
+	public Integer getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 	public String getType_name() {
@@ -98,22 +98,22 @@ public class MasterProduct {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public double getKuantitas() {
+	public Double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(double kuantitas) {
+	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
-	public double getHpp() {
+	public Double getHpp() {
 		return hpp;
 	}
-	public void setHpp(double hpp) {
+	public void setHpp(Double hpp) {
 		this.hpp = hpp;
 	}
-	public double getHarga_jual() {
+	public Double getHarga_jual() {
 		return harga_jual;
 	}
-	public void setHarga_jual(double harga_jual) {
+	public void setHarga_jual(Double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
 	public String getRemarks() {

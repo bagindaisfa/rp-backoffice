@@ -70,6 +70,7 @@ public class AuthenticationController {
 		response.setLokasi_office(userObj.getLokasi_office());
 		response.setId_store(userObj.getId_store());
 		response.setLokasi_store(userObj.getLokasi_store());
+		response.setAlamat_store(userObj.getAlamat_store());
 		response.setAkses_modul(userObj.getAkses_modul());
 		
 

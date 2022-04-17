@@ -20,11 +20,11 @@ public interface StockOfficeRepository extends JpaRepository<StockOffice, Long> 
 	Double totalStockOffice(int rowstatus);
 	
 	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND "
-			+ "artikel LIKE %:keyword% OR "
+			+ "(artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "
 			+ "type_name LIKE %:keyword% OR "
 			+ "nama_kategori LIKE %:keyword% OR "
-			+ "sku_code LIKE %:keyword%", nativeQuery = true)
+			+ "sku_code LIKE %:keyword%)", nativeQuery = true)
 	List<StockOffice> search(String keyword);
 
 }

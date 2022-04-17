@@ -131,4 +131,8 @@ public class PelangganController {
     	return "redirect:/pelanggan/all";
     }
 
+    @GetMapping("/totalPoin")
+	public Double totalPoin(@Param("no_hp_pelanggan") String no_hp_pelanggan) {
+        return pelangganService.totalPoin(no_hp_pelanggan);
+    }
 }

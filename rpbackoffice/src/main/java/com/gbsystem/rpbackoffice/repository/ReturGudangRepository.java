@@ -15,7 +15,7 @@ public interface ReturGudangRepository extends JpaRepository<ReturGudang, Long> 
 	@Query(value = "SELECT * FROM retur_gudang WHERE rowstatus = 1 AND pengiriman_code = :pengiriman_code", nativeQuery = true)
 	ReturGudang findByPengiriman_code(String pengiriman_code);
 	
-	@Query(value = "SELECT * FROM retur_gudang WHERE rowstatus = 1 AND nama_gudang LIKE %:keyword% OR lokasi_office_tujuan LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM retur_gudang WHERE rowstatus = 1 AND (nama_gudang LIKE %:keyword% OR lokasi_office_tujuan LIKE %:keyword%)", nativeQuery = true)
 	List<ReturGudang> search(String keyword);
 	
 	

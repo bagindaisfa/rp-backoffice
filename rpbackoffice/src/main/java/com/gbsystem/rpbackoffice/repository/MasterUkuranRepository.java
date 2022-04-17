@@ -13,6 +13,6 @@ import com.gbsystem.rpbackoffice.entities.MasterUkuran;
 public interface MasterUkuranRepository extends JpaRepository<MasterUkuran, Long> {
 List<MasterUkuran> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_ukuran WHERE rowstatus = 1 AND ukuran like %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_ukuran WHERE rowstatus = 1 AND (ukuran like %:keyword%)", nativeQuery = true)
 	List<MasterUkuran> search(String keyword);
 }

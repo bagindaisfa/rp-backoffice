@@ -101,5 +101,10 @@ public class PelangganService {
 		p.setRowstatus(1);
     	eRepo.save(p);
 	}
-
+	
+	
+	public Double totalPoin(String no_hp_pelanggan){
+		return eRepo.totalPoin(no_hp_pelanggan);
+	}
+	
 }

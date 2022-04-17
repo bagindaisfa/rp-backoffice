@@ -13,6 +13,6 @@ import com.gbsystem.rpbackoffice.entities.MasterKategori;
 public interface MasterKategoriRepository extends JpaRepository<MasterKategori, Long> {
 	List<MasterKategori> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM master_kategori WHERE rowstatus = 1 AND kategori_name LIKE %:keyword%", nativeQuery = true)
+	@Query(value = "SELECT * FROM master_kategori WHERE rowstatus = 1 AND ( kategori_name LIKE %:keyword% )", nativeQuery = true)
 	List<MasterKategori> search(String keyword);
 }

@@ -17,8 +17,6 @@ public interface ChartOfAccountRepository extends JpaRepository<ChartOfAccount, 
 	@Query(value= "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND no_akun IN :no_akun", nativeQuery = true )
 	List<ChartOfAccount> findByChartOfAccountNo_akun(@Param("no_akun") List<String> chartOfAccountNama_akunList);
 	
-	@Query(value = "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND "
-			+ "MATCH(no_akun, nama_akun, tipe, kelompok) "
-			+ "AGAINST (?1)", nativeQuery = true)
+	@Query(value = "SELECT * FROM chart_of_account WHERE rowstatus = 1 AND (no_akun LIKE %:keyword% OR nama_akun LIKE %:keyword% OR tipe LIKE %:keyword% OR kelompok LIKE %:keyword% )", nativeQuery = true)
 	List<ChartOfAccount> search(String keyword);
 }
