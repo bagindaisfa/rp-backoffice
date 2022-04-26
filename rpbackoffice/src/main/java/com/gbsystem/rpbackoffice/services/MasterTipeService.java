@@ -29,6 +29,10 @@ public class MasterTipeService {
 		return eRepo.findByRowstatus(1);
 	}
 	
+	public MasterTipe findByName(String type_name) {
+		return eRepo.findByName(type_name);
+	}
+	
 	public void deleteMasterTipeById(Long id)
     {
 		MasterTipe p = new MasterTipe();

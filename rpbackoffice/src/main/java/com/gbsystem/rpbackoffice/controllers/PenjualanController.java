@@ -48,9 +48,9 @@ public class PenjualanController {
 	
 	@PostMapping("/add")
 	@ResponseBody
-	public Penjualan savePenjualan(@RequestBody Penjualan penjualan) 
+	public List<Penjualan> savePenjualan(@RequestBody Penjualan penjualan) 
 	{
-		Penjualan penjualanResponse = penjualanService.savePenjualan(penjualan);
+		List<Penjualan> penjualanResponse = penjualanService.savePenjualan(penjualan);
 		return penjualanResponse;
 	}
 	

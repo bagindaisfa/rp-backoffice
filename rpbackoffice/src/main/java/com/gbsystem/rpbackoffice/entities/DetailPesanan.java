@@ -34,7 +34,6 @@ public class DetailPesanan {
 	private String kategori;
 	private String nama_kategori;
 	private String nama_barang;
-	private String ukuran;
 	private Double harga;
 	private Double kuantitas;
 	private Double total;
@@ -116,12 +115,6 @@ public class DetailPesanan {
 	}
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
-	}
-	public String getUkuran() {
-		return ukuran;
-	}
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
 	}
 	
 	public Double getHarga() {

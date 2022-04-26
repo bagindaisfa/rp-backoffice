@@ -15,4 +15,7 @@ public interface MasterTipeRepository extends JpaRepository<MasterTipe, Long> {
 	
 	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = 1 AND ( type_name LIKE %:keyword% )", nativeQuery = true)
 	List<MasterTipe> search(String keyword);
+	
+	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = 1 AND type_name = :type_name", nativeQuery = true)
+	MasterTipe findByName(String type_name);
 }

@@ -32,12 +32,12 @@ public class Penjualan {
 	private String nama_pelanggan;
 	private int id_karyawan;
 	private String nama_karyawan;
-	private double diskon;
+	private Double diskon;
 	private String metode_bayar;
 	private String ekspedisi;
-	private double ongkir;
-	private double total;
-	private double kembalian;
+	private Double ongkir;
+	private Double total;
+	private Double kembalian;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualan", cascade = CascadeType.ALL)
 	@Where(clause = "rowstatus=1")
@@ -80,10 +80,10 @@ public class Penjualan {
 	public void setNo_hp_pelanggan(String no_hp_pelanggan) {
 		this.no_hp_pelanggan = no_hp_pelanggan;
 	}
-	public double getDiskon() {
+	public Double getDiskon() {
 		return diskon;
 	}
-	public void setDiskon(double diskon) {
+	public void setDiskon(Double diskon) {
 		this.diskon = diskon;
 	}
 	public String getMetode_bayar() {
@@ -98,22 +98,22 @@ public class Penjualan {
 	public void setEkspedisi(String ekspedisi) {
 		this.ekspedisi = ekspedisi;
 	}
-	public double getOngkir() {
+	public Double getOngkir() {
 		return ongkir;
 	}
-	public void setOngkir(double ongkir) {
+	public void setOngkir(Double ongkir) {
 		this.ongkir = ongkir;
 	}
-	public double getTotal() {
+	public Double getTotal() {
 		return total;
 	}
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
-	public double getKembalian() {
+	public Double getKembalian() {
 		return kembalian;
 	}
-	public void setKembalian(double kembalian) {
+	public void setKembalian(Double kembalian) {
 		this.kembalian = kembalian;
 	}
 	public String getNama_pelanggan() {

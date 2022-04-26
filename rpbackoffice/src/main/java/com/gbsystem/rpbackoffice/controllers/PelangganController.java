@@ -132,7 +132,7 @@ public class PelangganController {
     }
 
     @GetMapping("/totalPoin")
-	public Double totalPoin(@Param("no_hp_pelanggan") String no_hp_pelanggan) {
-        return pelangganService.totalPoin(no_hp_pelanggan);
+	public Double totalPoin(@Param("nama_pelanggan") String nama_pelanggan,@Param("no_hp_pelanggan") String no_hp_pelanggan) {
+        return pelangganService.totalPoin(nama_pelanggan,no_hp_pelanggan);
     }
 }

@@ -103,8 +103,8 @@ public class PelangganService {
 	}
 	
 	
-	public Double totalPoin(String no_hp_pelanggan){
-		return eRepo.totalPoin(no_hp_pelanggan);
+	public Double totalPoin(String nama_pelanggan, String no_hp_pelanggan){
+		return eRepo.totalPoin(nama_pelanggan, no_hp_pelanggan);
 	}
 	
 }

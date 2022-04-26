@@ -30,6 +30,6 @@ public interface PelangganRepository extends JpaRepository<Pelanggan, Long> {
 	@Query(value = "SELECT * FROM pelanggan WHERE rowstatus = 1 and no_hp =:no_hp_pelanggan ", nativeQuery = true)
 	List<Pelanggan> findByNoHp(String no_hp_pelanggan);
 	
-	@Query(value = "SELECT SUM(poin) FROM pelanggan WHERE rowstatus = 1 and no_hp =:no_hp_pelanggan ", nativeQuery = true)
-	Double totalPoin(String no_hp_pelanggan);
+	@Query(value = "SELECT poin FROM pelanggan WHERE rowstatus = 1 and nama_pelanggan=:nama_pelanggan and no_hp =:no_hp_pelanggan ", nativeQuery = true)
+	Double totalPoin(String nama_pelanggan, String no_hp_pelanggan);
 }

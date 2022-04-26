@@ -59,4 +59,6 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	List<Penjualan> rekapPelangganPerTanggal(int id_store, String start_date, String end_date, String no_hp_pelanggan);
 	
+	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_transaksi=:id_transaksi", nativeQuery = true)
+	List<Penjualan> findByIdTransaksi(String id_transaksi);
 }
