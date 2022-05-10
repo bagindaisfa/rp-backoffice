@@ -34,6 +34,8 @@ public class Penjualan {
 	private String nama_karyawan;
 	private Double diskon;
 	private String metode_bayar;
+	private String bank_name;
+	private String no_rek;
 	private String ekspedisi;
 	private Double ongkir;
 	private Double total;
@@ -91,6 +93,18 @@ public class Penjualan {
 	}
 	public void setMetode_bayar(String metode_bayar) {
 		this.metode_bayar = metode_bayar;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public String getNo_rek() {
+		return no_rek;
+	}
+	public void setNo_rek(String no_rek) {
+		this.no_rek = no_rek;
 	}
 	public String getEkspedisi() {
 		return ekspedisi;

@@ -92,6 +92,8 @@ public class PenjualanService {
 		item.setNama_karyawan(penjualan.getNama_karyawan());
 		item.setDiskon(penjualan.getDiskon());
 		item.setMetode_bayar(penjualan.getMetode_bayar());
+		item.setBank_name(penjualan.getBank_name());
+		item.setNo_rek(penjualan.getNo_rek());
 		item.setEkspedisi(penjualan.getEkspedisi());
 		item.setOngkir(penjualan.getOngkir());
 		item.setTotal(penjualan.getTotal());
@@ -275,6 +277,8 @@ public class PenjualanService {
 		p.setLokasi_store(penjualan.getLokasi_store());
 		p.setDiskon(penjualan.getDiskon());
 		p.setMetode_bayar(penjualan.getMetode_bayar());
+		p.setBank_name(penjualan.getBank_name());
+		p.setNo_rek(penjualan.getNo_rek());
 		p.setEkspedisi(penjualan.getEkspedisi());
 		p.setOngkir(penjualan.getOngkir());
 		p.setTotal(penjualan.getTotal());
