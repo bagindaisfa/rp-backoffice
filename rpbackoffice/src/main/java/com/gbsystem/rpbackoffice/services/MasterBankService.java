@@ -1,9 +1,13 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gbsystem.rpbackoffice.entities.MasterBank;
 import com.gbsystem.rpbackoffice.repository.MasterBankRepository;
@@ -13,9 +17,18 @@ public class MasterBankService {
 	@Autowired
 	private MasterBankRepository eRepo;
 	
-	public MasterBank saveMasterBank( String bank_name, String acc_number, String owner_name ) {
+	public MasterBank saveMasterBank( String bank_name, String owner_name, String acc_number, MultipartFile image ) {
 		
 		MasterBank p = new MasterBank();
+		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 		p.setBank_name(bank_name);
 		p.setOwner_name(owner_name);
 		p.setAcc_number(acc_number);
@@ -34,6 +47,10 @@ public class MasterBankService {
 	
 	public MasterBank findByName(String bank_name) {
 		return eRepo.findByName(bank_name);
+	}
+	
+	public MasterBank findByNorek(String acc_number) {
+		return eRepo.findByNorek(acc_number);
 	}
 	
 	public MasterBank findByOwner(String owner_name) {

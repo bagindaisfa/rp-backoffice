@@ -1,9 +1,11 @@
 package com.gbsystem.rpbackoffice.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class MasterBank {
@@ -14,6 +16,10 @@ public class MasterBank {
 	private String acc_number;
 	private String owner_name;
 	private int rowstatus;
+	@Lob
+	@Column(columnDefinition = "MEDIUMBLOB")
+	private String image;
+	
 	public int getId() {
 		return id;
 	}
@@ -43,6 +49,12 @@ public class MasterBank {
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	@Override
 	public String toString() {
