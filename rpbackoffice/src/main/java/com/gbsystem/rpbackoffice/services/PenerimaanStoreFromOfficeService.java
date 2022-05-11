@@ -67,6 +67,8 @@ public class PenerimaanStoreFromOfficeService {
 			detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
 			detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			detail.setKeterangan(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKeterangan());
+			detail.setHarga_jual(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHarga_jual());
+			detail.setHpp(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHpp());
 			detail.setRowstatus(1);
 			detail.setPenerimaanStoreFromOffice(p);
 			details.add(detail);
@@ -86,6 +88,8 @@ public class PenerimaanStoreFromOfficeService {
 				new_insert.setType_name(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType_name());
 				new_insert.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 				new_insert.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+				new_insert.setHarga_jual(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHarga_jual());
+				new_insert.setHpp(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHpp());
 				new_insert.setRowstatus(1);
 				eStockRepo.save(new_insert);
 			} else {
@@ -249,6 +253,8 @@ public class PenerimaanStoreFromOfficeService {
 			detail_update.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
 			detail_update.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 			detail_update.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
+			detail_update.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
+			detail_update.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
 			detail_update.setRowstatus(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus());
 			
 			if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus() == 1) {
