@@ -141,7 +141,7 @@ public class MasterProductController {
     		q.setNama_barang(formatter.formatCellValue(row.getCell(1)));
     		q.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
     		q.setUkuran(formatter.formatCellValue(row.getCell(8)));
-    		
+    		q.setSku_code(formatter.formatCellValue(row.getCell(13)));
     		q.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
     		q.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
     		q.setRowstatus(1);
