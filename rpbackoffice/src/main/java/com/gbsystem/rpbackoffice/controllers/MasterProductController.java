@@ -1,5 +1,7 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -21,8 +23,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
+import com.gbsystem.rpbackoffice.entities.PenyimpananMasuk;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
+import com.gbsystem.rpbackoffice.repository.PenerimaanSupplierRepository;
+import com.gbsystem.rpbackoffice.repository.PenyimpananMasukRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 import com.gbsystem.rpbackoffice.services.MasterProductService;
 
@@ -35,8 +40,15 @@ public class MasterProductController {
 	
 	@Autowired
 	private MasterProductRepository eRepo;
+	
 	@Autowired
 	private StockOfficeRepository eStockRepo;
+	
+	@Autowired
+	private PenerimaanSupplierRepository ePenerimaanSuppRepo;
+	
+	@Autowired
+	private PenyimpananMasukRepository ePenyimpananRepo;
 	
     @GetMapping("/all")
 	public ResponseEntity<List<MasterProduct>> getAll() {
@@ -91,14 +103,13 @@ public class MasterProductController {
     		@RequestParam("artikel_frame") String artikel_frame,
     		@RequestParam("artikel_lens") String artikel_lens,
     		@RequestParam("ukuran") String ukuran,
-    		@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("hpp") double hpp,
     		@RequestParam("harga_jual") double harga_jual,
     		@RequestParam("remarks") String remarks
     		) throws Exception {
     	
     	if (artikel_product != "") {
-    		masterProductService.update(id, image,sku_code, artikel_product,nama_product,type,type_name,kategori,nama_kategori,artikel_frame,artikel_lens,ukuran,kuantitas,hpp,harga_jual,remarks);
+    		masterProductService.update(id, image,sku_code, artikel_product,nama_product,type,type_name,kategori,nama_kategori,artikel_frame,artikel_lens,ukuran,hpp,harga_jual,remarks);
     	}
     	return "Update Data Successs!";
 		
@@ -147,6 +158,30 @@ public class MasterProductController {
     		q.setRowstatus(1);
     		eStockRepo.save(q);
     		eRepo.save(masterProduct);
+    		
+    		if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) != null) {
+    			if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) > 0) {
+    				PenyimpananMasuk f = new PenyimpananMasuk();
+    				f.setId_office(1);
+    				f.setLokasi_office("Kantor Pusat");
+    				f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
+    				f.setTanggal_masuk(new Date());
+    				f.setArtikel(formatter.formatCellValue(row.getCell(0)));
+    	    		f.setKategori(formatter.formatCellValue(row.getCell(4)));
+    	    		f.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+    	    		f.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
+    	    		f.setType_name(formatter.formatCellValue(row.getCell(3)));
+    	    		f.setNama_barang(formatter.formatCellValue(row.getCell(1)));
+    	    		f.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+    	    		f.setUkuran(formatter.formatCellValue(row.getCell(8)));
+    	    		f.setSku_code(formatter.formatCellValue(row.getCell(13)));
+    	    		f.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+    	    		f.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+    				f.setKeterangan("Barang Masuk Dari Master Product");
+    				f.setRowstatus(1);
+    				ePenyimpananRepo.save(f);
+    			}
+    		}
         }
         
     }

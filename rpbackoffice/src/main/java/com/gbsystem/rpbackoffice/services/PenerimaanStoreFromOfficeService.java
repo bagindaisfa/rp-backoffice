@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.DetailPenerimaanStoreFromOffice;
+import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PenerimaanStoreFromOffice;
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenerimaanStoreFromOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreMasukRepository;
@@ -37,6 +39,9 @@ public class PenerimaanStoreFromOfficeService {
 	
 	@Autowired
 	private PenyimpananStoreMasukRepository ePenyimpananStoreRepo;
+	
+	@Autowired
+	private MasterProductRepository eMasterProductRepo;
 	
 	public PenerimaanStoreFromOffice savePenerimaanStore(PenerimaanStoreFromOffice penerimaanStoreFromOffice) {
 		
@@ -78,8 +83,13 @@ public class PenerimaanStoreFromOfficeService {
 					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			if (d == null) {
 				StockStore new_insert = new StockStore();
+				
+				MasterProduct prod = new MasterProduct();
+				prod = eMasterProductRepo.findBySkuCode(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
+				
 				new_insert.setId_store(penerimaanStoreFromOffice.getId_store());
 				new_insert.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+				new_insert.setFoto_barang(prod.getImage());
 				new_insert.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 				new_insert.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 				new_insert.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());

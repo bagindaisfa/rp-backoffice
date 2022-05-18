@@ -36,15 +36,15 @@ public class PenyimpananMobileController {
 	
 	@GetMapping("/stockStoreMasukAndKeluar")
 	public Map totalQtyMasukAndKeluar(@Param("id_store") int id_store){
-		double masuk = penyimpananMobileService.totalQtyKeluar(id_store);
-		double keluar = penyimpananMobileService.totalQtyMasuk(id_store);
-		double pindah = penyimpananMobileService.totalStockStorePindah(id_store);
+		Double masuk = penyimpananMobileService.totalQtyMasuk(id_store);
+		Double keluar = penyimpananMobileService.totalQtyKeluar(id_store);
+		Double pindah = penyimpananMobileService.totalStockStorePindah(id_store);
 		
 		Map<String, Map<String, String>> response = new HashMap<>();
 		Map<String, String> map = new HashMap<>();
-		map.put("val A", String.valueOf(masuk));
-		map.put("val B", String.valueOf(keluar));
-		map.put("val C", String.valueOf(pindah));
+		map.put("val A", String.valueOf(masuk == null ? 0.0 : masuk));
+		map.put("val B", String.valueOf(keluar == null ? 0.0 : keluar));
+		map.put("val C", String.valueOf(pindah == null ? 0.0 : pindah));
 		response.put("result", map);
 		return response;
 	}

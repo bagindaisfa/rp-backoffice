@@ -58,9 +58,9 @@ public class PenyimpananMobileService {
 	}
 
 
-	public double totalStockStorePindah(int id_store){
+	public Double totalStockStorePindah(int id_store){
 		
-		double store_pindah = eDetailPengirimanStoreToStoreRepository.totalQtyPindah(1,id_store);
+		Double store_pindah = eDetailPengirimanStoreToStoreRepository.totalQtyPindah(1,id_store);
 		
 		
 		return store_pindah;

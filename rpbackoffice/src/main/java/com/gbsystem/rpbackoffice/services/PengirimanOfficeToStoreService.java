@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.DetailPengirimanOfficeToStore;
+import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PengirimanOfficeToStore;
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;

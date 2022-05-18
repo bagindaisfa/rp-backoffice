@@ -30,6 +30,7 @@ import com.gbsystem.rpbackoffice.repository.MasterTipeRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
+import com.gbsystem.rpbackoffice.repository.PesananTungguRepository;
 import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerArtikelRepository;
 import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerKaryawanRepository;
 import com.gbsystem.rpbackoffice.repository.RekapPenjualanPerKategoriRepository;
@@ -77,8 +78,17 @@ public class PenjualanService {
 	@Autowired
 	private MasterProductRepository eMasterProductRepository;
 	
+	@Autowired
+	private PesananTungguRepository ePesananTungguRepo;
+	
 	public List<Penjualan> savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
+		if (penjualan.getId_transaksi() != null) {
+			ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
+		}
+		if (penjualan.getId_transaksi() != "") {
+			ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
+		}
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-S" + (eRepo.count() + 1);
 		Date tanggal_transaksi = new Date();
 		List<DetailPesanan> details = new ArrayList<>();

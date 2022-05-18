@@ -32,6 +32,7 @@ public class KaryawanService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		k.setNama_karyawan(nama_karyawan);
 		k.setTanggal_join(new Date());
 		k.setId_office(id_office);
 		k.setLokasi_office(lokasi_office);
