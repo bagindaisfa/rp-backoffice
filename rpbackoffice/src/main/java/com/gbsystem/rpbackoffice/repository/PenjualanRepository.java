@@ -12,7 +12,16 @@ import com.gbsystem.rpbackoffice.entities.Penjualan;
 @Repository
 public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	
-	List<Penjualan> findByRowstatus(@Param("rowstatus") int rowstatus); 
+	List<Penjualan> findByRowstatus(@Param("rowstatus") int rowstatus);
+	
+	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_store = :id_store ORDER BY tanggal_transaksi DESC", nativeQuery = true)
+	List<Penjualan> getAllPerStore(int id_store);
+	
+	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_store = :id_store AND"
+			+ "( id_transaksi LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword% OR "
+			+ "nama_pelanggan LIKE %:keyword% ) ORDER BY tanggal_transaksi DESC", nativeQuery = true)
+	List<Penjualan> searchPerStore(int id_store, String keyword);
 	
 	@Query(value = "SELECT * FROM penjualan WHERE id = :id", nativeQuery = true)
 	Penjualan getById(Long id);

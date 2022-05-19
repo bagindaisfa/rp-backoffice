@@ -45,6 +45,17 @@ public class PenjualanController {
     	return new ResponseEntity<>(penjualanService.search(keyword), HttpStatus.OK);
     }
 	
+	@GetMapping("/penjualanPerStore")
+	public ResponseEntity<List<Penjualan>> getAllPenjualanPerStore(@Param("id_store") int id_store){
+
+		return new ResponseEntity<>(penjualanService.getAllPerStore(id_store), HttpStatus.OK);
+	}
+	
+	@GetMapping("/searchPerStore")
+	public ResponseEntity<List<Penjualan>> searchPerStore(@Param("id_store") int id_store,@Param("keyword") String keyword){
+		return new ResponseEntity<>(penjualanService.searchPerStore(id_store,keyword), HttpStatus.OK);
+	}
+	
 	@PostMapping("/add")
 	@ResponseBody
 	public List<Penjualan> savePenjualan(@RequestBody Penjualan penjualan) 

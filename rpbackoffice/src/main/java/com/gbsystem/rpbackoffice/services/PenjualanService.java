@@ -185,6 +185,7 @@ public class PenjualanService {
 		
 		return eRepo.findByIdTransaksi(id_transaksi);
 	}
+	
 	public List<Penjualan> getAllPenjualan(){
 
 		return eRepo.findByRowstatus(1);
@@ -192,6 +193,15 @@ public class PenjualanService {
 	
 	public List<Penjualan> search(String keyword){
 		return eRepo.search(keyword);
+	}
+	
+	public List<Penjualan> getAllPerStore(int id_store){
+
+		return eRepo.getAllPerStore(id_store);
+	}
+	
+	public List<Penjualan> searchPerStore(int id_store, String keyword){
+		return eRepo.searchPerStore(id_store,keyword);
 	}
 	
 	public List<Penjualan> subRiwayatPelanggan(int id_store, String start_date, String end_date, String no_hp_pelanggan){
