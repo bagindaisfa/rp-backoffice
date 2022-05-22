@@ -70,4 +70,7 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	
 	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_transaksi=:id_transaksi", nativeQuery = true)
 	List<Penjualan> findByIdTransaksi(String id_transaksi);
+	
+	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_transaksi=:id_transaksi", nativeQuery = true)
+	Penjualan getPenjualan(String id_transaksi);
 }

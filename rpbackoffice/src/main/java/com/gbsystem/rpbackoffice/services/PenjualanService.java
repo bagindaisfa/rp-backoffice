@@ -83,10 +83,9 @@ public class PenjualanService {
 	
 	public List<Penjualan> savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
-		if (penjualan.getId_transaksi() != null) {
-			ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
-		}
-		if (penjualan.getId_transaksi() != "") {
+		if (penjualan.getId_transaksi() == null) {
+			System.out.println("Tidak ada pesanan tunggu");
+		} else {
 			ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
 		}
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-S" + (eRepo.count() + 1);

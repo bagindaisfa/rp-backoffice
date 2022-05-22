@@ -16,9 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gbsystem.rpbackoffice.entities.DetailPengirimanStoreToStore;
 import com.gbsystem.rpbackoffice.entities.PengirimanStoreToStore;
+import com.gbsystem.rpbackoffice.entities.PenukaranBarang;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.services.PenukaranBarangService;
 import com.gbsystem.rpbackoffice.services.PenyimpananMobileService;
 
 @RestController
@@ -28,6 +30,8 @@ public class PenyimpananMobileController {
 	@Autowired
 	private PenyimpananMobileService penyimpananMobileService;
 	
+	@Autowired
+	private PenukaranBarangService penukaranBarangService;
 	
 	@GetMapping("/stockStore")
 	public double totalStockStore(@Param("id_store") int id_store){
@@ -159,6 +163,7 @@ public class PenyimpananMobileController {
 		List<PenyimpananStoreMasuk> stock_masuk = penyimpananMobileService.getAllPerStoreMasuk(id_store);
 		List<PenyimpananStoreKeluar> stock_keluar = penyimpananMobileService.getAllPerStoreKeluar(id_store);
 		List<StockStore> stockMinimum = penyimpananMobileService.stockMinimum(id_store);
+		List<PenukaranBarang> penukaran = penukaranBarangService.getAllPerStore(id_store);
 		
 		Map<String, Map<String, Object>> response = new HashMap<>();
 		Map<String, Object> map = new HashMap<>();
@@ -166,6 +171,7 @@ public class PenyimpananMobileController {
 		map.put("masuk", stock_masuk);
 		map.put("keluar", stock_keluar);
 		map.put("minimum", stockMinimum);
+		map.put("penukaran", penukaran);
 		
 		response.put("result", map);
 		return response;
