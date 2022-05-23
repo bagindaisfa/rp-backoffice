@@ -10,6 +10,7 @@
 	<groupId>com.gbsystem</groupId>
 	<artifactId>rpbackoffice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>rpbackoffice</name>
 	<description>Rudy Project Information System</description>
 	<properties>
