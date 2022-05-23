@@ -100,6 +100,7 @@ public class PenjualanService {
 		item.setId_karyawan(penjualan.getId_karyawan());
 		item.setNama_karyawan(penjualan.getNama_karyawan());
 		item.setDiskon(penjualan.getDiskon());
+		item.setDiskon_remark(penjualan.getDiskon_remark());
 		item.setMetode_bayar(penjualan.getMetode_bayar());
 		item.setBank_name(penjualan.getBank_name());
 		item.setNo_rek(penjualan.getNo_rek());
@@ -145,7 +146,9 @@ public class PenjualanService {
 			d.setKategori(product.getKategori());
 			d.setNama_kategori(product.getNama_kategori());
 			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
-			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
+			d.setHarga(product.getHarga_jual());
+			d.setHarga_baru(penjualan.getDetailPesananList().get(i).getHarga_baru());
+			d.setHarga_baru_remark(penjualan.getDetailPesananList().get(i).getHarga_baru_remark());
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(1);
@@ -295,6 +298,7 @@ public class PenjualanService {
 		p.setId_store(penjualan.getId_store());
 		p.setLokasi_store(penjualan.getLokasi_store());
 		p.setDiskon(penjualan.getDiskon());
+		p.setDiskon_remark(penjualan.getDiskon_remark());
 		p.setMetode_bayar(penjualan.getMetode_bayar());
 		p.setBank_name(penjualan.getBank_name());
 		p.setNo_rek(penjualan.getNo_rek());
@@ -327,6 +331,7 @@ public class PenjualanService {
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
+			MasterProduct product = eMasterProductRepository.findBySkuCode(penjualan.getDetailPesananList().get(i).getSku_code());
 			d = p.getDetailPesananList().get(i);
 			d.setTanggal_transaksi(penjualan.getTanggal_transaksi());
 			d.setId_transaksi(penjualan.getId_transaksi());
@@ -338,7 +343,9 @@ public class PenjualanService {
 			d.setType(penjualan.getDetailPesananList().get(i).getType());
 			d.setType_name(penjualan.getDetailPesananList().get(i).getType_name());
 			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
-			d.setHarga(penjualan.getDetailPesananList().get(i).getHarga());
+			d.setHarga(product.getHarga_jual());
+			d.setHarga_baru(penjualan.getDetailPesananList().get(i).getHarga_baru());
+			d.setHarga_baru_remark(penjualan.getDetailPesananList().get(i).getHarga_baru_remark());
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(penjualan.getDetailPesananList().get(i).getRowstatus());

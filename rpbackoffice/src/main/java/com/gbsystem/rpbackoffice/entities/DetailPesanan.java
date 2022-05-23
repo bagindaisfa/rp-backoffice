@@ -35,6 +35,8 @@ public class DetailPesanan {
 	private String nama_kategori;
 	private String nama_barang;
 	private Double harga;
+	private Double harga_baru;
+	private String harga_baru_remark;
 	private Double kuantitas;
 	private Double total;
 	private int rowstatus;
@@ -122,6 +124,18 @@ public class DetailPesanan {
 	}
 	public void setHarga(Double harga) {
 		this.harga = harga;
+	}
+	public Double getHarga_baru() {
+		return harga_baru;
+	}
+	public void setHarga_baru(Double harga_baru) {
+		this.harga_baru = harga_baru;
+	}
+	public String getHarga_baru_remark() {
+		return harga_baru_remark;
+	}
+	public void setHarga_baru_remark(String harga_baru_remark) {
+		this.harga_baru_remark = harga_baru_remark;
 	}
 	public Double getKuantitas() {
 		return kuantitas;

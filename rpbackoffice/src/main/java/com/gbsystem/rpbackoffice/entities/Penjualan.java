@@ -33,6 +33,7 @@ public class Penjualan {
 	private int id_karyawan;
 	private String nama_karyawan;
 	private Double diskon;
+	private String diskon_remark;
 	private String metode_bayar;
 	private String bank_name;
 	private String no_rek;
@@ -87,6 +88,12 @@ public class Penjualan {
 	}
 	public void setDiskon(Double diskon) {
 		this.diskon = diskon;
+	}
+	public String getDiskon_remark() {
+		return diskon_remark;
+	}
+	public void setDiskon_remark(String diskon_remark) {
+		this.diskon_remark = diskon_remark;
 	}
 	public String getMetode_bayar() {
 		return metode_bayar;
