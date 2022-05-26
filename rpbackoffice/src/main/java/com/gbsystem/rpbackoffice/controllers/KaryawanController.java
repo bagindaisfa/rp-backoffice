@@ -115,7 +115,7 @@ public class KaryawanController {
     {
     	
     	karyawanService.deleteKaryawanById(id);
-    	return "redirect:/karyawan/all";
+    	return "Terhapus!";
     }
 
     @PostMapping("/pindahStore")

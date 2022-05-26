@@ -191,6 +191,6 @@ public class MasterProductController {
     {
     	
     	masterProductService.deleteMasterProductById(id);
-    	return "redirect:/kategori";
+    	return "Terhapus";
     }
 }

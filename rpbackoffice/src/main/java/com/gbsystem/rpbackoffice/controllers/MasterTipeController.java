@@ -48,7 +48,7 @@ public class MasterTipeController {
     public String saveMaster_tipe(@RequestParam("type_name") String type_name) 
 	{
     	masterTipeService.saveMasterTipe(type_name);
-		return "redirect:/tipe";
+		return "Tersimpan!";
 	}
     
     @PostMapping("/update")
@@ -65,7 +65,7 @@ public class MasterTipeController {
     {
     	
     	masterTipeService.deleteMasterTipeById(id);
-    	return "redirect:/kategori";
+    	return "Terhapus!";
     }
     
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

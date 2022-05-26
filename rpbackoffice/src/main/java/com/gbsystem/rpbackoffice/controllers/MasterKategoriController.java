@@ -47,7 +47,7 @@ public class MasterKategoriController {
     public String saveMaster_kategori(@RequestParam("kategori_name") String kategori_name) 
 	{
     	masterKategoriService.saveMasterKategori(kategori_name);
-		return "redirect:/kategori";
+		return "Tersimpan!";
 	}
     
     @PostMapping("/update")
@@ -64,7 +64,7 @@ public class MasterKategoriController {
     {
     	
     	masterKategoriService.deleteMasterKategoriById(id);
-    	return "redirect:/kategori";
+    	return "Terhapus!";
     }
     
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
