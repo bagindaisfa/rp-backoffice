@@ -93,4 +93,7 @@ public class CustomUserService implements UserDetailsService {
 		return authority;
 	}
 
+	public List<User> search(String keyword){
+		return userDetailsRepository.search(keyword);
+	}
 }

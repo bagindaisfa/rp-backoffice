@@ -3,9 +3,11 @@ package com.gbsystem.rpbackoffice.controllers;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.spec.InvalidKeySpecException;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gbsystem.rpbackoffice.config.JWTTokenHelper;
-
+import com.gbsystem.rpbackoffice.entities.Karyawan;
 import com.gbsystem.rpbackoffice.entities.User;
 
 import com.gbsystem.rpbackoffice.requests.AuthenticationRequest;
@@ -123,5 +125,10 @@ public class AuthenticationController {
 			return "Success!";
 		
 	}
+	
+	@GetMapping("/auth/search")
+    public ResponseEntity<List<User>> search(@Param("keyword") String keyword) {
+    	return new ResponseEntity<>(customUserService.search(keyword), HttpStatus.OK);
+    }
 }
 

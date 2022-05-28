@@ -83,6 +83,7 @@ public class PenjualanService {
 	
 	public List<Penjualan> savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
+		Double sum_qty = 0.0;
 		if (penjualan.getId_transaksi() == null) {
 			System.out.println("Tidak ada pesanan tunggu");
 		} else {
@@ -152,6 +153,7 @@ public class PenjualanService {
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(1);
+			sum_qty += penjualan.getDetailPesananList().get(i).getKuantitas();
 			d.setPenjualan(item);
 			details.add(d);
 			
@@ -182,6 +184,7 @@ public class PenjualanService {
 			ePenyimpananStoreKeluarRepo.save(store_asal);
 			
 		}
+		item.setSum_qty(sum_qty);
 		item.setDetailPesananList(details);
 		eRepo.save(item);
 		
@@ -290,6 +293,7 @@ public class PenjualanService {
 	
 	private Penjualan saveUpdate( Penjualan penjualan) {
 		Penjualan p = new Penjualan();
+		Double sum_qty = 0.0;
     	p = eRepo.findById(penjualan.getId()).get();
     	List<DetailPesanan> details = new ArrayList<>();
     	
@@ -349,7 +353,7 @@ public class PenjualanService {
 			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(penjualan.getDetailPesananList().get(i).getRowstatus());
-			
+			sum_qty += penjualan.getDetailPesananList().get(i).getKuantitas();
 			
 			if (penjualan.getDetailPesananList().get(i).getRowstatus() == 1) {
 				StockStore check = new StockStore();
@@ -381,6 +385,7 @@ public class PenjualanService {
 			d.setPenjualan(p);
 			details.add(d);
 		}
+		p.setSum_qty(sum_qty);
 		p.setDetailPesananList(details);
     	eRepo.save(p);
     	
@@ -507,6 +512,13 @@ public class PenjualanService {
 		List<Penjualan> rekapPelangganPerTanggal = eRepo.rekapPelangganPerTanggal(id_store, start_date, end_date, no_hp_pelanggan);
 		
 		return rekapPelangganPerTanggal;
+	}
+	
+	public List<Penjualan> penjualanPerKaryawan(int id_karyawan, String start_date, String end_date) {
+		
+		List<Penjualan> penjualanPerKaryawan = eRepo.penjualanPerKaryawan(id_karyawan,start_date,end_date);
+		
+		return penjualanPerKaryawan;
 	}
 	
 	public List<DetailPesanan> findByKaryawanId(int id_store, int id_karyawan, String start_date, String end_date) {

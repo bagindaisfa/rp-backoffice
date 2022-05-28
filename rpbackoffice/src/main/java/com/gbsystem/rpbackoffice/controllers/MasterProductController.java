@@ -55,6 +55,21 @@ public class MasterProductController {
         return new ResponseEntity<>(masterProductService.getAllMasterProduct(), HttpStatus.OK);
     }
     
+    @GetMapping("/getById")
+	public ResponseEntity<MasterProduct> getById(@Param("id") String id) {
+        return new ResponseEntity<>(masterProductService.findById(id), HttpStatus.OK);
+    }
+    
+    @GetMapping("/getBySkuCode")
+	public ResponseEntity<MasterProduct> getBySkuCode(@Param("sku_code") String sku_code) {
+        return new ResponseEntity<>(masterProductService.findBySkuCode(sku_code), HttpStatus.OK);
+    }
+    
+    @GetMapping("/getByType")
+	public ResponseEntity<List<MasterProduct>> getByType(@Param("type") int type) {
+        return new ResponseEntity<>(masterProductService.findByType(type), HttpStatus.OK);
+    }
+    
     @GetMapping("/dropdown")
 	public ResponseEntity<List<MasterProduct>> getAllDropdown(@RequestParam List<String> artikel_product) {
     	

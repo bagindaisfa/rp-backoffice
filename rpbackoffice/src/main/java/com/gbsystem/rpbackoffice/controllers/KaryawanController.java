@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.controllers;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,29 +59,31 @@ public class KaryawanController {
     }
     
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String saveProduct(@RequestParam("nama_karyawan") String nama_karyawan,
+    public @ResponseBody String saveProduct(
+    		@RequestParam("tanggal_join") Date tanggal_join,@RequestParam("nama_karyawan") String nama_karyawan,@RequestParam("tanggal_lahir") Date tanggal_lahir,
     		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
     		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("total_transaksi") double total_transaksi, @RequestParam("image") MultipartFile image) throws Exception {
+    		@RequestParam("image") MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
-    		karyawanService.saveKaryawan(nama_karyawan, id_office, lokasi_office, id_store, lokasi_store, jabatan,
-    				no_hp, email, alamat, total_transaksi, image);
+    		karyawanService.saveKaryawan(tanggal_join,nama_karyawan,tanggal_lahir, id_office, lokasi_office, id_store, lokasi_store, jabatan,
+    				no_hp, email, alamat, image);
     	}
     	return "Insert Data Successs!";
 		
     }
     
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("nama_karyawan") String nama_karyawan,
+    public @ResponseBody String update(@RequestParam("id") Long id,
+    		@RequestParam("tanggal_join") Date tanggal_join,@RequestParam("nama_karyawan") String nama_karyawan,@RequestParam("tanggal_lahir") Date tanggal_lahir,
     		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
     		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
     		@RequestParam("total_transaksi") double total_transaksi, @RequestParam("image") MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
-    		karyawanService.update(id, nama_karyawan, id_office, lokasi_office, id_store, lokasi_store, jabatan,
+    		karyawanService.update(id, tanggal_join,nama_karyawan,tanggal_lahir, id_office, lokasi_office, id_store, lokasi_store, jabatan,
     				no_hp, email, alamat, total_transaksi, image);
     	}
     	return "Update Data Successs!";

@@ -148,6 +148,18 @@ public class MasterProductService {
     	eRepo.save(p);    
     }
 	
+	public MasterProduct findById(String id) {
+		return eRepo.findById(id);
+	}
+	
+	public MasterProduct findBySkuCode(String sku_code) {
+		return eRepo.findBySkuCode(sku_code);
+	}
+	
+	public List<MasterProduct> findByType(int type) {
+		return eRepo.findByType(type);
+	}
+	
 	public String update(
 			Long id, MultipartFile image, String sku_code, String artikel_product,
 			String nama_product, int type, String type_name,

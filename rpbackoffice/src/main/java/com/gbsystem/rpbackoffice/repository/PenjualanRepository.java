@@ -73,4 +73,15 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	
 	@Query(value = "SELECT * FROM penjualan WHERE rowstatus = 1 AND id_transaksi=:id_transaksi", nativeQuery = true)
 	Penjualan getPenjualan(String id_transaksi);
+	
+	@Query(value = "SELECT "
+			+ "tanggal_transaksi,"
+			+ "lokasi_store,"
+			+ "SUM(sum_qty) AS sum_qty,"
+			+ "SUM(total) as total "
+			+ "FROM penjualan "
+			+ "WHERE id_karyawan=:id_karyawan AND "
+			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date "
+			+ "GROUP BY id_karyawan,DATE(tanggal_transaksi),lokasi_store", nativeQuery = true)
+	List<Penjualan> penjualanPerKaryawan(int id_karyawan, String start_date, String end_date);
 }

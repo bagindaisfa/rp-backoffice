@@ -20,6 +20,8 @@ public class Karyawan {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_join;
 	private String nama_karyawan;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date tanggal_lahir;
 	private int id_office;
 	private String lokasi_office;
 	private int id_store;
@@ -55,6 +57,12 @@ public class Karyawan {
 		this.nama_karyawan = nama_karyawan;
 	}
 	
+	public Date getTanggal_lahir() {
+		return tanggal_lahir;
+	}
+	public void setTanggal_lahir(Date tanggal_lahir) {
+		this.tanggal_lahir = tanggal_lahir;
+	}
 	public int getId_office() {
 		return id_office;
 	}

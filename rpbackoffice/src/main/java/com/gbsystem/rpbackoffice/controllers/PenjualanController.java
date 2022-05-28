@@ -203,6 +203,12 @@ public class PenjualanController {
 		return riwayatPertanggal;
 	}
 	
+	@GetMapping("/penjualanPerKaryawan")
+	public List<Penjualan> penjualanPerKaryawan(int id_karyawan, String start_date, String end_date) {
+		List<Penjualan> penjualanPerKaryawan = penjualanService.penjualanPerKaryawan(id_karyawan,start_date,end_date);
+		return penjualanPerKaryawan;
+	}
+	
 	@GetMapping("/rangkumanMobilePenjualanKaryawan")
     public List<DetailPesanan> findByKaryawanId(@Param("id_store") int id_store,@Param("id_karyawan") int id_karyawan,@Param("start_date") String start_date,@Param("end_date") String end_date) {
 		List<DetailPesanan> rekapKaryawan = penjualanService.findByKaryawanId(id_store,id_karyawan, start_date, end_date);

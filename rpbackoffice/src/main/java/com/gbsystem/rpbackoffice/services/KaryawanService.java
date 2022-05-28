@@ -19,8 +19,12 @@ public class KaryawanService {
 	@Autowired
 	private KaryawanRepository eRepo;
 	
-	public Karyawan saveKaryawan(String nama_karyawan,int id_office, String lokasi_office, int id_store, String lokasi_store,String jabatan
-			,String no_hp, String email, String alamat, double total_transaksi, MultipartFile image) {
+	public Karyawan saveKaryawan(
+			Date tanggal_join,String nama_karyawan,Date tanggal_lahir,
+			int id_office, String lokasi_office,int id_store,
+			String lokasi_store,String jabatan,String no_hp,
+			String email, String alamat,
+			MultipartFile image) {
 		
 		Karyawan k = new Karyawan();
 		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
@@ -32,8 +36,9 @@ public class KaryawanService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		k.setTanggal_join(tanggal_join);
 		k.setNama_karyawan(nama_karyawan);
-		k.setTanggal_join(new Date());
+		k.setTanggal_lahir(tanggal_lahir);
 		k.setId_office(id_office);
 		k.setLokasi_office(lokasi_office);
 		k.setId_store(id_store);
@@ -42,7 +47,7 @@ public class KaryawanService {
 		k.setNo_hp(no_hp);
 		k.setEmail(email);
 		k.setAlamat(alamat);
-		k.setTotal_transaksi(total_transaksi);
+		k.setTotal_transaksi(0.0);
 		k.setRowstatus(1);
 		return eRepo.save(k);
 	}
@@ -73,7 +78,7 @@ public class KaryawanService {
     	eRepo.save(k);    
     }
 	
-	public void update(Long id, String nama_karyawan, int id_office, String lokasi_office, int id_store, String lokasi_store, String jabatan
+	public void update(Long id, Date tanggal_join,String nama_karyawan,Date tanggal_lahir, int id_office, String lokasi_office, int id_store, String lokasi_store, String jabatan
 			,String no_hp, String email, String alamat, double total_transaksi, MultipartFile image) {
 		Karyawan k = new Karyawan();
 		k = eRepo.findById(id).get();
@@ -87,7 +92,9 @@ public class KaryawanService {
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
+		k.setTanggal_join(tanggal_join);
 		k.setNama_karyawan(nama_karyawan);
+		k.setTanggal_lahir(tanggal_lahir);
 		k.setId_office(id_office);
 		k.setLokasi_office(lokasi_office);
 		k.setId_store(id_store);

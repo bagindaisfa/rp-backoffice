@@ -41,6 +41,7 @@ public class Penjualan {
 	private Double ongkir;
 	private Double total;
 	private Double kembalian;
+	private Double sum_qty;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualan", cascade = CascadeType.ALL)
 	@Where(clause = "rowstatus=1")
@@ -136,6 +137,13 @@ public class Penjualan {
 	}
 	public void setKembalian(Double kembalian) {
 		this.kembalian = kembalian;
+	}
+	
+	public Double getSum_qty() {
+		return sum_qty;
+	}
+	public void setSum_qty(Double sum_qty) {
+		this.sum_qty = sum_qty;
 	}
 	public String getNama_pelanggan() {
 		return nama_pelanggan;
