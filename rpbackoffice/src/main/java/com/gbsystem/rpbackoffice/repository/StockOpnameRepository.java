@@ -13,6 +13,6 @@ import com.gbsystem.rpbackoffice.entities.StockOpname;
 public interface StockOpnameRepository extends JpaRepository<StockOpname, Long> {
 	List<StockOpname> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%)", nativeQuery = true)
+	@Query(value = "SELECT * FROM stock_opname WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%)", nativeQuery = true)
 	List<StockOpname> search(String keyword);
 }

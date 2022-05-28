@@ -104,6 +104,33 @@ public class MasterProductController {
 		return masterProductResponse;
 	}
     
+    @PostMapping(value = "/addCustom", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public @ResponseBody MasterProduct saveMasterProductCustom(
+    		@RequestParam("image") MultipartFile image,
+    		@RequestParam("sku_code") String sku_code,
+    		@RequestParam("sku_code_f") String sku_code_f,
+    		@RequestParam("sku_code_s") String sku_code_s,
+    		@RequestParam("artikel_product") String artikel_product,
+    		@RequestParam("nama_product") String nama_product,
+    		@RequestParam("type") int type,
+    		@RequestParam("type_name") String type_name,
+    		@RequestParam("kategori") String kategori,
+    		@RequestParam("nama_kategori") String nama_kategori,
+    		@RequestParam("artikel_frame") String artikel_frame,
+    		@RequestParam("artikel_lens") String artikel_lens,
+    		@RequestParam("artikel_frame_ns") String artikel_frame_ns,
+    		@RequestParam("artikel_lens_ns") String artikel_lens_ns,
+    		@RequestParam("ukuran") String ukuran,
+    		@RequestParam("kuantitas") double kuantitas,
+    		@RequestParam("hpp") double hpp,
+    		@RequestParam("harga_jual") double harga_jual,
+    		@RequestParam("remarks") String remarks
+    		) 
+	{
+    	MasterProduct masterProductResponse = masterProductService.saveMasterProductCustom(image,sku_code,sku_code_f,sku_code_s,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens,artikel_frame_ns,artikel_lens_ns, ukuran,kuantitas, hpp, harga_jual, remarks);
+		return masterProductResponse;
+	}
+    
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String update(
     		@RequestParam("id") Long id,

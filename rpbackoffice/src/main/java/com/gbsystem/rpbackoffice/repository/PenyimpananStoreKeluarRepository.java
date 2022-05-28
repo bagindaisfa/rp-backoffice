@@ -45,7 +45,7 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND sku_code = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Float generateKuantitasKeluar(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "delete from penyimpanan_store_keluar b where b.pengiriman_code=:pengiriman_code", nativeQuery = true)
 	void deleteStoreKeluar(String pengiriman_code);
