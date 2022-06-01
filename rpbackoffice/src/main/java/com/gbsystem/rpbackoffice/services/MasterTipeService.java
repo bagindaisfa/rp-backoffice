@@ -33,7 +33,7 @@ public class MasterTipeService {
 		return eRepo.findByName(type_name);
 	}
 	
-	public void deleteMasterTipeById(Long id)
+	public void deleteMasterTipeById(int id)
     {
 		MasterTipe p = new MasterTipe();
     	p = eRepo.findById(id).get();
@@ -41,7 +41,7 @@ public class MasterTipeService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String type_name ) {
+	public void update(int id, String type_name ) {
 		MasterTipe p = new MasterTipe();
     	p = eRepo.findById(id).get();
 		p.setType_name(type_name);

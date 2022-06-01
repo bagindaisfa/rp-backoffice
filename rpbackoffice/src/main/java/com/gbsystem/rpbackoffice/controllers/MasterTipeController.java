@@ -52,7 +52,7 @@ public class MasterTipeController {
 	}
     
     @PostMapping("/update")
-    public String update(@RequestParam("id") Long id,@RequestParam("type_name") String type_name) throws Exception {
+    public String update(@RequestParam("id") int id,@RequestParam("type_name") String type_name) throws Exception {
     	
     	if (type_name != "") {
     		masterTipeService.update(id, type_name);
@@ -61,7 +61,7 @@ public class MasterTipeController {
 		
     }
     @GetMapping("/delete")
-    public String deleteTipe(@RequestParam("id") Long id)
+    public String deleteTipe(@RequestParam("id") int id)
     {
     	
     	masterTipeService.deleteMasterTipeById(id);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.gbsystem.rpbackoffice.entities.MasterTipe;
 
 @Repository
-public interface MasterTipeRepository extends JpaRepository<MasterTipe, Long> {
+public interface MasterTipeRepository extends JpaRepository<MasterTipe, Integer> {
 	@Query(value = "SELECT * FROM master_tipe WHERE rowstatus = :rowstatus ORDER BY id", nativeQuery = true)
 	List<MasterTipe> findByRowstatus(int rowstatus);
 	
