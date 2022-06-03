@@ -16,7 +16,7 @@ public interface UserDetailsRepository extends JpaRepository<User, Long> {
 	
 	User findById(long id);
 	
-	@Query(value = "SELECT * FROM auth_user_details WHERE rowstatus = 1 AND ( "
+	@Query(value = "SELECT * FROM auth_user_details WHERE ( "
 			+ "user_name LIKE %:keyword% OR "
 			+ "first_name LIKE %:keyword% OR "
 			+ "last_name LIKE %:keyword% OR "
