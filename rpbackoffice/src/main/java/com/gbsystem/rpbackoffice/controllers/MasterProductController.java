@@ -110,7 +110,7 @@ public class MasterProductController {
 	}
     
     @PostMapping(value = "/addCustom", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody MasterProduct saveMasterProductCustom(
+    public @ResponseBody String saveMasterProductCustom(
     		@RequestParam("image") MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("sku_code_f") String sku_code_f,
@@ -132,7 +132,7 @@ public class MasterProductController {
     		@RequestParam("remarks") String remarks
     		) 
 	{
-    	MasterProduct masterProductResponse = masterProductService.saveMasterProductCustom(image,sku_code,sku_code_f,sku_code_s,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens,artikel_frame_ns,artikel_lens_ns, ukuran,kuantitas, hpp, harga_jual, remarks);
+    	String masterProductResponse = masterProductService.saveMasterProductCustom(image,sku_code,sku_code_f,sku_code_s,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens,artikel_frame_ns,artikel_lens_ns, ukuran,kuantitas, hpp, harga_jual, remarks);
 		return masterProductResponse;
 	}
     
