@@ -88,6 +88,7 @@ public class MasterProductService {
 		
 		q.setId_office(1);
 		q.setLokasi_office("Kantor Pusat");
+		q.setSku_code(sku_code);
 		q.setArtikel(artikel_product);
 		q.setKategori(kategori);
 		q.setNama_kategori(nama_kategori);
@@ -109,6 +110,7 @@ public class MasterProductService {
 				f.setLokasi_office("Kantor Pusat");
 				f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
 				f.setTanggal_masuk(new Date());
+				f.setSku_code(sku_code);
 				f.setArtikel(artikel_product);
 				f.setKategori(kategori);
 				f.setNama_kategori(nama_kategori);
@@ -213,6 +215,7 @@ public class MasterProductService {
 		} else {
 			q.setId_office(1);
 			q.setLokasi_office("Kantor Pusat");
+			q.setSku_code(sku_code);
 			q.setArtikel(artikel_product);
 			q.setKategori(kategori);
 			q.setNama_kategori(nama_kategori);
@@ -235,6 +238,7 @@ public class MasterProductService {
 					f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
 					f.setTanggal_masuk(new Date());
 					f.setArtikel(artikel_product);
+					f.setSku_code(sku_code);
 					f.setKategori(kategori);
 					f.setNama_kategori(nama_kategori);
 					f.setType(type);

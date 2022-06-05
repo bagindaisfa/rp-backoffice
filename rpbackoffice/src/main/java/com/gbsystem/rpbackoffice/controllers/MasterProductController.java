@@ -113,8 +113,8 @@ public class MasterProductController {
     public @ResponseBody String saveMasterProductCustom(
     		@RequestParam("image") MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
-    		@RequestParam("sku_code_f") String sku_code_f,
-    		@RequestParam("sku_code_s") String sku_code_s,
+    		@RequestParam("artikel_f") String artikel_f,
+    		@RequestParam("artikel_s") String artikel_s,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
     		@RequestParam("type") int type,
@@ -132,7 +132,7 @@ public class MasterProductController {
     		@RequestParam("remarks") String remarks
     		) 
 	{
-    	String masterProductResponse = masterProductService.saveMasterProductCustom(image,sku_code,sku_code_f,sku_code_s,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens,artikel_frame_ns,artikel_lens_ns, ukuran,kuantitas, hpp, harga_jual, remarks);
+    	String masterProductResponse = masterProductService.saveMasterProductCustom(image,sku_code,artikel_f,artikel_s,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens,artikel_frame_ns,artikel_lens_ns, ukuran,kuantitas, hpp, harga_jual, remarks);
 		return masterProductResponse;
 	}
     
