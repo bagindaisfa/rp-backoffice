@@ -65,6 +65,11 @@ public class MasterProductController {
         return new ResponseEntity<>(masterProductService.findBySkuCode(sku_code), HttpStatus.OK);
     }
     
+    @GetMapping("/getByArticle")
+	public ResponseEntity<MasterProduct> getByArticle(@Param("article") String article) {
+        return new ResponseEntity<>(masterProductService.findByArticle(article), HttpStatus.OK);
+    }
+    
     @GetMapping("/getByType")
 	public ResponseEntity<List<MasterProduct>> getByType(@Param("type") int type) {
         return new ResponseEntity<>(masterProductService.findByType(type), HttpStatus.OK);

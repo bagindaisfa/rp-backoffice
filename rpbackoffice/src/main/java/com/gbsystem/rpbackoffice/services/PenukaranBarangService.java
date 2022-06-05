@@ -42,7 +42,7 @@ public class PenukaranBarangService {
 		for (int i=0; i<penukaranBarang.size(); i++) {
 			PenukaranBarang p = new PenukaranBarang();
 			MasterProduct prod = new MasterProduct();
-			prod = eMasterProductRepo.findBySkuCode(penukaranBarang.get(i).getSku_code());
+			prod = eMasterProductRepo.findByArticle(penukaranBarang.get(i).getArtikel());
 			
 			Penjualan penjualan = new Penjualan();
 			penjualan = ePenjualanRepo.getPenjualan(penukaranBarang.get(i).getId_transaksi());
@@ -69,9 +69,9 @@ public class PenukaranBarangService {
 			eRepo.save(p);
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndSku_code(
+			d = eStockRepo.findById_storeAndArtikel(
 					penukaranBarang.get(i).getId_store(),
-					penukaranBarang.get(i).getSku_code());
+					penukaranBarang.get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + penukaranBarang.get(i).getKuantitas());
 			eStockRepo.save(d);
 			

@@ -49,7 +49,7 @@ public class PesananTungguService {
 		
 		for(int i = 0; i < pesananTunggu.getBarang_pesanan().size(); i++) {
 			BarangPesananTungguItem d = new BarangPesananTungguItem();
-			MasterProduct product = eMasterProductRepository.findBySkuCode(pesananTunggu.getBarang_pesanan().get(i).getSku_code());
+			MasterProduct product = eMasterProductRepository.findByArticle(pesananTunggu.getBarang_pesanan().get(i).getArtikel());
 			d.setNo_pesanan(id_transaksi);
 			d.setImage(product.getImage());
 			d.setId_store(pesananTunggu.getBarang_pesanan().get(i).getId_store());

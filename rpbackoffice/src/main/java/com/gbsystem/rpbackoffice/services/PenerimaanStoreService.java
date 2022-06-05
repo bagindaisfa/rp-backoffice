@@ -39,9 +39,9 @@ public class PenerimaanStoreService {
 			PenerimaanStore p = new PenerimaanStore();
 			
 			StockOffice d = new StockOffice();
-			d = eStockRepo.findById_officeAndSku_code(
+			d = eStockRepo.findById_officeAndArtikel(
 					get_retur.getId_office_tujuan(),
-					get_retur.getDetail_pengiriman().get(i).getSku_code());
+					get_retur.getDetail_pengiriman().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + get_retur.getDetail_pengiriman().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
@@ -111,9 +111,9 @@ public class PenerimaanStoreService {
 			}
 			
 	    	StockOffice d = new StockOffice();
-			d = eStockRepo.findById_officeAndSku_code(
+			d = eStockRepo.findById_officeAndArtikel(
 					get_retur.get(i).getId_office(),
-					get_retur.get(i).getSku_code());
+					get_retur.get(i).getArtikel());
 	    	d.setKuantitas(d.getKuantitas() - get_retur.get(i).getKuantitas());
 	    	eStockRepo.save(d);
 	    	
@@ -137,9 +137,9 @@ public class PenerimaanStoreService {
 			}
 			
 	    	StockOffice d = new StockOffice();
-			d = eStockRepo.findById_officeAndSku_code(
+			d = eStockRepo.findById_officeAndArtikel(
 					get_retur.get(i).getId_office(),
-					get_retur.get(i).getSku_code());
+					get_retur.get(i).getArtikel());
 	    	d.setKuantitas(d.getKuantitas() - get_retur.get(i).getKuantitas());
 	    	eStockRepo.save(d);
 	    	
@@ -153,9 +153,9 @@ public class PenerimaanStoreService {
 			PenerimaanStore p = new PenerimaanStore();
 			
 			StockOffice d = new StockOffice();
-			d = eStockRepo.findById_officeAndSku_code(
+			d = eStockRepo.findById_officeAndArtikel(
 					get_retur_new.getId_office_tujuan(),
-					get_retur_new.getDetail_pengiriman().get(i).getSku_code());
+					get_retur_new.getDetail_pengiriman().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + get_retur_new.getDetail_pengiriman().get(i).getKuantitas());
 			eStockRepo.save(d);
 			

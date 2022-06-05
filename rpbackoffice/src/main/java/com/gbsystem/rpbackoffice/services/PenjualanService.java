@@ -16,7 +16,6 @@ import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerArtikel;
 import com.gbsystem.rpbackoffice.entities.DetailPesanan;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
-import com.gbsystem.rpbackoffice.entities.MasterTipe;
 import com.gbsystem.rpbackoffice.entities.Pelanggan;
 import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerKaryawan;
@@ -26,7 +25,6 @@ import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerProduk;
 import com.gbsystem.rpbackoffice.entities.RekapPenjualanPerTipe;
 import com.gbsystem.rpbackoffice.repository.DetailPesananRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
-import com.gbsystem.rpbackoffice.repository.MasterTipeRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
@@ -135,7 +133,8 @@ public class PenjualanService {
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
-			MasterProduct product = eMasterProductRepository.findBySkuCode(penjualan.getDetailPesananList().get(i).getSku_code());
+			MasterProduct product = eMasterProductRepository.findByArticle(penjualan.getDetailPesananList().get(i).getArtikel());
+			
 			d.setTanggal_transaksi(tanggal_transaksi);
 			d.setId_transaksi(id_transaksi);
 			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
@@ -158,9 +157,9 @@ public class PenjualanService {
 			details.add(d);
 			
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndSku_code(
+			check = eStockRepo.findById_storeAndArtikel(
 					penjualan.getId_store(),
-					penjualan.getDetailPesananList().get(i).getSku_code());
+					penjualan.getDetailPesananList().get(i).getArtikel());
 			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
 			
@@ -249,9 +248,9 @@ public class PenjualanService {
 			details.add(p.getDetailPesananList().get(i));
 			
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndSku_code(
+			check = eStockRepo.findById_storeAndArtikel(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getSku_code()
+					p.getDetailPesananList().get(i).getArtikel()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -279,9 +278,9 @@ public class PenjualanService {
 		
 		for(int i = 0; i < p.getDetailPesananList().size(); i++) {
 			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndSku_code(
+			check = eStockRepo.findById_storeAndArtikel(
 					p.getDetailPesananList().get(i).getId_store(),
-					p.getDetailPesananList().get(i).getSku_code()
+					p.getDetailPesananList().get(i).getArtikel()
 					);
 			check.setKuantitas(check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas());
 			eStockRepo.save(check);
@@ -335,7 +334,7 @@ public class PenjualanService {
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
-			MasterProduct product = eMasterProductRepository.findBySkuCode(penjualan.getDetailPesananList().get(i).getSku_code());
+			MasterProduct product = eMasterProductRepository.findByArticle(penjualan.getDetailPesananList().get(i).getArtikel());
 			d = p.getDetailPesananList().get(i);
 			d.setTanggal_transaksi(penjualan.getTanggal_transaksi());
 			d.setId_transaksi(penjualan.getId_transaksi());
@@ -357,9 +356,9 @@ public class PenjualanService {
 			
 			if (penjualan.getDetailPesananList().get(i).getRowstatus() == 1) {
 				StockStore check = new StockStore();
-				check = eStockRepo.findById_storeAndSku_code(
+				check = eStockRepo.findById_storeAndArtikel(
 						penjualan.getDetailPesananList().get(i).getId_store(),
-						penjualan.getDetailPesananList().get(i).getSku_code()
+						penjualan.getDetailPesananList().get(i).getArtikel()
 						);
 				check.setKuantitas((check.getKuantitas() + p.getDetailPesananList().get(i).getKuantitas()) - penjualan.getDetailPesananList().get(i).getKuantitas());
 			

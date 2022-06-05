@@ -60,7 +60,7 @@ public class PengirimanStoreToStoreService {
 		for(int i = 0; i < pengirimanStoreToStore.getDetailPengirimanList().size(); i++) {
 			DetailPengirimanStoreToStore detail = new DetailPengirimanStoreToStore();
 			MasterProduct prod = new MasterProduct();
-			prod = eMasterProductRepository.findBySkuCode(pengirimanStoreToStore.getDetailPengirimanList().get(i).getSku_code());
+			prod = eMasterProductRepository.findByArticle(pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 			
 			detail.setTanggal_pengiriman(tanggal_pengiriman);
 			detail.setPengiriman_code(code_pengiriman);
@@ -121,16 +121,16 @@ public class PengirimanStoreToStoreService {
 			details.add(p.getDetailPengirimanList().get(i));
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndSku_code(
+			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_asal(),
-	    			p.getDetailPengirimanList().get(i).getSku_code());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
-			g = eStockRepo.findById_storeAndSku_code(
+			g = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_tujuan(),
-	    			p.getDetailPengirimanList().get(i).getSku_code());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			 
 			g.setKuantitas(g.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(g);
@@ -149,16 +149,16 @@ public class PengirimanStoreToStoreService {
 		for(int i = 0; i < p.getDetailPengirimanList().size(); i++) {
 			
 			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndSku_code(
+			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_asal(),
-	    			p.getDetailPengirimanList().get(i).getSku_code());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			d.setKuantitas(d.getKuantitas() + p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(d);
 			
 			StockStore g = new StockStore();
-			g = eStockRepo.findById_storeAndSku_code(
+			g = eStockRepo.findById_storeAndArtikel(
 					p.getId_store_tujuan(),
-	    			p.getDetailPengirimanList().get(i).getSku_code());
+	    			p.getDetailPengirimanList().get(i).getArtikel());
 			 
 			g.setKuantitas(g.getKuantitas() - p.getDetailPengirimanList().get(i).getKuantitas());
 			eStockRepo.save(g);
@@ -187,7 +187,7 @@ public class PengirimanStoreToStoreService {
 		for(int i = 0; i < pengirimanStoreToStoreNew.getDetailPengirimanList().size(); i++) {
 			DetailPengirimanStoreToStore detail_update = new DetailPengirimanStoreToStore();
 			MasterProduct prod = new MasterProduct();
-			prod = eMasterProductRepository.findBySkuCode(pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getSku_code());
+			prod = eMasterProductRepository.findByArticle(pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 			
 			detail_update.setTanggal_pengiriman(pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getTanggal_pengiriman());
 			detail_update.setPengiriman_code(pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getPengiriman_code());
@@ -206,17 +206,17 @@ public class PengirimanStoreToStoreService {
 			
 			if (pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getRowstatus() == 1) {
 				StockStore e = new StockStore();
-				e = eStockRepo.findById_storeAndSku_code(
+				e = eStockRepo.findById_storeAndArtikel(
 						pengirimanStoreToStoreNew.getId_store_asal(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getSku_code());
+						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				
 				e.setKuantitas(e.getKuantitas() - pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(e);
 		
 				StockStore f = new StockStore();
-				f = eStockRepo.findById_storeAndSku_code(
+				f = eStockRepo.findById_storeAndArtikel(
 						pengirimanStoreToStoreNew.getId_store_tujuan(),
-						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getSku_code());
+						pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getArtikel());
 				f.setKuantitas(f.getKuantitas() + pengirimanStoreToStoreNew.getDetailPengirimanList().get(i).getKuantitas());
 				eStockRepo.save(f);
 			

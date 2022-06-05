@@ -2,7 +2,6 @@ package com.gbsystem.rpbackoffice.services;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -130,7 +129,7 @@ public class MasterProductService {
 	}
 	
 	public MasterProduct saveMasterProductCustom( 
-			MultipartFile image, String sku_code,String sku_code_f,String sku_code_s,
+			MultipartFile image, String sku_code,String artikel_f,String artikel_s,
 			String artikel_product, String nama_product, 
 			int type, String type_name, String kategori, String nama_kategori,
 			String artikel_frame, String artikel_lens,String artikel_frame_ns, String artikel_lens_ns,
@@ -208,12 +207,12 @@ public class MasterProductService {
 		
 		// region pengurangan stock
 		StockOffice penguranganF = new StockOffice();
-		penguranganF = eStockRepo.findById_officeAndSku_code(1, sku_code_f);
+		penguranganF = eStockRepo.findById_officeAndArtikel(1, artikel_f);
 		penguranganF.setKuantitas(penguranganF.getKuantitas() - 1);
 		eStockRepo.save(penguranganF);
 		
 		StockOffice penguranganS = new StockOffice();
-		penguranganS = eStockRepo.findById_officeAndSku_code(1, sku_code_s);
+		penguranganS = eStockRepo.findById_officeAndArtikel(1, artikel_s);
 		penguranganS.setKuantitas(penguranganS.getKuantitas() - 1);
 		eStockRepo.save(penguranganS);
 		// end region pengurangan stock
@@ -264,6 +263,10 @@ public class MasterProductService {
 		return eRepo.findBySkuCode(sku_code);
 	}
 	
+	public MasterProduct findByArticle(String article) {
+		return eRepo.findByArticle(article);
+	}
+	
 	public List<MasterProduct> findByType(int type) {
 		return eRepo.findByType(type);
 	}
@@ -295,7 +298,7 @@ public class MasterProductService {
 		List<MasterStore> masterStore = eMasterStoreRepo.findByRowstatus(1);
     	for (int i=0; i<masterStore.size(); i++) {
         	StockStore r = new StockStore();
-        	r = eStockStoreRepo.findById_storeAndSku_code(Math.toIntExact(masterStore.get(i).getId()), sku_code);
+        	r = eStockStoreRepo.findById_storeAndArtikel(Math.toIntExact(masterStore.get(i).getId()), artikel_product);
         	
         	r.setFoto_barang(img);
 			r.setSku_code(sku_code);
@@ -315,7 +318,7 @@ public class MasterProductService {
     	for (int i=0; i<masterOffice.size(); i++) {
     		
         	StockOffice q = new StockOffice();
-        	q = eStockRepo.findById_officeAndSku_code(Math.toIntExact(masterOffice.get(i).getId()),sku_code);
+        	q = eStockRepo.findById_officeAndArtikel(Math.toIntExact(masterOffice.get(i).getId()),artikel_product);
         	
     		q.setFoto_barang(img);
 			q.setSku_code(sku_code);

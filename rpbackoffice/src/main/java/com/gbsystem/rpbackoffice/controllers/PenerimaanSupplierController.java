@@ -46,9 +46,9 @@ public class PenerimaanSupplierController {
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("id_office") int id_office, @RequestParam("sku_code") String sku_code)
+    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("id_office") int id_office, @RequestParam("artikel") String artikel)
     {
-    	penerimaanSupplierService.deletePenerimaanSupplierById(id,id_office,sku_code);
+    	penerimaanSupplierService.deletePenerimaanSupplierById(id,id_office,artikel);
     	return "redirect:/all";
     }
 
