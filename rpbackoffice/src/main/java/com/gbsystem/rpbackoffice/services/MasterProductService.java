@@ -210,9 +210,7 @@ public class MasterProductService {
 		}
 		// end region stock baru lens dan frame
 		
-		if (penguranganF == null || penguranganS == null || penambahanFrame == null || penambahanLens == null) {
-			result = "Custom Product Gagal!";
-		} else {
+		if (penguranganF != null || penguranganS != null || penambahanFrame != null || penambahanLens != null) {
 			q.setId_office(1);
 			q.setLokasi_office("Kantor Pusat");
 			q.setSku_code(sku_code);
