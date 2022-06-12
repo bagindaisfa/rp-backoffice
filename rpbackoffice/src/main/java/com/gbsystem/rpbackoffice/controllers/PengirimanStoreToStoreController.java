@@ -49,17 +49,17 @@ public class PengirimanStoreToStoreController {
     
     @PostMapping("/update")
     @ResponseBody
-    public PengirimanStoreToStore update(@RequestBody PengirimanStoreToStore pengirimanStoreToStore) throws Exception {
+    public String update(@RequestBody PengirimanStoreToStore pengirimanStoreToStore) throws Exception {
     	
-    	PengirimanStoreToStore pengirimanStoreToStoreResponse = pengirimanStoreService.update(pengirimanStoreToStore);
+    	String pengirimanStoreToStoreResponse = pengirimanStoreService.update(pengirimanStoreToStore);
     	return pengirimanStoreToStoreResponse;
 		
     }
     
     @GetMapping("/delete")
-    public PengirimanStoreToStore deletePengirimanStore(@RequestParam("id") Long id)
+    public String deletePengirimanStore(@RequestParam("id") Long id)
     {
-    	PengirimanStoreToStore pengirimanStoreToStoreResponse = pengirimanStoreService.deletePengirimanStoreById(id);
+    	String pengirimanStoreToStoreResponse = pengirimanStoreService.deletePengirimanStoreById(id);
     	return pengirimanStoreToStoreResponse;
     }
 

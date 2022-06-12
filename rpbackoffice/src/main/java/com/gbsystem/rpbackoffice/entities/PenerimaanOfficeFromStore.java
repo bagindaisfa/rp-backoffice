@@ -21,24 +21,25 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-public class PenerimaanSupplier {
-
+public class PenerimaanOfficeFromStore {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String penerimaan_code;
-	private String pembelian_code;
+	private String retur_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private int id_office;
 	private String lokasi_office;
-	private String id_supplier;
-	private String nama_supplier;
+	private int id_store;
+	private String lokasi_store;
 	private int rowstatus;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penerimaanSupplier", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penerimaanOfficeFromStore", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
-	@JsonIgnoreProperties("penerimaanSupllier")
-	List<DetailPenerimaanSupplier> detailPenerimaanList = new ArrayList<>();
+	@JsonIgnoreProperties("penerimaanOfficeFromStore")
+	private List<DetailPenerimaanOfficeFromStore> detailPenerimaanList = new ArrayList<>();
+	
 	public Long getId() {
 		return id;
 	}
@@ -51,11 +52,11 @@ public class PenerimaanSupplier {
 	public void setPenerimaan_code(String penerimaan_code) {
 		this.penerimaan_code = penerimaan_code;
 	}
-	public String getPembelian_code() {
-		return pembelian_code;
+	public String getRetur_code() {
+		return retur_code;
 	}
-	public void setPembelian_code(String pembelian_code) {
-		this.pembelian_code = pembelian_code;
+	public void setRetur_code(String retur_code) {
+		this.retur_code = retur_code;
 	}
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;
@@ -75,17 +76,17 @@ public class PenerimaanSupplier {
 	public void setLokasi_office(String lokasi_office) {
 		this.lokasi_office = lokasi_office;
 	}
-	public String getId_supplier() {
-		return id_supplier;
+	public int getId_store() {
+		return id_store;
 	}
-	public void setId_supplier(String id_supplier) {
-		this.id_supplier = id_supplier;
+	public void setId_store(int id_store) {
+		this.id_store = id_store;
 	}
-	public String getNama_supplier() {
-		return nama_supplier;
+	public String getLokasi_store() {
+		return lokasi_store;
 	}
-	public void setNama_supplier(String nama_supplier) {
-		this.nama_supplier = nama_supplier;
+	public void setLokasi_store(String lokasi_store) {
+		this.lokasi_store = lokasi_store;
 	}
 	public int getRowstatus() {
 		return rowstatus;
@@ -93,10 +94,10 @@ public class PenerimaanSupplier {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	public List<DetailPenerimaanSupplier> getDetailPenerimaanList() {
+	public List<DetailPenerimaanOfficeFromStore> getDetailPenerimaanList() {
 		return detailPenerimaanList;
 	}
-	public void setDetailPenerimaanList(List<DetailPenerimaanSupplier> detailPenerimaanList) {
+	public void setDetailPenerimaanList(List<DetailPenerimaanOfficeFromStore> detailPenerimaanList) {
 		this.detailPenerimaanList = detailPenerimaanList;
 	}
 	

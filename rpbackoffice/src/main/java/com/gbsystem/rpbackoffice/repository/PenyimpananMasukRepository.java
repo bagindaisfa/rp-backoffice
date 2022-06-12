@@ -27,4 +27,7 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
 	Double generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	
+	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code AND artikel=:artikel", nativeQuery = true)
+	PenyimpananMasuk getPenyimpananByPenerimanCodeandArtikel(String penerimaan_code, String artikel);
 }

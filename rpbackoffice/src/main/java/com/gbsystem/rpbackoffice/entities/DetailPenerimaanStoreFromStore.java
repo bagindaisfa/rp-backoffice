@@ -28,15 +28,20 @@ public class DetailPenerimaanStoreFromStore {
 	private Date tanggal_penerimaan;
 	private String sku_code;
 	private String artikel;
+	private int type;
+	private String type_name;
+	private String kategori;
+	private String nama_kategori;
 	private String nama_barang;
 	private double kuantitas;
+	private Double harga_jual;
+	private Double hpp;
 	private String keterangan;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "penerimaan_store_from_store_id", referencedColumnName = "id")
 	@JsonIgnoreProperties("detailPenerimaanList")
     private PenerimaanStoreFromStore penerimaanStoreFromStore;
-	
 	public Long getId() {
 		return id;
 	}
@@ -55,14 +60,41 @@ public class DetailPenerimaanStoreFromStore {
 	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
 		this.tanggal_penerimaan = tanggal_penerimaan;
 	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
+	}
 	public String getArtikel() {
 		return artikel;
 	}
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
-	public PenerimaanStoreFromStore getPenerimaanStoreFromStore() {
-		return penerimaanStoreFromStore;
+	public int getType() {
+		return type;
+	}
+	public void setType(int type) {
+		this.type = type;
+	}
+	public String getType_name() {
+		return type_name;
+	}
+	public void setType_name(String type_name) {
+		this.type_name = type_name;
+	}
+	public String getKategori() {
+		return kategori;
+	}
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
+	}
+	public String getNama_kategori() {
+		return nama_kategori;
+	}
+	public void setNama_kategori(String nama_kategori) {
+		this.nama_kategori = nama_kategori;
 	}
 	public String getNama_barang() {
 		return nama_barang;
@@ -76,11 +108,17 @@ public class DetailPenerimaanStoreFromStore {
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
-	public String getSku_code() {
-		return sku_code;
+	public Double getHarga_jual() {
+		return harga_jual;
 	}
-	public void setSku_code(String sku_code) {
-		this.sku_code = sku_code;
+	public void setHarga_jual(Double harga_jual) {
+		this.harga_jual = harga_jual;
+	}
+	public Double getHpp() {
+		return hpp;
+	}
+	public void setHpp(Double hpp) {
+		this.hpp = hpp;
 	}
 	public String getKeterangan() {
 		return keterangan;
@@ -94,8 +132,12 @@ public class DetailPenerimaanStoreFromStore {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
+	public PenerimaanStoreFromStore getPenerimaanStoreFromStore() {
+		return penerimaanStoreFromStore;
+	}
 	public void setPenerimaanStoreFromStore(PenerimaanStoreFromStore penerimaanStoreFromStore) {
 		this.penerimaanStoreFromStore = penerimaanStoreFromStore;
 	}
-
+	
+	
 }

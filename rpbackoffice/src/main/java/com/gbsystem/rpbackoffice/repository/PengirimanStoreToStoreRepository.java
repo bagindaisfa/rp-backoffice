@@ -32,4 +32,6 @@ public interface PengirimanStoreToStoreRepository extends JpaRepository<Pengirim
 			+ "WHERE A.rowstatus = 1 AND A.id_store_asal= :id_store ", nativeQuery = true)
 	List<PengirimanStoreToStore> getAllPerStorePindah(int id_store);
 
+	@Query(value = "SELECT * FROM pengiriman_store_to_store WHERE rowstatus = 1 AND pengiriman_code =:pengiriman_code", nativeQuery = true)
+	PengirimanStoreToStore getByPengirimanCode(String pengiriman_code);
 }

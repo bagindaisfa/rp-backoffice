@@ -62,9 +62,9 @@ public class PengirimanOfficeToStoreController {
     
     @PostMapping("/update")
     @ResponseBody
-    public PengirimanOfficeToStore update(@RequestBody PengirimanOfficeToStore pengirimanOfficeToStore) throws Exception {
+    public String update(@RequestBody PengirimanOfficeToStore pengirimanOfficeToStore) throws Exception {
     	
-    	PengirimanOfficeToStore pengirimanResponse = pengirimanGudangService.update(pengirimanOfficeToStore);
+    	String pengirimanResponse = pengirimanGudangService.update(pengirimanOfficeToStore);
     	return pengirimanResponse;
 		
     }
@@ -72,8 +72,8 @@ public class PengirimanOfficeToStoreController {
     @GetMapping("/delete")
     public String deletePengirimanGudang(@RequestParam("id") Long id)
     {
-    	pengirimanGudangService.deletePengirimanGudangById(id);
-    	return "redirect:/all";
+    	String response = pengirimanGudangService.deletePengirimanGudangById(id);
+    	return response;
     }
 
     @GetMapping("/transferRequest")

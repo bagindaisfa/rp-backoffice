@@ -52,4 +52,7 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM penyimpanan_store_masuk WHERE rowstatus = :rowstatus AND id_store = :id_store", nativeQuery = true)
 	double totalQtyMasuk(int rowstatus, int id_store);
+	
+	@Query(value = "SELECT * FROM penyimpanan_store_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code AND artikel=:artikel", nativeQuery = true)
+	PenyimpananStoreMasuk getByPenerimaanCodeandArtikel(String penerimaan_code, String artikel);
 }

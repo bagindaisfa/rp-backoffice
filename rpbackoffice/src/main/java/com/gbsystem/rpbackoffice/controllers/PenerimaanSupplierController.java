@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,20 +37,19 @@ public class PenerimaanSupplierController {
     }
     
     @PostMapping("/add")
-    public @ResponseBody String saveProduct(@RequestParam("pembelian_code") String pembelian_code) throws Exception {
+    @ResponseBody
+    public PenerimaanSupplier saveProduct(@RequestBody PenerimaanSupplier penerimaanSupplier) throws Exception {
     	
-    	if (pembelian_code != "") {
-    		penerimaanSupplierService.savePenerimaanSupplier(pembelian_code);
-    	}
-    	return "Insert Data Successs!";
+    	PenerimaanSupplier response = penerimaanSupplierService.savePenerimaanSupplier(penerimaanSupplier);
+    	return response;
 		
     }
     
     @GetMapping("/delete")
-    public String deletePenerimaanSupplier(@RequestParam("id") Long id, @RequestParam("id_office") int id_office, @RequestParam("artikel") String artikel)
+    public String deletePenerimaanSupplier(@RequestParam("id") Long id)
     {
-    	penerimaanSupplierService.deletePenerimaanSupplierById(id,id_office,artikel);
-    	return "redirect:/all";
+    	String response = penerimaanSupplierService.deletePenerimaanSupplierById(id);
+    	return response;
     }
 
 }

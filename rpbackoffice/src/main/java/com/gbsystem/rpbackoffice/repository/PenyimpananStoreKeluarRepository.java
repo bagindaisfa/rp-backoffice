@@ -42,14 +42,17 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 			+ "lokasi_office LIKE %:keyword% )", nativeQuery = true)
 	List<PenyimpananStoreKeluar> searchMobile(int id_store, String keyword);
 	
-	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND sku_code = (?1)"
+	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND artikel = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasKeluar(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Float generateKuantitasKeluar(String artikel, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "delete from penyimpanan_store_keluar b where b.pengiriman_code=:pengiriman_code", nativeQuery = true)
 	void deleteStoreKeluar(String pengiriman_code);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM penyimpanan_store_keluar WHERE rowstatus = :rowstatus AND id_store = :id_store ", nativeQuery = true)
 	double totalQtyKeluar(int rowstatus, int id_store);
+	
+	@Query(value = "SELECT * FROM penyimpanan_store_keluar WHERE rowstatus = 1 AND pengiriman_code= :pengiriman_code AND artikel=:artikel", nativeQuery = true)
+	PenyimpananStoreKeluar getByPengirimanCodeandArtikel(String pengiriman_code, String artikel);
 }

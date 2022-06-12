@@ -18,5 +18,8 @@ List<PenerimaanStoreFromStore> findByRowstatus(@Param("rowstatus") int rowstatus
 			+ "(lokasi_store_asal LIKE %:keyword% OR "
 			+ "lokasi_store_penerima LIKE %:keyword%)", nativeQuery = true)
 	List<PenerimaanStoreFromStore> search(String keyword);
+	
+	@Query(value = "SELECT * FROM penerimaan_store_from_store WHERE rowstatus = 1 AND pengiriman_code = :pengiriman_code", nativeQuery = true)
+	PenerimaanStoreFromStore findByPengirimanCode(String pengiriman_code);
 
 }

@@ -59,11 +59,11 @@ public class ReturGudangController {
     	return returGudangResponse;
     }
     
-    @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/update")
     @ResponseBody
-    public ReturGudang update(@RequestBody ReturGudang returGudang) throws Exception {
+    public String update(@RequestBody ReturGudang returGudang) throws Exception {
     	
-    	ReturGudang returGudangResponse = returGudangService.update(returGudang);
+    	String returGudangResponse = returGudangService.update(returGudang);
     	return returGudangResponse;
 		
     }

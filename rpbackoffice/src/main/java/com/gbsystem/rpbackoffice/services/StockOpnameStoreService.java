@@ -34,8 +34,8 @@ public class StockOpnameStoreService {
 		Date date = new Date();
 		Date date_before = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
 		
-		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
-		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
+		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
+		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
 		
 		Double stock = kuantitas_masuk - kuantitas_keluar;
 		

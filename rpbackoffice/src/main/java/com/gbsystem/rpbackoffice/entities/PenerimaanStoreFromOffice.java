@@ -27,6 +27,7 @@ public class PenerimaanStoreFromOffice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String penerimaan_code;
+	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private int id_office;
@@ -49,6 +50,12 @@ public class PenerimaanStoreFromOffice {
 	}
 	public void setPenerimaan_code(String penerimaan_code) {
 		this.penerimaan_code = penerimaan_code;
+	}
+	public String getPengiriman_code() {
+		return pengiriman_code;
+	}
+	public void setPengiriman_code(String pengiriman_code) {
+		this.pengiriman_code = pengiriman_code;
 	}
 	public Date getTanggal_penerimaan() {
 		return tanggal_penerimaan;

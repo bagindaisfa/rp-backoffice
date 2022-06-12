@@ -18,8 +18,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-public class DetailPenerimaanStoreFromOffice {
-	
+public class DetailPenerimaanOfficeFromStore {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -39,10 +38,9 @@ public class DetailPenerimaanStoreFromOffice {
 	private Double hpp;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "penerimaan_store_from_office_id", referencedColumnName = "id")
+    @JoinColumn(name = "penerimaan_office_from_store_id", referencedColumnName = "id")
 	@JsonIgnoreProperties("detailPenerimaanList")
-    private PenerimaanStoreFromOffice penerimaanStoreFromOffice;
-	
+	private PenerimaanOfficeFromStore penerimaanOfficeFromStore;
 	public Long getId() {
 		return id;
 	}
@@ -61,13 +59,18 @@ public class DetailPenerimaanStoreFromOffice {
 	public void setTanggal_penerimaan(Date tanggal_penerimaan) {
 		this.tanggal_penerimaan = tanggal_penerimaan;
 	}
+	public String getSku_code() {
+		return sku_code;
+	}
+	public void setSku_code(String sku_code) {
+		this.sku_code = sku_code;
+	}
 	public String getArtikel() {
 		return artikel;
 	}
 	public void setArtikel(String artikel) {
 		this.artikel = artikel;
 	}
-	
 	public int getType() {
 		return type;
 	}
@@ -92,9 +95,6 @@ public class DetailPenerimaanStoreFromOffice {
 	public void setNama_kategori(String nama_kategori) {
 		this.nama_kategori = nama_kategori;
 	}
-	public PenerimaanStoreFromOffice getPenerimaanStoreFromOffice() {
-		return penerimaanStoreFromOffice;
-	}
 	public String getNama_barang() {
 		return nama_barang;
 	}
@@ -106,12 +106,6 @@ public class DetailPenerimaanStoreFromOffice {
 	}
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
-	}
-	public String getSku_code() {
-		return sku_code;
-	}
-	public void setSku_code(String sku_code) {
-		this.sku_code = sku_code;
 	}
 	public String getKeterangan() {
 		return keterangan;
@@ -137,8 +131,11 @@ public class DetailPenerimaanStoreFromOffice {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	public void setPenerimaanStoreFromOffice(PenerimaanStoreFromOffice penerimaanStoreFromOffice) {
-		this.penerimaanStoreFromOffice = penerimaanStoreFromOffice;
+	public PenerimaanOfficeFromStore getPenerimaanOfficeFromStore() {
+		return penerimaanOfficeFromStore;
 	}
-
+	public void setPenerimaanOfficeFromStore(PenerimaanOfficeFromStore penerimaanOfficeFromStore) {
+		this.penerimaanOfficeFromStore = penerimaanOfficeFromStore;
+	}
+	
 }

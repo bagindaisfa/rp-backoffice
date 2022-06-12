@@ -36,4 +36,7 @@ public interface DetailPengirimanStoreToStoreRepository extends JpaRepository<De
 			+ "ON A.id = B.pengiriman_store_to_store_id AND B.rowstatus =1 "
 			+ "WHERE A.rowstatus = :rowstatus AND A.id_store_asal = :id_store", nativeQuery = true)
 	Double totalQtyPindah(int rowstatus, int id_store);
+	
+	@Query(value = "DELETE FROM detail_pengiriman_store_to_store WHERE pengiriman_code = :pengiriman_code", nativeQuery = true)
+	void deleteByPengirimanCode(String pengiriman_code);
 }

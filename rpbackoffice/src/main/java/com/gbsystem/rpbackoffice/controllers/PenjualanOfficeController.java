@@ -54,10 +54,10 @@ public class PenjualanOfficeController {
     }
 	
 	@GetMapping("/delete")
-    public PenjualanOffice deletePenjualan(@RequestParam("id") Long id)
+    public String deletePenjualan(@RequestParam("id") Long id)
     {
     	
-		PenjualanOffice penjualanOfficeResponse = penjualanOfficeService.deletePenjualanById(id);
+		String penjualanOfficeResponse = penjualanOfficeService.deletePenjualanById(id);
     	return penjualanOfficeResponse;
     }
 	    
