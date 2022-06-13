@@ -60,6 +60,10 @@ public class PembelianService {
 		return eRepo.search(keyword);
 	}
 	
+	public Pembelian getPembelian(String pembelian_code) {
+		return eRepo.findByPembelianCode(pembelian_code);
+	}
+	
 	public List<Pembelian> getAllPembelian(){
 
 		return eRepo.findByRowstatus(1);

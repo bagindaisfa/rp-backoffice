@@ -37,6 +37,11 @@ public class PembelianController {
     	return new ResponseEntity<>(pembelianService.search(keyword), HttpStatus.OK);
     }
     
+    @GetMapping("/getPembelian")
+    public ResponseEntity<Pembelian> getPembelian(@Param("pembelian_code") String pembelian_code) {
+    	return new ResponseEntity<>(pembelianService.getPembelian(pembelian_code), HttpStatus.OK);
+    }
+    
     @PostMapping("/add")
     @ResponseBody
     public Pembelian saveProduct(@RequestBody Pembelian pembelian) throws Exception {
