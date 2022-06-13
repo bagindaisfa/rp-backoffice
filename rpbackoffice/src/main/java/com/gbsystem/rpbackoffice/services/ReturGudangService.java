@@ -122,7 +122,6 @@ public class ReturGudangService {
 	    	
 	    	List<DetailReturGudang> details = new ArrayList<>();
 	    	
-	    	p.setPengiriman_code(returGudang.getPengiriman_code());
 			p.setTanggal_retur(returGudang.getTanggal_retur());
 			p.setId_store_asal(returGudang.getId_store_asal());
 			p.setLokasi_store_asal(returGudang.getLokasi_store_asal());
@@ -142,7 +141,6 @@ public class ReturGudangService {
 					MasterProduct prod = new MasterProduct();
 					prod = eMasterProductRepository.findByArticle(returGudang.getDetail_pengiriman().get(i).getArtikel());
 					detail.setTanggal_retur(returGudang.getDetail_pengiriman().get(i).getTanggal_retur());
-					detail.setPengiriman_code(returGudang.getDetail_pengiriman().get(i).getPengiriman_code());
 					detail.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
 					detail.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
 					detail.setKategori(prod == null ? "" : prod.getKategori());
@@ -160,7 +158,7 @@ public class ReturGudangService {
 				} else {
 					DetailReturGudang d = new DetailReturGudang();
 					d.setTanggal_retur(returGudang.getDetail_pengiriman().get(i).getTanggal_retur());
-					d.setPengiriman_code(returGudang.getDetail_pengiriman().get(i).getPengiriman_code());
+					d.setPengiriman_code(p.getPengiriman_code());
 					d.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
 					d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
 					d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());

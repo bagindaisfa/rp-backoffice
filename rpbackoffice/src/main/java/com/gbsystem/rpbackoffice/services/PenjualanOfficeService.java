@@ -149,8 +149,8 @@ public class PenjualanOfficeService {
 		double total = 0;
 		PenjualanOffice p = new PenjualanOffice();
     	p = eRepo.findById(penjualanOffice.getId()).get();
+    	
     	p.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
-		p.setId_transaksi(penjualanOffice.getId_transaksi());
 		p.setId_office(penjualanOffice.getId_office());
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
 		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
@@ -169,7 +169,6 @@ public class PenjualanOfficeService {
 			
 			if (d != null) {
 				d.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
-				d.setId_transaksi(penjualanOffice.getId_transaksi());
 				d.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
 				d.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 				d.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
@@ -203,7 +202,7 @@ public class PenjualanOfficeService {
 							penjualanOffice.getId_transaksi(),
 							penjualanOffice.getDetail_penjualan().get(k).getArtikel()
 							);
-					f.setPengiriman_code(penjualanOffice.getId_transaksi());
+					f.setPengiriman_code(p.getId_transaksi());
 					f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
 					f.setId_office(penjualanOffice.getId_office());
 					f.setLokasi_office(penjualanOffice.getLokasi_office());
@@ -242,7 +241,7 @@ public class PenjualanOfficeService {
 				}
 			} else {
 				DetailPenjualanOffice new_insert = new DetailPenjualanOffice();
-				new_insert.setId_transaksi(penjualanOffice.getId_transaksi());
+				new_insert.setId_transaksi(p.getId_transaksi());
 				new_insert.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
 				new_insert.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 				new_insert.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
@@ -271,7 +270,7 @@ public class PenjualanOfficeService {
 				eStockOfficeRepo.save(g);
 				
 				PenyimpananKeluar f = new PenyimpananKeluar();
-				f.setPengiriman_code(penjualanOffice.getId_transaksi());
+				f.setPengiriman_code(p.getId_transaksi());
 				f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
 				f.setId_office(penjualanOffice.getId_office());
 				f.setLokasi_office(penjualanOffice.getLokasi_office());

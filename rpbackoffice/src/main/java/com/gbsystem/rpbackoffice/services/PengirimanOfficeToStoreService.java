@@ -125,7 +125,6 @@ public class PengirimanOfficeToStoreService {
 	    	
 	    	List<DetailPengirimanOfficeToStore> details = new ArrayList<>();
 			
-			p.setPengiriman_code(pengirimanOfficeToStore.getPengiriman_code());
 			p.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
 			p.setId_office(pengirimanOfficeToStore.getId_office());
 			p.setLokasi_office(pengirimanOfficeToStore.getLokasi_office());
@@ -145,7 +144,6 @@ public class PengirimanOfficeToStoreService {
 					MasterProduct prod = new MasterProduct();
 					prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 					
-					detail_update.setPengiriman_code(pengirimanOfficeToStore.getPengiriman_code());
 					detail_update.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
 					detail_update.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 					detail_update.setKategori(prod == null ? "" : prod.getKategori());
@@ -167,7 +165,7 @@ public class PengirimanOfficeToStoreService {
 					MasterProduct prod = new MasterProduct();
 					prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
 					
-					detail.setPengiriman_code(pengirimanOfficeToStore.getPengiriman_code());
+					detail.setPengiriman_code(p.getPengiriman_code());
 					detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
 					detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
 					detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());

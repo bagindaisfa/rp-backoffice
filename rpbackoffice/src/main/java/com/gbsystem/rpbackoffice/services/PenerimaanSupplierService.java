@@ -165,8 +165,6 @@ public class PenerimaanSupplierService {
     	
     	List<DetailPenerimaanSupplier> details = new ArrayList<>();
 		
-		p.setPenerimaan_code(penerimaanSupplier.getPenerimaan_code());
-		p.setPembelian_code(penerimaanSupplier.getPembelian_code());
 		p.setTanggal_penerimaan(penerimaanSupplier.getTanggal_penerimaan());
 		p.setId_office(penerimaanSupplier.getId_office());
 		p.setLokasi_office(penerimaanSupplier.getLokasi_office());
@@ -214,7 +212,7 @@ public class PenerimaanSupplierService {
 							);
 					h.setId_office(penerimaanSupplier.getId_office());
 					h.setLokasi_office(penerimaanSupplier.getLokasi_office());
-					h.setPenerimaan_code(penerimaanSupplier.getPenerimaan_code());
+					h.setPenerimaan_code(p.getPenerimaan_code());
 					h.setTanggal_masuk(penerimaanSupplier.getTanggal_penerimaan());
 					h.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 					h.setArtikel(penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
@@ -247,7 +245,7 @@ public class PenerimaanSupplierService {
 			} else {
 				DetailPenerimaanSupplier detail = new DetailPenerimaanSupplier();
 				
-				detail.setPenerimaan_code(penerimaanSupplier.getPenerimaan_code());
+				detail.setPenerimaan_code(p.getPenerimaan_code());
 				detail.setTanggal_penerimaan(penerimaanSupplier.getTanggal_penerimaan());
 				detail.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 				detail.setArtikel(penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
@@ -294,7 +292,7 @@ public class PenerimaanSupplierService {
 				PenyimpananMasuk f = new PenyimpananMasuk();
 				f.setId_office(1);
 				f.setLokasi_office("Kantor Pusat");
-				f.setPenerimaan_code(penerimaanSupplier.getPenerimaan_code());
+				f.setPenerimaan_code(p.getPenerimaan_code());
 				f.setTanggal_masuk(penerimaanSupplier.getTanggal_penerimaan());
 				f.setArtikel(penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
 				f.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());

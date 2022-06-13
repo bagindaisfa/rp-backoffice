@@ -92,9 +92,7 @@ public class PembelianService {
 		p = eRepo.findById(pembelian.getId()).get();
 		List<DetailPembelian> details = new ArrayList<>();
 		
-		p.setPembelian_code(pembelian.getPembelian_code());
 		p.setTanggal_transaksi(pembelian.getTanggal_transaksi());
-		
 		p.setId_supplier(pembelian.getId_supplier());
 		p.setNama_supplier(pembelian.getNama_supplier());
 		p.setRowstatus(pembelian.getRowstatus());
@@ -106,7 +104,6 @@ public class PembelianService {
 				d = eDetailRepo.findById(pembelian.getDetail_pembelian().get(i).getId()).orElse(null);	
 			}
 			if (d != null) {
-				d.setPembelian_code(pembelian.getPembelian_code());
 				d.setTanggal_transaksi(pembelian.getTanggal_transaksi());
 				d.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
 				d.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
@@ -124,6 +121,7 @@ public class PembelianService {
 				details.add(d);
 			} else {
 				DetailPembelian new_detail = new DetailPembelian();
+				new_detail.setPembelian_code(p.getPembelian_code());
 				new_detail.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
 				new_detail.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
 				new_detail.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());

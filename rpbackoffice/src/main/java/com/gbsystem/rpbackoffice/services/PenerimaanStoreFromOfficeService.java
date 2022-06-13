@@ -234,7 +234,6 @@ public class PenerimaanStoreFromOfficeService {
 		
     	List<DetailPenerimaanStoreFromOffice> details = new ArrayList<>();
 		
-		p.setPenerimaan_code(penerimaanStoreFromOfficeNew.getPenerimaan_code());
 		p.setPengiriman_code(penerimaanStoreFromOfficeNew.getPengiriman_code());
 		p.setTanggal_penerimaan(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
 		p.setId_office(penerimaanStoreFromOfficeNew.getId_office());
@@ -291,7 +290,7 @@ public class PenerimaanStoreFromOfficeService {
 							);
 					f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
 					f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-					f.setPengiriman_code(penerimaanStoreFromOfficeNew.getPengiriman_code());
+					f.setPengiriman_code(p.getPengiriman_code());
 					f.setTanggal_keluar(pengiriman.getTanggal_pengiriman());
 					f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 					f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
@@ -314,7 +313,7 @@ public class PenerimaanStoreFromOfficeService {
 							);
 					h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
 					h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-					h.setPenerimaan_code(penerimaanStoreFromOfficeNew.getPenerimaan_code());
+					h.setPenerimaan_code(p.getPenerimaan_code());
 					h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
 					h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 					h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
@@ -363,7 +362,7 @@ public class PenerimaanStoreFromOfficeService {
 				details.add(detail_update);	
 			} else {
 				DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
-				detail.setPenerimaan_code(penerimaanStoreFromOfficeNew.getPenerimaan_code());
+				detail.setPenerimaan_code(p.getPenerimaan_code());
 				detail.setTanggal_penerimaan(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
 				detail.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				detail.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
@@ -421,7 +420,7 @@ public class PenerimaanStoreFromOfficeService {
 				PenyimpananKeluar f = new PenyimpananKeluar();
 				f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
 				f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-				f.setPengiriman_code(penerimaanStoreFromOfficeNew.getPenerimaan_code());
+				f.setPengiriman_code(p.getPengiriman_code());
 				f.setTanggal_keluar(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
 				f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 				f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
@@ -440,7 +439,7 @@ public class PenerimaanStoreFromOfficeService {
 				PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
 				h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
 				h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-				h.setPenerimaan_code(penerimaanStoreFromOfficeNew.getPenerimaan_code());
+				h.setPenerimaan_code(p.getPenerimaan_code());
 				h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
 				h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
 				h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
