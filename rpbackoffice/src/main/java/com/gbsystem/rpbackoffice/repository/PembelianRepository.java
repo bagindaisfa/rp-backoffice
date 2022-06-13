@@ -14,7 +14,7 @@ public interface PembelianRepository extends JpaRepository<Pembelian, Long> {
 	List<Pembelian> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM pembelian WHERE rowstatus = 1 AND "
-			+ "( artikel LIKE %:keyword% OR tipe LIKE %:keyword% OR kategori LIKE %:keyword% OR "
+			+ "(pembelian_code LIKE %:keyword% OR artikel LIKE %:keyword% OR tipe LIKE %:keyword% OR kategori LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR ukuran LIKE %:keyword% OR sku_code LIKE %:keyword% )", nativeQuery = true)
 	List<Pembelian> search(String keyword);
 	
