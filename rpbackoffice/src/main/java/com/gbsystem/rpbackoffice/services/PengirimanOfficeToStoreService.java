@@ -138,7 +138,7 @@ public class PengirimanOfficeToStoreService {
 				if (pengirimanOfficeToStore.getDetailPengirimanList().get(i).getId() == null) {
 					detail_update = null;
 				} else {
-					detail_update = eDetailRepo.getById(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getId());	
+					detail_update = eDetailRepo.findById(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getId()).orElse(null);	
 				}
 				
 				if (detail_update != null) {

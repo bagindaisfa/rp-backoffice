@@ -164,7 +164,7 @@ public class PenjualanOfficeService {
 			if (penjualanOffice.getDetail_penjualan().get(k).getId() == null) {
 				d = null;
 			} else {
-				d = eDetailRepo.getById(penjualanOffice.getDetail_penjualan().get(k).getId());
+				d = eDetailRepo.findById(penjualanOffice.getDetail_penjualan().get(k).getId()).orElse(null);
 			}
 			
 			if (d != null) {

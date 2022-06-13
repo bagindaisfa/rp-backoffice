@@ -181,7 +181,7 @@ public class PenerimaanSupplierService {
 			if (penerimaanSupplier.getDetailPenerimaanList().get(i).getId() == null) {
 				detail_update = null;
 			} else {
-				detail_update = eDetailRepo.getById(penerimaanSupplier.getDetailPenerimaanList().get(i).getId());
+				detail_update = eDetailRepo.findById(penerimaanSupplier.getDetailPenerimaanList().get(i).getId()).orElse(null);
 			}
 			
 			if (detail_update != null) {

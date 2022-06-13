@@ -103,7 +103,7 @@ public class PembelianService {
 			if (pembelian.getDetail_pembelian().get(i).getId() == null) {
 				d = null;
 			} else {
-				d = eDetailRepo.getById(pembelian.getDetail_pembelian().get(i).getId());	
+				d = eDetailRepo.findById(pembelian.getDetail_pembelian().get(i).getId()).orElse(null);	
 			}
 			if (d != null) {
 				d.setPembelian_code(pembelian.getPembelian_code());

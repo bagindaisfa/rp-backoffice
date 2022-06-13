@@ -134,7 +134,7 @@ public class PengirimanStoreToStoreService {
 	    	
 	    	List<DetailPengirimanStoreToStore> details = new ArrayList<>();
 	    	
-	    	p.setPengiriman_code(pengirimanStoreToStore.getPengiriman_code());
+	    	p.setPengiriman_code(p.getPengiriman_code());
 			p.setTanggal_pengiriman(pengirimanStoreToStore.getTanggal_pengiriman());
 			p.setId_store_asal(pengirimanStoreToStore.getId_store_asal());
 			p.setLokasi_store_asal(pengirimanStoreToStore.getLokasi_store_asal());
@@ -143,7 +143,7 @@ public class PengirimanStoreToStoreService {
 			p.setId_karyawan(pengirimanStoreToStore.getId_karyawan());
 			p.setNama_karyawan(pengirimanStoreToStore.getNama_karyawan());
 			p.setKeterangan(pengirimanStoreToStore.getKeterangan());
-			p.setRowstatus(pengirimanStoreToStore.getRowstatus());
+			p.setRowstatus(1);
 			
 			for(int i = 0; i < pengirimanStoreToStore.getDetailPengirimanList().size(); i++) {
 				
@@ -152,7 +152,8 @@ public class PengirimanStoreToStoreService {
 				if (pengirimanStoreToStore.getDetailPengirimanList().get(i).getId() == null) {
 					detail = null;
 				} else {
-					detail = eDetailRepo.getById(pengirimanStoreToStore.getDetailPengirimanList().get(i).getId());	
+					detail = eDetailRepo.findById(pengirimanStoreToStore.getDetailPengirimanList().get(i).getId()).orElse(null);
+					
 				}
 				
 				if (detail != null) {
@@ -160,7 +161,7 @@ public class PengirimanStoreToStoreService {
 					prod = eMasterProductRepository.findByArticle(pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 					
 					detail.setTanggal_pengiriman(pengirimanStoreToStore.getTanggal_pengiriman());
-					detail.setPengiriman_code(pengirimanStoreToStore.getPengiriman_code());
+					detail.setPengiriman_code(p.getPengiriman_code());
 					detail.setSku_code(pengirimanStoreToStore.getDetailPengirimanList().get(i).getSku_code());
 					detail.setArtikel(pengirimanStoreToStore.getDetailPengirimanList().get(i).getArtikel());
 					detail.setKategori(prod == null ? "" : prod.getKategori());

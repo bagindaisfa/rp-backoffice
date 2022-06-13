@@ -151,7 +151,7 @@ public class PenyimpananMobileService {
 			double hpp, double harga_jual, int rowstatus) {
 		
 		StockStore p = new StockStore();
-		p = eStockStoreRepo.getById(id);
+		p = eStockStoreRepo.findById(id).orElse(null);
 		p.setArtikel(artikel);
 		p.setId_store(id_store);
 		p.setLokasi_store(lokasi_store);

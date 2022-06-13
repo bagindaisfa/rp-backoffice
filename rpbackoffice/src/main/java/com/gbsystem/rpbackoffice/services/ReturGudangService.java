@@ -135,7 +135,7 @@ public class ReturGudangService {
 				if (returGudang.getDetail_pengiriman().get(i).getId() == null) {
 					detail = null;
 				} else {
-					detail = eDetailRepo.getById(returGudang.getDetail_pengiriman().get(i).getId());	
+					detail = eDetailRepo.findById(returGudang.getDetail_pengiriman().get(i).getId()).orElse(null);	
 				}
 				
 				if (detail != null) {
