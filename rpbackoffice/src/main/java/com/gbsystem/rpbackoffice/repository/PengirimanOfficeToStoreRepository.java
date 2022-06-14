@@ -12,7 +12,10 @@ public interface PengirimanOfficeToStoreRepository extends JpaRepository<Pengiri
 	
 List<PengirimanOfficeToStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pengiriman_office_to_store WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR nama_gudang LIKE %:keyword%)", nativeQuery = true)
+	@Query(value = "SELECT * FROM pengiriman_office_to_store WHERE rowstatus = 1 AND ("
+			+ "pengiriman_code LIKE %:keyword% OR "
+			+ "lokasi_office LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword%)", nativeQuery = true)
 	List<PengirimanOfficeToStore> search(String keyword);
 	
 	@Query(value = "SELECT * FROM pengiriman_office_to_store WHERE rowstatus = 1 AND pengiriman_code = :pengiriman_code", nativeQuery = true)
