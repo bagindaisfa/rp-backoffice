@@ -221,7 +221,7 @@ public class PenerimaanStoreFromStoreService {
 
 	public PenerimaanStoreFromStore update(PenerimaanStoreFromStore penerimaanStoreFromStoreNew) {
 		PenerimaanStoreFromStore p = new PenerimaanStoreFromStore();
-    	p = eRepo.findById(penerimaanStoreFromStoreNew.getId()).get();
+    	p = eRepo.findById(penerimaanStoreFromStoreNew.getId()).orElse(null);
     	
     	PengirimanStoreToStore pengiriman = new PengirimanStoreToStore();
 		pengiriman = ePengirimanRepo.getByPengirimanCode(penerimaanStoreFromStoreNew.getPengiriman_code());
@@ -284,8 +284,6 @@ public class PenerimaanStoreFromStoreService {
 							);
 					f.setId_store(penerimaanStoreFromStoreNew.getId_store_asal());
 					f.setLokasi_store(penerimaanStoreFromStoreNew.getLokasi_store_asal());
-					f.setPengiriman_code(p.getPenerimaan_code());
-					f.setTanggal_keluar(new Date());
 					f.setSku_code(penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getSku_code());
 					f.setArtikel(penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getArtikel());
 					f.setKategori(prod == null ? "" : prod.getKategori());
@@ -305,7 +303,6 @@ public class PenerimaanStoreFromStoreService {
 							penerimaanStoreFromStoreNew.getPenerimaan_code(),
 							penerimaanStoreFromStoreNew.getDetailPenerimaanList().get(i).getArtikel()
 							);
-					h.setPenerimaan_code(p.getPenerimaan_code());
 					h.setId_store(penerimaanStoreFromStoreNew.getId_store_tujuan());
 					h.setLokasi_store(penerimaanStoreFromStoreNew.getLokasi_store_tujuan());
 					h.setTanggal_masuk(penerimaanStoreFromStoreNew.getTanggal_penerimaan());
