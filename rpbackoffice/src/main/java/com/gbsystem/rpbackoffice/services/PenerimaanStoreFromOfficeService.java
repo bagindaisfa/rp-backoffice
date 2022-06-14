@@ -83,7 +83,6 @@ public class PenerimaanStoreFromOfficeService {
 			detail.setType_name(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType_name());
 			detail.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
 			detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-			detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			detail.setKeterangan(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKeterangan());
 			detail.setHarga_jual(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHarga_jual());
 			detail.setHpp(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHpp());
@@ -261,7 +260,6 @@ public class PenerimaanStoreFromOfficeService {
 				detail_update.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
 				detail_update.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
 				detail_update.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				detail_update.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
 				detail_update.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
 				detail_update.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
 				detail_update.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
