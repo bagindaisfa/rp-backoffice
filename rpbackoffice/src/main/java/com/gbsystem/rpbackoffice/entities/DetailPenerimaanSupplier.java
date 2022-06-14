@@ -33,6 +33,7 @@ public class DetailPenerimaanSupplier {
 	private String ukuran;
 	private Double hpp;
 	private Double harga_jual;
+	private String keterangan;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "penerimaan_supllier_id", referencedColumnName = "id")
@@ -121,6 +122,12 @@ public class DetailPenerimaanSupplier {
 	}
 	public void setHarga_jual(Double harga_jual) {
 		this.harga_jual = harga_jual;
+	}
+	public String getKeterangan() {
+		return keterangan;
+	}
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
 	}
 	public int getRowstatus() {
 		return rowstatus;

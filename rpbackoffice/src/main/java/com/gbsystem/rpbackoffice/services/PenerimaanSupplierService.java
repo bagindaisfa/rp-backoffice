@@ -60,8 +60,8 @@ public class PenerimaanSupplierService {
 			detail.setType_name(penerimaanSupplier.getDetailPenerimaanList().get(i).getType_name());
 			detail.setNama_barang(penerimaanSupplier.getDetailPenerimaanList().get(i).getNama_barang());
 			detail.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
-			detail.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 			detail.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
+			detail.setKeterangan(penerimaanSupplier.getDetailPenerimaanList().get(i).getKeterangan());
 			detail.setHpp(penerimaanSupplier.getDetailPenerimaanList().get(i).getHpp());
 			detail.setRowstatus(1);
 			detail.setPenerimaanSupplier(p);
@@ -193,6 +193,7 @@ public class PenerimaanSupplierService {
 				detail_update.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
 				detail_update.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 				detail_update.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
+				detail_update.setKeterangan(penerimaanSupplier.getDetailPenerimaanList().get(i).getKeterangan());
 				detail_update.setHpp(penerimaanSupplier.getDetailPenerimaanList().get(i).getHpp());
 				detail_update.setRowstatus(penerimaanSupplier.getDetailPenerimaanList().get(i).getRowstatus());
 				
@@ -257,6 +258,7 @@ public class PenerimaanSupplierService {
 				detail.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
 				detail.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 				detail.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
+				detail.setKeterangan(penerimaanSupplier.getDetailPenerimaanList().get(i).getKeterangan());
 				detail.setHpp(penerimaanSupplier.getDetailPenerimaanList().get(i).getHpp());
 				detail.setRowstatus(1);
 				detail.setPenerimaanSupplier(p);
