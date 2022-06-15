@@ -36,7 +36,7 @@ public class DetailPenerimaanSupplier {
 	private String keterangan;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "penerimaan_supllier_id", referencedColumnName = "id")
+    @JoinColumn(name = "penerimaan_supplier_id", referencedColumnName = "id")
 	@JsonIgnoreProperties("detailPenerimaanList")
 	private PenerimaanSupplier penerimaanSupplier;
 	public Long getId() {

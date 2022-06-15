@@ -58,6 +58,7 @@ public class PenerimaanSupplierService {
 			detail.setNama_kategori(penerimaanSupplier.getDetailPenerimaanList().get(i).getNama_kategori());
 			detail.setType(penerimaanSupplier.getDetailPenerimaanList().get(i).getType());
 			detail.setType_name(penerimaanSupplier.getDetailPenerimaanList().get(i).getType_name());
+			detail.setUkuran(penerimaanSupplier.getDetailPenerimaanList().get(i).getUkuran());
 			detail.setNama_barang(penerimaanSupplier.getDetailPenerimaanList().get(i).getNama_barang());
 			detail.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
 			detail.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
@@ -66,7 +67,6 @@ public class PenerimaanSupplierService {
 			detail.setRowstatus(1);
 			detail.setPenerimaanSupplier(p);
 			details.add(detail);
-			
 			StockOffice d = new StockOffice();
 			d = eStockRepo.findById_officeAndArtikel(
 					1,
@@ -183,6 +183,7 @@ public class PenerimaanSupplierService {
 			}
 			
 			if (detail_update != null) {
+				detail_update.setTanggal_penerimaan(penerimaanSupplier.getTanggal_penerimaan());
 				detail_update.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
 				detail_update.setArtikel(penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
 				detail_update.setKategori(penerimaanSupplier.getDetailPenerimaanList().get(i).getKategori());
@@ -191,7 +192,7 @@ public class PenerimaanSupplierService {
 				detail_update.setType_name(penerimaanSupplier.getDetailPenerimaanList().get(i).getType_name());
 				detail_update.setNama_barang(penerimaanSupplier.getDetailPenerimaanList().get(i).getNama_barang());
 				detail_update.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
-				detail_update.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
+				detail_update.setUkuran(penerimaanSupplier.getDetailPenerimaanList().get(i).getUkuran());
 				detail_update.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
 				detail_update.setKeterangan(penerimaanSupplier.getDetailPenerimaanList().get(i).getKeterangan());
 				detail_update.setHpp(penerimaanSupplier.getDetailPenerimaanList().get(i).getHpp());
@@ -256,7 +257,7 @@ public class PenerimaanSupplierService {
 				detail.setType_name(penerimaanSupplier.getDetailPenerimaanList().get(i).getType_name());
 				detail.setNama_barang(penerimaanSupplier.getDetailPenerimaanList().get(i).getNama_barang());
 				detail.setKuantitas(penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
-				detail.setSku_code(penerimaanSupplier.getDetailPenerimaanList().get(i).getSku_code());
+				detail.setUkuran(penerimaanSupplier.getDetailPenerimaanList().get(i).getUkuran());
 				detail.setHarga_jual(penerimaanSupplier.getDetailPenerimaanList().get(i).getHarga_jual());
 				detail.setKeterangan(penerimaanSupplier.getDetailPenerimaanList().get(i).getKeterangan());
 				detail.setHpp(penerimaanSupplier.getDetailPenerimaanList().get(i).getHpp());

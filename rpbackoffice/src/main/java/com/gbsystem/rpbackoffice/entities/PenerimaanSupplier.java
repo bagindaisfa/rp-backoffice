@@ -37,7 +37,7 @@ public class PenerimaanSupplier {
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penerimaanSupplier", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
-	@JsonIgnoreProperties("penerimaanSupllier")
+	@JsonIgnoreProperties("penerimaanSupplier")
 	List<DetailPenerimaanSupplier> detailPenerimaanList = new ArrayList<>();
 	public Long getId() {
 		return id;
