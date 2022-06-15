@@ -286,7 +286,7 @@ public class PenerimaanOfficeFromStoreService {
 					
 					PenyimpananStoreKeluar h = new PenyimpananStoreKeluar();
 					h = ePenyimpananStoreRepo.getByPengirimanCodeandArtikel(
-							penerimaanOfficeFromStore.getPenerimaan_code(),
+							p.getRetur_code(),
 							penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getArtikel()
 							);
 					h.setId_office(penerimaanOfficeFromStore.getId_office());
