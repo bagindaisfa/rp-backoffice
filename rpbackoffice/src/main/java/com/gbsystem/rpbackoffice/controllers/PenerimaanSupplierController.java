@@ -45,6 +45,15 @@ public class PenerimaanSupplierController {
 		
     }
     
+    @PostMapping(value = "/update")
+    @ResponseBody
+    public PenerimaanSupplier update(@RequestBody PenerimaanSupplier penerimaanSupplier) throws Exception {
+    	
+    	PenerimaanSupplier response = penerimaanSupplierService.update(penerimaanSupplier);
+    	return response;
+		
+    }
+    
     @GetMapping("/delete")
     public String deletePenerimaanSupplier(@RequestParam("id") Long id)
     {
