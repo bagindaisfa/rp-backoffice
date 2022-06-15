@@ -41,8 +41,8 @@ public class PenerimaanSupplierService {
 		p.setPenerimaan_code(code_penerimaan);
 		p.setPembelian_code(penerimaanSupplier.getPembelian_code());
 		p.setTanggal_penerimaan(penerimaanSupplier.getTanggal_penerimaan());
-		p.setId_office(penerimaanSupplier.getId_office());
-		p.setLokasi_office(penerimaanSupplier.getLokasi_office());
+		p.setId_office(1);
+		p.setLokasi_office("Kantor Pusat");
 		p.setId_supplier(penerimaanSupplier.getId_supplier());
 		p.setNama_supplier(penerimaanSupplier.getNama_supplier());
 		p.setRowstatus(1);
@@ -166,8 +166,8 @@ public class PenerimaanSupplierService {
     	List<DetailPenerimaanSupplier> details = new ArrayList<>();
 		
 		p.setTanggal_penerimaan(penerimaanSupplier.getTanggal_penerimaan());
-		p.setId_office(penerimaanSupplier.getId_office());
-		p.setLokasi_office(penerimaanSupplier.getLokasi_office());
+		p.setId_office(1);
+		p.setLokasi_office("Kantor Pusat");
 		p.setId_supplier(penerimaanSupplier.getId_supplier());
 		p.setNama_supplier(penerimaanSupplier.getNama_supplier());
 		p.setRowstatus(penerimaanSupplier.getRowstatus());
