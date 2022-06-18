@@ -159,7 +159,7 @@ public class PenerimaanSupplierService {
     	return "Berhasil Didelete!";
     }
 	
-	public PenerimaanSupplier update(PenerimaanSupplier penerimaanSupplier) {
+	public String update(PenerimaanSupplier penerimaanSupplier) {
 		PenerimaanSupplier p = new PenerimaanSupplier();
     	p = eRepo.findById(penerimaanSupplier.getId()).get();
     	
@@ -202,7 +202,7 @@ public class PenerimaanSupplierService {
 					
 					StockOffice g = new StockOffice();
 					g = eStockRepo.findById_officeAndArtikel(
-							penerimaanSupplier.getId_office(),
+							1,
 							penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
 					g.setKuantitas((g.getKuantitas() - detail_update.getKuantitas()) + penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
 					eStockRepo.save(g);
@@ -212,7 +212,7 @@ public class PenerimaanSupplierService {
 							penerimaanSupplier.getPenerimaan_code(),
 							penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel()
 							);
-					h.setId_office(penerimaanSupplier.getId_office());
+					h.setId_office(1);
 					h.setLokasi_office(penerimaanSupplier.getLokasi_office());
 					h.setPenerimaan_code(p.getPenerimaan_code());
 					h.setTanggal_masuk(penerimaanSupplier.getTanggal_penerimaan());
@@ -229,7 +229,7 @@ public class PenerimaanSupplierService {
 				} else {
 					StockOffice g = new StockOffice();
 					g = eStockRepo.findById_officeAndArtikel(
-							penerimaanSupplier.getId_office(),
+							1,
 							penerimaanSupplier.getDetailPenerimaanList().get(i).getArtikel());
 					g.setKuantitas(g.getKuantitas() - penerimaanSupplier.getDetailPenerimaanList().get(i).getKuantitas());
 					eStockRepo.save(g);
@@ -315,7 +315,8 @@ public class PenerimaanSupplierService {
 			
 		}
 		p.setDetailPenerimaanList(details);
-		return eRepo.save(p);
+		eRepo.save(p);
+		return "Sukses diupdate!";
 	}
 
 }

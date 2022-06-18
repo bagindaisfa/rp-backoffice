@@ -47,9 +47,9 @@ public class PenerimaanSupplierController {
     
     @PostMapping(value = "/update")
     @ResponseBody
-    public PenerimaanSupplier update(@RequestBody PenerimaanSupplier penerimaanSupplier) throws Exception {
+    public String update(@RequestBody PenerimaanSupplier penerimaanSupplier) throws Exception {
     	
-    	PenerimaanSupplier response = penerimaanSupplierService.update(penerimaanSupplier);
+    	String response = penerimaanSupplierService.update(penerimaanSupplier);
     	return response;
 		
     }
