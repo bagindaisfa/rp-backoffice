@@ -31,9 +31,6 @@ public class MasterProductService {
 	private MasterProductRepository eRepo;
 	
 	@Autowired
-	private MasterProductRepository eSecRepo;
-	
-	@Autowired
 	private StockOfficeRepository eStockRepo;
 	
 	@Autowired
@@ -302,64 +299,86 @@ public class MasterProductService {
 			String nama_kategori, Double hpp,
 			Double harga_jual, String remarks ) {
 		
-		String img = "";
-		
 		MasterProduct p = new MasterProduct();
     	p = eRepo.findById(id).get();
     	
     	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		
+		List<MasterStore> masterStore = eMasterStoreRepo.findByRowstatus(1);
+		if (masterStore != null) {
+			for (int i=0; i<masterStore.size(); i++) {
+	        	StockStore r = new StockStore();
+	        	
+	        	r = eStockStoreRepo.findById_storeAndArtikel(Math.toIntExact(masterStore.get(i).getId()), artikel_product);
+	        	if (r != null) {
+	        		if(fileName.contains("..")) {
+		    			System.out.println("not a valid file");
+		    		}
+		    		try {
+		    			r.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
+		    		}catch(IOException e) {
+		    			e.printStackTrace();
+		    		}
+		        	
+					r.setSku_code(sku_code);
+					r.setArtikel(artikel_product);
+					r.setKategori(kategori);
+					r.setNama_kategori(nama_kategori);
+					r.setType(type);
+					r.setType_name(type_name);
+					r.setNama_barang(nama_product);
+					
+					r.setHarga_jual(harga_jual);
+					r.setHpp(hpp);
+					eStockStoreRepo.save(r);
+	        	}
+	    	}
+		}
+    	
+
+    	List<MasterOffice> masterOffice = eMasterOfficeRepo.findByRowstatus(1);
+    	if (masterOffice != null) {
+    		for (int i=0; i<masterOffice.size(); i++) {
+        		
+            	StockOffice q = new StockOffice();
+            	q = eStockRepo.findById_officeAndArtikel(Math.toIntExact(masterOffice.get(i).getId()),artikel_product);
+            	
+            	if (q != null) {
+            		if(fileName.contains("..")) {
+            			System.out.println("not a valid file");
+            		}
+            		try {
+            			q.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
+            		}catch(IOException e) {
+            			e.printStackTrace();
+            		}
+            		
+        			q.setSku_code(sku_code);
+        			q.setArtikel(artikel_product);
+        			q.setKategori(kategori);
+        			q.setNama_kategori(nama_kategori);
+        			q.setType(type);
+        			q.setType_name(type_name);
+        			q.setNama_barang(nama_product);
+        			q.setUkuran(ukuran);
+        			q.setHpp(hpp);
+        			q.setHarga_jual(harga_jual);
+        			q.setRowstatus(1);
+        			eStockRepo.save(q);
+            	}
+        	}
+    	}
+    	
+    	
     	if(fileName.contains("..")) {
 			System.out.println("not a valid file");
 		}
-		
 		try {
-			img = Base64.getEncoder().encodeToString(image.getBytes());
+			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 		
-		List<MasterStore> masterStore = eMasterStoreRepo.findByRowstatus(1);
-    	for (int i=0; i<masterStore.size(); i++) {
-        	StockStore r = new StockStore();
-        	r = eStockStoreRepo.findById_storeAndArtikel(Math.toIntExact(masterStore.get(i).getId()), artikel_product);
-        	
-        	r.setFoto_barang(img);
-			r.setSku_code(sku_code);
-			r.setArtikel(artikel_product);
-			r.setKategori(kategori);
-			r.setNama_kategori(nama_kategori);
-			r.setType(type);
-			r.setType_name(type_name);
-			r.setNama_barang(nama_product);
-			
-			r.setHarga_jual(harga_jual);
-			r.setHpp(hpp);
-			eStockStoreRepo.save(r);
-    	}
-
-    	List<MasterOffice> masterOffice = eMasterOfficeRepo.findByRowstatus(1);
-    	for (int i=0; i<masterOffice.size(); i++) {
-    		
-        	StockOffice q = new StockOffice();
-        	q = eStockRepo.findById_officeAndArtikel(Math.toIntExact(masterOffice.get(i).getId()),artikel_product);
-        	
-    		q.setFoto_barang(img);
-			q.setSku_code(sku_code);
-			q.setArtikel(artikel_product);
-			q.setKategori(kategori);
-			q.setNama_kategori(nama_kategori);
-			q.setType(type);
-			q.setType_name(type_name);
-			q.setNama_barang(nama_product);
-			q.setUkuran(ukuran);
-			q.setHpp(hpp);
-			q.setHarga_jual(harga_jual);
-			q.setRowstatus(1);
-			eStockRepo.save(q);
-    	}
-    	
-		p.setImage(img);
 		p.setSku_code(sku_code);
     	p.setArtikel_product(artikel_product);
 		p.setNama_product(nama_product);

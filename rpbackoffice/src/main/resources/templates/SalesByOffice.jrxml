@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesByOffice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e593dbd-df03-4ceb-a80a-bdbd58a32cca">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
@@ -28,7 +28,7 @@
 			</staticText>
 			<image>
 				<reportElement x="-10" y="8" width="191" height="71" uuid="3e920c9c-7f1b-4071-9392-cd1262286871"/>
-				<imageExpression><![CDATA["C:\\Users\\bagin\\OneDrive\\Pictures\\LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/res/LOGO RP.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="181" y="16" width="388" height="44" uuid="21086927-f716-428e-a969-dad2e43c3a70"/>

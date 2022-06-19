@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BestArticleByStore" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4666118b-a28c-468e-8ef5-a65cb91a8015">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
@@ -22,7 +22,7 @@
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="-10" y="8" width="191" height="71" uuid="db8cf077-62e1-4050-8c11-13466827e88f"/>
-				<imageExpression><![CDATA["/target/classes/templates/LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/res/LOGO RP.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="181" y="16" width="388" height="44" uuid="a8b05fd7-9ef6-4cf0-9534-709ab00236e9"/>
