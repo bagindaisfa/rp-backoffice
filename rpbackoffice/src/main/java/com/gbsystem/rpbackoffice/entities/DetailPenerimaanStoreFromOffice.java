@@ -3,6 +3,7 @@ package com.gbsystem.rpbackoffice.entities;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class DetailPenerimaanStoreFromOffice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String penerimaan_code;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition = "date") @JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private String sku_code;
 	private String artikel;

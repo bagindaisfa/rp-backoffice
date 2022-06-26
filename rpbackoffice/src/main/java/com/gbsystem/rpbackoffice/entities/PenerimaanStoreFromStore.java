@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,7 +29,7 @@ public class PenerimaanStoreFromStore {
 	private Long id;
 	private String penerimaan_code;
 	private String pengiriman_code;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition = "date") @JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_penerimaan;
 	private int id_store_asal;
 	private String lokasi_store_asal;

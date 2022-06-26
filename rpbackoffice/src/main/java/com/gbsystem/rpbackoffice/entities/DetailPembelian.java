@@ -23,7 +23,7 @@ public class DetailPembelian {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String pembelian_code;
-	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition = "date") @JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_transaksi;
 
 	@Column(updatable=false, insertable=false)
