@@ -156,7 +156,7 @@ public class MasterProductController {
     		) throws Exception {
     	
     	if (artikel_product != "") {
-    		masterProductService.update(id, image,sku_code, artikel_product,nama_product,type,type_name,kategori,nama_kategori,artikel_frame,artikel_lens,ukuran,hpp,harga_jual,remarks);
+    		masterProductService.update(id, image, sku_code, artikel_product,nama_product, type, type_name,kategori, artikel_frame, artikel_lens, ukuran,nama_kategori, hpp,harga_jual, remarks);
     	}
     	return "Update Data Successs!";
 		

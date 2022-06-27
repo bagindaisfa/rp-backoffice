@@ -70,7 +70,11 @@ public class CustomUserService implements UserDetailsService {
 		authorityList.add(createAuthority("USER","User role"));
 		
 		user.setUserName(userName);
-		user.setPassword(passwordEncoder.encode(password));
+		if (password.equals("")) {
+			System.out.println("password kosong");
+		} else {
+			user.setPassword(passwordEncoder.encode(password));
+		}
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
