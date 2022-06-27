@@ -28,7 +28,7 @@ public class PengirimanStoreToStore {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String pengiriman_code;
-	@Column(columnDefinition = "date") @JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_pengiriman;
 	private int id_store_asal;
 	private String lokasi_store_asal;
