@@ -33,25 +33,25 @@ public class PenyimpananMobileService {
 	@Autowired
 	private PengirimanStoreToStoreRepository ePengirimanStoreToStoreRepository; 
 	
-	public double totalStockStore(int id_store){
+	public Double totalStockStore(int id_store){
 		
-		double stock_store = eStockStoreRepo.totalStocPerkStore(1, id_store);
+		Double stock_store = eStockStoreRepo.totalStocPerkStore(1, id_store) == null? 0.0 : eStockStoreRepo.totalStocPerkStore(1, id_store);
 		
 		
 		return stock_store;
 	}
 	
-	public double totalQtyMasuk(int id_store){
+	public Double totalQtyMasuk(int id_store){
 			
-		double store_masuk = ePenyimpananStoreMasukRepository.totalQtyMasuk(1, id_store);
+		Double store_masuk = ePenyimpananStoreMasukRepository.totalQtyMasuk(1, id_store) == null? 0.0 : ePenyimpananStoreMasukRepository.totalQtyMasuk(1, id_store);
 		
 		
 		return store_masuk;
 	}
 	
-	public double totalQtyKeluar(int id_store){
+	public Double totalQtyKeluar(int id_store){
 		
-		double store_keluar = ePenyimpananStoreKeluarRepository.totalQtyKeluar(1, id_store);
+		Double store_keluar = ePenyimpananStoreKeluarRepository.totalQtyKeluar(1, id_store) == null? 0.0 : ePenyimpananStoreKeluarRepository.totalQtyKeluar(1, id_store);
 		
 		
 		return store_keluar;

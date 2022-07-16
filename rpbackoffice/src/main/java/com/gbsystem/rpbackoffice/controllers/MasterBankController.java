@@ -47,19 +47,24 @@ public class MasterBankController {
 	}
     
     @PostMapping("/update")
-    public String update(@RequestParam("id") Long id, @RequestParam("bank_name") String bank_name, @RequestParam("owner_name") String owner_name, @RequestParam("acc_number") String acc_number) throws Exception {
+    public String update(
+    		@RequestParam("id") int id, 
+    		@RequestParam("bank_name") String bank_name, 
+    		@RequestParam("owner_name") String owner_name, 
+    		@RequestParam("acc_number") String acc_number,
+    		@RequestParam("image") MultipartFile image) throws Exception {
     	
     	if (bank_name != "") {
-    		masterBankService.update(id, bank_name, owner_name, acc_number);
+    		masterBankService.update(id, bank_name, owner_name, acc_number,image);
     	}
     	return "Update Data Successs!";
 		
     }
     @GetMapping("/delete")
-    public String deleteBank(@RequestParam("id") Long id)
+    public String deleteBank(@RequestParam("id") int id)
     {
     	
-    	masterBankService.deleteMasterBankById(id);
+    	masterBankService.deleteMasterBankById(Long.valueOf(id));
     	return "redirect:/bank";
     }
 }

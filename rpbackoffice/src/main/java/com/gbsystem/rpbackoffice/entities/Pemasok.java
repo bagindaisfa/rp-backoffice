@@ -14,7 +14,7 @@ public class Pemasok {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date tanggal_join;
 	private String kode_pemasok;
@@ -22,14 +22,12 @@ public class Pemasok {
 	private String no_hp;
 	private String email;
 	private String alamat;
-	private double hpp;
-	private double harga_jual;
 	private int rowstatus;
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
@@ -75,20 +73,6 @@ public class Pemasok {
 		this.alamat = alamat;
 	}
 	
-	public double getHpp() {
-		return hpp;
-	}
-	public void setHpp(double hpp) {
-		this.hpp = hpp;
-	}
-	
-	public double getHarga_jual() {
-		return harga_jual;
-	}
-	public void setHarga_jual(double harga_jual) {
-		this.harga_jual = harga_jual;
-	}
-	
 	public int getRowstatus() {
 		return rowstatus;
 	}
@@ -105,8 +89,6 @@ public class Pemasok {
 				+ " no_hp=" + no_hp + ","
 				+ " email=" + email + ","
 	            + " alamat=" + alamat + ","
-	            + " hpp=" + hpp + ","
-	    	    + " harga_jual=" + harga_jual + ","
 	            + " rowstatus=" + rowstatus + "]";
 	}
 	

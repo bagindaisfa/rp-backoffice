@@ -29,6 +29,7 @@ public class PengirimanStoreToStore {
 	private Long id;
 	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_pengiriman;
 	private int id_store_asal;
 	private String lokasi_store_asal;

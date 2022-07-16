@@ -53,24 +53,22 @@ public class PemasokController {
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(@RequestParam("kode_pemasok") String kode_pemasok,
     		@RequestParam("nama_pemasok") String nama_pemasok,
-    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat) throws Exception {
     	
     	if (nama_pemasok != "") {
-    		pemasokService.savePemasok(kode_pemasok, nama_pemasok, no_hp, email, alamat, hpp, harga_jual);
+    		pemasokService.savePemasok(kode_pemasok, nama_pemasok, no_hp, email, alamat);
     	}
     	return "Insert Data Successs!";
 		
     }
     
     @PostMapping(value = "/update")
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("kode_pemasok") String kode_pemasok,
+    public @ResponseBody String update(@RequestParam("id") int id,@RequestParam("kode_pemasok") String kode_pemasok,
     		@RequestParam("nama_pemasok") String nama_pemasok,
-    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("hpp") double hpp,@RequestParam("harga_jual") double harga_jual) throws Exception {
+    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat) throws Exception {
     	
     	if (nama_pemasok != "") {
-    		pemasokService.update(id, kode_pemasok, nama_pemasok, no_hp, email, alamat, hpp, harga_jual);
+    		pemasokService.update(id, kode_pemasok, nama_pemasok, no_hp, email, alamat);
     	}
     	return "Update Data Successs!";
 		
@@ -90,8 +88,6 @@ public class PemasokController {
     		p.setNo_hp(row.getCell(3).getStringCellValue());
     		p.setEmail(row.getCell(4).getStringCellValue());
     		p.setAlamat(row.getCell(5).getStringCellValue());
-    		p.setHpp(row.getCell(6).getNumericCellValue());
-    		p.setHarga_jual(row.getCell(7).getNumericCellValue());
     		p.setRowstatus(1);
     		p.setTanggal_join(row.getCell(0).getDateCellValue());
         	eRepo.save(p);
@@ -100,10 +96,10 @@ public class PemasokController {
     }
     
     @GetMapping("/delete")
-    public String deletePemasok(@RequestParam("id") Long id)
+    public String deletePemasok(@RequestParam("id") int id)
     {
     	
-    	pemasokService.deletePemasokById(id);
+    	pemasokService.deletePemasokById(Long.valueOf(id));
     	return "redirect:/pemasok/all";
     }
 }

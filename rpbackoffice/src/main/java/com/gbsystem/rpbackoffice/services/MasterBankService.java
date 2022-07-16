@@ -65,9 +65,18 @@ public class MasterBankService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String bank_name, String owner_name, String acc_number ) {
+	public void update(int id, String bank_name, String owner_name, String acc_number, MultipartFile image ) {
 		MasterBank p = new MasterBank();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(Long.valueOf(id)).get();
+    	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+		if(fileName.contains("..")) {
+			System.out.println("not a valid file");
+		}
+		try {
+			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
 		p.setBank_name(bank_name);
 		p.setOwner_name(owner_name);
 		p.setAcc_number(acc_number);

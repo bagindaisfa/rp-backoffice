@@ -73,19 +73,22 @@ public class PenerimaanStoreFromOfficeService {
 		for(int i = 0; i < penerimaanStoreFromOffice.getDetailPenerimaanList().size(); i++) {
 			DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
 			
+			MasterProduct prod = new MasterProduct();
+			prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+			
 			detail.setPenerimaan_code(code_penerimaan);
 			detail.setTanggal_penerimaan(penerimaanStoreFromOffice.getTanggal_penerimaan());
 			detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			detail.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			detail.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());
-			detail.setNama_kategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_kategori());
-			detail.setType(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType());
-			detail.setType_name(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType_name());
-			detail.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
+			detail.setKategori(prod == null ? "" : prod.getKategori());
+			detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+			detail.setType(prod == null ? 0 : prod.getType());
+			detail.setType_name(prod == null ? "" : prod.getType_name());
+			detail.setNama_barang(prod == null ? "" : prod.getNama_product());
 			detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
 			detail.setKeterangan(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKeterangan());
-			detail.setHarga_jual(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHarga_jual());
-			detail.setHpp(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHpp());
+			detail.setHpp(prod == null ? 0 : prod.getHpp());
+			detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
 			detail.setRowstatus(1);
 			detail.setPenerimaanStoreFromOffice(p);
 			details.add(detail);
@@ -97,9 +100,6 @@ public class PenerimaanStoreFromOfficeService {
 			if (d == null) {
 				StockStore new_insert = new StockStore();
 				
-				MasterProduct prod = new MasterProduct();
-				prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-				
 				new_insert.setId_store(penerimaanStoreFromOffice.getId_store());
 				new_insert.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
 				new_insert.setFoto_barang(prod.getImage());
@@ -109,10 +109,10 @@ public class PenerimaanStoreFromOfficeService {
 				new_insert.setNama_kategori(prod.getNama_kategori());
 				new_insert.setType(prod.getType());
 				new_insert.setType_name(prod.getType_name());
-				new_insert.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
+				new_insert.setNama_barang(prod.getNama_product());
 				new_insert.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-				new_insert.setHarga_jual(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHarga_jual());
-				new_insert.setHpp(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getHpp());
+				new_insert.setHarga_jual(prod.getHarga_jual());
+				new_insert.setHpp(prod.getHpp());
 				new_insert.setRowstatus(1);
 				eStockRepo.save(new_insert);
 			} else {
@@ -136,11 +136,11 @@ public class PenerimaanStoreFromOfficeService {
 			f.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
 			f.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
 			f.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			f.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());
-			f.setNama_kategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_kategori());
-			f.setType(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType());
-			f.setType_name(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType_name());
-			f.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
+			f.setKategori(prod == null ? "" : prod.getKategori());
+			f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+			f.setType(prod == null ? 0 : prod.getType());
+			f.setType_name(prod == null ? "" : prod.getType_name());
+			f.setNama_barang(prod == null ? "" : prod.getNama_product());
 			f.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
 			f.setKeterangan("Barang Dikirim Ke Store");
 			f.setRowstatus(1);
@@ -157,9 +157,9 @@ public class PenerimaanStoreFromOfficeService {
 			h.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
 			h.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());
 			h.setNama_kategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_kategori());
-			h.setType(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType());
-			h.setType_name(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getType_name());
-			h.setNama_barang(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_barang());
+			h.setType(prod == null ? 0 : prod.getType());
+			h.setType_name(prod == null ? "" : prod.getType_name());
+			h.setNama_barang(prod == null ? "" : prod.getNama_product());
 			h.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
 			h.setRowstatus(1);
 			ePenyimpananStoreRepo.save(h);

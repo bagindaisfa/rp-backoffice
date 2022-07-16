@@ -60,7 +60,7 @@ public class PengirimanOfficeToStoreService {
 			detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
 			detail.setType(prod == null ? 0 : prod.getType());
 			detail.setType_name(prod == null ? "" : prod.getType_name());
-			detail.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
+			detail.setNama_barang(prod == null ? "" : prod.getNama_product());
 			detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 			detail.setUkuran(prod == null ? "" : prod.getUkuran());
 			detail.setHpp(prod == null ? 0 : prod.getHpp());

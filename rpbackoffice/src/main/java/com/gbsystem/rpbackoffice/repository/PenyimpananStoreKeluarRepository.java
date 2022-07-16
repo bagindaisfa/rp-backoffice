@@ -51,7 +51,7 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 	void deleteStoreKeluar(String pengiriman_code);
 	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM penyimpanan_store_keluar WHERE rowstatus = :rowstatus AND id_store = :id_store ", nativeQuery = true)
-	double totalQtyKeluar(int rowstatus, int id_store);
+	Double totalQtyKeluar(int rowstatus, int id_store);
 	
 	@Query(value = "SELECT * FROM penyimpanan_store_keluar WHERE rowstatus = 1 AND pengiriman_code= :pengiriman_code AND artikel=:artikel", nativeQuery = true)
 	PenyimpananStoreKeluar getByPengirimanCodeandArtikel(String pengiriman_code, String artikel);

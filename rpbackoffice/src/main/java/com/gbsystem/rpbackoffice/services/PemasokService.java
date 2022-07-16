@@ -15,7 +15,7 @@ public class PemasokService {
 	@Autowired
 	private PemasokRepository eRepo;
 	
-	public Pemasok savePemasok(String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat, double hpp, double harga_jual) {
+	public Pemasok savePemasok(String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat) {
 		
 		Pemasok p = new Pemasok();
 		
@@ -25,8 +25,7 @@ public class PemasokService {
 		p.setNo_hp(no_hp);
 		p.setEmail(email);
 		p.setAlamat(alamat);
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
+		
 		p.setRowstatus(1);
 		return eRepo.save(p);
 	}
@@ -52,16 +51,15 @@ public class PemasokService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat, double hpp, double harga_jual) {
+	public void update(int id, String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat) {
 		Pemasok p = new Pemasok();
-    	
+    	p = eRepo.findById(Long.valueOf(id)).get();
 		p.setKode_pemasok(kode_pemasok);
 		p.setNama_pemasok(nama_pemasok);
 		p.setNo_hp(no_hp);
 		p.setEmail(email);
 		p.setAlamat(alamat);
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
+		
 		p.setRowstatus(1);
 		eRepo.save(p);
 	}
