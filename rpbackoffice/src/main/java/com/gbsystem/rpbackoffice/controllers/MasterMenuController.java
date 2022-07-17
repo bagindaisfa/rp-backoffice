@@ -41,7 +41,7 @@ public class MasterMenuController {
 	}
     
     @PostMapping("/update")
-    public String update(@RequestParam("id") Long id,@RequestParam("kode_menu") String kode_menu, @RequestParam("nama_menu") String nama_menu ) throws Exception {
+    public String update(@RequestParam("id") int id,@RequestParam("kode_menu") String kode_menu, @RequestParam("nama_menu") String nama_menu ) throws Exception {
     	
     	if (nama_menu != "") {
     		masterMenuService.update(id,kode_menu, nama_menu);
@@ -50,7 +50,7 @@ public class MasterMenuController {
 		
     }
     @GetMapping("/delete")
-    public String deleteTipe(@RequestParam("id") Long id)
+    public String deleteTipe(@RequestParam("id") int id)
     {
     	
     	masterMenuService.deleteMasterMenuById(id);

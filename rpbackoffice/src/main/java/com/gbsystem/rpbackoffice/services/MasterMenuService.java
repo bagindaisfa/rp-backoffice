@@ -16,7 +16,6 @@ public class MasterMenuService {
 	public MasterMenu saveMasterMenu( String nama_menu ) {
 		
 		MasterMenu p = new MasterMenu();
-		;
 		p.setKode_menu("MM-"+ (eRepo.count()+1));
 		p.setNama_menu(nama_menu);
 		p.setRowstatus(1);
@@ -32,17 +31,17 @@ public class MasterMenuService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public void deleteMasterMenuById(Long id)
+	public void deleteMasterMenuById(int id)
     {
 		MasterMenu p = new MasterMenu();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
     	p.setRowstatus(0);
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String kode_menu, String nama_menu ) {
+	public void update(int id, String kode_menu, String nama_menu ) {
 		MasterMenu p = new MasterMenu();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
     	p.setKode_menu(kode_menu);
 		p.setNama_menu(nama_menu);
 		p.setRowstatus(1);
