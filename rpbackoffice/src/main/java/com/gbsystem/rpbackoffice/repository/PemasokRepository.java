@@ -13,7 +13,7 @@ import com.gbsystem.rpbackoffice.entities.Pemasok;
 @Repository
 public interface PemasokRepository extends JpaRepository<Pemasok, Long> {
 	
-	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND id=:id) ", nativeQuery = true)
+	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND id=:id ", nativeQuery = true)
 	Pemasok findById(int id);
 	
 	List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
