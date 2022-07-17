@@ -57,17 +57,17 @@ public class MasterBankService {
 		return eRepo.findByOwner(owner_name);
 	}
 	
-	public void deleteMasterBankById(Long id)
+	public void deleteMasterBankById(int id)
     {
 		MasterBank p = new MasterBank();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
     	p.setRowstatus(0);
     	eRepo.save(p);    
     }
 	
 	public void update(int id, String bank_name, String owner_name, String acc_number, MultipartFile image ) {
 		MasterBank p = new MasterBank();
-    	p = eRepo.findById(Long.valueOf(id)).get();
+    	p = eRepo.findById(id);
     	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		if(fileName.contains("..")) {
 			System.out.println("not a valid file");

@@ -64,7 +64,7 @@ public class MasterBankController {
     public String deleteBank(@RequestParam("id") int id)
     {
     	
-    	masterBankService.deleteMasterBankById(Long.valueOf(id));
+    	masterBankService.deleteMasterBankById(id);
     	return "redirect:/bank";
     }
 }

@@ -43,17 +43,17 @@ public class PemasokService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public void deletePemasokById(Long id)
+	public void deletePemasokById(int id)
     {
 		Pemasok p = new Pemasok();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
     	p.setRowstatus(0);
     	eRepo.save(p);    
     }
 	
 	public void update(int id, String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat) {
 		Pemasok p = new Pemasok();
-    	p = eRepo.findById(Long.valueOf(id)).get();
+    	p = eRepo.findById(id);
 		p.setKode_pemasok(kode_pemasok);
 		p.setNama_pemasok(nama_pemasok);
 		p.setNo_hp(no_hp);

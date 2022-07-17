@@ -99,7 +99,7 @@ public class PemasokController {
     public String deletePemasok(@RequestParam("id") int id)
     {
     	
-    	pemasokService.deletePemasokById(Long.valueOf(id));
+    	pemasokService.deletePemasokById(id);
     	return "redirect:/pemasok/all";
     }
 }

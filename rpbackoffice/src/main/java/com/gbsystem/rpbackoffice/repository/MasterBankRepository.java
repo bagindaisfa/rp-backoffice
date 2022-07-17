@@ -10,6 +10,10 @@ import com.gbsystem.rpbackoffice.entities.MasterBank;
 
 @Repository
 public interface MasterBankRepository extends JpaRepository<MasterBank, Long> {
+	
+	@Query(value = "SELECT * FROM master_bank WHERE rowstatus=1 AND id=:id", nativeQuery = true)
+	MasterBank findById(int id);
+	
 	@Query(value = "SELECT * FROM master_bank WHERE rowstatus = :rowstatus ORDER BY id", nativeQuery = true)
 	List<MasterBank> findByRowstatus(int rowstatus);
 	

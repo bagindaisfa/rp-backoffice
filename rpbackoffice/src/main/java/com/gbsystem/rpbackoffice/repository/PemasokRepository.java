@@ -13,7 +13,10 @@ import com.gbsystem.rpbackoffice.entities.Pemasok;
 @Repository
 public interface PemasokRepository extends JpaRepository<Pemasok, Long> {
 	
-List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
+	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND id=:id) ", nativeQuery = true)
+	Pemasok findById(int id);
+	
+	List<Pemasok> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = 1 AND (nama_pemasok LIKE %:keyword%) ", nativeQuery = true)
 	List<Pemasok> search(String keyword);
