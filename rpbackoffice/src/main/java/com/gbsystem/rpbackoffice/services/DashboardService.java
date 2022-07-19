@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
+import com.gbsystem.rpbackoffice.repository.PenukaranBarangRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 import com.gbsystem.rpbackoffice.repository.DetailPembelianRepository;
@@ -34,6 +35,8 @@ public class DashboardService {
 	private StockOfficeRepository eStockOfficeRepo;
 	@Autowired
 	private StockStoreRepository eStockStoreRepo;
+	@Autowired
+	private PenukaranBarangRepository ePenukaranRepo;
 	
 	// Region Penjualan
 	public Double getAllPenjualan(){
@@ -96,6 +99,10 @@ public class DashboardService {
 	}
 	// end region pembelian
 	
+	public Double totalPenukaran(int rowstatus) {
+		Double penukaran = ePenukaranRepo.totalPenukaran(rowstatus) == null ? 0.00 : ePenukaranRepo.totalPenukaran(rowstatus);
+		return penukaran;
+	}
 	
 	// region product
 	public Double totalProduct(){

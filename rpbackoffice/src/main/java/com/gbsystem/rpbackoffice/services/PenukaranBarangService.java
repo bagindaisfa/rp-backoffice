@@ -106,4 +106,8 @@ public class PenukaranBarangService {
 	public List<PenukaranBarang> searchPerStore(int id_store, String keyword){
 		return eRepo.searchPerStore(id_store,keyword);
 	}
+	
+	public Double totalPenukaran(int rowstatus) {
+		return eRepo.totalPenukaran(rowstatus);
+	}
 }

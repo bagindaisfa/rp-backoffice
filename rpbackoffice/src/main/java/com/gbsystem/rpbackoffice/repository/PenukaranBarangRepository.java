@@ -23,4 +23,7 @@ public interface PenukaranBarangRepository  extends JpaRepository<PenukaranBaran
 			+ "no_hp_pelanggan LIKE %:keyword% OR "
 			+ "nama_pelanggan LIKE %:keyword% ) ORDER BY tanggal_masuk DESC", nativeQuery = true)
 	List<PenukaranBarang> searchPerStore(int id_store, String keyword);
+	
+	@Query(value = "SELECT SUM(A.kuantitas) AS kuantitas FROM penukaran_barang A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	Double totalPenukaran(int rowstatus);
 }

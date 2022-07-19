@@ -51,6 +51,11 @@ public class DashboardController {
 	}
 	// end region pembelian
 	
+	//region penukaran
+	@GetMapping("/penukaran")
+	public Double totalPenukaran() {
+		return dashboardService.totalPenukaran(1);
+	}
 	
 	// region product
 	@GetMapping("/jmlProduct")

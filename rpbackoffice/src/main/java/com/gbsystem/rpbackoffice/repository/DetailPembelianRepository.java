@@ -30,6 +30,6 @@ public interface DetailPembelianRepository extends JpaRepository<DetailPembelian
 	@Query(value = "SELECT COUNT(id) AS total FROM detail_pembelian WHERE rowstatus = :rowstatus", nativeQuery = true)
 	Double totalPembelian(int rowstatus);
 	
-	@Query(value = "SELECT SUM(A.hpp) AS total FROM detail_pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	@Query(value = "SELECT SUM(A.hpp * A.kuantitas) AS total FROM detail_pembelian A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
 	Double totalHpp(int rowstatus);
 }
