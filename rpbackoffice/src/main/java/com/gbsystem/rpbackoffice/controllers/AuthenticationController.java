@@ -112,10 +112,18 @@ public class AuthenticationController {
 	}
 	@PostMapping(value = "/auth/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public @ResponseBody String  saveUser(
-			@RequestParam("id") long id, @RequestParam("userName") String userName,@RequestParam("password") String password,
-    		@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName,
-    		@RequestParam("email") String email,@RequestParam("phoneNumber") String phoneNumber,@RequestParam("id_office") int id_office, @RequestParam("lokasi_office") String lokasi_office,
-    		@RequestParam("id_store") int id_store,@RequestParam("lokasi_store") String lokasi_store, @RequestParam("akses_modul") String[] akses_modul) throws Exception{
+			@RequestParam("id") long id, 
+			@RequestParam("userName") String userName,
+			@RequestParam("password") String password,
+    		@RequestParam("firstName") String firstName,
+    		@RequestParam("lastName") String lastName,
+    		@RequestParam("email") String email,
+    		@RequestParam("phoneNumber") String phoneNumber,
+    		@RequestParam("id_office") int id_office, 
+    		@RequestParam("lokasi_office") String lokasi_office,
+    		@RequestParam("id_store") int id_store,
+    		@RequestParam("lokasi_store") String lokasi_store, 
+    		@RequestParam("akses_modul") String[] akses_modul) throws Exception{
 		
 		customUserService.update(id,
 				userName, password, firstName,

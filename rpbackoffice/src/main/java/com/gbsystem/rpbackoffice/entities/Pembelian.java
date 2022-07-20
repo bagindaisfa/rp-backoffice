@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Pembelian {
 	private Long id;
 	private String pembelian_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_transaksi;
 	private String id_supplier;
 	private String nama_supplier;

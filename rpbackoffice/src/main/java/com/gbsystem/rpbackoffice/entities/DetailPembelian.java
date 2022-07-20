@@ -24,6 +24,7 @@ public class DetailPembelian {
 	private Long id;
 	private String pembelian_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_transaksi;
 
 	@Column(updatable=false, insertable=false)

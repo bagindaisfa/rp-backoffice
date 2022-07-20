@@ -17,6 +17,7 @@ public class GeneralJournal {
 	private Long id;
 	private String nomorJournal;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_transaksi;
 	private String noAkun;
 	private String nama_akun;

@@ -14,7 +14,7 @@ public interface RekapPenjualanPerArtikelRepository extends JpaRepository<RekapP
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	Double countingArtikel(int id_store, String start_date, String end_date);
 	
-	@Query(value = "SELECT SUM(total) AS total FROM detail_pesanan WHERE rowstatus = 1 AND id_store=:id_store AND "
+	@Query(value = "SELECT SUM(total) AS total FROM penjualan WHERE rowstatus = 1 AND id_store=:id_store AND "
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	Double totalPerArtikel(int id_store, String start_date, String end_date);
 	

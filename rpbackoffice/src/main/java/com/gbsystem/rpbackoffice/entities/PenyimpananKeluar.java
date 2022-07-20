@@ -20,6 +20,7 @@ public class PenyimpananKeluar {
 	private String lokasi_office;
 	private String pengiriman_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_keluar;
 	private int id_store;
 	private String lokasi_store;

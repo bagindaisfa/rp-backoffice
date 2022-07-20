@@ -15,7 +15,7 @@ public interface RekapPenjualanPerTipeRepository extends JpaRepository<RekapPenj
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	Double countingTipe(int id_store, String start_date, String end_date);
 	
-	@Query(value = "SELECT SUM(total) AS total FROM detail_pesanan WHERE rowstatus = 1 AND id_store=:id_store AND "
+	@Query(value = "SELECT SUM(total) AS total FROM penjualan WHERE rowstatus = 1 AND id_store=:id_store AND "
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	Double totalPerTipe(int id_store, String start_date, String end_date);
 	

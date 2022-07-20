@@ -18,9 +18,11 @@ public class Karyawan {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_join;
 	private String nama_karyawan;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_lahir;
 	private int id_office;
 	private String lokasi_office;

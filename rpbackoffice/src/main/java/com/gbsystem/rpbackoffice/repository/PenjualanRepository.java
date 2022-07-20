@@ -44,7 +44,7 @@ public interface PenjualanRepository extends JpaRepository<Penjualan, Long> {
 	
 	
 	//Laporan Moblie
-	@Query(value = "SELECT COUNT(id) FROM penjualan WHERE rowstatus = 1 AND id_store=:id_store AND "
+	@Query(value = "SELECT SUM(kuantitas) FROM detail_pesanan WHERE rowstatus = 1 AND id_store=:id_store AND "
 			+ "DATE(tanggal_transaksi) >= :start_date AND DATE(tanggal_transaksi) <= :end_date", nativeQuery = true)
 	Double countingMobile(int id_store, String start_date, String end_date);
 	

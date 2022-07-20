@@ -22,6 +22,7 @@ public class PenyimpananStoreMasuk {
 	private String lokasi_store;
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_masuk;
 	private String sku_code;
 	private String artikel;

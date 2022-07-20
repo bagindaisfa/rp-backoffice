@@ -2,6 +2,7 @@ package com.gbsystem.rpbackoffice.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class PenukaranBarang {
 	private String id_transaksi;
 	private String penerimaan_code;
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(columnDefinition="date")
 	private Date tanggal_masuk;
 	private String sku_code;
 	private String artikel;

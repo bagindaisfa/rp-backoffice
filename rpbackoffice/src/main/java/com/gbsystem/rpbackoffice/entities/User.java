@@ -34,10 +34,10 @@ public class User implements UserDetails {
 	private String password;
 
 
-	@Column(name = "CREATED_ON")
+	@Column(name = "CREATED_ON", columnDefinition="date")
 	private Date createdAt = new Date();
 
-	@Column(name = "UPDATED_ON")
+	@Column(name = "UPDATED_ON", columnDefinition="date")
 	private Date updatedAt = new Date();
 
 	@Column(name = "first_name")
