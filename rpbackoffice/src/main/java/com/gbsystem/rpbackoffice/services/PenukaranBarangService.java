@@ -93,6 +93,7 @@ public class PenukaranBarangService {
 			h.setKuantitas(penukaranBarang.get(i).getKuantitas());
 			h.setUkuran(prod.getUkuran());
 			h.setHarga_jual(prod.getHarga_jual());
+			h.setKeterangan("Pengembalian Barang dari Transaksi" + penukaranBarang.get(i).getId_transaksi());
 			h.setRowstatus(1);
 			ePenyimpananStoreRepo.save(h);
 		}

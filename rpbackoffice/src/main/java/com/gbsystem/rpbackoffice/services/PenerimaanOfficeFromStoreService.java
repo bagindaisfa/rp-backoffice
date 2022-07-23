@@ -141,6 +141,7 @@ public class PenerimaanOfficeFromStoreService {
 			h.setType_name(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getType_name());
 			h.setNama_barang(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getNama_barang());
 			h.setKuantitas(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getKuantitas());
+			h.setKeterangan("Pengembalian Barang ke " + penerimaanOfficeFromStore.getLokasi_office());
 			h.setRowstatus(1);
 			ePenyimpananStoreRepo.save(h);
 			
@@ -303,6 +304,7 @@ public class PenerimaanOfficeFromStoreService {
 					h.setType_name(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getType_name());
 					h.setNama_barang(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getNama_barang());
 					h.setKuantitas(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getKuantitas());
+					h.setKeterangan("Pengembalian Barang ke " + penerimaanOfficeFromStore.getLokasi_office());
 					h.setRowstatus(1);
 					ePenyimpananStoreRepo.save(h);
 				} else {
@@ -407,6 +409,7 @@ public class PenerimaanOfficeFromStoreService {
 				h.setType_name(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getType_name());
 				h.setNama_barang(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getNama_barang());
 				h.setKuantitas(penerimaanOfficeFromStore.getDetailPenerimaanList().get(i).getKuantitas());
+				h.setKeterangan("Pengembalian Barang ke " + penerimaanOfficeFromStore.getLokasi_office());
 				h.setRowstatus(1);
 				ePenyimpananStoreRepo.save(h);
 			}

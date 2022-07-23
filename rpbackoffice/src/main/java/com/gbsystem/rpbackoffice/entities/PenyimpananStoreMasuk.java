@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,9 +32,7 @@ public class PenyimpananStoreMasuk {
 	private String nama_barang;
 	private double kuantitas;
 	private String ukuran;
-	@Lob
-	@Column(columnDefinition = "MEDIUMBLOB")
-	private String foto_barang;
+	private String keterangan;
 	private double hpp;
 	private double harga_jual;
 	private int rowstatus;
@@ -136,11 +133,11 @@ public class PenyimpananStoreMasuk {
 	public void setUkuran(String ukuran) {
 		this.ukuran = ukuran;
 	}
-	public String getFoto_barang() {
-		return foto_barang;
+	public String getKeterangan() {
+		return keterangan;
 	}
-	public void setFoto_barang(String foto_barang) {
-		this.foto_barang = foto_barang;
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
 	}
 	public double getHpp() {
 		return hpp;

@@ -47,6 +47,10 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
 	Float generateKuantitasKeluar(String artikel, Date tanggal_awal, Date tanggal_akhir);
 	
+	@Query(value = "select * from penyimpanan_store_keluar WHERE rowstatus=1 AND id_store=:id_store AND "
+			+ "DATE(tanggal_keluar) >= :date_from AND DATE(tanggal_keluar) <= :date_to", nativeQuery = true)
+	List<PenyimpananStoreKeluar> allPenyimpananStoreKeluar(int id_store, Date date_from, Date date_to);
+	
 	@Query(value = "delete from penyimpanan_store_keluar b where b.pengiriman_code=:pengiriman_code", nativeQuery = true)
 	void deleteStoreKeluar(String pengiriman_code);
 	

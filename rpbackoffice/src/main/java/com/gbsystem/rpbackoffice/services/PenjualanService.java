@@ -179,6 +179,7 @@ public class PenjualanService {
 			
 			store_asal.setHpp(check.getHpp());
 			store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
+			store_asal.setKeterangan("Penjualan " + id_transaksi);
 			store_asal.setRowstatus(1);
 			ePenyimpananStoreKeluarRepo.save(store_asal);
 			
@@ -377,6 +378,7 @@ public class PenjualanService {
 				store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
 				store_asal.setHpp(check.getHpp());
 				store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
+				store_asal.setKeterangan("Penjualan " + penjualan.getId_transaksi());
 				store_asal.setRowstatus(1);
 				ePenyimpananStoreKeluarRepo.save(store_asal);
 				eStockRepo.save(check);

@@ -139,6 +139,7 @@ public class PenerimaanStoreFromStoreService {
 			f.setUkuran(prod == null ? "" : prod.getUkuran());
 			f.setHpp(prod == null ? 0 : prod.getHpp());
 			f.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+			f.setKeterangan("Pengiriman Barang ke " + penerimaanStoreFromStore.getLokasi_store_tujuan());
 			f.setRowstatus(1);
 			ePenyimpananStoreKeluarRepo.save(f);
 			
@@ -156,6 +157,7 @@ public class PenerimaanStoreFromStoreService {
 			h.setUkuran(prod == null ? "" : prod.getUkuran());
 			h.setHpp(prod == null ? 0 : prod.getHpp());
 			h.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+			h.setKeterangan("Penerimaan Barang dari " + penerimaanStoreFromStore.getLokasi_store_asal());
 			h.setRowstatus(1);
 			ePenyimpananStoreRepo.save(h);
 			
@@ -295,6 +297,7 @@ public class PenerimaanStoreFromStoreService {
 					f.setUkuran(prod == null ? "" : prod.getUkuran());
 					f.setHpp(prod == null ? 0 : prod.getHpp());
 					f.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+					f.setKeterangan("Pengiriman Barang ke " + penerimaanStoreFromStoreNew.getLokasi_store_tujuan());
 					f.setRowstatus(1);
 					ePenyimpananStoreKeluarRepo.save(f);
 					
@@ -317,6 +320,7 @@ public class PenerimaanStoreFromStoreService {
 					h.setUkuran(prod == null ? "" : prod.getUkuran());
 					h.setHpp(prod == null ? 0 : prod.getHpp());
 					h.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+					h.setKeterangan("Penerimaan Barang dari " + penerimaanStoreFromStoreNew.getLokasi_store_asal());
 					h.setRowstatus(1);
 					ePenyimpananStoreRepo.save(h);
 				} else {
@@ -423,6 +427,7 @@ public class PenerimaanStoreFromStoreService {
 				f.setUkuran(prod == null ? "" : prod.getUkuran());
 				f.setHpp(prod == null ? 0 : prod.getHpp());
 				f.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+				f.setKeterangan("Pengiriman Barang ke " + penerimaanStoreFromStoreNew.getLokasi_store_tujuan());
 				f.setRowstatus(1);
 				ePenyimpananStoreKeluarRepo.save(f);
 				
@@ -442,6 +447,7 @@ public class PenerimaanStoreFromStoreService {
 				h.setUkuran(prod == null ? "" : prod.getUkuran());
 				h.setHpp(prod == null ? 0 : prod.getHpp());
 				h.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+				h.setKeterangan("Penerimaan Barang dari " + penerimaanStoreFromStoreNew.getLokasi_store_asal());
 				h.setRowstatus(1);
 				ePenyimpananStoreRepo.save(h);
 			}

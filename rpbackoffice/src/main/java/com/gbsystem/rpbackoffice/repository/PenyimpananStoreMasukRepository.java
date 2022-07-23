@@ -47,6 +47,10 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
 	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
 	
+	@Query(value = "select * from penyimpanan_store_masuk WHERE rowstatus=1 AND id_store=:id_store AND "
+			+ "DATE(tanggal_masuk) >= :date_from AND DATE(tanggal_masuk) <= :date_to", nativeQuery = true)
+	List<PenyimpananStoreMasuk> allPenyimpananStoreMasuk(int id_store, Date date_from, Date date_to);
+	
 	@Query(value = "delete from penyimpanan_store_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
 	void deleteStoreMasuk(String penerimaan_code);
 	
