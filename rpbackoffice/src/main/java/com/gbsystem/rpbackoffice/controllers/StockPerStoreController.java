@@ -20,6 +20,7 @@ import com.gbsystem.rpbackoffice.services.StockPerStoreService;
 @RequestMapping("/stockPerStore")
 @CrossOrigin
 public class StockPerStoreController {
+	
 	@Autowired
 	private StockPerStoreService stockService;
 	

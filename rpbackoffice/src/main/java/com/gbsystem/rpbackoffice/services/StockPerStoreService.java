@@ -15,6 +15,7 @@ import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 
 @Service
 public class StockPerStoreService {
+	
 	@Autowired
 	private PenyimpananStoreMasukRepository eMasukRepo;
 	
