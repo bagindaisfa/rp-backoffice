@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.DetailPenjualanOffice;
+import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.DetailPenjualanOfficeRepository;
+import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
@@ -31,6 +33,9 @@ public class PenjualanOfficeService {
 	@Autowired
 	private PenyimpananKeluarRepository ePenyimpananRepo;
 	
+	@Autowired
+	private MasterProductRepository eMasterProductRepository;
+	
 	public PenjualanOffice savePenjualanOffice(PenjualanOffice penjualanOffice) {
 		
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-O" + (eRepo.count() + 1);
@@ -48,17 +53,21 @@ public class PenjualanOfficeService {
 		
 		for(int i = 0; i < penjualanOffice.getDetail_penjualan().size(); i++) {
 			DetailPenjualanOffice d = new DetailPenjualanOffice();
+			
+			MasterProduct prod = new MasterProduct();
+			prod = eMasterProductRepository.findByArticle(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
+			
 			d.setTanggal_transaksi(tanggal_transaksi);
 			d.setId_transaksi(id_transaksi);
 			d.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
 			d.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
-			d.setKategori(penjualanOffice.getDetail_penjualan().get(i).getKategori());
-			d.setNama_kategori(penjualanOffice.getDetail_penjualan().get(i).getNama_kategori());
-			d.setType(penjualanOffice.getDetail_penjualan().get(i).getType());
-			d.setType_name(penjualanOffice.getDetail_penjualan().get(i).getType_name());
-			d.setNama_barang(penjualanOffice.getDetail_penjualan().get(i).getNama_barang());
+			d.setKategori(prod == null ? "" : prod.getKategori());
+			d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+			d.setType(prod == null ? 0 : prod.getType());
+			d.setType_name(prod == null ? "" : prod.getType_name());
+			d.setNama_barang(prod == null ? "" : prod.getNama_product());
 			d.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			d.setUkuran(penjualanOffice.getDetail_penjualan().get(i).getUkuran());
+			d.setUkuran(prod == null ? "" : prod.getUkuran());
 			d.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(i).getMetode_pembayaran());
 			d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
 			d.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(i).getOngkos_kirim());
@@ -84,15 +93,15 @@ public class PenjualanOfficeService {
 			f.setLokasi_store("-");
 			f.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
 			f.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
-			f.setKategori(penjualanOffice.getDetail_penjualan().get(i).getKategori());
-			f.setNama_kategori(penjualanOffice.getDetail_penjualan().get(i).getNama_kategori());
-			f.setType(penjualanOffice.getDetail_penjualan().get(i).getType());
-			f.setType_name(penjualanOffice.getDetail_penjualan().get(i).getType_name());
-			f.setNama_barang(penjualanOffice.getDetail_penjualan().get(i).getNama_barang());
+			f.setKategori(prod == null ? "" : prod.getKategori());
+			f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+			f.setType(prod == null ? 0 : prod.getType());
+			f.setType_name(prod == null ? "" : prod.getType_name());
+			f.setNama_barang(prod == null ? "" : prod.getNama_product());
 			f.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			f.setUkuran(penjualanOffice.getDetail_penjualan().get(i).getUkuran());
-			f.setHpp(g.getHpp());
-			f.setHarga_jual(g.getHarga_jual());
+			f.setUkuran(prod == null ? "" : prod.getUkuran());
+			f.setHpp(prod == null ? 0 : prod.getHpp());
+			f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
 			f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
 			f.setRowstatus(1);
 			ePenyimpananRepo.save(f);
@@ -161,6 +170,9 @@ public class PenjualanOfficeService {
 		for(int k = 0; k < penjualanOffice.getDetail_penjualan().size(); k++) {
 			DetailPenjualanOffice d = new DetailPenjualanOffice();
 			
+			MasterProduct prod = new MasterProduct();
+			prod = eMasterProductRepository.findByArticle(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+			
 			if (penjualanOffice.getDetail_penjualan().get(k).getId() == null) {
 				d = null;
 			} else {
@@ -171,14 +183,13 @@ public class PenjualanOfficeService {
 				d.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
 				d.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
 				d.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-				d.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
-				d.setNama_kategori(penjualanOffice.getDetail_penjualan().get(k).getNama_kategori());
-				d.setType(penjualanOffice.getDetail_penjualan().get(k).getType());
-				d.setType_name(penjualanOffice.getDetail_penjualan().get(k).getType_name());
-				d.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
-				d.setNama_barang(penjualanOffice.getDetail_penjualan().get(k).getNama_barang());
+				d.setKategori(prod == null ? "" : prod.getKategori());
+				d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				d.setType(prod == null ? 0 : prod.getType());
+				d.setType_name(prod == null ? "" : prod.getType_name());
+				d.setNama_barang(prod == null ? "" : prod.getNama_product());
 				d.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				d.setUkuran(penjualanOffice.getDetail_penjualan().get(k).getUkuran());
+				d.setUkuran(prod == null ? "" : prod.getUkuran());
 				d.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(k).getMetode_pembayaran());
 				d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 				d.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(k).getOngkos_kirim());
@@ -209,15 +220,15 @@ public class PenjualanOfficeService {
 					f.setLokasi_store("-");
 					f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 					f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-					f.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
-					f.setNama_kategori(penjualanOffice.getDetail_penjualan().get(k).getNama_kategori());
-					f.setType(penjualanOffice.getDetail_penjualan().get(k).getType());
-					f.setType_name(penjualanOffice.getDetail_penjualan().get(k).getType_name());
-					f.setNama_barang(penjualanOffice.getDetail_penjualan().get(k).getNama_barang());
+					f.setKategori(prod == null ? "" : prod.getKategori());
+					f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+					f.setType(prod == null ? 0 : prod.getType());
+					f.setType_name(prod == null ? "" : prod.getType_name());
+					f.setNama_barang(prod == null ? "" : prod.getNama_product());
 					f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-					f.setUkuran(penjualanOffice.getDetail_penjualan().get(k).getUkuran());
-					f.setHpp(l.getHpp());
-					f.setHarga_jual(l.getHarga_jual());
+					f.setUkuran(prod == null ? "" : prod.getUkuran());
+					f.setHpp(prod == null ? 0 : prod.getHpp());
+					f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 					f.setKeterangan("Penjualan Office ke pelanggan" + penjualanOffice.getNama_pelanggan());
 					f.setRowstatus(1);
 					ePenyimpananRepo.save(f);
@@ -245,13 +256,13 @@ public class PenjualanOfficeService {
 				new_insert.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
 				new_insert.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 				new_insert.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				new_insert.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
-				new_insert.setNama_kategori(penjualanOffice.getDetail_penjualan().get(k).getNama_kategori());
-				new_insert.setType(penjualanOffice.getDetail_penjualan().get(k).getType());
-				new_insert.setType_name(penjualanOffice.getDetail_penjualan().get(k).getType_name());
-				new_insert.setNama_barang(penjualanOffice.getDetail_penjualan().get(k).getNama_barang());
+				new_insert.setKategori(prod == null ? "" : prod.getKategori());
+				new_insert.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				new_insert.setType(prod == null ? 0 : prod.getType());
+				new_insert.setType_name(prod == null ? "" : prod.getType_name());
+				new_insert.setNama_barang(prod == null ? "" : prod.getNama_product());
 				new_insert.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				new_insert.setUkuran(penjualanOffice.getDetail_penjualan().get(k).getUkuran());
+				new_insert.setUkuran(prod == null ? "" : prod.getUkuran());
 				new_insert.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(k).getMetode_pembayaran());
 				new_insert.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 				new_insert.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(k).getOngkos_kirim());
@@ -260,7 +271,7 @@ public class PenjualanOfficeService {
 				new_insert.setRowstatus(1);
 				new_insert.setPenjualanOffice(p);
 				total += penjualanOffice.getDetail_penjualan().get(k).getTotal();
-				details.add(d);
+				details.add(new_insert);
 				
 				StockOffice g = new StockOffice();
 				g = eStockOfficeRepo.findById_officeAndArtikel(
@@ -277,15 +288,15 @@ public class PenjualanOfficeService {
 				f.setLokasi_store("-");
 				f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
 				f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				f.setKategori(penjualanOffice.getDetail_penjualan().get(k).getKategori());
-				f.setNama_kategori(penjualanOffice.getDetail_penjualan().get(k).getNama_kategori());
-				f.setType(penjualanOffice.getDetail_penjualan().get(k).getType());
-				f.setType_name(penjualanOffice.getDetail_penjualan().get(k).getType_name());
-				f.setNama_barang(penjualanOffice.getDetail_penjualan().get(k).getNama_barang());
+				f.setKategori(prod == null ? "" : prod.getKategori());
+				f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				f.setType(prod == null ? 0 : prod.getType());
+				f.setType_name(prod == null ? "" : prod.getType_name());
+				f.setNama_barang(prod == null ? "" : prod.getNama_product());
 				f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				f.setUkuran(penjualanOffice.getDetail_penjualan().get(k).getUkuran());
-				f.setHpp(g.getHpp());
-				f.setHarga_jual(g.getHarga_jual());
+				f.setUkuran(prod == null ? "" : prod.getUkuran());
+				f.setHpp(prod == null ? 0 : prod.getHpp());
+				f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 				f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
 				f.setRowstatus(1);
 				ePenyimpananRepo.save(f);
