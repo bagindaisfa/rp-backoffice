@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;
+import com.gbsystem.rpbackoffice.entities.StockPerStoreList;
 import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananStoreMasukRepository;
@@ -38,5 +39,10 @@ public class StockPerStoreService {
 	public List<StockStore> stockAllItemPerStore(int id_store) {
 		
 		return eStockStoreRepo.stockAllItemPerStore(id_store);
+	}
+	
+	public List<StockPerStoreList> allStock() {
+		
+		return eStockStoreRepo.allStock();
 	}
 }

@@ -54,13 +54,14 @@ public class PelangganController {
     }
     
     @PostMapping(value = "/add")
-    public @ResponseBody String saveProduct(@RequestParam("nama_pelanggan") String nama_pelanggan,
+    public @ResponseBody String saveProduct(
+    		@RequestParam("nik") String nik,@RequestParam("nama_pelanggan") String nama_pelanggan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
     		@RequestParam("total_kunjungan") double total_kunjungan,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("poin") double poin,@RequestParam("pembelian") double total_pembelian) throws Exception {
     	
     	if (nama_pelanggan != "") {
-    		pelangganService.savePelanggan(nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
+    		pelangganService.savePelanggan(nik,nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
     	}
     	return "Insert Data Successs!";
     	}
@@ -76,13 +77,13 @@ public class PelangganController {
     }
     
     @PostMapping(value = "/update")
-    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("nama_pelanggan") String nama_pelanggan,
+    public @ResponseBody String update(@RequestParam("id") Long id,@RequestParam("nik") String nik,@RequestParam("nama_pelanggan") String nama_pelanggan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
     		@RequestParam("total_kunjungan") double total_kunjungan,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("poin") double poin,@RequestParam("pembelian") double total_pembelian) throws Exception {
     	
     	if (nama_pelanggan != "") {
-    		pelangganService.update(id, nama_pelanggan, no_hp, email, alamat, total_kunjungan,
+    		pelangganService.update(id, nik, nama_pelanggan, no_hp, email, alamat, total_kunjungan,
     				kuantitas, poin, total_pembelian);
     	}
     	return "Update Data Successs!";

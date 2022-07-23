@@ -15,12 +15,13 @@ public class PelangganService {
 	@Autowired
 	private PelangganRepository eRepo;
 	
-	public Pelanggan savePelanggan(String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
+	public Pelanggan savePelanggan(String nik,String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
 			double kuantitas, double poin, double total_pembelian) {
 		
 		Pelanggan p = new Pelanggan();
 		
 		p.setTanggal_join(new Date());
+		p.setNik(nik);
 		p.setNama_pelanggan(nama_pelanggan);
 		p.setNo_hp(no_hp);
 		p.setEmail(email);
@@ -38,6 +39,7 @@ public class PelangganService {
 		Pelanggan p = new Pelanggan();
 		
 		p.setTanggal_join(new Date());
+		p.setNik(pelanggan.getNik());
 		p.setNama_pelanggan(pelanggan.getNama_pelanggan());
 		p.setNo_hp(pelanggan.getNo_hp());
 		p.setEmail(pelanggan.getEmail());
@@ -71,10 +73,11 @@ public class PelangganService {
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
+	public void update(Long id, String nik, String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
 			double kuantitas, double poin, double total_pembelian) {
 		Pelanggan p = new Pelanggan();
 		p = eRepo.findById(id).get();
+		p.setNik(nik);
 		p.setNama_pelanggan(nama_pelanggan);
 		p.setNo_hp(no_hp);
 		p.setEmail(email);

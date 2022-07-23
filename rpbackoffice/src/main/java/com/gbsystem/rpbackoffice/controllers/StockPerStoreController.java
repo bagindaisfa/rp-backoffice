@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreKeluar;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;
+import com.gbsystem.rpbackoffice.entities.StockPerStoreList;
 import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.services.StockPerStoreService;
 
@@ -42,9 +43,13 @@ public class StockPerStoreController {
 		return stockService.storeKeluar(id_store, date_from, date_to);
 	}
 	
-	@GetMapping("/allStock")
+	@GetMapping("/allStockPerStore")
 	public List<StockStore> allStock(@Param("id_store") int id_store){
 		return stockService.stockAllItemPerStore(id_store);
 	}
 
+	@GetMapping("/allStock")
+	public List<StockPerStoreList> allStock(){
+		return stockService.allStock();
+	}
 }
