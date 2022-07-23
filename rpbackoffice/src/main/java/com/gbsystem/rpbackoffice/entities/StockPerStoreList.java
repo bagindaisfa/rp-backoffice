@@ -9,14 +9,14 @@ import javax.persistence.Id;
 public class StockPerStoreList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	private int id_store;
 	private String lokasi_store;
 	private Double total_per_store;
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public int getId_store() {

@@ -72,6 +72,4 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kuantitas <=5 ", nativeQuery = true)
 	List<StockStore> stockMinimum(int id_store);
 	
-	@Query(value = "SELECT id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 group by id_store,lokasi_store", nativeQuery = true)
-	List<StockPerStoreList> allStock();
 }
