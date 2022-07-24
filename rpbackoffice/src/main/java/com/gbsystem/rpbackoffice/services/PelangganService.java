@@ -94,6 +94,7 @@ public class PelangganService {
 		Pelanggan p = new Pelanggan();
 		p = eRepo.findById(pelanggan.getId()).get();
 		p.setNama_pelanggan(pelanggan.getNama_pelanggan());
+		p.setNik(pelanggan.getNik());
 		p.setNo_hp(pelanggan.getNo_hp());
 		p.setEmail(pelanggan.getEmail());
 		p.setAlamat(pelanggan.getAlamat());
