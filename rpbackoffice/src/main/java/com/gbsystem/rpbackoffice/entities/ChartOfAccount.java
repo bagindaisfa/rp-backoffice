@@ -16,6 +16,7 @@ public class ChartOfAccount {
 	private String tipe;
 	private String saldo_normal;
 	private double saldo_awal;
+	private int is_delete;
 	private int rowstatus;
 	
 	public Long getId() {
@@ -80,6 +81,14 @@ public class ChartOfAccount {
 
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
+	}
+	
+	public int getIs_delets() {
+		return is_delete;
+	}
+
+	public void setIs_delete(int is_delete) {
+		this.is_delete = is_delete;
 	}
 	@Override
 	public String toString() {

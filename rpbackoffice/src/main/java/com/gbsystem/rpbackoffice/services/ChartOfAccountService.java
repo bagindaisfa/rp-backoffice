@@ -24,6 +24,7 @@ public class ChartOfAccountService {
 		p.setTipe(tipe);
 		p.setSaldo_normal(saldo_normal);
 		p.setSaldo_awal(saldo_awal);
+		p.setIs_delete(0);
 		p.setRowstatus(1);
 		return eRepo.save(p);
 	}
@@ -61,6 +62,7 @@ public class ChartOfAccountService {
 		p.setTipe(tipe);
 		p.setSaldo_normal(saldo_normal);
 		p.setSaldo_awal(saldo_awal);
+		p.setIs_delete(0);
     	eRepo.save(p);
 	}
 }

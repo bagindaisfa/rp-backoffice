@@ -28,7 +28,13 @@ public class GeneralJournalController {
     @PostMapping(value = "/add")
     public Object saveGeneralJournal(@RequestBody List<GeneralJournal> request){
     	generalJournalService.saveGeneralJournal(request);
-		return "redirect:/akutanasi/journal/all";
+		return "Success!";
+	}
+    
+    @PostMapping(value = "/update")
+    public Object updateGeneralJournal(@RequestBody List<GeneralJournal> request){
+    	generalJournalService.update(request);
+		return "Success!";
 	}
     
     @GetMapping("/bukuBesar")

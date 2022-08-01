@@ -60,7 +60,7 @@ public class CharOfAccountController {
     		) 
 	{
     	chartOfAccountService.saveChartOfAccount(noAkun,namaAkun,kelompok,tipe,saldo_normal, saldo_awal);
-		return "redirect:/akutanasi/coa/all";
+		return "Success!";
 	}
     
     @PostMapping(value = "/update")
@@ -77,7 +77,7 @@ public class CharOfAccountController {
     	if (namaAkun != "") {
     		chartOfAccountService.update(id, noAkun,namaAkun,kelompok,tipe,saldo_normal, saldo_awal);
     	}
-    	return "Update Data Successs!";
+    	return "Update Data Success!";
 		
     }
     

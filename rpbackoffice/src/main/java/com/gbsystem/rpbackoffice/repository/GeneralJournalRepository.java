@@ -24,7 +24,7 @@ public interface GeneralJournalRepository extends JpaRepository<GeneralJournal, 
 			+ "ELSE 0 END AS 'saldo_akhir' "
 			+ "FROM general_journal A JOIN (SELECT @balance \\:\\= 0) B LEFT JOIN chart_of_account C ON A.no_akun=C.no_akun "
 			+ "WHERE A.rowstatus=1 AND A.tanggal_transaksi >= :tanggal_awal AND A.tanggal_transaksi <= :tanggal_akhir "
-			+ "AND A.project LIKE %:project% "
+			+ "AND A.project_name LIKE %:project% "
 			+ "ORDER BY A.tanggal_transaksi,A.id", nativeQuery=true )
 	List<GeneralJournal> findBukuBesar(Date tanggal_awal, Date tanggal_akhir, String project);
 	
