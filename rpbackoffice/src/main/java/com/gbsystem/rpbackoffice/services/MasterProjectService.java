@@ -29,17 +29,17 @@ public class MasterProjectService {
 		return eRepo.findByRowstatus(1);
 	}
 	
-	public void deleteMasterProjectById(Long id)
+	public void deleteMasterProjectById(int id)
     {
 		MasterProject p = new MasterProject();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
     	p.setRowstatus(0);
     	eRepo.save(p);    
     }
 	
-	public void update(Long id, String project_name ) {
+	public void update(int id, String project_name ) {
 		MasterProject p = new MasterProject();
-    	p = eRepo.findById(id).get();
+    	p = eRepo.findById(id);
 		p.setProject_name(project_name);
 		p.setRowstatus(1);
     	eRepo.save(p);

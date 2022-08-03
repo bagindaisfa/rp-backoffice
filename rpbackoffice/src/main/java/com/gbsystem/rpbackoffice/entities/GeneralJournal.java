@@ -25,7 +25,7 @@ public class GeneralJournal {
 	private String rincian_transaksi;
 	private double debit_amount;
 	private double credit_amount;
-	private String project;
+	private int project_id;
 	private String project_name;
 	@Column(updatable=false, insertable=false)
 	private double saldo_akhir;
@@ -85,11 +85,11 @@ public class GeneralJournal {
 	public void setCredit_amount(double credit_amount) {
 		this.credit_amount = credit_amount;
 	}
-	public String getProject() {
-		return project;
+	public int getProject_id() {
+		return project_id;
 	}
-	public void setProject(String project) {
-		this.project = project;
+	public void setProject_id(int project_id) {
+		this.project_id = project_id;
 	}
 	public String getProject_name() {
 		return project_name;

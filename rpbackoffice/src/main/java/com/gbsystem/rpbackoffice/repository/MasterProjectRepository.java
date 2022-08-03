@@ -12,7 +12,7 @@ import com.gbsystem.rpbackoffice.entities.MasterProject;
 public interface MasterProjectRepository extends JpaRepository<MasterProject, Long> {
 	List<MasterProject> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	public MasterProject findById(String id);
+	public MasterProject findById(int id);
 	
 	@Query(value = "SELECT * FROM master_project WHERE rowstatus = 1 AND (project_name LIKE %:keyword%) ", nativeQuery = true)
 	List<MasterProject> search(String keyword);

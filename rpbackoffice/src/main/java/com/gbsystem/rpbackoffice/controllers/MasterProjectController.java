@@ -41,7 +41,7 @@ public class MasterProjectController {
 	}
     
     @PostMapping("/update")
-    public String update(@RequestParam("id") Long id,@RequestParam("project_name") String project_name) throws Exception {
+    public String update(@RequestParam("id") int id,@RequestParam("project_name") String project_name) throws Exception {
     	
     	if (project_name != "") {
     		masterProjectService.update(id, project_name);
@@ -50,7 +50,7 @@ public class MasterProjectController {
 		
     }
     @GetMapping("/delete")
-    public String deleteTipe(@RequestParam("id") Long id)
+    public String deleteTipe(@RequestParam("id") int id)
     {
     	
     	masterProjectService.deleteMasterProjectById(id);
