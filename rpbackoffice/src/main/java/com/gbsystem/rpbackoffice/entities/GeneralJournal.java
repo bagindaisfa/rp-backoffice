@@ -14,7 +14,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class GeneralJournal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	private String nomorJournal;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(columnDefinition="date")
@@ -23,18 +23,18 @@ public class GeneralJournal {
 	private String nama_akun;
 	private String kelompok;
 	private String rincian_transaksi;
-	private double debit_amount;
-	private double credit_amount;
-	private int project_id;
+	private Double debit_amount;
+	private Double credit_amount;
+	private Integer project_id;
 	private String project_name;
 	@Column(updatable=false, insertable=false)
-	private double saldo_akhir;
+	private Double saldo_akhir;
 	private int rowstatus;
 	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getNomorJournal() {

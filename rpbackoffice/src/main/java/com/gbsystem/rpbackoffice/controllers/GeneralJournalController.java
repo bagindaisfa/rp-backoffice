@@ -38,7 +38,7 @@ public class GeneralJournalController {
 	}
     
     @GetMapping("/bukuBesar")
-    public ResponseEntity<List<GeneralJournal>> search(
+    public ResponseEntity<List<GeneralJournal>> bukuBesar(
     		@Param("tanggal_awal") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_awal,
     		@Param("tanggal_akhir") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_akhir,
     		@Param("project") String project) {
@@ -46,7 +46,7 @@ public class GeneralJournalController {
     }
     
     @GetMapping("/journalUmum")
-    public ResponseEntity<List<GeneralJournal>> search(
+    public ResponseEntity<List<GeneralJournal>> jurnalUmum(
     		@Param("tanggal_awal") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_awal,
     		@Param("tanggal_akhir") @DateTimeFormat(pattern="yyyy-MM-dd") Date tanggal_akhir
     		) {

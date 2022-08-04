@@ -67,7 +67,7 @@ public class GeneralJournalService {
 		for (int i = 0; i < generalJournal.size(); i++) {
 			
 			GeneralJournal d = new GeneralJournal();
-			d = eRepo.findById(generalJournal.get(i).getId()).get();
+			d = eRepo.findById(generalJournal.get(i).getId());
 			
 			String acc_name = eCoaRepo.findByNoAkun(generalJournal.get(i).getNoAkun()).getNamaAkun();
 			String project_name = eProjectRepo.findById(generalJournal.get(i).getProject_id()).getProject_name();
