@@ -11,7 +11,7 @@ import com.gbsystem.rpbackoffice.entities.GeneralJournal;
 
 @Repository
 public interface GeneralJournalRepository extends JpaRepository<GeneralJournal, Long> {
-	@Query(value ="SELECT * FROM general_journal WHERE rowstatus=1 AND A.tanggal_transaksi >= :tanggal_awal AND A.tanggal_transaksi <= :tanggal_akhir ", nativeQuery=true )
+	@Query(value ="SELECT A.* FROM general_journal A WHERE rowstatus=1 AND A.tanggal_transaksi >= :tanggal_awal AND A.tanggal_transaksi <= :tanggal_akhir ", nativeQuery=true )
 	List<GeneralJournal> findAll(Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value ="SELECT "
