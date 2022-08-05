@@ -13,7 +13,7 @@ import com.gbsystem.rpbackoffice.entities.GeneralJournal;
 public interface GeneralJournalRepository extends JpaRepository<GeneralJournal, Long> {
 	@Query(value ="SELECT id,credit_amount, debit_amount, "
 			+ "kelompok, nama_akun, no_akun, "
-			+ "nomor_journal, project, project_name, "
+			+ "nomor_journal, project_name, "
 			+ "rincian_transaksi, rowstatus, IFNULL(saldo_akhir,0) as saldo_akhir, "
 			+ "tanggal_transaksi, project_id FROM general_journal "
 			+ "WHERE rowstatus=1 AND tanggal_transaksi >= :tanggal_awal AND tanggal_transaksi <= :tanggal_akhir ", nativeQuery=true )
