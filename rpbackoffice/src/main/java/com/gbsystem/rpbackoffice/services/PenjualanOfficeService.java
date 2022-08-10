@@ -1,6 +1,9 @@
 package com.gbsystem.rpbackoffice.services;
 
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,11 +13,13 @@ import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.DetailPenjualanOffice;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
+import com.gbsystem.rpbackoffice.entities.Pelanggan;
 import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.DetailPenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
+import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
@@ -36,6 +41,9 @@ public class PenjualanOfficeService {
 	@Autowired
 	private MasterProductRepository eMasterProductRepository;
 	
+	@Autowired
+	private PelangganRepository ePelangganRepo;
+	
 	public PenjualanOffice savePenjualanOffice(PenjualanOffice penjualanOffice) {
 		
 		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-O" + (eRepo.count() + 1);
@@ -50,6 +58,8 @@ public class PenjualanOfficeService {
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
 		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
+		p.setId_karyawan(penjualanOffice.getId_karyawan());
+		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
 		
 		for(int i = 0; i < penjualanOffice.getDetail_penjualan().size(); i++) {
 			DetailPenjualanOffice d = new DetailPenjualanOffice();
@@ -109,6 +119,29 @@ public class PenjualanOfficeService {
 		p.setTotal_penjualan(total);
 		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
+		
+		if (total > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+
+			    LocalDate now = LocalDate.now();
+			    LocalDate firstDay = now.with(firstDayOfYear());
+			    
+			    if (now != firstDay) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (total * 0.001));
+			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + total);
+			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+					ePelangganRepo.save(pembeli.get(i));
+			    } else {
+			    	pembeli.get(i).setPoin(total * 0.001);
+			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + total);
+			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+					ePelangganRepo.save(pembeli.get(i));
+			    }
+			}
+		}
+		
 		return eRepo.save(p);
 	}
 	
@@ -151,6 +184,16 @@ public class PenjualanOfficeService {
     	
     	p.setDetail_penjualan(details);
     	eRepo.save(p);
+    	
+    	if (p.getTotal_penjualan() > 1000000) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(p.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+				pembeli.get(i).setPoin(pembeli.get(i).getPoin() - (p.getTotal_penjualan() * 0.01));
+				ePelangganRepo.save(pembeli.get(i));	
+			}
+		}
+    	
     	return "Berhasil didelete!";
     }
 	
@@ -164,6 +207,8 @@ public class PenjualanOfficeService {
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
 		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
+		p.setId_karyawan(penjualanOffice.getId_karyawan());
+		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
 		p.setRowstatus(penjualanOffice.getRowstatus());
 		
 		List<DetailPenjualanOffice> details = new ArrayList<>();
