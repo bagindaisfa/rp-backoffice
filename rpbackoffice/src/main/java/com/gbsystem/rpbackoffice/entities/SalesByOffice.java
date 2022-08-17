@@ -13,31 +13,31 @@ public class SalesByOffice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(updatable=false, insertable=false)
+	
 	private Date tanggal_transaksi;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private Date date_from;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private Date date_to;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private String lokasi_office;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private String nama_pelanggan;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private String artikel;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private String nama_barang;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private double kuantitas;
 	
-	@Column(updatable=false, insertable=false)
+	
 	private double harga;
 
 	public Long getId() {
@@ -118,6 +118,14 @@ public class SalesByOffice {
 
 	public void setHarga(double harga) {
 		this.harga = harga;
+	}
+
+	@Override
+	public String toString() {
+		return "SalesByOffice [id=" + id + ", tanggal_transaksi=" + tanggal_transaksi + ", date_from=" + date_from
+				+ ", date_to=" + date_to + ", lokasi_office=" + lokasi_office + ", nama_pelanggan=" + nama_pelanggan
+				+ ", artikel=" + artikel + ", nama_barang=" + nama_barang + ", kuantitas=" + kuantitas + ", harga="
+				+ harga + "]";
 	}
 	
 }

@@ -12,10 +12,11 @@ import com.gbsystem.rpbackoffice.entities.PurchaseStoreByArticle;
 @Repository
 public interface PurchaseStoreByArticleRepository extends JpaRepository<PurchaseStoreByArticle, Long> {
 	@Query(value = "SELECT "
-			+ "A.id AS id, "
+			+ "B.id AS id, "
 			+ "A.nama_karyawan AS nama_karyawan, "
 			+ "A.lokasi_store AS lokasi_store, "
 			+ "B.tanggal_transaksi, "
+			+ "'' as ukuran,"
 			+ "B.artikel, "
 			+ "B.kuantitas, "
 			+ "B.nama_barang, "
@@ -35,14 +36,19 @@ public interface PurchaseStoreByArticleRepository extends JpaRepository<Purchase
 	List<PurchaseStoreByArticle> PurchaseStoreByArticle(String artikel, Date date_from, Date date_to);
 	
 	@Query(value = "SELECT "
-			+ "A.id AS id, "
+			+ "B.id AS id, "
 			+ "A.nama_karyawan AS nama_karyawan, "
 			+ "A.lokasi_store AS lokasi_store, "
 			+ "B.tanggal_transaksi, "
 			+ "B.artikel, "
 			+ "B.kuantitas, "
 			+ "B.nama_barang, "
+			+ "B.nama_kategori, "
+			+ "B.type_name,"
+			+ "'' as ukuran,"
 			+ "B.harga, "
+			+ "(select sum(total) from detail_pesanan where penjualan_id = A.id and rowstatus=1 "
+			+ "AND DATE(tanggal_transaksi) >= :date_from AND DATE(tanggal_transaksi) <= :date_to) as total, "
 			+ ":date_from AS date_from, "
 			+ ":date_to AS date_to "
 			+ "FROM penjualan A "

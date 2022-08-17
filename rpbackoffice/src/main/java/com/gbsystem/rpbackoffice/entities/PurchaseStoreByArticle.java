@@ -29,6 +29,9 @@ public class PurchaseStoreByArticle {
 	private Date tanggal_transaksi;
 	
 	@Column(updatable=false, insertable=false)
+	private String ukuran;
+	
+	@Column(updatable=false, insertable=false)
 	private Date date_from;
 	
 	@Column(updatable=false, insertable=false)
@@ -97,6 +100,14 @@ public class PurchaseStoreByArticle {
 		this.tanggal_transaksi = tanggal_transaksi;
 	}
 
+	public String getUkuran() {
+		return ukuran;
+	}
+
+	public void setUkuran(String ukuran) {
+		this.ukuran = ukuran;
+	}
+	
 	public Date getDate_from() {
 		return date_from;
 	}

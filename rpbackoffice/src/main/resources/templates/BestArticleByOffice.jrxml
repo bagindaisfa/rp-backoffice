@@ -34,7 +34,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Ruko Golden Boulevard, Blok W2 No. 12 Jl. Pahlawan Seribu BSD City Tangerang.
+				<text><![CDATA[Ruko Icon Business Park V Blok F No.6 BSD Sampora Tangerang 15345.
 Phone: +62-2153163512 Fax: +39.0422.431978 
 E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
@@ -190,7 +190,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="36" splitType="Stretch">
+		<band height="37" splitType="Stretch">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="-10" y="0" width="84" height="20" isPrintInFirstWholeBand="true" uuid="de790f12-ae23-430f-84ad-0fb18aef74a9"/>
 				<textElement textAlignment="Center"/>

@@ -19,6 +19,8 @@ public class SalesByOfficeService {
 	}
 	
 	public List<SalesByOffice> BestArticle(String id_office, Date date_from, Date date_to){
+		List<SalesByOffice> test = eRepo.BestArticle(id_office, date_from, date_to);
+		System.out.println(test.toString());
 		return eRepo.BestArticle(id_office, date_from, date_to);
 	}
 }
