@@ -60,6 +60,14 @@ public class PenjualanOfficeService {
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
 		p.setId_karyawan(penjualanOffice.getId_karyawan());
 		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
+		p.setDiskon(penjualanOffice.getDiskon());
+		p.setDiskon_remark(penjualanOffice.getDiskon_remark());
+		p.setOngkos_kirim(penjualanOffice.getOngkos_kirim());
+		p.setEkspedisi(penjualanOffice.getEkspedisi());
+		p.setPajak_biaya(penjualanOffice.getPajak_biaya());
+		p.setMetode_pembayaran(penjualanOffice.getMetode_pembayaran());
+		p.setBank_name(penjualanOffice.getBank_name());
+		p.setNo_rek(penjualanOffice.getNo_rek());
 		
 		for(int i = 0; i < penjualanOffice.getDetail_penjualan().size(); i++) {
 			DetailPenjualanOffice d = new DetailPenjualanOffice();
@@ -77,11 +85,7 @@ public class PenjualanOfficeService {
 			d.setType_name(prod == null ? "" : prod.getType_name());
 			d.setNama_barang(prod == null ? "" : prod.getNama_product());
 			d.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			d.setUkuran(prod == null ? "" : prod.getUkuran());
-			d.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(i).getMetode_pembayaran());
 			d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
-			d.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(i).getOngkos_kirim());
-			d.setPajak_biaya(penjualanOffice.getDetail_penjualan().get(i).getPajak_biaya());
 			d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getTotal());
 			d.setRowstatus(1);
 			d.setPenjualanOffice(p);
@@ -116,7 +120,7 @@ public class PenjualanOfficeService {
 			f.setRowstatus(1);
 			ePenyimpananRepo.save(f);
 		}
-		p.setTotal_penjualan(total);
+		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + ((total * penjualanOffice.getPajak_biaya())/100));
 		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
 		
@@ -203,12 +207,20 @@ public class PenjualanOfficeService {
     	p = eRepo.findById(penjualanOffice.getId()).get();
     	
     	p.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
-		p.setId_office(penjualanOffice.getId_office());
+    	p.setId_office(penjualanOffice.getId_office());
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
 		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
 		p.setId_karyawan(penjualanOffice.getId_karyawan());
 		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
+		p.setDiskon(penjualanOffice.getDiskon());
+		p.setDiskon_remark(penjualanOffice.getDiskon_remark());
+		p.setOngkos_kirim(penjualanOffice.getOngkos_kirim());
+		p.setEkspedisi(penjualanOffice.getEkspedisi());
+		p.setPajak_biaya(penjualanOffice.getPajak_biaya());
+		p.setMetode_pembayaran(penjualanOffice.getMetode_pembayaran());
+		p.setBank_name(penjualanOffice.getBank_name());
+		p.setNo_rek(penjualanOffice.getNo_rek());
 		p.setRowstatus(penjualanOffice.getRowstatus());
 		
 		List<DetailPenjualanOffice> details = new ArrayList<>();
@@ -234,11 +246,7 @@ public class PenjualanOfficeService {
 				d.setType_name(prod == null ? "" : prod.getType_name());
 				d.setNama_barang(prod == null ? "" : prod.getNama_product());
 				d.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				d.setUkuran(prod == null ? "" : prod.getUkuran());
-				d.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(k).getMetode_pembayaran());
 				d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				d.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(k).getOngkos_kirim());
-				d.setPajak_biaya(penjualanOffice.getDetail_penjualan().get(k).getPajak_biaya());
 				d.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
 				d.setRowstatus(penjualanOffice.getDetail_penjualan().get(k).getRowstatus());
 				d.setPenjualanOffice(p);
@@ -331,11 +339,7 @@ public class PenjualanOfficeService {
 				new_insert.setType_name(prod == null ? "" : prod.getType_name());
 				new_insert.setNama_barang(prod == null ? "" : prod.getNama_product());
 				new_insert.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				new_insert.setUkuran(prod == null ? "" : prod.getUkuran());
-				new_insert.setMetode_pembayaran(penjualanOffice.getDetail_penjualan().get(k).getMetode_pembayaran());
 				new_insert.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				new_insert.setOngkos_kirim(penjualanOffice.getDetail_penjualan().get(k).getOngkos_kirim());
-				new_insert.setPajak_biaya(penjualanOffice.getDetail_penjualan().get(k).getPajak_biaya());
 				new_insert.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
 				new_insert.setRowstatus(1);
 				new_insert.setPenjualanOffice(p);
@@ -372,7 +376,7 @@ public class PenjualanOfficeService {
 			}
 			
 		}
-		p.setTotal_penjualan(total);
+		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + ((total * penjualanOffice.getPajak_biaya())/100));
 		p.setRowstatus(1);
     	p.setDetail_penjualan(details);
     	return eRepo.save(p);

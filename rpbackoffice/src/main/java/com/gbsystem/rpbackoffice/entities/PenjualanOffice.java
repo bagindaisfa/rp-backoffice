@@ -36,7 +36,15 @@ public class PenjualanOffice {
 	private String nama_pelanggan;
 	private int id_karyawan;
 	private String nama_karyawan;
-	private double total_penjualan;
+	private Double diskon;
+	private String diskon_remark;
+	private String metode_pembayaran;
+	private String bank_name;
+	private String no_rek;
+	private Double ongkos_kirim;
+	private String ekspedisi;
+	private Double pajak_biaya;
+	private Double total_penjualan;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualanOffice", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
@@ -97,10 +105,59 @@ public class PenjualanOffice {
 	public void setNama_karyawan(String nama_karyawan) {
 		this.nama_karyawan = nama_karyawan;
 	}
-	public double getTotal_penjualan() {
+	
+	public Double getDiskon() {
+		return diskon;
+	}
+	public void setDiskon(Double diskon) {
+		this.diskon = diskon;
+	}
+	public String getDiskon_remark() {
+		return diskon_remark;
+	}
+	public void setDiskon_remark(String diskon_remark) {
+		this.diskon_remark = diskon_remark;
+	}
+	public String getMetode_pembayaran() {
+		return metode_pembayaran;
+	}
+	public void setMetode_pembayaran(String metode_pembayaran) {
+		this.metode_pembayaran = metode_pembayaran;
+	}
+	public String getBank_name() {
+		return bank_name;
+	}
+	public void setBank_name(String bank_name) {
+		this.bank_name = bank_name;
+	}
+	public String getNo_rek() {
+		return no_rek;
+	}
+	public void setNo_rek(String no_rek) {
+		this.no_rek = no_rek;
+	}
+	public Double getOngkos_kirim() {
+		return ongkos_kirim;
+	}
+	public void setOngkos_kirim(Double ongkos_kirim) {
+		this.ongkos_kirim = ongkos_kirim;
+	}
+	public String getEkspedisi() {
+		return ekspedisi;
+	}
+	public void setEkspedisi(String ekspedisi) {
+		this.ekspedisi = ekspedisi;
+	}
+	public Double getPajak_biaya() {
+		return pajak_biaya;
+	}
+	public void setPajak_biaya(Double pajak_biaya) {
+		this.pajak_biaya = pajak_biaya;
+	}
+	public Double getTotal_penjualan() {
 		return total_penjualan;
 	}
-	public void setTotal_penjualan(double total_penjualan) {
+	public void setTotal_penjualan(Double total_penjualan) {
 		this.total_penjualan = total_penjualan;
 	}
 	public int getRowstatus() {

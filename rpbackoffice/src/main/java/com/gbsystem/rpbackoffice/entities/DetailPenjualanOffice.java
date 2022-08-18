@@ -32,11 +32,7 @@ public class DetailPenjualanOffice {
 	private String nama_kategori;
 	private String nama_barang;
 	private double kuantitas;
-	private String ukuran;
-	private String metode_pembayaran;
 	private double harga_satuan_barang;
-	private double ongkos_kirim;
-	private double pajak_biaya;
 	private double total;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -111,36 +107,14 @@ public class DetailPenjualanOffice {
 	public void setKuantitas(double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
-	public String getUkuran() {
-		return ukuran;
-	}
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
-	}
-	public String getMetode_pembayaran() {
-		return metode_pembayaran;
-	}
-	public void setMetode_pembayaran(String metode_pembayaran) {
-		this.metode_pembayaran = metode_pembayaran;
-	}
+	
 	public double getHarga_satuan_barang() {
 		return harga_satuan_barang;
 	}
 	public void setHarga_satuan_barang(double harga_satuan_barang) {
 		this.harga_satuan_barang = harga_satuan_barang;
 	}
-	public double getOngkos_kirim() {
-		return ongkos_kirim;
-	}
-	public void setOngkos_kirim(double ongkos_kirim) {
-		this.ongkos_kirim = ongkos_kirim;
-	}
-	public double getPajak_biaya() {
-		return pajak_biaya;
-	}
-	public void setPajak_biaya(double pajak_biaya) {
-		this.pajak_biaya = pajak_biaya;
-	}
+	
 	public double getTotal() {
 		return total;
 	}
