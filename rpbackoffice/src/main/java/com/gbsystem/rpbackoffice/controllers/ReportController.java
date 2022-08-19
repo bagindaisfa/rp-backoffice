@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gbsystem.rpbackoffice.services.InvoiceService;
 import com.gbsystem.rpbackoffice.services.PembelianService;
 import com.gbsystem.rpbackoffice.services.PenerimaanByStoreReportService;
 import com.gbsystem.rpbackoffice.services.PenerimaanBySupplierReportService;
@@ -71,6 +72,9 @@ public class ReportController {
 	
 	@Autowired
 	private PembelianService pembelianService;
+	
+	@Autowired
+	private InvoiceService invoiceOfficeService;
 	
 	@GetMapping("/purchaseStoreBySummary")
 	public ResponseEntity<byte []> generatePdfSummary(@Param("no_hp_pelanggan") String no_hp_pelanggan, @Param("date_from") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_from, @Param("date_to") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_to) throws Exception, JRException{
@@ -238,6 +242,20 @@ public class ReportController {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=BestArticleByOffice.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/invoice")
+	public ResponseEntity<byte []> generatePdfInvoiceOffice(@Param("id_office") int id_office, @Param("id_transaksi") String id_transaksi) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(invoiceOfficeService.Invoice(id_office, id_transaksi));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/Invoice.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=Invoice_"+ id_transaksi +".pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 	

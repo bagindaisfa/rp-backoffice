@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7393376c-db09-4fe9-aafc-bb5e6d9ce328">
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="7393376c-db09-4fe9-aafc-bb5e6d9ce328">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
@@ -22,7 +22,10 @@
 	<field name="harga" class="java.lang.Double"/>
 	<field name="jumlah" class="java.lang.Double"/>
 	<field name="total_jumlah" class="java.lang.Double"/>
-	<field name="komisi" class="java.lang.Double"/>
+	<field name="nama_pelanggan" class="java.lang.String"/>
+	<field name="alamat" class="java.lang.String"/>
+	<field name="bank_name" class="java.lang.String"/>
+	<field name="no_rek" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -70,33 +73,43 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<text><![CDATA[Tempat Pengiriman :]]></text>
 			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="398" y="20" width="154" height="44" uuid="7d8853f8-f36d-4fd5-9a3a-ab44bcf532a2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nama_pelanggan}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="398" y="100" width="154" height="42" uuid="71466977-cc9c-486c-be40-dd462fb6909c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="78" splitType="Stretch">
-			<staticText>
-				<reportElement x="80" y="42" width="1" height="17" uuid="7c8d1c44-c373-404b-a7cd-de58fb96e3b6"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[:]]></text>
-			</staticText>
+		<band height="36" splitType="Stretch">
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="452" y="10" width="115" height="17" isPrintInFirstWholeBand="true" uuid="0f44979a-5a81-41bb-82ca-fc49b9182dfd"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{tanggal_transaksi}]]></textFieldExpression>
+				<reportElement isPrintRepeatedValues="false" x="452" y="15" width="115" height="17" isPrintInFirstWholeBand="true" uuid="0f44979a-5a81-41bb-82ca-fc49b9182dfd"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($F{tanggal_transaksi})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="46" y="10" width="110" height="17" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="24" y="15" width="110" height="17" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
 				<text><![CDATA[INVOICE]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="63" splitType="Stretch">
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="81" y="-47" width="146" height="20" uuid="37317669-24cb-4528-9bbc-0ad430a87bf8">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="112" y="0" width="145" height="20" uuid="37317669-24cb-4528-9bbc-0ad430a87bf8">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -109,7 +122,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Nama Barang]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="226" y="-47" width="94" height="20" uuid="467ecc9a-94eb-401f-b1ea-cdf4d41cb269">
+				<reportElement x="257" y="0" width="94" height="20" uuid="467ecc9a-94eb-401f-b1ea-cdf4d41cb269">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -124,9 +137,9 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kuantitas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-8" y="-47" width="88" height="20" uuid="50ab47a7-ab4a-4c3f-9536-568de7efe3ff">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<reportElement x="10" y="0" width="102" height="20" uuid="50ab47a7-ab4a-4c3f-9536-568de7efe3ff">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid"/>
@@ -138,7 +151,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Artikel]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="320" y="-47" width="103" height="20" uuid="33b8d75f-7629-44da-827a-0b455a9d38c7">
+				<reportElement x="351" y="0" width="103" height="20" uuid="33b8d75f-7629-44da-827a-0b455a9d38c7">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -153,22 +166,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Retail Price]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="423" y="-47" width="67" height="20" uuid="9b63bd2e-114f-4882-b852-e6a708a6b0ae">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Komisi]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="486" y="-47" width="67" height="20" uuid="534d9f64-653d-442c-86fc-94323759aa8b">
+				<reportElement x="455" y="0" width="85" height="20" uuid="534d9f64-653d-442c-86fc-94323759aa8b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -182,44 +180,18 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<text><![CDATA[Jumlah]]></text>
 			</staticText>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="490" y="-7" width="63" height="40" isPrintInFirstWholeBand="true" uuid="416751fa-a2f3-4280-b9b2-ffe9f979499b"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{total_jumlah}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-8" y="13" width="498" height="20" uuid="f1ea846a-6ba5-4d08-a80b-134bb074c471">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box rightPadding="3">
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Total Jumlah]]></text>
-			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="82" splitType="Stretch">
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="81" y="-91" width="145" height="20" isPrintInFirstWholeBand="true" uuid="f991ae76-e2ce-4be4-b573-5c2fbb73a7e8"/>
+				<reportElement stretchType="RelativeToTallestObject" x="112" y="0" width="145" height="20" isPrintInFirstWholeBand="true" uuid="f991ae76-e2ce-4be4-b573-5c2fbb73a7e8"/>
 				<box>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -227,11 +199,12 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="-8" y="-91" width="88" height="20" isPrintInFirstWholeBand="true" uuid="4442e4c9-51a0-41f3-aafa-7572db8512be"/>
+				<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="102" height="20" isPrintInFirstWholeBand="true" uuid="4442e4c9-51a0-41f3-aafa-7572db8512be"/>
 				<box>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -239,11 +212,14 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[$F{artikel}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="227" y="-91" width="93" height="20" isPrintInFirstWholeBand="true" uuid="934e4eaf-8941-4341-a1c6-f789d55fd28e"/>
+				<reportElement stretchType="RelativeToTallestObject" x="257" y="0" width="94" height="20" isPrintInFirstWholeBand="true" uuid="934e4eaf-8941-4341-a1c6-f789d55fd28e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
 				<box>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center">
 					<font size="10"/>
@@ -251,92 +227,116 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="320" y="-91" width="103" height="20" isPrintInFirstWholeBand="true" uuid="eb5094c5-bde1-4b49-a821-04a61af78047"/>
+				<reportElement stretchType="RelativeToTallestObject" x="351" y="0" width="103" height="20" isPrintInFirstWholeBand="true" uuid="eb5094c5-bde1-4b49-a821-04a61af78047"/>
 				<box>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
 			</textField>
-			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="227" y="-70" width="93" height="20" isPrintInFirstWholeBand="true" uuid="0cdc689d-245d-4e6c-8c46-91ce190eecc7"/>
-				<box leftPadding="3">
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{total_kuantitas}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="-8" y="-70" width="235" height="20" uuid="af1c2558-179e-49b0-a5c3-0673aa3de016">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box rightPadding="3">
-					<topPen lineWidth="1.0" lineStyle="Solid"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<text><![CDATA[Total Kuantitas]]></text>
-			</staticText>
 			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="423" y="-91" width="67" height="20" isPrintInFirstWholeBand="true" uuid="179d6261-d97f-45cf-b757-39b46a7d927c"/>
+				<reportElement stretchType="RelativeToTallestObject" x="454" y="0" width="86" height="20" isPrintInFirstWholeBand="true" uuid="92372531-c860-435f-823a-f4dbf7ab1cb1"/>
 				<box>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{komisi}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" x="486" y="-91" width="67" height="20" isPrintInFirstWholeBand="true" uuid="92372531-c860-435f-823a-f4dbf7ab1cb1"/>
-				<box>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="1.0"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
 			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
-				<reportElement x="0" y="0" width="88" height="14" uuid="4360b122-73cf-4da7-8aff-d0c518606408"/>
+				<reportElement x="112" y="20" width="340" height="20" uuid="e3870175-3647-4ef1-b059-e575c6cb6b10">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="1" width="144" height="20" uuid="85d36fd9-bc4f-4780-9624-eda85b3806be">
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<paragraph rightIndent="5"/>
+				</textElement>
+				<text><![CDATA[Total Kuantitas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="257" y="0" width="94" height="20" uuid="2b44e1a9-0bda-40c8-8035-49494939ecff"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total_kuantitas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0.00">
+				<reportElement x="453" y="20" width="86" height="20" uuid="d53ef279-a939-43ab-8988-2797cb25514d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{total_jumlah}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="207" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="19" width="88" height="14" uuid="4360b122-73cf-4da7-8aff-d0c518606408"/>
 				<text><![CDATA[Mohon Transfer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="16" width="88" height="14" uuid="a4c794fc-1508-4168-9033-f994a1cdf59e"/>
-				<text><![CDATA[Bank : MANDIRI]]></text>
+				<reportElement x="1" y="33" width="50" height="14" uuid="a4c794fc-1508-4168-9033-f994a1cdf59e"/>
+				<text><![CDATA[Bank : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="30" width="188" height="14" uuid="7ae61675-05a6-4fd8-97df-d6f56f2d9f9c"/>
-				<text><![CDATA[Cabang : BSD. Tangerang Selatan]]></text>
+				<reportElement x="1" y="47" width="50" height="14" uuid="d7d8d156-d8a0-4752-9a30-dab17e88942a"/>
+				<text><![CDATA[No. Rek : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="44" width="188" height="14" uuid="d7d8d156-d8a0-4752-9a30-dab17e88942a"/>
-				<text><![CDATA[No. Rek : 118-00-0495819-4]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="58" width="188" height="14" uuid="f63567dc-596d-48ad-a244-79273e22d567"/>
+				<reportElement x="1" y="61" width="188" height="14" uuid="f63567dc-596d-48ad-a244-79273e22d567"/>
 				<text><![CDATA[Atas Nama : PT. Promatra Nusantara]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="-6" y="0" width="559" height="72" backcolor="rgba(255, 255, 255, 0.0)" uuid="501ad357-62f0-4f21-ae54-8569bd2e5740"/>
+				<reportElement x="-6" y="11" width="559" height="72" backcolor="rgba(255, 255, 255, 0.0)" uuid="501ad357-62f0-4f21-ae54-8569bd2e5740"/>
 			</rectangle>
-			<line>
-				<reportElement x="320" y="-70" width="170" height="1" uuid="e85c8fb7-f7de-4fab-9816-f07774511260"/>
-			</line>
-		</band>
-	</detail>
-	<pageFooter>
-		<band height="96" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="33" width="136" height="14" uuid="209f89f1-11a6-4881-bf24-e37cca64809c"/>
+				<textFieldExpression><![CDATA[$F{bank_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="47" width="136" height="16" uuid="e1ca618e-0830-4fad-ba7c-b74e83863651"/>
+				<textFieldExpression><![CDATA[$F{no_rek}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="-3" y="1" width="109" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4"/>
+				<reportElement x="-6" y="109" width="109" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
@@ -344,7 +344,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Hormat Kami]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-4" y="13" width="109" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc"/>
+				<reportElement x="-7" y="121" width="109" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
@@ -352,7 +352,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[PT. Promatra Nusantara]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-4" y="75" width="109" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145"/>
+				<reportElement x="-7" y="183" width="109" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145"/>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
