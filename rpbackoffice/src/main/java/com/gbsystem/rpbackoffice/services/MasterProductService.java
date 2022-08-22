@@ -48,83 +48,90 @@ public class MasterProductService {
 	@Autowired
 	private PenerimaanSupplierRepository ePenerimaanSuppRepo;
 	
-	public MasterProduct saveMasterProduct( MultipartFile image,
+	public String saveMasterProduct( MultipartFile image,
 			String sku_code,String artikel_product, String nama_product, 
 			int type, String type_name, String kategori, 
 			String nama_kategori, String artikel_frame, String artikel_lens,String ukuran,
 			Double kuantitas,Double hpp,Double harga_jual, String remarks
 			) {
-		
-		MasterProduct p = new MasterProduct();
-		StockOffice q = new StockOffice();
-		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-		if(fileName.contains("..")) {
-			System.out.println("not a valid file");
-		}
-		try {
-			p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-			q.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
-		p.setSku_code(sku_code);
-		p.setArtikel_product(artikel_product);
-		p.setNama_product(nama_product);
-		p.setType(type);
-		p.setType_name(type_name);
-		p.setKategori(kategori);
-		p.setNama_kategori(nama_kategori);
-		p.setArtikel_frame(artikel_frame);
-		p.setArtikel_lens(artikel_lens);
-		p.setUkuran(ukuran);
-		p.setKuantitas(kuantitas);
-		p.setHpp(hpp);
-		p.setHarga_jual(harga_jual);
-		p.setRemarks(remarks);
-		p.setRowstatus(1);
-		
-		q.setId_office(1);
-		q.setLokasi_office("Kantor Pusat");
-		q.setSku_code(sku_code);
-		q.setArtikel(artikel_product);
-		q.setKategori(kategori);
-		q.setNama_kategori(nama_kategori);
-		q.setType(type);
-		q.setType_name(type_name);
-		q.setNama_barang(nama_product);
-		q.setKuantitas(kuantitas);
-		q.setUkuran(ukuran);
-		
-		q.setHpp(hpp);
-		q.setHarga_jual(harga_jual);
-		q.setRowstatus(1);
-		eStockRepo.save(q);
-		
-		if (kuantitas != null) {
-			if (kuantitas > 0) {
-				PenyimpananMasuk f = new PenyimpananMasuk();
-				f.setId_office(1);
-				f.setLokasi_office("Kantor Pusat");
-				f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
-				f.setTanggal_masuk(new Date());
-				f.setSku_code(sku_code);
-				f.setArtikel(artikel_product);
-				f.setKategori(kategori);
-				f.setNama_kategori(nama_kategori);
-				f.setType(type);
-				f.setType_name(type_name);
-				f.setNama_barang(nama_product);
-				f.setKuantitas(kuantitas);
-				f.setUkuran(ukuran);
-				f.setHpp(hpp);
-				f.setHarga_jual(harga_jual);
-				f.setKeterangan("Barang Masuk Dari Master Product");
-				f.setRowstatus(1);
-				ePenyimpananRepo.save(f);
+		String response = "";
+		MasterProduct r = new MasterProduct();
+		r = eRepo.findByArticle(artikel_product);
+		if (r != null) {
+			response = "Produk sudah ada!";
+		} else {
+			MasterProduct p = new MasterProduct();
+			StockOffice q = new StockOffice();
+			String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+			if(fileName.contains("..")) {
+				System.out.println("not a valid file");
 			}
+			try {
+				p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+				q.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+			p.setSku_code(sku_code);
+			p.setArtikel_product(artikel_product);
+			p.setNama_product(nama_product);
+			p.setType(type);
+			p.setType_name(type_name);
+			p.setKategori(kategori);
+			p.setNama_kategori(nama_kategori);
+			p.setArtikel_frame(artikel_frame);
+			p.setArtikel_lens(artikel_lens);
+			p.setUkuran(ukuran);
+			p.setKuantitas(kuantitas);
+			p.setHpp(hpp);
+			p.setHarga_jual(harga_jual);
+			p.setRemarks(remarks);
+			p.setRowstatus(1);
+			
+			q.setId_office(1);
+			q.setLokasi_office("Kantor Pusat");
+			q.setSku_code(sku_code);
+			q.setArtikel(artikel_product);
+			q.setKategori(kategori);
+			q.setNama_kategori(nama_kategori);
+			q.setType(type);
+			q.setType_name(type_name);
+			q.setNama_barang(nama_product);
+			q.setKuantitas(kuantitas);
+			q.setUkuran(ukuran);
+			
+			q.setHpp(hpp);
+			q.setHarga_jual(harga_jual);
+			q.setRowstatus(1);
+			eStockRepo.save(q);
+			
+			if (kuantitas != null) {
+				if (kuantitas > 0) {
+					PenyimpananMasuk f = new PenyimpananMasuk();
+					f.setId_office(1);
+					f.setLokasi_office("Kantor Pusat");
+					f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
+					f.setTanggal_masuk(new Date());
+					f.setSku_code(sku_code);
+					f.setArtikel(artikel_product);
+					f.setKategori(kategori);
+					f.setNama_kategori(nama_kategori);
+					f.setType(type);
+					f.setType_name(type_name);
+					f.setNama_barang(nama_product);
+					f.setKuantitas(kuantitas);
+					f.setUkuran(ukuran);
+					f.setHpp(hpp);
+					f.setHarga_jual(harga_jual);
+					f.setKeterangan("Barang Masuk Dari Master Product");
+					f.setRowstatus(1);
+					ePenyimpananRepo.save(f);
+				}
+			}
+			eRepo.save(p);
+			response = "Sukses!";
 		}
-		
-		return eRepo.save(p);
+		return response;
 	}
 	
 	public String saveMasterProductCustom( 

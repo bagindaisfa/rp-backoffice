@@ -54,11 +54,13 @@ public class PemasokController {
     public @ResponseBody String saveProduct(@RequestParam("kode_pemasok") String kode_pemasok,
     		@RequestParam("nama_pemasok") String nama_pemasok,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat) throws Exception {
-    	
+    	String response = "";
     	if (nama_pemasok != "") {
-    		pemasokService.savePemasok(kode_pemasok, nama_pemasok, no_hp, email, alamat);
+    		response = pemasokService.savePemasok(kode_pemasok, nama_pemasok, no_hp, email, alamat);
+    	} else {
+    		response = "Gagal!";
     	}
-    	return "Insert Data Successs!";
+    	return response;
 		
     }
     

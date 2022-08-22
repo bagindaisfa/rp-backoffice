@@ -46,8 +46,8 @@ public class MasterKategoriController {
     @PostMapping("/add")
     public String saveMaster_kategori(@RequestParam("kategori_name") String kategori_name) 
 	{
-    	masterKategoriService.saveMasterKategori(kategori_name);
-		return "Tersimpan!";
+    	String response = masterKategoriService.saveMasterKategori(kategori_name);
+		return response;
 	}
     
     @PostMapping("/update")

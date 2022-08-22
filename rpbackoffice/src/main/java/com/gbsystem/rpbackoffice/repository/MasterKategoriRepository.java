@@ -15,4 +15,7 @@ public interface MasterKategoriRepository extends JpaRepository<MasterKategori, 
 	
 	@Query(value = "SELECT * FROM master_kategori WHERE rowstatus = 1 AND ( kategori_name LIKE %:keyword% )", nativeQuery = true)
 	List<MasterKategori> search(String keyword);
+	
+	@Query(value = "SELECT * FROM master_kategori WHERE rowstatus = 1 AND kategori_name=:kategori_name LIMIT 1", nativeQuery = true)
+	MasterKategori findByName(String kategori_name);
 }

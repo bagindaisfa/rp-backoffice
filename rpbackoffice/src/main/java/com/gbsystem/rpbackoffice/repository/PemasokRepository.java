@@ -24,6 +24,9 @@ public interface PemasokRepository extends JpaRepository<Pemasok, Long> {
 	@Query(value = "SELECT COUNT(id) AS id FROM pemasok WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Long totalPemasok(int rowstatus);
 	
+	@Query(value = "SELECT * FROM pemasok WHERE rowstatus = :rowstatus AND kode_pemasok=:kode_pemasok LIMIT 1", nativeQuery = true)
+	Pemasok findByKodePemasok(String kode_pemasok); 
+	
 //	@Query(value = "SELECT * INTO OUTFILE 'D:/test.csv' FROM pemasok where rowstatus = 1", nativeQuery = true)
 //	List<Pemasok> download(String oe);
 	

@@ -87,7 +87,7 @@ public class MasterProductController {
     }
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public @ResponseBody MasterProduct saveMaster_product(
+    public @ResponseBody String saveMaster_product(
     		@RequestParam("image") MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
@@ -105,7 +105,7 @@ public class MasterProductController {
     		@RequestParam("remarks") String remarks
     		) 
 	{
-    	MasterProduct masterProductResponse = masterProductService.saveMasterProduct(image,sku_code,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
+    	String masterProductResponse = masterProductService.saveMasterProduct(image,sku_code,artikel_product, nama_product,type, type_name, kategori,nama_kategori, artikel_frame, artikel_lens, ukuran,kuantitas, hpp, harga_jual, remarks);
 		return masterProductResponse;
 	}
     
@@ -172,62 +172,66 @@ public class MasterProductController {
             StockOffice q = new StockOffice();
         	XSSFRow row = worksheet.getRow(i);
         	DataFormatter formatter = new DataFormatter();
-        	masterProduct.setImage(null);
-        	masterProduct.setArtikel_product(formatter.formatCellValue(row.getCell(0)));
-        	masterProduct.setNama_product(formatter.formatCellValue(row.getCell(1)));
-        	masterProduct.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
-        	masterProduct.setType_name(formatter.formatCellValue(row.getCell(3)));
-        	masterProduct.setKategori(formatter.formatCellValue(row.getCell(4)));
-        	masterProduct.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
-        	masterProduct.setArtikel_frame(formatter.formatCellValue(row.getCell(6)));
-        	masterProduct.setArtikel_lens(formatter.formatCellValue(row.getCell(7)));
-        	masterProduct.setUkuran(formatter.formatCellValue(row.getCell(8)));
-        	masterProduct.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
-        	masterProduct.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
-        	masterProduct.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
-        	masterProduct.setRemarks(formatter.formatCellValue(row.getCell(12)));
-        	masterProduct.setSku_code(formatter.formatCellValue(row.getCell(13)));
-        	masterProduct.setRowstatus(1);
-        	
-        	q.setId_office(1);
-    		q.setLokasi_office("Kantor Pusat");
-    		q.setArtikel(formatter.formatCellValue(row.getCell(0)));
-    		q.setKategori(formatter.formatCellValue(row.getCell(4)));
-    		q.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
-    		q.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
-    		q.setType_name(formatter.formatCellValue(row.getCell(3)));
-    		q.setNama_barang(formatter.formatCellValue(row.getCell(1)));
-    		q.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
-    		q.setUkuran(formatter.formatCellValue(row.getCell(8)));
-    		q.setSku_code(formatter.formatCellValue(row.getCell(13)));
-    		q.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
-    		q.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
-    		q.setRowstatus(1);
-    		eStockRepo.save(q);
-    		eRepo.save(masterProduct);
-    		
-    		if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) != null) {
-    			if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) > 0) {
-    				PenyimpananMasuk f = new PenyimpananMasuk();
-    				f.setId_office(1);
-    				f.setLokasi_office("Kantor Pusat");
-    				f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
-    				f.setTanggal_masuk(new Date());
-    				f.setArtikel(formatter.formatCellValue(row.getCell(0)));
-    	    		f.setKategori(formatter.formatCellValue(row.getCell(4)));
-    	    		f.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
-    	    		f.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
-    	    		f.setType_name(formatter.formatCellValue(row.getCell(3)));
-    	    		f.setNama_barang(formatter.formatCellValue(row.getCell(1)));
-    	    		f.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
-    	    		f.setUkuran(formatter.formatCellValue(row.getCell(8)));
-    	    		f.setSku_code(formatter.formatCellValue(row.getCell(13)));
-    	    		f.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
-    	    		f.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
-    				f.setKeterangan("Barang Masuk Dari Master Product");
-    				f.setRowstatus(1);
-    				ePenyimpananRepo.save(f);
-    			}
+        	MasterProduct r = new MasterProduct();
+    		r = eRepo.findByArticle(formatter.formatCellValue(row.getCell(0)));
+    		if (r == null) {
+	        	masterProduct.setImage(null);
+	        	masterProduct.setArtikel_product(formatter.formatCellValue(row.getCell(0)));
+	        	masterProduct.setNama_product(formatter.formatCellValue(row.getCell(1)));
+	        	masterProduct.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
+	        	masterProduct.setType_name(formatter.formatCellValue(row.getCell(3)));
+	        	masterProduct.setKategori(formatter.formatCellValue(row.getCell(4)));
+	        	masterProduct.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+	        	masterProduct.setArtikel_frame(formatter.formatCellValue(row.getCell(6)));
+	        	masterProduct.setArtikel_lens(formatter.formatCellValue(row.getCell(7)));
+	        	masterProduct.setUkuran(formatter.formatCellValue(row.getCell(8)));
+	        	masterProduct.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+	        	masterProduct.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+	        	masterProduct.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+	        	masterProduct.setRemarks(formatter.formatCellValue(row.getCell(12)));
+	        	masterProduct.setSku_code(formatter.formatCellValue(row.getCell(13)));
+	        	masterProduct.setRowstatus(1);
+	        	
+	        	q.setId_office(1);
+	    		q.setLokasi_office("Kantor Pusat");
+	    		q.setArtikel(formatter.formatCellValue(row.getCell(0)));
+	    		q.setKategori(formatter.formatCellValue(row.getCell(4)));
+	    		q.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+	    		q.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
+	    		q.setType_name(formatter.formatCellValue(row.getCell(3)));
+	    		q.setNama_barang(formatter.formatCellValue(row.getCell(1)));
+	    		q.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+	    		q.setUkuran(formatter.formatCellValue(row.getCell(8)));
+	    		q.setSku_code(formatter.formatCellValue(row.getCell(13)));
+	    		q.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+	    		q.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+	    		q.setRowstatus(1);
+	    		eStockRepo.save(q);
+	    		eRepo.save(masterProduct);
+	    		
+	    		if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) != null) {
+	    			if (Double.valueOf(formatter.formatCellValue(row.getCell(9))) > 0) {
+	    				PenyimpananMasuk f = new PenyimpananMasuk();
+	    				f.setId_office(1);
+	    				f.setLokasi_office("Kantor Pusat");
+	    				f.setPenerimaan_code("PS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenerimaanSuppRepo.count()+1));
+	    				f.setTanggal_masuk(new Date());
+	    				f.setArtikel(formatter.formatCellValue(row.getCell(0)));
+	    	    		f.setKategori(formatter.formatCellValue(row.getCell(4)));
+	    	    		f.setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+	    	    		f.setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
+	    	    		f.setType_name(formatter.formatCellValue(row.getCell(3)));
+	    	    		f.setNama_barang(formatter.formatCellValue(row.getCell(1)));
+	    	    		f.setKuantitas(Double.valueOf(formatter.formatCellValue(row.getCell(9))));
+	    	    		f.setUkuran(formatter.formatCellValue(row.getCell(8)));
+	    	    		f.setSku_code(formatter.formatCellValue(row.getCell(13)));
+	    	    		f.setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+	    	    		f.setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+	    				f.setKeterangan("Barang Masuk Dari Master Product");
+	    				f.setRowstatus(1);
+	    				ePenyimpananRepo.save(f);
+	    			}
+	    		}
     		}
         }
         

@@ -47,8 +47,8 @@ public class MasterTipeController {
     @PostMapping("/add")
     public String saveMaster_tipe(@RequestParam("type_name") String type_name) 
 	{
-    	masterTipeService.saveMasterTipe(type_name);
-		return "Tersimpan!";
+    	String response = masterTipeService.saveMasterTipe(type_name);
+		return response;
 	}
     
     @PostMapping("/update")
@@ -74,13 +74,18 @@ public class MasterTipeController {
         XSSFWorkbook workbook = new XSSFWorkbook(readExcelDataFile.getInputStream());
         XSSFSheet worksheet = workbook.getSheetAt(0);
         for(int i=1; i<worksheet.getPhysicalNumberOfRows(); i++) {
+        	MasterTipe q = new MasterTipe();
+        	
             MasterTipe p = new MasterTipe();
         	XSSFRow row = worksheet.getRow(i);
         	DataFormatter formatter = new DataFormatter();
-    		p.setType_name(formatter.formatCellValue(row.getCell(0)));
-    		p.setRowstatus(1);
-        	
-    		eRepo.save(p);
+        	q = eRepo.findByName(formatter.formatCellValue(row.getCell(0)));
+        	if (q == null) {
+        		p.setType_name(formatter.formatCellValue(row.getCell(0)));
+        		p.setRowstatus(1);
+            	
+        		eRepo.save(p);	
+        	}
         }
         
     }

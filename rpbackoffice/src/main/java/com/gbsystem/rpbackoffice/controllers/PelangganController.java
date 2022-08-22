@@ -59,19 +59,21 @@ public class PelangganController {
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
     		@RequestParam("total_kunjungan") double total_kunjungan,@RequestParam("kuantitas") double kuantitas,
     		@RequestParam("poin") double poin,@RequestParam("pembelian") double total_pembelian) throws Exception {
-    	
+    	String response = "";
     	if (nama_pelanggan != "") {
-    		pelangganService.savePelanggan(nik,nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
+    		response = pelangganService.savePelanggan(nik,nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
+    	} else {
+    		response = "Gagal!";
     	}
-    	return "Insert Data Successs!";
-    	}
+    	return response;
+    }
     
     @PostMapping(value = "/addMobile")
     public Map savePelangganMobile(@RequestBody Pelanggan pelanggan) {
     	
-    	pelangganService.savePelangganMobile(pelanggan);
+    	String rsp = pelangganService.savePelangganMobile(pelanggan);
     	Map<String,String> response = new HashMap<>();
-    	response.put("message", "Insert Success");
+    	response.put("message", rsp);
     	return response;
 		
     }

@@ -15,41 +15,55 @@ public class PelangganService {
 	@Autowired
 	private PelangganRepository eRepo;
 	
-	public Pelanggan savePelanggan(String nik,String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
+	public String savePelanggan(String nik,String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
 			double kuantitas, double poin, double total_pembelian) {
-		
-		Pelanggan p = new Pelanggan();
-		
-		p.setTanggal_join(new Date());
-		p.setNik(nik);
-		p.setNama_pelanggan(nama_pelanggan);
-		p.setNo_hp(no_hp);
-		p.setEmail(email);
-		p.setAlamat(alamat);
-		p.setTotal_kunjungan(total_kunjungan);
-		p.setKuantitas(kuantitas);
-		p.setPoin(poin);
-		p.setTotal_pembelian(total_pembelian);
-		p.setRowstatus(1);
-		return eRepo.save(p);
+		String response = "";
+		Pelanggan q = new Pelanggan();
+		q = eRepo.findByNoHandphone(no_hp);
+		if (q != null) {
+			response = "Pelanggan sudah ada!";
+		} else {
+			Pelanggan p = new Pelanggan();
+			p.setTanggal_join(new Date());
+			p.setNik(nik);
+			p.setNama_pelanggan(nama_pelanggan);
+			p.setNo_hp(no_hp);
+			p.setEmail(email);
+			p.setAlamat(alamat);
+			p.setTotal_kunjungan(total_kunjungan);
+			p.setKuantitas(kuantitas);
+			p.setPoin(poin);
+			p.setTotal_pembelian(total_pembelian);
+			p.setRowstatus(1);
+			eRepo.save(p);
+			response = "Sukses!";
+		}
+		return response;
 	}
 	
-	public Pelanggan savePelangganMobile(Pelanggan pelanggan) {
-		
-		Pelanggan p = new Pelanggan();
-		
-		p.setTanggal_join(new Date());
-		p.setNik(pelanggan.getNik());
-		p.setNama_pelanggan(pelanggan.getNama_pelanggan());
-		p.setNo_hp(pelanggan.getNo_hp());
-		p.setEmail(pelanggan.getEmail());
-		p.setAlamat(pelanggan.getAlamat());
-		p.setTotal_kunjungan(pelanggan.getTotal_kunjungan());
-		p.setKuantitas(pelanggan.getKuantitas());
-		p.setPoin(pelanggan.getPoin());
-		p.setTotal_pembelian(pelanggan.getTotal_pembelian());
-		p.setRowstatus(1);
-		return eRepo.save(p);
+	public String savePelangganMobile(Pelanggan pelanggan) {
+		String response = "";
+		Pelanggan q = new Pelanggan();
+		q = eRepo.findByNoHandphone(pelanggan.getNo_hp());
+		if (q != null) {
+			response = "Pelanggan sudah ada!";
+		} else {
+			Pelanggan p = new Pelanggan();
+			p.setTanggal_join(new Date());
+			p.setNik(pelanggan.getNik());
+			p.setNama_pelanggan(pelanggan.getNama_pelanggan());
+			p.setNo_hp(pelanggan.getNo_hp());
+			p.setEmail(pelanggan.getEmail());
+			p.setAlamat(pelanggan.getAlamat());
+			p.setTotal_kunjungan(pelanggan.getTotal_kunjungan());
+			p.setKuantitas(pelanggan.getKuantitas());
+			p.setPoin(pelanggan.getPoin());
+			p.setTotal_pembelian(pelanggan.getTotal_pembelian());
+			p.setRowstatus(1);
+			eRepo.save(p);
+			response = "Sukses!";
+		}
+		return response;
 	}
 
 	public List<Pelanggan> search(String keyword){

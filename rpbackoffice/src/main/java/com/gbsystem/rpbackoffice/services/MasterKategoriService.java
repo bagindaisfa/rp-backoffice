@@ -12,12 +12,21 @@ public class MasterKategoriService {
 	@Autowired
 	private MasterKategoriRepository eRepo;
 	
-	public MasterKategori saveMasterKategori( String kategori_name ) {
-		
+	public String saveMasterKategori( String kategori_name ) {
+		String response = "";
 		MasterKategori p = new MasterKategori();
-		p.setKategori_name(kategori_name);
-		p.setRowstatus(1);
-		return eRepo.save(p);
+		p = eRepo.findByName(kategori_name);
+		if (p != null) {
+			response = "Kategori sudah ada!";
+		} else {
+			MasterKategori q = new MasterKategori();
+			q.setKategori_name(kategori_name);
+			q.setRowstatus(1);
+			eRepo.save(q);
+			response = "Sukses!";
+		}
+		
+		return response;
 	}
 
 	public List<MasterKategori> search(String keyword){

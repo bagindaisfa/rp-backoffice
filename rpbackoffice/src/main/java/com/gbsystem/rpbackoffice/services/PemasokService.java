@@ -15,19 +15,27 @@ public class PemasokService {
 	@Autowired
 	private PemasokRepository eRepo;
 	
-	public Pemasok savePemasok(String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat) {
-		
-		Pemasok p = new Pemasok();
-		
-		p.setTanggal_join(new Date());
-		p.setKode_pemasok(kode_pemasok);
-		p.setNama_pemasok(nama_pemasok);
-		p.setNo_hp(no_hp);
-		p.setEmail(email);
-		p.setAlamat(alamat);
-		
-		p.setRowstatus(1);
-		return eRepo.save(p);
+	public String savePemasok(String kode_pemasok, String nama_pemasok, String no_hp, String email, String alamat) {
+		String response = "";
+		Pemasok q = new Pemasok();
+		q = eRepo.findByKodePemasok(kode_pemasok);
+		if (q != null) {
+			response = "Pemasok sudah ada!";
+		} else {
+			Pemasok p = new Pemasok();
+			
+			p.setTanggal_join(new Date());
+			p.setKode_pemasok(kode_pemasok);
+			p.setNama_pemasok(nama_pemasok);
+			p.setNo_hp(no_hp);
+			p.setEmail(email);
+			p.setAlamat(alamat);
+			
+			p.setRowstatus(1);
+			eRepo.save(p);
+			response = "Sukses!";
+		}
+		return response;
 	}
 
 	public List<Pemasok> search(String keyword){

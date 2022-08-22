@@ -12,12 +12,21 @@ public class MasterTipeService {
 	@Autowired
 	private MasterTipeRepository eRepo;
 	
-	public MasterTipe saveMasterTipe( String type_name ) {
+	public String saveMasterTipe( String type_name ) {
+		String response = "";
+		MasterTipe q = new MasterTipe();
+		q = eRepo.findByName(type_name);
+		if (q!=null) {
+			response = "Tipe sudah ada!";
+		} else {
+			MasterTipe p = new MasterTipe();
+			p.setType_name(type_name);
+			p.setRowstatus(1);
+			eRepo.save(p);
+			response = "Sukses!";
+		}
 		
-		MasterTipe p = new MasterTipe();
-		p.setType_name(type_name);
-		p.setRowstatus(1);
-		return eRepo.save(p);
+		return response;
 	}
 
 	public List<MasterTipe> search(String keyword){
