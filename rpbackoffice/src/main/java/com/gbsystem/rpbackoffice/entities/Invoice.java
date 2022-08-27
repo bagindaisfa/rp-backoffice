@@ -12,9 +12,13 @@ public class Invoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String id_transaksi;
 	private String artikel;
 	private String nama_barang;
 	private Date tanggal_transaksi;
+	private Double ongkos_kirim;
+	private Double pajak_biaya;
+	private Double diskon;
 	private Double kuantitas;
 	private Double total_kuantitas;
 	private Double harga;
@@ -29,6 +33,12 @@ public class Invoice {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getId_transaksi() {
+		return id_transaksi;
+	}
+	public void setId_transaksi(String id_transaksi) {
+		this.id_transaksi = id_transaksi;
 	}
 	public String getArtikel() {
 		return artikel;
@@ -47,6 +57,25 @@ public class Invoice {
 	}
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
+	}
+	
+	public Double getPajak_biaya() {
+		return pajak_biaya;
+	}
+	public void setPajak_biaya(Double pajak_biaya) {
+		this.pajak_biaya = pajak_biaya;
+	}
+	public Double getOngkos_kirim() {
+		return ongkos_kirim;
+	}
+	public void setOngkos_kirim(Double ongkos_kirim) {
+		this.ongkos_kirim = ongkos_kirim;
+	}
+	public Double getDiskon() {
+		return diskon;
+	}
+	public void setDiskon(Double diskon) {
+		this.diskon = diskon;
 	}
 	public Double getKuantitas() {
 		return kuantitas;

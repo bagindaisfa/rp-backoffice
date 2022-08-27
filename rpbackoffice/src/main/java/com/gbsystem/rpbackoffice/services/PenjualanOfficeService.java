@@ -86,10 +86,10 @@ public class PenjualanOfficeService {
 			d.setNama_barang(prod == null ? "" : prod.getNama_product());
 			d.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
 			d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
-			d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getTotal());
+			d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
 			d.setRowstatus(1);
 			d.setPenjualanOffice(p);
-			total += penjualanOffice.getDetail_penjualan().get(i).getTotal();
+			total += (penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * penjualanOffice.getDetail_penjualan().get(i).getHarga_satuan_barang());
 			details.add(d);
 			
 			StockOffice g = new StockOffice();
@@ -120,7 +120,19 @@ public class PenjualanOfficeService {
 			f.setRowstatus(1);
 			ePenyimpananRepo.save(f);
 		}
-		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + ((total * penjualanOffice.getPajak_biaya())/100));
+		Double pajak = 0.0;
+		Double diskon = total * (penjualanOffice.getDiskon()/100);
+		
+		if ( diskon > 0.0 ) {
+			pajak = (total - diskon) * (penjualanOffice.getPajak_biaya()/100);
+			
+		} else {
+			pajak = total * (penjualanOffice.getPajak_biaya() / 100);
+		}
+		System.out.println(pajak);
+		System.out.println((total - diskon) + penjualanOffice.getOngkos_kirim());
+		
+		p.setTotal_penjualan((total - diskon) + penjualanOffice.getOngkos_kirim() + pajak);
 		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
 		
@@ -376,7 +388,14 @@ public class PenjualanOfficeService {
 			}
 			
 		}
-		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + ((total * penjualanOffice.getPajak_biaya())/100));
+		Double pajak = 0.0;
+		if ( penjualanOffice.getDiskon() > 0.0 ) {
+			pajak = (total - (total * (penjualanOffice.getDiskon()/100))) + ((total - (total * (penjualanOffice.getDiskon()/100))) * (penjualanOffice.getPajak_biaya()/100));
+			
+		} else {
+			pajak = total * (penjualanOffice.getPajak_biaya() / 100);
+		}
+		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + pajak);
 		p.setRowstatus(1);
     	p.setDetail_penjualan(details);
     	return eRepo.save(p);

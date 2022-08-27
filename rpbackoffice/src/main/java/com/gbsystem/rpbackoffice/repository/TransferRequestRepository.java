@@ -17,7 +17,8 @@ public interface TransferRequestRepository extends JpaRepository<TransferRequest
 			+ "d.artikel, "
 			+ "d.nama_barang, "
 			+ "d.kuantitas, "
-			+ "d.harga_jual "
+			+ "d.harga_jual, "
+			+ "(select sum(kuantitas) from detail_pengiriman_office_to_store where pengiriman_code = :pengiriman_code and rowstatus=1) as sum_qty "
 			+ "from pengiriman_office_to_store p "
 			+ "left join detail_pengiriman_office_to_store d on p.id = d.pengiriman_office_to_store_id and d.rowstatus=1 "
 			+ "where p.rowstatus=1 and p.pengiriman_code = :pengiriman_code", nativeQuery = true)

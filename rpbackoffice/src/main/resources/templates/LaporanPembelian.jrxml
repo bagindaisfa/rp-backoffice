@@ -36,7 +36,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
 			<image>
 				<reportElement x="90" y="8" width="191" height="71" uuid="e88d62ac-785b-40fb-9a17-5f005c77eda0"/>
-				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/res/LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="281" y="-14" width="388" height="30" uuid="5971b856-64a9-4111-af81-bf643fda44d3"/>

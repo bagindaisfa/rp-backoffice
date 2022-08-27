@@ -82,7 +82,7 @@
 			</textField>
 			<image>
 				<reportElement x="1" y="10" width="179" height="60" uuid="60401643-918c-4c31-9497-06d435ccf1d7"/>
-				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/res/LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/src/main/resources/templates/LOGO RP.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -293,7 +293,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<text><![CDATA[Ruko Golden Boulevard Blok W 2 No. 12 BSD City, Tangerang Selatan. Telp 021-53163512 / WA : 0811 1717 734]]></text>
+				<text><![CDATA[Ruko Icon Business Park V Blok F No.6 BSD Sampora Tangerang 15345. Telp 021-53163512 / WA : 0811 1717 734]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="5" y="119" width="545" height="20" uuid="e0df7ff5-b77c-4103-b6a1-0c97c3df82f9"/>

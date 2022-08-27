@@ -35,6 +35,17 @@ public class TransferRequest {
 	
 	@Column(updatable=false, insertable=false)
 	private Double harga_jual;
+	
+	@Column(updatable=false, insertable=false)
+	private Double sum_qty;
+
+	public Double getSum_qty() {
+		return sum_qty;
+	}
+
+	public void setSum_qty(Double sum_qty) {
+		this.sum_qty = sum_qty;
+	}
 
 	public Long getId() {
 		return id;

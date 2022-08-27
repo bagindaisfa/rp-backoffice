@@ -20,7 +20,7 @@
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="-10" y="8" width="191" height="71" uuid="96ee377b-5639-46ab-a4fb-df1caa093890"/>
-				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/res/LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="181" y="-14" width="388" height="30" uuid="9af9d906-8b9d-4cdb-a917-33400f1bfa2f"/>

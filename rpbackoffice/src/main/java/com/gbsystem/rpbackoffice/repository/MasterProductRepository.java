@@ -16,7 +16,7 @@ public interface MasterProductRepository extends JpaRepository<MasterProduct, Lo
 	
 	MasterProduct findById(String id);
 	
-	@Query(value= "SELECT * FROM master_product WHERE rowstatus = 1 AND sku_code = :sku_code", nativeQuery = true )
+	@Query(value= "SELECT * FROM master_product WHERE rowstatus = 1 AND sku_code = :sku_code ORDER BY id LIMIT 1", nativeQuery = true )
 	MasterProduct findBySkuCode(String sku_code);
 	
 	@Query(value= "SELECT * FROM master_product WHERE rowstatus = 1 AND artikel_product = :artikel_product ORDER BY id LIMIT 1 ", nativeQuery = true )
