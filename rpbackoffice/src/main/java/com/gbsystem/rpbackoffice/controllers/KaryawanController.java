@@ -48,6 +48,11 @@ public class KaryawanController {
         return new ResponseEntity<>(karyawanService.getAllByIdStore(id_store), HttpStatus.OK);
     }
     
+    @GetMapping("/allForOffice")
+	public ResponseEntity<List<Karyawan>> getAllForOffice(@Param("id_store") int id_store) {
+        return new ResponseEntity<>(karyawanService.getAllForOffice(id_store), HttpStatus.OK);
+    }
+    
     @GetMapping("/search")
     public ResponseEntity<List<Karyawan>> search(@Param("keyword") String keyword) {
     	return new ResponseEntity<>(karyawanService.search(keyword), HttpStatus.OK);
@@ -64,7 +69,7 @@ public class KaryawanController {
     		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
     		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("image") MultipartFile image) throws Exception {
+    		@RequestParam(value="image", required=false) MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
     		karyawanService.saveKaryawan(tanggal_join,nama_karyawan,tanggal_lahir, id_office, lokasi_office, id_store, lokasi_store, jabatan,
@@ -80,7 +85,7 @@ public class KaryawanController {
     		@RequestParam("id_office") int id_office,@RequestParam("lokasi_office") String lokasi_office,
     		@RequestParam("id_store") int id_store, @RequestParam("lokasi_store") String lokasi_store,@RequestParam("jabatan") String jabatan,
     		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("total_transaksi") double total_transaksi, @RequestParam("image") MultipartFile image) throws Exception {
+    		@RequestParam("total_transaksi") double total_transaksi, @RequestParam(value="image", required=false) MultipartFile image) throws Exception {
     	
     	if (nama_karyawan != "") {
     		karyawanService.update(id, tanggal_join,nama_karyawan,tanggal_lahir, id_office, lokasi_office, id_store, lokasi_store, jabatan,

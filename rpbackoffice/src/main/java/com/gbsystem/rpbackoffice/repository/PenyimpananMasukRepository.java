@@ -17,7 +17,7 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code ", nativeQuery = true)
 	List<PenyimpananMasuk> findByPenerimaan_code(String penerimaan_code);
 	
-	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword%)", nativeQuery = true)
+	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND (nama_barang LIKE %:keyword% OR sku_code LIKE %:keyword% OR penerimaan_code LIKE %:keyword% )", nativeQuery = true)
 	List<PenyimpananMasuk> search(String keyword);
 	
 	@Query(value = "delete from penyimpanan_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)

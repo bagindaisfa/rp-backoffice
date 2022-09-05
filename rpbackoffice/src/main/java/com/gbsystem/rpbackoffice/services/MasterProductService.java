@@ -311,7 +311,7 @@ public class MasterProductService {
     	
     	String fileName = StringUtils.cleanPath(image.getOriginalFilename());
 		
-		List<MasterStore> masterStore = eMasterStoreRepo.findByRowstatus(1);
+		List<MasterStore> masterStore = eMasterStoreRepo.findByRowstatus();
 		if (masterStore != null) {
 			for (int i=0; i<masterStore.size(); i++) {
 	        	StockStore r = new StockStore();

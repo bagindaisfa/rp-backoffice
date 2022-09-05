@@ -26,10 +26,6 @@
 	</background>
 	<title>
 		<band height="80" splitType="Stretch">
-			<image>
-				<reportElement x="-10" y="8" width="191" height="71" uuid="29db5b27-b425-45a1-8477-2634303bc4d9"/>
-				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="181" y="-14" width="388" height="30" uuid="ddf4be5b-2eac-446b-ab26-ed3940f3dde0"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
@@ -46,6 +42,10 @@
 Phone: +62-2153163512 Fax: +39.0422.431978 
 E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
+			<image>
+				<reportElement x="-11" y="-14" width="170" height="90" uuid="c656a516-5325-4a79-a0cf-02906407ee2e"/>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

@@ -79,7 +79,7 @@ public class PengirimanOfficeToStoreController {
     @GetMapping("/transferRequest")
 	public ResponseEntity<byte []> generatePdfTfRequest(@Param("pengiriman_code") String pengiriman_code) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(pengirimanGudangToStoreReportService.TransferRequest(pengiriman_code));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/TransferRequest.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("classes/templates/TransferRequest.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);

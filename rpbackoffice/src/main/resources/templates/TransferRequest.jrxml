@@ -69,10 +69,6 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<text><![CDATA[Tempat Pengiriman :]]></text>
 			</staticText>
-			<image>
-				<reportElement isPrintRepeatedValues="false" x="-8" y="1" width="179" height="60" uuid="1e1c0db9-0f7c-43b6-aaa1-e78f5706aff9"/>
-				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/src/main/resources/templates/LOGO RP.png"]]></imageExpression>
-			</image>
 			<textField>
 				<reportElement isPrintRepeatedValues="false" x="410" y="30" width="134" height="30" uuid="153e26b2-3d26-46e5-810b-d7c3d6e8528a"/>
 				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
@@ -81,6 +77,10 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<reportElement isPrintRepeatedValues="false" x="410" y="110" width="134" height="30" uuid="77461f1d-5da9-4502-90eb-6d3a980b886b"/>
 				<textFieldExpression><![CDATA[$F{lokasi_store}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="-8" y="-14" width="141" height="73" uuid="abd68254-f916-4906-94df-78e80116905e"/>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

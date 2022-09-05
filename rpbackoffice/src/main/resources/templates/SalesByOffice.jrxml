@@ -26,10 +26,6 @@
 				</textElement>
 				<text><![CDATA[Rudy Project - Indonesia]]></text>
 			</staticText>
-			<image>
-				<reportElement x="-10" y="8" width="191" height="71" uuid="3e920c9c-7f1b-4071-9392-cd1262286871"/>
-				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="181" y="16" width="388" height="44" uuid="21086927-f716-428e-a969-dad2e43c3a70"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -39,6 +35,10 @@
 Phone: +62-2153163512 Fax: +39.0422.431978 
 E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
+			<image>
+				<reportElement x="-11" y="-14" width="170" height="90" uuid="7950fdc7-82f5-40a2-aaf1-eb3df1a56ad0"/>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

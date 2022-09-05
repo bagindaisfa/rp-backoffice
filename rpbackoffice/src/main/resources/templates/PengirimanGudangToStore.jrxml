@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<!-- Created with Jaspersoft Studio version 6.19.1.final using JasperReports Library version 6.19.1-867c00bf88cd4d784d404379d6c05e1b419e8a4c  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7393376c-db09-4fe9-aafc-bb5e6d9ce328">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -46,15 +46,14 @@
 Phone: +62-2153163512 Fax: +39.0422.431978 
 E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
+			<image>
+				<reportElement x="-8" y="-13" width="170" height="90" uuid="6de5fe1b-f5bb-4a25-9027-549d1a845742"/>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="75" splitType="Stretch">
-			<staticText>
-				<reportElement x="80" y="56" width="10" height="17" uuid="7c8d1c44-c373-404b-a7cd-de58fb96e3b6"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[:]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="178" y="29" width="199" height="17" uuid="c8de4ef7-bba6-4dba-8422-da152d8d453d"/>
 				<textElement textAlignment="Center">

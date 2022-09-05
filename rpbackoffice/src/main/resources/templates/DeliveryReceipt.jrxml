@@ -82,7 +82,7 @@
 			</textField>
 			<image>
 				<reportElement x="1" y="10" width="179" height="60" uuid="60401643-918c-4c31-9497-06d435ccf1d7"/>
-				<imageExpression><![CDATA["C:/Users/Baginda Isfa/Documents/GitHub/rp-backoffice/rpbackoffice/src/main/resources/templates/LOGO RP.png"]]></imageExpression>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

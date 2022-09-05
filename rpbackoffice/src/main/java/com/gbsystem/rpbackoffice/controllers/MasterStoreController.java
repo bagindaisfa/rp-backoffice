@@ -53,7 +53,7 @@ public class MasterStoreController {
 		
     }
     @GetMapping("/delete")
-    public String deleteStore(@RequestParam("id") Long id)
+    public String deleteStore(@RequestParam("id") int id)
     {
     	
     	masterStoreService.deleteMasterStoreById(id);

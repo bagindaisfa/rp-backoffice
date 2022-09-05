@@ -73,13 +73,13 @@ public class ReturGudangController {
     		@RequestParam("id") Long id)
     {
     	returGudangService.deleteReturGudangById(id);
-    	return "redirect:/all";
+    	return "Deleted!";
     }
     
     @GetMapping("/deliveryReceipt")
 	public ResponseEntity<byte []> generatePdfReturGudang(@Param("pengiriman_code") String pengiriman_code) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(detailReturGudangService.ReturGudangReport(pengiriman_code));
-		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("src/main/resources/templates/DeliveryReceipt.jrxml"));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("classes/templates/DeliveryReceipt.jrxml"));
 		
 		HashMap<String, Object> map = new HashMap<>();
 		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);

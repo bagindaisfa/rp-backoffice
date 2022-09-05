@@ -22,5 +22,8 @@ List<Karyawan> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
 	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND id_store = :id_store", nativeQuery = true)
 	List<Karyawan> getAllByIdStore(int id_store);
+	
+	@Query(value = "SELECT * FROM karyawan WHERE rowstatus = 1 AND id_store = :id_store", nativeQuery = true)
+	List<Karyawan> getAllForOffice(int id_store);
 
 }

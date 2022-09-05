@@ -42,16 +42,20 @@ public class KaryawanService {
 		
 		MasterStore store = new MasterStore();
 		store = eStoreRepo.getById(Long.valueOf(id_store));
+		if (image != null) {
+			String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+			if(fileName.contains("..")) {
+				System.out.println("not a valid file");
+			}
+			try {
+				k.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			k.setImage(null);
+		}
 		
-		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-		if(fileName.contains("..")) {
-			System.out.println("not a valid file");
-		}
-		try {
-			k.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
 		k.setTanggal_join(tanggal_join);
 		k.setNama_karyawan(nama_karyawan);
 		k.setTanggal_lahir(tanggal_lahir);
@@ -85,6 +89,11 @@ public class KaryawanService {
 
 		return eRepo.getAllByIdStore(id_store);
 	}
+
+	public List<Karyawan> getAllForOffice(int id_store){
+
+		return eRepo.getAllForOffice(id_store);
+	}
 	
 	public void deleteKaryawanById(Long id)
     {
@@ -105,14 +114,18 @@ public class KaryawanService {
 		MasterStore store = new MasterStore();
 		store = eStoreRepo.getById(Long.valueOf(id_store));
 		
-		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-		if(fileName.contains("..")) {
-			System.out.println("not a valid file");
-		}
-		try {
-			k.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-		}catch(IOException e) {
-			e.printStackTrace();
+		if (image != null) {
+			String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+			if(fileName.contains("..")) {
+				System.out.println("not a valid file");
+			}
+			try {
+				k.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			k.setImage(null);
 		}
 		k.setTanggal_join(tanggal_join);
 		k.setNama_karyawan(nama_karyawan);
