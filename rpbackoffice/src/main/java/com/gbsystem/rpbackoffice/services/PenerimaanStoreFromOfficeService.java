@@ -71,99 +71,105 @@ public class PenerimaanStoreFromOfficeService {
 		p.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
 		p.setRowstatus(1);
 		for(int i = 0; i < penerimaanStoreFromOffice.getDetailPenerimaanList().size(); i++) {
-			DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
-			
-			MasterProduct prod = new MasterProduct();
-			prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			
-			detail.setPenerimaan_code(code_penerimaan);
-			detail.setTanggal_penerimaan(penerimaanStoreFromOffice.getTanggal_penerimaan());
-			detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
-			detail.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			detail.setKategori(prod == null ? "" : prod.getKategori());
-			detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-			detail.setType(prod == null ? 0 : prod.getType());
-			detail.setType_name(prod == null ? "" : prod.getType_name());
-			detail.setNama_barang(prod == null ? "" : prod.getNama_product());
-			detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-			detail.setKeterangan(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKeterangan());
-			detail.setHpp(prod == null ? 0 : prod.getHpp());
-			detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
-			detail.setRowstatus(1);
-			detail.setPenerimaanStoreFromOffice(p);
-			details.add(detail);
-			
-			StockStore d = new StockStore();
-			d = eStockRepo.findById_storeAndArtikel(
-					penerimaanStoreFromOffice.getId_store(),
-					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			if (d == null) {
-				StockStore new_insert = new StockStore();
-				
-				new_insert.setId_store(penerimaanStoreFromOffice.getId_store());
-				new_insert.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
-				new_insert.setFoto_barang(prod.getImage());
-				new_insert.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
-				new_insert.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-				new_insert.setKategori(prod.getKategori());
-				new_insert.setNama_kategori(prod.getNama_kategori());
-				new_insert.setType(prod.getType());
-				new_insert.setType_name(prod.getType_name());
-				new_insert.setNama_barang(prod.getNama_product());
-				new_insert.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-				new_insert.setHarga_jual(prod.getHarga_jual());
-				new_insert.setHpp(prod.getHpp());
-				new_insert.setRowstatus(1);
-				eStockRepo.save(new_insert);
-			} else {
-				d.setKuantitas(d.getKuantitas() + penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-				eStockRepo.save(d);
-			}
-			
-			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			StockOffice checker = new StockOffice();
+			checker = eStockOfficeRepo.findById_officeAndArtikel(
 					penerimaanStoreFromOffice.getId_office(),
 					penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-			eStockOfficeRepo.save(g);
-			
-			PenyimpananKeluar f = new PenyimpananKeluar();
-			f.setId_office(penerimaanStoreFromOffice.getId_office());
-			f.setLokasi_office(penerimaanStoreFromOffice.getLokasi_office());
-			f.setPengiriman_code(penerimaanStoreFromOffice.getPengiriman_code());
-			f.setTanggal_keluar(pengiriman.getTanggal_pengiriman());
-			f.setId_store(penerimaanStoreFromOffice.getId_store());
-			f.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
-			f.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
-			f.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			f.setKategori(prod == null ? "" : prod.getKategori());
-			f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-			f.setType(prod == null ? 0 : prod.getType());
-			f.setType_name(prod == null ? "" : prod.getType_name());
-			f.setNama_barang(prod == null ? "" : prod.getNama_product());
-			f.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-			f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOffice.getLokasi_store());
-			f.setRowstatus(1);
-			ePenyimpananRepo.save(f);
-			
-			PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-			h.setId_office(pengiriman.getId_office());
-			h.setLokasi_office(pengiriman.getLokasi_office());
-			h.setPenerimaan_code(code_penerimaan);
-			h.setTanggal_masuk(penerimaanStoreFromOffice.getTanggal_penerimaan());
-			h.setId_store(pengiriman.getId_store());
-			h.setLokasi_store(pengiriman.getLokasi_store());
-			h.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
-			h.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
-			h.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());
-			h.setNama_kategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_kategori());
-			h.setType(prod == null ? 0 : prod.getType());
-			h.setType_name(prod == null ? "" : prod.getType_name());
-			h.setNama_barang(prod == null ? "" : prod.getNama_product());
-			h.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
-			h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
-			h.setRowstatus(1);
-			ePenyimpananStoreRepo.save(h);
+			if (checker != null && checker.getKuantitas() > 0.0) {
+				DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
+				
+				MasterProduct prod = new MasterProduct();
+				prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				
+				detail.setPenerimaan_code(code_penerimaan);
+				detail.setTanggal_penerimaan(penerimaanStoreFromOffice.getTanggal_penerimaan());
+				detail.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
+				detail.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				detail.setKategori(prod == null ? "" : prod.getKategori());
+				detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				detail.setType(prod == null ? 0 : prod.getType());
+				detail.setType_name(prod == null ? "" : prod.getType_name());
+				detail.setNama_barang(prod == null ? "" : prod.getNama_product());
+				detail.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+				detail.setKeterangan(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKeterangan());
+				detail.setHpp(prod == null ? 0 : prod.getHpp());
+				detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+				detail.setRowstatus(1);
+				detail.setPenerimaanStoreFromOffice(p);
+				details.add(detail);
+				
+				StockStore d = new StockStore();
+				d = eStockRepo.findById_storeAndArtikel(
+						penerimaanStoreFromOffice.getId_store(),
+						penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				if (d == null) {
+					StockStore new_insert = new StockStore();
+					
+					new_insert.setId_store(penerimaanStoreFromOffice.getId_store());
+					new_insert.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+					new_insert.setFoto_barang(prod.getImage());
+					new_insert.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
+					new_insert.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+					new_insert.setKategori(prod.getKategori());
+					new_insert.setNama_kategori(prod.getNama_kategori());
+					new_insert.setType(prod.getType());
+					new_insert.setType_name(prod.getType_name());
+					new_insert.setNama_barang(prod.getNama_product());
+					new_insert.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+					new_insert.setHarga_jual(prod.getHarga_jual());
+					new_insert.setHpp(prod.getHpp());
+					new_insert.setRowstatus(1);
+					eStockRepo.save(new_insert);
+				} else {
+					d.setKuantitas(d.getKuantitas() + penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+					eStockRepo.save(d);
+				}
+				
+				StockOffice g = new StockOffice();
+				g = eStockOfficeRepo.findById_officeAndArtikel(
+						penerimaanStoreFromOffice.getId_office(),
+						penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+				eStockOfficeRepo.save(g);
+				
+				PenyimpananKeluar f = new PenyimpananKeluar();
+				f.setId_office(penerimaanStoreFromOffice.getId_office());
+				f.setLokasi_office(penerimaanStoreFromOffice.getLokasi_office());
+				f.setPengiriman_code(penerimaanStoreFromOffice.getPengiriman_code());
+				f.setTanggal_keluar(pengiriman.getTanggal_pengiriman());
+				f.setId_store(penerimaanStoreFromOffice.getId_store());
+				f.setLokasi_store(penerimaanStoreFromOffice.getLokasi_store());
+				f.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
+				f.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				f.setKategori(prod == null ? "" : prod.getKategori());
+				f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				f.setType(prod == null ? 0 : prod.getType());
+				f.setType_name(prod == null ? "" : prod.getType_name());
+				f.setNama_barang(prod == null ? "" : prod.getNama_product());
+				f.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+				f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOffice.getLokasi_store());
+				f.setRowstatus(1);
+				ePenyimpananRepo.save(f);
+				
+				PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
+				h.setId_office(pengiriman.getId_office());
+				h.setLokasi_office(pengiriman.getLokasi_office());
+				h.setPenerimaan_code(code_penerimaan);
+				h.setTanggal_masuk(penerimaanStoreFromOffice.getTanggal_penerimaan());
+				h.setId_store(pengiriman.getId_store());
+				h.setLokasi_store(pengiriman.getLokasi_store());
+				h.setSku_code(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getSku_code());
+				h.setArtikel(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getArtikel());
+				h.setKategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKategori());
+				h.setNama_kategori(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getNama_kategori());
+				h.setType(prod == null ? 0 : prod.getType());
+				h.setType_name(prod == null ? "" : prod.getType_name());
+				h.setNama_barang(prod == null ? "" : prod.getNama_product());
+				h.setKuantitas(penerimaanStoreFromOffice.getDetailPenerimaanList().get(i).getKuantitas());
+				h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
+				h.setRowstatus(1);
+				ePenyimpananStoreRepo.save(h);
+			}
 			
 		}
 		
@@ -243,219 +249,224 @@ public class PenerimaanStoreFromOfficeService {
 		p.setRowstatus(penerimaanStoreFromOfficeNew.getRowstatus());
 		
 		for(int i = 0; i < penerimaanStoreFromOfficeNew.getDetailPenerimaanList().size(); i++) {
+			StockOffice checker = new StockOffice();
+			checker = eStockOfficeRepo.findById_officeAndArtikel(
+					penerimaanStoreFromOfficeNew.getId_office(),
+					penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
 			
-			DetailPenerimaanStoreFromOffice detail_update = new DetailPenerimaanStoreFromOffice();
-			
-			if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getId() == null) {
-				detail_update = null;
-			} else {
-				detail_update = eDetailRepo.findById(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getId()).orElse(null);
-			}
-			
-			if (detail_update != null) {
-				detail_update.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-				detail_update.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				detail_update.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-				detail_update.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-				detail_update.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-				detail_update.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-				detail_update.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-				detail_update.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				detail_update.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
-				detail_update.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
-				detail_update.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
-				detail_update.setRowstatus(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus());
+				DetailPenerimaanStoreFromOffice detail_update = new DetailPenerimaanStoreFromOffice();
 				
-				if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus() == 1) {
-					
-					StockStore d = new StockStore();
-					d = eStockRepo.findById_storeAndArtikel(
-							penerimaanStoreFromOfficeNew.getId_store(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					d.setKuantitas((d.getKuantitas() - detail_update.getKuantitas()) + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					eStockRepo.save(d);
-					
-					StockOffice g = new StockOffice();
-					g = eStockOfficeRepo.findById_officeAndArtikel(
-							penerimaanStoreFromOfficeNew.getId_office(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					g.setKuantitas((g.getKuantitas() + detail_update.getKuantitas()) - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					eStockOfficeRepo.save(g);
-				
-					PenyimpananKeluar f = new PenyimpananKeluar();
-					f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
-							penerimaanStoreFromOfficeNew.getPengiriman_code(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
-							);
-					f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
-					f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-					f.setPengiriman_code(p.getPengiriman_code());
-					f.setTanggal_keluar(pengiriman.getTanggal_pengiriman());
-					f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
-					f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
-					f.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-					f.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					f.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-					f.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-					f.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-					f.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-					f.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-					f.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOfficeNew.getLokasi_store());
-					f.setRowstatus(1);
-					ePenyimpananRepo.save(f);
-					
-					PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-					h = ePenyimpananStoreRepo.getByPenerimaanCodeandArtikel(
-							penerimaanStoreFromOfficeNew.getPenerimaan_code(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
-							);
-					h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
-					h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-					h.setPenerimaan_code(p.getPenerimaan_code());
-					h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
-					h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
-					h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
-					h.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-					h.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					h.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-					h.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-					h.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-					h.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-					h.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-					h.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
-					h.setRowstatus(1);
-					ePenyimpananStoreRepo.save(h);
+				if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getId() == null) {
+					detail_update = null;
 				} else {
-					StockStore d = new StockStore();
-					d = eStockRepo.findById_storeAndArtikel(
-							penerimaanStoreFromOfficeNew.getId_store(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					d.setKuantitas(d.getKuantitas() - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					eStockRepo.save(d);
-					
-					StockOffice g = new StockOffice();
-					g = eStockOfficeRepo.findById_officeAndArtikel(
-							penerimaanStoreFromOfficeNew.getId_office(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					g.setKuantitas(g.getKuantitas() + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					eStockOfficeRepo.save(g);
-				
-					PenyimpananKeluar f = new PenyimpananKeluar();
-					f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
-							penerimaanStoreFromOfficeNew.getPengiriman_code(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
-							);
-					f.setRowstatus(0);
-					ePenyimpananRepo.save(f);
-					
-					PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-					h = ePenyimpananStoreRepo.getByPenerimaanCodeandArtikel(
-							penerimaanStoreFromOfficeNew.getPenerimaan_code(),
-							penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
-							);
-					h.setRowstatus(0);
-					ePenyimpananStoreRepo.save(h);
-				}
-				detail_update.setPenerimaanStoreFromOffice(p);
-				details.add(detail_update);	
-			} else {
-				DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
-				detail.setPenerimaan_code(p.getPenerimaan_code());
-				detail.setTanggal_penerimaan(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
-				detail.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-				detail.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				detail.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-				detail.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-				detail.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-				detail.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-				detail.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-				detail.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				detail.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-				detail.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
-				detail.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
-				detail.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
-				detail.setRowstatus(1);
-				detail.setPenerimaanStoreFromOffice(p);
-				details.add(detail);
-				
-				StockStore d = new StockStore();
-				d = eStockRepo.findById_storeAndArtikel(
-						penerimaanStoreFromOfficeNew.getId_store(),
-						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				if (d == null) {
-					StockStore new_insert = new StockStore();
-					
-					MasterProduct prod = new MasterProduct();
-					prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					
-					new_insert.setId_store(penerimaanStoreFromOfficeNew.getId_store());
-					new_insert.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
-					new_insert.setFoto_barang(prod.getImage());
-					new_insert.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-					new_insert.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-					new_insert.setKategori(prod.getKategori());
-					new_insert.setNama_kategori(prod.getNama_kategori());
-					new_insert.setType(prod.getType());
-					new_insert.setType_name(prod.getType_name());
-					new_insert.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-					new_insert.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					new_insert.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
-					new_insert.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
-					new_insert.setRowstatus(1);
-					eStockRepo.save(new_insert);
-				} else {
-					d.setKuantitas(d.getKuantitas() + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-					eStockRepo.save(d);
+					detail_update = eDetailRepo.findById(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getId()).orElse(null);
 				}
 				
-				StockOffice g = new StockOffice();
-				g = eStockOfficeRepo.findById_officeAndArtikel(
-						penerimaanStoreFromOfficeNew.getId_office(),
-						penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				eStockOfficeRepo.save(g);
-				
-				PenyimpananKeluar f = new PenyimpananKeluar();
-				f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
-				f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-				f.setPengiriman_code(p.getPengiriman_code());
-				f.setTanggal_keluar(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
-				f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
-				f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
-				f.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-				f.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				f.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-				f.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-				f.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-				f.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-				f.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-				f.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOfficeNew.getLokasi_store());
-				f.setRowstatus(1);
-				ePenyimpananRepo.save(f);
-				
-				PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
-				h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
-				h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
-				h.setPenerimaan_code(p.getPenerimaan_code());
-				h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
-				h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
-				h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
-				h.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
-				h.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
-				h.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
-				h.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
-				h.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
-				h.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
-				h.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
-				h.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
-				h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
-				h.setRowstatus(1);
-				ePenyimpananStoreRepo.save(h);
+				if (detail_update != null) {
+					detail_update.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+					detail_update.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+					detail_update.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+					detail_update.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+					detail_update.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+					detail_update.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+					detail_update.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+					detail_update.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+					detail_update.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
+					detail_update.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
+					detail_update.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
+					detail_update.setRowstatus(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus());
+					
+					if (penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getRowstatus() == 1) {
+						
+						StockStore d = new StockStore();
+						d = eStockRepo.findById_storeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_store(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						d.setKuantitas((d.getKuantitas() - detail_update.getKuantitas()) + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						eStockRepo.save(d);
+						
+						StockOffice g = new StockOffice();
+						g = eStockOfficeRepo.findById_officeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_office(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						g.setKuantitas((g.getKuantitas() + detail_update.getKuantitas()) - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						eStockOfficeRepo.save(g);
+					
+						PenyimpananKeluar f = new PenyimpananKeluar();
+						f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
+								penerimaanStoreFromOfficeNew.getPengiriman_code(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
+								);
+						f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
+						f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
+						f.setPengiriman_code(p.getPengiriman_code());
+						f.setTanggal_keluar(pengiriman.getTanggal_pengiriman());
+						f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
+						f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+						f.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						f.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						f.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+						f.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+						f.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+						f.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+						f.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+						f.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOfficeNew.getLokasi_store());
+						f.setRowstatus(1);
+						ePenyimpananRepo.save(f);
+						
+						PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
+						h = ePenyimpananStoreRepo.getByPenerimaanCodeandArtikel(
+								penerimaanStoreFromOfficeNew.getPenerimaan_code(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
+								);
+						h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
+						h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
+						h.setPenerimaan_code(p.getPenerimaan_code());
+						h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
+						h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
+						h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+						h.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						h.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						h.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+						h.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+						h.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+						h.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+						h.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+						h.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
+						h.setRowstatus(1);
+						ePenyimpananStoreRepo.save(h);
+					} else {
+						StockStore d = new StockStore();
+						d = eStockRepo.findById_storeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_store(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						d.setKuantitas(d.getKuantitas() - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						eStockRepo.save(d);
+						
+						StockOffice g = new StockOffice();
+						g = eStockOfficeRepo.findById_officeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_office(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						g.setKuantitas(g.getKuantitas() + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						eStockOfficeRepo.save(g);
+					
+						PenyimpananKeluar f = new PenyimpananKeluar();
+						f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
+								penerimaanStoreFromOfficeNew.getPengiriman_code(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
+								);
+						f.setRowstatus(0);
+						ePenyimpananRepo.save(f);
+						
+						PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
+						h = ePenyimpananStoreRepo.getByPenerimaanCodeandArtikel(
+								penerimaanStoreFromOfficeNew.getPenerimaan_code(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel()
+								);
+						h.setRowstatus(0);
+						ePenyimpananStoreRepo.save(h);
+					}
+					detail_update.setPenerimaanStoreFromOffice(p);
+					details.add(detail_update);	
+				} else {
+					if (checker != null && checker.getKuantitas() > 0.0) {
+						DetailPenerimaanStoreFromOffice detail = new DetailPenerimaanStoreFromOffice();
+						detail.setPenerimaan_code(p.getPenerimaan_code());
+						detail.setTanggal_penerimaan(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
+						detail.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						detail.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						detail.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+						detail.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+						detail.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+						detail.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+						detail.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+						detail.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						detail.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						detail.setKeterangan(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKeterangan());
+						detail.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
+						detail.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
+						detail.setRowstatus(1);
+						detail.setPenerimaanStoreFromOffice(p);
+						details.add(detail);
+						
+						StockStore d = new StockStore();
+						d = eStockRepo.findById_storeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_store(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						if (d == null) {
+							StockStore new_insert = new StockStore();
+							
+							MasterProduct prod = new MasterProduct();
+							prod = eMasterProductRepo.findByArticle(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+							
+							new_insert.setId_store(penerimaanStoreFromOfficeNew.getId_store());
+							new_insert.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+							new_insert.setFoto_barang(prod.getImage());
+							new_insert.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+							new_insert.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+							new_insert.setKategori(prod.getKategori());
+							new_insert.setNama_kategori(prod.getNama_kategori());
+							new_insert.setType(prod.getType());
+							new_insert.setType_name(prod.getType_name());
+							new_insert.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+							new_insert.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+							new_insert.setHarga_jual(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHarga_jual());
+							new_insert.setHpp(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getHpp());
+							new_insert.setRowstatus(1);
+							eStockRepo.save(new_insert);
+						} else {
+							d.setKuantitas(d.getKuantitas() + penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+							eStockRepo.save(d);
+						}
+					
+						StockOffice g = new StockOffice();
+						g = eStockOfficeRepo.findById_officeAndArtikel(
+								penerimaanStoreFromOfficeNew.getId_office(),
+								penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						g.setKuantitas(g.getKuantitas() - penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						eStockOfficeRepo.save(g);
+					
+						PenyimpananKeluar f = new PenyimpananKeluar();
+						f.setId_office(penerimaanStoreFromOfficeNew.getId_office());
+						f.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
+						f.setPengiriman_code(p.getPengiriman_code());
+						f.setTanggal_keluar(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
+						f.setId_store(penerimaanStoreFromOfficeNew.getId_store());
+						f.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+						f.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						f.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						f.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+						f.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+						f.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+						f.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+						f.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+						f.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						f.setKeterangan("Barang Dikirim Ke " + penerimaanStoreFromOfficeNew.getLokasi_store());
+						f.setRowstatus(1);
+						ePenyimpananRepo.save(f);
+						
+						PenyimpananStoreMasuk h = new PenyimpananStoreMasuk();
+						h.setId_office(penerimaanStoreFromOfficeNew.getId_office());
+						h.setLokasi_office(penerimaanStoreFromOfficeNew.getLokasi_office());
+						h.setPenerimaan_code(p.getPenerimaan_code());
+						h.setTanggal_masuk(penerimaanStoreFromOfficeNew.getTanggal_penerimaan());
+						h.setId_store(penerimaanStoreFromOfficeNew.getId_store());
+						h.setLokasi_store(penerimaanStoreFromOfficeNew.getLokasi_store());
+						h.setSku_code(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getSku_code());
+						h.setArtikel(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getArtikel());
+						h.setKategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKategori());
+						h.setNama_kategori(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_kategori());
+						h.setType(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType());
+						h.setType_name(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getType_name());
+						h.setNama_barang(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getNama_barang());
+						h.setKuantitas(penerimaanStoreFromOfficeNew.getDetailPenerimaanList().get(i).getKuantitas());
+						h.setKeterangan("Penerimaan Barang dari " + pengiriman.getLokasi_office());
+						h.setRowstatus(1);
+						ePenyimpananStoreRepo.save(h);
+				}
 			}
-			
 		}
 		p.setDetailPenerimaanList(details);
 		return eRepo.save(p);

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -38,6 +40,7 @@ public class DetailPenerimaanOfficeFromStore {
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "penerimaan_office_from_store_id", referencedColumnName = "id")
+	@Where(clause="rowstatus = 1")
 	@JsonIgnoreProperties("detailPenerimaanList")
 	private PenerimaanOfficeFromStore penerimaanOfficeFromStore;
 	public Long getId() {

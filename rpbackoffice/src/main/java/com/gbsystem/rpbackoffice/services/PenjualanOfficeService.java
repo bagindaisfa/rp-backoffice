@@ -60,11 +60,11 @@ public class PenjualanOfficeService {
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
 		p.setId_karyawan(penjualanOffice.getId_karyawan());
 		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
-		p.setDiskon(penjualanOffice.getDiskon());
+		p.setDiskon((penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon()));
 		p.setDiskon_remark(penjualanOffice.getDiskon_remark());
-		p.setOngkos_kirim(penjualanOffice.getOngkos_kirim());
+		p.setOngkos_kirim((penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		p.setEkspedisi(penjualanOffice.getEkspedisi());
-		p.setPajak_biaya(penjualanOffice.getPajak_biaya());
+		p.setPajak_biaya(penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya());
 		p.setMetode_pembayaran(penjualanOffice.getMetode_pembayaran());
 		p.setBank_name(penjualanOffice.getBank_name());
 		p.setNo_rek(penjualanOffice.getNo_rek());
@@ -120,19 +120,22 @@ public class PenjualanOfficeService {
 			f.setRowstatus(1);
 			ePenyimpananRepo.save(f);
 		}
-		Double pajak = 0.0;
-		Double diskon = total * (penjualanOffice.getDiskon()/100);
-		
-		if ( diskon > 0.0 ) {
-			pajak = (total - diskon) * (penjualanOffice.getPajak_biaya()/100);
+		Double pajak = penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya();
+		Double diskon = penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon();
+		Double total_penjualan = 0.0;
+		if (diskon > 0.0 && pajak > 0.0) {
+			Double total_new = total - (total * (diskon / 100));
+			total_penjualan =total_new + (total_new * (pajak / 100));
 			
+		} else if (diskon > 0.0 && pajak <= 0.0) {
+			total_penjualan =total - (total * (diskon / 100));
+		} else if (diskon <= 0.0 && pajak > 0.0) {
+			total_penjualan =total + (total * (pajak / 100));
 		} else {
-			pajak = total * (penjualanOffice.getPajak_biaya() / 100);
+			total_penjualan =total;
 		}
-		System.out.println(pajak);
-		System.out.println((total - diskon) + penjualanOffice.getOngkos_kirim());
+		p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		
-		p.setTotal_penjualan((total - diskon) + penjualanOffice.getOngkos_kirim() + pajak);
 		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
 		
@@ -225,11 +228,11 @@ public class PenjualanOfficeService {
 		p.setNama_pelanggan(penjualanOffice.getNama_pelanggan());
 		p.setId_karyawan(penjualanOffice.getId_karyawan());
 		p.setNama_karyawan(penjualanOffice.getNama_karyawan());
-		p.setDiskon(penjualanOffice.getDiskon());
+		p.setDiskon((penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon()));
 		p.setDiskon_remark(penjualanOffice.getDiskon_remark());
-		p.setOngkos_kirim(penjualanOffice.getOngkos_kirim());
+		p.setOngkos_kirim((penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		p.setEkspedisi(penjualanOffice.getEkspedisi());
-		p.setPajak_biaya(penjualanOffice.getPajak_biaya());
+		p.setPajak_biaya((penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya()));
 		p.setMetode_pembayaran(penjualanOffice.getMetode_pembayaran());
 		p.setBank_name(penjualanOffice.getBank_name());
 		p.setNo_rek(penjualanOffice.getNo_rek());
@@ -264,7 +267,7 @@ public class PenjualanOfficeService {
 				d.setPenjualanOffice(p);
 				details.add(d);
 				if (penjualanOffice.getDetail_penjualan().get(k).getRowstatus() == 1) {
-					total += penjualanOffice.getDetail_penjualan().get(k).getTotal();
+					total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 					
 					StockOffice l = new StockOffice();
 					l = eStockOfficeRepo.findById_officeAndArtikel(
@@ -322,7 +325,7 @@ public class PenjualanOfficeService {
 					}
 					
 				} else {
-					total -= penjualanOffice.getDetail_penjualan().get(k).getTotal();
+					total -= (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 					
 					StockOffice l = new StockOffice();
 					l = eStockOfficeRepo.findById_officeAndArtikel(
@@ -355,7 +358,7 @@ public class PenjualanOfficeService {
 				new_insert.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
 				new_insert.setRowstatus(1);
 				new_insert.setPenjualanOffice(p);
-				total += penjualanOffice.getDetail_penjualan().get(k).getTotal();
+				total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
 				details.add(new_insert);
 				
 				StockOffice g = new StockOffice();
@@ -388,14 +391,21 @@ public class PenjualanOfficeService {
 			}
 			
 		}
-		Double pajak = 0.0;
-		if ( penjualanOffice.getDiskon() > 0.0 ) {
-			pajak = (total - (total * (penjualanOffice.getDiskon()/100))) + ((total - (total * (penjualanOffice.getDiskon()/100))) * (penjualanOffice.getPajak_biaya()/100));
+		Double pajak = penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya();
+		Double diskon = penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon();
+		Double total_penjualan = 0.0;
+		if (diskon > 0.0 && pajak > 0.0) {
+			Double total_new = total - (total * (diskon / 100));
+			total_penjualan =total_new + (total_new * (pajak / 100));
 			
+		} else if (diskon > 0.0 && pajak <= 0.0) {
+			total_penjualan =total - (total * (diskon / 100));
+		} else if (diskon <= 0.0 && pajak > 0.0) {
+			total_penjualan =total + (total * (pajak / 100));
 		} else {
-			pajak = total * (penjualanOffice.getPajak_biaya() / 100);
+			total_penjualan =total;
 		}
-		p.setTotal_penjualan((total - ((total * penjualanOffice.getDiskon())/100)) + penjualanOffice.getOngkos_kirim() + pajak);
+		p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		p.setRowstatus(1);
     	p.setDetail_penjualan(details);
     	return eRepo.save(p);

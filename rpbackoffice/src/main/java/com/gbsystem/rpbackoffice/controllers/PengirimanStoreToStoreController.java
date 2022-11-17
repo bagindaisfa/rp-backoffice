@@ -40,6 +40,7 @@ public class PengirimanStoreToStoreController {
 	@Autowired
 	private PengirimanStoreToStoreService pengirimanStoreService;
 	
+	@Autowired
 	private PengirimanStoreToStoreReportService pengirimanStoreToStoreReportService;
 
     @GetMapping("/all")

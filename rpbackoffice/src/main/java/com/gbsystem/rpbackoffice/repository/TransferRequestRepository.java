@@ -12,6 +12,7 @@ import com.gbsystem.rpbackoffice.entities.TransferRequest;
 public interface TransferRequestRepository extends JpaRepository<TransferRequest, Long> {
 	@Query(value = "select d.id, "
 			+ "p.tanggal_pengiriman, "
+			+ "p.pengiriman_code as kode_pengiriman, "
 			+ "p.lokasi_office, "
 			+ "p.lokasi_store, "
 			+ "d.artikel, "
@@ -26,6 +27,7 @@ public interface TransferRequestRepository extends JpaRepository<TransferRequest
 	
 	@Query(value = "select d.id, "
 			+ "p.tanggal_pengiriman, "
+			+ "p.pengiriman_code as kode_pengiriman, "
 			+ "p.lokasi_store_asal as lokasi_office, "
 			+ "p.lokasi_store_tujuan as lokasi_store, "
 			+ "d.artikel, "

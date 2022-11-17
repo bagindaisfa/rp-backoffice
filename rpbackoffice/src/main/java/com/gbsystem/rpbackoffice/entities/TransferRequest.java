@@ -15,28 +15,31 @@ public class TransferRequest {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private Date tanggal_pengiriman;
 	
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
+	private String kode_pengiriman;
+	
+	@Column(updatable=false,nullable=false, insertable=false)
 	private String lokasi_office;
 
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private String lokasi_store;
 
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private String artikel;
 
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private String nama_barang;
 
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private Double kuantitas;
 	
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private Double harga_jual;
 	
-	@Column(updatable=false, insertable=false)
+	@Column(updatable=false,nullable=false, insertable=false)
 	private Double sum_qty;
 
 	public Double getSum_qty() {
@@ -67,6 +70,14 @@ public class TransferRequest {
 		return lokasi_office;
 	}
 
+	public void setKode_pengiriman(String kode_pengiriman) {
+		this.kode_pengiriman = kode_pengiriman;
+	}
+
+	public String getKode_pengiriman() {
+		return kode_pengiriman;
+	}
+	
 	public void setLokasi_office(String lokasi_office) {
 		this.lokasi_office = lokasi_office;
 	}

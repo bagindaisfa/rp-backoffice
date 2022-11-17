@@ -24,10 +24,12 @@ public class Invoice {
 	private Double harga;
 	private Double jumlah;
 	private Double total_jumlah;
+	private String terbilang;
 	private String nama_pelanggan;
 	private String alamat;
 	private String bank_name;
 	private String no_rek;
+	private String owner_name;
 	public Long getId() {
 		return id;
 	}
@@ -108,6 +110,12 @@ public class Invoice {
 	public void setTotal_jumlah(Double total_jumlah) {
 		this.total_jumlah = total_jumlah;
 	}
+	public String getTerbilang() {
+		return terbilang;
+	}
+	public void setTerbilang(String terbilang) {
+		this.terbilang = terbilang;
+	}
 	public String getNama_pelanggan() {
 		return nama_pelanggan;
 	}
@@ -131,6 +139,12 @@ public class Invoice {
 	}
 	public void setNo_rek(String no_rek) {
 		this.no_rek = no_rek;
+	}
+	public String getOwner_name() {
+		return owner_name;
+	}
+	public void setOwner_name(String owner_name) {
+		this.owner_name = owner_name;
 	}
 	
 }

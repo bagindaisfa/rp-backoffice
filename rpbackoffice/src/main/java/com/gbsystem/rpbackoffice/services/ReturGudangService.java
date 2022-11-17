@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.ReturGudang;
+import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.entities.DetailReturGudang;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PenerimaanOfficeFromStore;
@@ -16,6 +17,7 @@ import com.gbsystem.rpbackoffice.repository.DetailReturGudangRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenerimaanOfficeFromStoreRepository;
 import com.gbsystem.rpbackoffice.repository.ReturGudangRepository;
+import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 
 @Service
 public class ReturGudangService {
@@ -31,6 +33,9 @@ public class ReturGudangService {
 	
 	@Autowired
 	private MasterProductRepository eMasterProductRepository;
+	
+	@Autowired
+	private StockStoreRepository eStockStoreRepo;
 	
 	public ReturGudang saveReturGudang(ReturGudang returGudang) {
 		
@@ -49,23 +54,29 @@ public class ReturGudangService {
 		p.setRowstatus(1);
 		
 		for(int i = 0; i < returGudang.getDetail_pengiriman().size(); i++) {
-			DetailReturGudang d = new DetailReturGudang();
-			d.setPengiriman_code(code_retur);
-			d.setTanggal_retur(tanggal_pengiriman);
-			d.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
-			d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
-			d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
-			d.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
-			d.setType(returGudang.getDetail_pengiriman().get(i).getType());
-			d.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
-			d.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
-			d.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
-			d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
-			d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
-			d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
-			d.setRowstatus(1);
-			d.setReturGudang(p);
-			details.add(d);
+			StockStore stock = new StockStore();
+			stock = eStockStoreRepo.findById_storeAndArtikel(
+					returGudang.getId_store_asal(),
+					returGudang.getDetail_pengiriman().get(i).getArtikel());
+			if (stock != null && stock.getKuantitas() > 0.0) {
+				DetailReturGudang d = new DetailReturGudang();
+				d.setPengiriman_code(code_retur);
+				d.setTanggal_retur(tanggal_pengiriman);
+				d.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
+				d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
+				d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
+				d.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
+				d.setType(returGudang.getDetail_pengiriman().get(i).getType());
+				d.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
+				d.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
+				d.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
+				d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
+				d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
+				d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
+				d.setRowstatus(1);
+				d.setReturGudang(p);
+				details.add(d);	
+			}
 		}
 		p.setDetail_pengiriman(details);
 		return eRepo.save(p);
@@ -130,6 +141,10 @@ public class ReturGudangService {
 			p.setRowstatus(1);
 			
 			for(int i = 0; i < returGudang.getDetail_pengiriman().size(); i++) {
+				StockStore stock = new StockStore();
+				stock = eStockStoreRepo.findById_storeAndArtikel(
+						returGudang.getId_store_asal(),
+						returGudang.getDetail_pengiriman().get(i).getArtikel());
 				DetailReturGudang detail = new DetailReturGudang();
 				if (returGudang.getDetail_pengiriman().get(i).getId() == null) {
 					detail = null;
@@ -156,23 +171,25 @@ public class ReturGudangService {
 					detail.setReturGudang(p);
 					details.add(detail);
 				} else {
-					DetailReturGudang d = new DetailReturGudang();
-					d.setTanggal_retur(returGudang.getDetail_pengiriman().get(i).getTanggal_retur());
-					d.setPengiriman_code(p.getPengiriman_code());
-					d.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
-					d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
-					d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
-					d.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
-					d.setType(returGudang.getDetail_pengiriman().get(i).getType());
-					d.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
-					d.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
-					d.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
-					d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
-					d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
-					d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
-					d.setRowstatus(1);
-					d.setReturGudang(p);
-					details.add(d);
+					if (stock != null && stock.getKuantitas() > 0.0) {
+						DetailReturGudang d = new DetailReturGudang();
+						d.setTanggal_retur(returGudang.getDetail_pengiriman().get(i).getTanggal_retur());
+						d.setPengiriman_code(p.getPengiriman_code());
+						d.setSku_code(returGudang.getDetail_pengiriman().get(i).getSku_code());
+						d.setArtikel(returGudang.getDetail_pengiriman().get(i).getArtikel());
+						d.setKategori(returGudang.getDetail_pengiriman().get(i).getKategori());
+						d.setNama_kategori(returGudang.getDetail_pengiriman().get(i).getNama_kategori());
+						d.setType(returGudang.getDetail_pengiriman().get(i).getType());
+						d.setType_name(returGudang.getDetail_pengiriman().get(i).getType_name());
+						d.setNama_barang(returGudang.getDetail_pengiriman().get(i).getNama_barang());
+						d.setKuantitas(returGudang.getDetail_pengiriman().get(i).getKuantitas());
+						d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
+						d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
+						d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
+						d.setRowstatus(1);
+						d.setReturGudang(p);
+						details.add(d);
+					}
 				}
 			}
 			p.setDetail_pengiriman(details);

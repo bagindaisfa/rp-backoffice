@@ -68,7 +68,7 @@
 			<textField>
 				<reportElement isPrintRepeatedValues="false" x="428" y="1" width="122" height="20" isPrintInFirstWholeBand="true" uuid="b13d3443-7c89-44e1-bd7a-b460c551fcac"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_retur})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format( $F{tanggal_retur})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement isPrintRepeatedValues="false" x="428" y="22" width="122" height="19" isPrintInFirstWholeBand="true" uuid="c07953c1-2166-466a-a112-44a7745e3481"/>

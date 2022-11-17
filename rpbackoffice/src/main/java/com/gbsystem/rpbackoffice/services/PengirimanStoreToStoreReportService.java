@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class PengirimanStoreToStoreReportService {
 	}
 	
 	public List<TransferRequest> TransferRequestStore(String pengiriman_code){
+		
 		return eTFRepo.TransferRequestStore(pengiriman_code);
 	}
 

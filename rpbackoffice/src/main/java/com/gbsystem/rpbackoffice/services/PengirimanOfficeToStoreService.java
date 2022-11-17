@@ -12,10 +12,12 @@ import com.gbsystem.rpbackoffice.entities.DetailPengirimanOfficeToStore;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PenerimaanStoreFromOffice;
 import com.gbsystem.rpbackoffice.entities.PengirimanOfficeToStore;
+import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.DetailPengirimanOfficeToStoreRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenerimaanStoreFromOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PengirimanOfficeToStoreRepository;
+import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 
 @Service
 public class PengirimanOfficeToStoreService {
@@ -32,6 +34,9 @@ public class PengirimanOfficeToStoreService {
 	@Autowired
 	private MasterProductRepository eMasterProductRepository;
 	
+	@Autowired
+	private StockOfficeRepository eStockOfficeRepo;
+	
 	public PengirimanOfficeToStore savePengirimanOffice(PengirimanOfficeToStore pengirimanOfficeToStore) {
 		
 		String code_pengiriman = "POTS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
@@ -47,27 +52,34 @@ public class PengirimanOfficeToStoreService {
 		p.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
 		p.setRowstatus(1);
 		for(int i = 0; i < pengirimanOfficeToStore.getDetailPengirimanList().size(); i++) {
-			DetailPengirimanOfficeToStore detail = new DetailPengirimanOfficeToStore();
+			StockOffice g = new StockOffice();
+			g = eStockOfficeRepo.findById_officeAndArtikel(
+					pengirimanOfficeToStore.getId_office(),
+					pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
+			if (g != null && g.getKuantitas() > 0.0) {
+				DetailPengirimanOfficeToStore detail = new DetailPengirimanOfficeToStore();
+				
+				MasterProduct prod = new MasterProduct();
+				prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
+				
+				detail.setPengiriman_code(code_pengiriman);
+				detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
+				detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
+				detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
+				detail.setKategori(prod == null ? "" : prod.getKategori());
+				detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				detail.setType(prod == null ? 0 : prod.getType());
+				detail.setType_name(prod == null ? "" : prod.getType_name());
+				detail.setNama_barang(prod == null ? "" : prod.getNama_product());
+				detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
+				detail.setUkuran(prod == null ? "" : prod.getUkuran());
+				detail.setHpp(prod == null ? 0 : prod.getHpp());
+				detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+				detail.setRowstatus(1);
+				detail.setPengirimanOfficeToStore(p);
+				details.add(detail);
+			}
 			
-			MasterProduct prod = new MasterProduct();
-			prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			
-			detail.setPengiriman_code(code_pengiriman);
-			detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
-			detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
-			detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-			detail.setKategori(prod == null ? "" : prod.getKategori());
-			detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-			detail.setType(prod == null ? 0 : prod.getType());
-			detail.setType_name(prod == null ? "" : prod.getType_name());
-			detail.setNama_barang(prod == null ? "" : prod.getNama_product());
-			detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-			detail.setUkuran(prod == null ? "" : prod.getUkuran());
-			detail.setHpp(prod == null ? 0 : prod.getHpp());
-			detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
-			detail.setRowstatus(1);
-			detail.setPengirimanOfficeToStore(p);
-			details.add(detail);
 		}
 		
 		p.setDetailPengirimanList(details);
@@ -133,6 +145,10 @@ public class PengirimanOfficeToStoreService {
 			p.setRowstatus(pengirimanOfficeToStore.getRowstatus());
 			
 			for(int i = 0; i < pengirimanOfficeToStore.getDetailPengirimanList().size(); i++) {
+				StockOffice checker = new StockOffice();
+				checker = eStockOfficeRepo.findById_officeAndArtikel(
+						pengirimanOfficeToStore.getId_office(),
+						pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());	
 				DetailPengirimanOfficeToStore detail_update = new DetailPengirimanOfficeToStore();
 				if (pengirimanOfficeToStore.getDetailPengirimanList().get(i).getId() == null) {
 					detail_update = null;
@@ -159,30 +175,34 @@ public class PengirimanOfficeToStoreService {
 					
 					detail_update.setPengirimanOfficeToStore(p);
 					details.add(detail_update);	
+					
 				} else {
-					DetailPengirimanOfficeToStore detail = new DetailPengirimanOfficeToStore();
-					
-					MasterProduct prod = new MasterProduct();
-					prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-					
-					detail.setPengiriman_code(p.getPengiriman_code());
-					detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
-					detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
-					detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
-					detail.setKategori(prod == null ? "" : prod.getKategori());
-					detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-					detail.setType(prod == null ? 0 : prod.getType());
-					detail.setType_name(prod == null ? "" : prod.getType_name());
-					detail.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
-					detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
-					detail.setUkuran(prod == null ? "" : prod.getUkuran());
-					detail.setHpp(prod == null ? 0 : prod.getHpp());
-					detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
-					detail.setRowstatus(1);
-					detail.setPengirimanOfficeToStore(p);
-					details.add(detail);
+					if (checker != null && checker.getKuantitas() > 0.0) {
+						DetailPengirimanOfficeToStore detail = new DetailPengirimanOfficeToStore();
+						
+						MasterProduct prod = new MasterProduct();
+						prod = eMasterProductRepository.findByArticle(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
+						
+						detail.setPengiriman_code(p.getPengiriman_code());
+						detail.setTanggal_pengiriman(pengirimanOfficeToStore.getTanggal_pengiriman());
+						detail.setSku_code(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getSku_code());
+						detail.setArtikel(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getArtikel());
+						detail.setKategori(prod == null ? "" : prod.getKategori());
+						detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+						detail.setType(prod == null ? 0 : prod.getType());
+						detail.setType_name(prod == null ? "" : prod.getType_name());
+						detail.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
+						detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
+						detail.setUkuran(prod == null ? "" : prod.getUkuran());
+						detail.setHpp(prod == null ? 0 : prod.getHpp());
+						detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+						detail.setRowstatus(1);
+						detail.setPengirimanOfficeToStore(p);
+						details.add(detail);
+					} else {
+						result = "Berhasil diupdate, namun ada stock yang tidak tersedia!";
+					}
 				}
-				
 			}
 			p.setDetailPengirimanList(details);
 			eRepo.save(p);

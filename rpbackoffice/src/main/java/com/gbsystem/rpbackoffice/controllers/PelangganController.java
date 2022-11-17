@@ -50,18 +50,16 @@ public class PelangganController {
     @GetMapping("/download")
     public ResponseEntity<String> download() {
     	pelangganService.download();
-    	return new ResponseEntity<>("OK GAN", HttpStatus.OK);
+    	return new ResponseEntity<>("Success!", HttpStatus.OK);
     }
     
     @PostMapping(value = "/add")
     public @ResponseBody String saveProduct(
     		@RequestParam("nik") String nik,@RequestParam("nama_pelanggan") String nama_pelanggan,
-    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat,
-    		@RequestParam("total_kunjungan") double total_kunjungan,@RequestParam("kuantitas") double kuantitas,
-    		@RequestParam("poin") double poin,@RequestParam("pembelian") double total_pembelian) throws Exception {
+    		@RequestParam("no_hp") String no_hp,@RequestParam("email") String email,@RequestParam("alamat") String alamat) throws Exception {
     	String response = "";
     	if (nama_pelanggan != "") {
-    		response = pelangganService.savePelanggan(nik,nama_pelanggan, no_hp, email, alamat, total_kunjungan,kuantitas, poin, total_pembelian);
+    		response = pelangganService.savePelanggan(nik,nama_pelanggan, no_hp, email, alamat);
     	} else {
     		response = "Gagal!";
     	}

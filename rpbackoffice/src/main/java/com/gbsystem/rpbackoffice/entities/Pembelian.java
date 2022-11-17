@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,6 +35,7 @@ public class Pembelian {
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pembelian", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("pembelian")
+	@Where(clause="rowstatus = 1")
     private List<DetailPembelian> detail_pembelian = new ArrayList<>();
 	
 	public Long getId() {

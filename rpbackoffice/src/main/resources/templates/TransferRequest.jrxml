@@ -14,6 +14,7 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="kode_pengiriman" class="java.lang.String"/>
 	<field name="artikel" class="java.lang.String"/>
 	<field name="nama_barang" class="java.lang.String"/>
 	<field name="tanggal_pengiriman" class="java.util.Date"/>
@@ -26,22 +27,13 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="158" splitType="Stretch">
+		<band height="156" splitType="Stretch">
 			<staticText>
-				<reportElement x="-6" y="59" width="267" height="14" uuid="217413d4-4340-4b0e-b0a6-7b86ea8dea14"/>
+				<reportElement x="-6" y="59" width="326" height="14" uuid="217413d4-4340-4b0e-b0a6-7b86ea8dea14"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PT. PROMATRA NUSANTARA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement isPrintRepeatedValues="false" x="-6" y="75" width="184" height="75" isPrintInFirstWholeBand="true" uuid="6efbc651-a1a0-425d-874f-ac05467dd453"/>
-				<textElement textAlignment="Left" verticalAlignment="Top">
-					<font size="9"/>
-				</textElement>
-				<text><![CDATA[Ruko Icon Business Park V Blok F No.6 BSD Sampora Tangerang 15345.
-Phone: +62-2153163512 Fax: +39.0422.431978 
-E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
+				<text><![CDATA[PT. ARRAS PROTAMA SEJAHTERA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="389" y="1" width="171" height="69" uuid="3eb895b6-3441-4b44-ae45-ff526f72aebb"/>
@@ -54,7 +46,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Kepada :]]></text>
+				<text><![CDATA[Dari :]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="390" y="81" width="170" height="69" uuid="fe172140-ae41-4b93-91ac-2035f2ed08c6"/>
@@ -67,24 +59,33 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[Tempat Pengiriman :]]></text>
+				<text><![CDATA[Kepada :]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="410" y="30" width="134" height="30" uuid="153e26b2-3d26-46e5-810b-d7c3d6e8528a"/>
+				<reportElement isPrintRepeatedValues="false" x="400" y="20" width="150" height="39" uuid="153e26b2-3d26-46e5-810b-d7c3d6e8528a"/>
 				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="410" y="110" width="134" height="30" uuid="77461f1d-5da9-4502-90eb-6d3a980b886b"/>
+				<reportElement isPrintRepeatedValues="false" x="400" y="100" width="150" height="39" uuid="77461f1d-5da9-4502-90eb-6d3a980b886b"/>
 				<textFieldExpression><![CDATA[$F{lokasi_store}]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="-8" y="-14" width="141" height="73" uuid="abd68254-f916-4906-94df-78e80116905e"/>
+				<reportElement x="-6" y="1" width="141" height="54" uuid="abd68254-f916-4906-94df-78e80116905e"/>
 				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="-7" y="83" width="287" height="67" uuid="3f875f3b-276d-44eb-8e55-d804dadb75b1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Ruko Icon Business Park V Blok F No.6 BSD Sampora Tangerang 15345.
+Phone: +62-2153163512 Fax: +39.0422.431978 
+E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="20" splitType="Stretch">
+		<band height="25" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<textField>
 				<reportElement isPrintRepeatedValues="false" x="450" y="0" width="115" height="20" isPrintInFirstWholeBand="true" uuid="0f44979a-5a81-41bb-82ca-fc49b9182dfd">
@@ -93,7 +94,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format( $F{tanggal_pengiriman})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format( $F{tanggal_pengiriman})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement isPrintRepeatedValues="false" x="46" y="0" width="110" height="20" isPrintInFirstWholeBand="true" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd">
@@ -104,6 +105,11 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<text><![CDATA[TRANSFER REQUEST]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="160" y="0" width="220" height="20" uuid="bd1732dc-5316-469f-9ca5-af649dbcfbc7"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{kode_pengiriman}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>

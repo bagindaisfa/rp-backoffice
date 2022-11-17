@@ -15,8 +15,7 @@ public class PelangganService {
 	@Autowired
 	private PelangganRepository eRepo;
 	
-	public String savePelanggan(String nik,String nama_pelanggan, String no_hp, String email, String alamat, double total_kunjungan,
-			double kuantitas, double poin, double total_pembelian) {
+	public String savePelanggan(String nik,String nama_pelanggan, String no_hp, String email, String alamat) {
 		String response = "";
 		Pelanggan q = new Pelanggan();
 		q = eRepo.findByNoHandphone(no_hp);
@@ -30,10 +29,10 @@ public class PelangganService {
 			p.setNo_hp(no_hp);
 			p.setEmail(email);
 			p.setAlamat(alamat);
-			p.setTotal_kunjungan(total_kunjungan);
-			p.setKuantitas(kuantitas);
-			p.setPoin(poin);
-			p.setTotal_pembelian(total_pembelian);
+			p.setTotal_kunjungan(0.0);
+			p.setKuantitas(0.0);
+			p.setPoin(0.0);
+			p.setTotal_pembelian(0.0);
 			p.setRowstatus(1);
 			eRepo.save(p);
 			response = "Sukses!";

@@ -30,20 +30,22 @@
 	<field name="alamat" class="java.lang.String"/>
 	<field name="bank_name" class="java.lang.String"/>
 	<field name="no_rek" class="java.lang.String"/>
+	<field name="owner_name" class="java.lang.String"/>
+	<field name="terbilang" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="150" splitType="Stretch">
+		<band height="162" splitType="Stretch">
 			<staticText>
-				<reportElement x="-6" y="59" width="267" height="14" uuid="217413d4-4340-4b0e-b0a6-7b86ea8dea14"/>
+				<reportElement x="-6" y="70" width="306" height="14" uuid="217413d4-4340-4b0e-b0a6-7b86ea8dea14"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[PT. PROMATRA NUSANTARA]]></text>
+				<text><![CDATA[PT. ARRAS PROTAMA SEJAHTERA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-6" y="75" width="184" height="75" uuid="6efbc651-a1a0-425d-874f-ac05467dd453"/>
+				<reportElement x="-6" y="86" width="306" height="75" uuid="6efbc651-a1a0-425d-874f-ac05467dd453"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font size="9"/>
 				</textElement>
@@ -51,8 +53,12 @@
 Phone: +62-2153163512 Fax: +39.0422.431978 
 E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 			</staticText>
+			<image>
+				<reportElement x="-5" y="1" width="183" height="68" uuid="e88d62ac-785b-40fb-9a17-5f005c77eda0"/>
+				<imageExpression><![CDATA["classes/templates/LOGO RP.png"]]></imageExpression>
+			</image>
 			<staticText>
-				<reportElement x="389" y="1" width="171" height="73" uuid="3eb895b6-3441-4b44-ae45-ff526f72aebb"/>
+				<reportElement x="360" y="1" width="200" height="73" uuid="3eb895b6-3441-4b44-ae45-ff526f72aebb"/>
 				<box topPadding="3" leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -65,7 +71,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Kepada :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="390" y="81" width="170" height="69" uuid="fe172140-ae41-4b93-91ac-2035f2ed08c6"/>
+				<reportElement x="361" y="81" width="199" height="69" uuid="fe172140-ae41-4b93-91ac-2035f2ed08c6"/>
 				<box topPadding="3" leftPadding="3">
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -78,14 +84,14 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Tempat Pengiriman :]]></text>
 			</staticText>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="396" y="20" width="154" height="20" uuid="7d8853f8-f36d-4fd5-9a3a-ab44bcf532a2"/>
+				<reportElement x="367" y="20" width="183" height="20" uuid="7d8853f8-f36d-4fd5-9a3a-ab44bcf532a2"/>
 				<textElement textAlignment="Left">
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nama_pelanggan}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement x="396" y="40" width="154" height="30" uuid="71466977-cc9c-486c-be40-dd462fb6909c"/>
+				<reportElement x="367" y="100" width="183" height="40" uuid="71466977-cc9c-486c-be40-dd462fb6909c"/>
 				<textElement textAlignment="Left">
 					<font size="9"/>
 				</textElement>
@@ -100,7 +106,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").format($F{tanggal_transaksi})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($F{tanggal_transaksi})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="24" y="7" width="64" height="22" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd"/>
@@ -391,36 +397,36 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="207" splitType="Stretch">
+		<band height="245" splitType="Stretch">
 			<staticText>
-				<reportElement x="1" y="19" width="75" height="14" uuid="4360b122-73cf-4da7-8aff-d0c518606408"/>
+				<reportElement x="1" y="62" width="201" height="14" uuid="4360b122-73cf-4da7-8aff-d0c518606408"/>
 				<text><![CDATA[Mohon Transfer]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="33" width="65" height="14" uuid="a4c794fc-1508-4168-9033-f994a1cdf59e"/>
+				<reportElement x="1" y="76" width="65" height="14" uuid="a4c794fc-1508-4168-9033-f994a1cdf59e"/>
 				<text><![CDATA[Bank ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="47" width="65" height="14" uuid="d7d8d156-d8a0-4752-9a30-dab17e88942a"/>
+				<reportElement x="1" y="90" width="65" height="14" uuid="d7d8d156-d8a0-4752-9a30-dab17e88942a"/>
 				<text><![CDATA[No. Rek ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1" y="61" width="65" height="14" uuid="f63567dc-596d-48ad-a244-79273e22d567"/>
+				<reportElement x="1" y="104" width="65" height="14" uuid="f63567dc-596d-48ad-a244-79273e22d567"/>
 				<text><![CDATA[Atas Nama ]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="-6" y="11" width="559" height="72" backcolor="rgba(255, 255, 255, 0.0)" uuid="501ad357-62f0-4f21-ae54-8569bd2e5740"/>
+				<reportElement x="-7" y="9" width="559" height="119" backcolor="rgba(255, 255, 255, 0.0)" uuid="501ad357-62f0-4f21-ae54-8569bd2e5740"/>
 			</rectangle>
 			<textField>
-				<reportElement x="66" y="33" width="136" height="14" uuid="209f89f1-11a6-4881-bf24-e37cca64809c"/>
+				<reportElement x="66" y="76" width="136" height="14" uuid="209f89f1-11a6-4881-bf24-e37cca64809c"/>
 				<textFieldExpression><![CDATA[": "+ $F{bank_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="66" y="47" width="136" height="14" uuid="e1ca618e-0830-4fad-ba7c-b74e83863651"/>
+				<reportElement x="66" y="90" width="136" height="14" uuid="e1ca618e-0830-4fad-ba7c-b74e83863651"/>
 				<textFieldExpression><![CDATA[": " + $F{no_rek}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-6" y="101" width="136" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4">
+				<reportElement x="-6" y="144" width="136" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -430,7 +436,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Hormat Kami]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="-6" y="119" width="136" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc">
+				<reportElement stretchType="RelativeToTallestObject" x="-6" y="162" width="136" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -440,7 +446,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[PT. Promatra Nusantara]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-7" y="183" width="136" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145">
+				<reportElement x="-7" y="226" width="136" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -450,9 +456,26 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Emilda Amin]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="61" width="136" height="14" uuid="521a878a-0f6a-45ab-bd60-2f9a839b1db8"/>
-				<text><![CDATA[: PT. Promatra Nusantara]]></text>
+				<reportElement x="0" y="20" width="100" height="13" uuid="13d65d94-2187-4734-bae6-85bf59eb1136">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TERBILANG]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="0" y="33" width="480" height="18" uuid="98c1dcf8-45eb-4b17-b4fa-c1b408ea7189"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{terbilang} + "RUPIAH"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="104" width="214" height="14" uuid="d1b2d718-e39f-4d18-84ac-bc78b2e561f0"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[": " + $F{owner_name}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

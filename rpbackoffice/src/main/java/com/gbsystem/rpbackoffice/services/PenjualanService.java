@@ -82,6 +82,7 @@ public class PenjualanService {
 	public List<Penjualan> savePenjualan( Penjualan penjualan) {
 		Penjualan item = new Penjualan();
 		Double sum_qty = 0.0;
+		Double total_harga = 0.0;
 		if (penjualan.getId_transaksi() == null) {
 			System.out.println("Tidak ada pesanan tunggu");
 		} else {
@@ -105,31 +106,7 @@ public class PenjualanService {
 		item.setNo_rek(penjualan.getNo_rek());
 		item.setEkspedisi(penjualan.getEkspedisi());
 		item.setOngkir(penjualan.getOngkir());
-		item.setTotal(penjualan.getTotal());
-		item.setKembalian(penjualan.getKembalian());
 		item.setRowstatus(1);
-		
-		if (penjualan.getTotal() > 1000000) {
-			List<Pelanggan> pembeli = new ArrayList<>();
-			pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
-			for (int i = 0; i < pembeli.size(); i++) {
-
-			    LocalDate now = LocalDate.now();
-			    LocalDate firstDay = now.with(firstDayOfYear());
-			    
-			    if (now != firstDay) {
-			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
-			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
-			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
-					ePelangganRepo.save(pembeli.get(i));
-			    } else {
-			    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
-			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
-			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
-					ePelangganRepo.save(pembeli.get(i));
-			    }
-			}
-		}
 		
 		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
 			DetailPesanan d = new DetailPesanan();
@@ -153,6 +130,7 @@ public class PenjualanService {
 			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
 			d.setRowstatus(1);
 			sum_qty += penjualan.getDetailPesananList().get(i).getKuantitas();
+			total_harga += (penjualan.getDetailPesananList().get(i).getKuantitas() * penjualan.getDetailPesananList().get(i).getHarga_baru());
 			d.setPenjualan(item);
 			details.add(d);
 			
@@ -184,9 +162,46 @@ public class PenjualanService {
 			ePenyimpananStoreKeluarRepo.save(store_asal);
 			
 		}
+		
+		Double diskon = item.getDiskon() == null ? 0.0 : item.getDiskon();
+		Double ongkir = item.getOngkir() == null ? 0.0 : item.getOngkir();
+		
+		Double total_new = 0.0;
+		if (diskon > 100.0) {
+			total_new = (total_harga - diskon) + ongkir;
+		} else if (diskon <= 100.0) {
+			total_new = (total_harga - (total_harga * (diskon / 100))) + ongkir;
+		} else {
+			total_new = (total_harga) + ongkir;
+		}
+		
+		item.setTotal(total_new);
+		item.setKembalian(penjualan.getKembalian());
 		item.setSum_qty(sum_qty);
 		item.setDetailPesananList(details);
 		eRepo.save(item);
+		
+		if (total_new > 1000000.0) {
+			List<Pelanggan> pembeli = new ArrayList<>();
+			pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
+			for (int i = 0; i < pembeli.size(); i++) {
+
+			    LocalDate now = LocalDate.now();
+			    LocalDate firstDay = now.with(firstDayOfYear());
+			    
+			    if (now != firstDay) {
+			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
+			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
+			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+					ePelangganRepo.save(pembeli.get(i));
+			    } else {
+			    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
+			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
+			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+					ePelangganRepo.save(pembeli.get(i));
+			    }
+			}
+		}
 		
 		return eRepo.findByIdTransaksi(id_transaksi);
 	}

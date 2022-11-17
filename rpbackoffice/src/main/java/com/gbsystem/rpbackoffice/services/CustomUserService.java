@@ -11,7 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.Authority;
+import com.gbsystem.rpbackoffice.entities.MasterStore;
 import com.gbsystem.rpbackoffice.entities.User;
+import com.gbsystem.rpbackoffice.repository.MasterStoreRepository;
 import com.gbsystem.rpbackoffice.repository.UserDetailsRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class CustomUserService implements UserDetailsService {
 	
 	@Autowired
 	UserDetailsRepository userDetailsRepository;
+	
+	@Autowired
+	MasterStoreRepository eMasterStore;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,6 +48,9 @@ public class CustomUserService implements UserDetailsService {
 		User user = new User();
 		List<Authority> authorityList=new ArrayList<>();
 		authorityList.add(createAuthority("USER","User role"));
+		
+		MasterStore store = eMasterStore.findById(id_store); 
+		
 		user.setUserName(userName);
 		user.setPassword(passwordEncoder.encode(password));
 		user.setFirstName(firstName);
@@ -54,6 +62,7 @@ public class CustomUserService implements UserDetailsService {
 		user.setLokasi_office(lokasi_office);
 		user.setId_store(id_store);
 		user.setLokasi_store(lokasi_store);
+		user.setAlamat_store(store.getAlamat());
 		user.setAkses_modul(akses_modul);
 		user.setAuthorities(authorityList);
 		return userDetailsRepository.save(user);
@@ -75,6 +84,8 @@ public class CustomUserService implements UserDetailsService {
 		} else {
 			user.setPassword(passwordEncoder.encode(password));
 		}
+		
+		MasterStore store = eMasterStore.findById(id_store);
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setEmail(email);
@@ -84,6 +95,7 @@ public class CustomUserService implements UserDetailsService {
 		user.setLokasi_office(lokasi_office);
 		user.setId_store(id_store);
 		user.setLokasi_store(lokasi_store);
+		user.setAlamat_store(store.getAlamat());
 		user.setAkses_modul(akses_modul);
 		user.setAuthorities(authorityList);
 		return userDetailsRepository.save(user);

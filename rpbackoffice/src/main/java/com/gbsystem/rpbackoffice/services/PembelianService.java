@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.repository.DetailPembelianRepository;
+import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PembelianRepository;
 import com.gbsystem.rpbackoffice.entities.DetailPembelian;
+import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.Pembelian;
 
 @Service
@@ -20,6 +22,9 @@ public class PembelianService {
 	
 	@Autowired
 	private DetailPembelianRepository eDetailRepo;
+	
+	@Autowired
+	private MasterProductRepository eMasterProductRepository;
 	
 	public Pembelian savePembelian(Pembelian pembelian ) {
 		
@@ -35,14 +40,17 @@ public class PembelianService {
 		p.setRowstatus(1);
 		for(int i = 0; i < pembelian.getDetail_pembelian().size(); i++) {
 			DetailPembelian d = new DetailPembelian();
+			MasterProduct prod = eMasterProductRepository.findByArticle(pembelian.getDetail_pembelian().get(i).getArtikel());
+			
 			d.setPembelian_code(pembelian_code);
 			d.setTanggal_transaksi(tanggal_transaksi);
 			d.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
-			d.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
-			d.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());
-			d.setType(pembelian.getDetail_pembelian().get(i).getType());
-			d.setType_name(pembelian.getDetail_pembelian().get(i).getType_name());
-			d.setNama_barang(pembelian.getDetail_pembelian().get(i).getNama_barang());
+			d.setSku_code(pembelian.getDetail_pembelian().get(i).getSku_code());
+			d.setKategori(prod == null ? "" : prod.getKategori());
+			d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+			d.setType(prod == null ? 0 : prod.getType());
+			d.setType_name(prod == null ? "" : prod.getType_name());
+			d.setNama_barang(prod == null ? "" : prod.getNama_product());
 			d.setKuantitas(pembelian.getDetail_pembelian().get(i).getKuantitas());
 			d.setUkuran(pembelian.getDetail_pembelian().get(i).getUkuran());
 			d.setHpp(pembelian.getDetail_pembelian().get(i).getHpp());
@@ -110,6 +118,7 @@ public class PembelianService {
 			if (d != null) {
 				d.setTanggal_transaksi(pembelian.getTanggal_transaksi());
 				d.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
+				d.setSku_code(pembelian.getDetail_pembelian().get(i).getSku_code());
 				d.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
 				d.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());
 				d.setType(pembelian.getDetail_pembelian().get(i).getType());
@@ -127,6 +136,7 @@ public class PembelianService {
 				DetailPembelian new_detail = new DetailPembelian();
 				new_detail.setPembelian_code(p.getPembelian_code());
 				new_detail.setArtikel(pembelian.getDetail_pembelian().get(i).getArtikel());
+				new_detail.setSku_code(pembelian.getDetail_pembelian().get(i).getSku_code());
 				new_detail.setKategori(pembelian.getDetail_pembelian().get(i).getKategori());
 				new_detail.setNama_kategori(pembelian.getDetail_pembelian().get(i).getNama_kategori());
 				new_detail.setType(pembelian.getDetail_pembelian().get(i).getType());
