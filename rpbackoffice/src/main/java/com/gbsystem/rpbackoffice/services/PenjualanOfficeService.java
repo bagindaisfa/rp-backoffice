@@ -148,6 +148,12 @@ public class PenjualanOfficeService {
 			} else {
 				total_penjualan =total;
 			}
+		} else {
+			if (pajak > 0.0) {
+				total_penjualan =total + (total * (pajak / 100));
+			} else {
+				total_penjualan =total;	
+			}
 		}
 		
 		p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
@@ -434,6 +440,12 @@ public class PenjualanOfficeService {
 				total_penjualan =total + (total * (pajak / 100));
 			} else {
 				total_penjualan =total;
+			}
+		} else {
+			if (pajak > 0.0) {
+				total_penjualan =total + (total * (pajak / 100));
+			} else {
+				total_penjualan =total;	
 			}
 		}
 		
