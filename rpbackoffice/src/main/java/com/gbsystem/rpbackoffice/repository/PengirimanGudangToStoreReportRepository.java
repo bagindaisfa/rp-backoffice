@@ -12,7 +12,7 @@ import com.gbsystem.rpbackoffice.entities.PengirimanGudangToStoreReport;
 @Repository
 public interface PengirimanGudangToStoreReportRepository extends JpaRepository<PengirimanGudangToStoreReport, Long> {
 	@Query(value = "select "
-			+ "p.id, "
+			+ "d.id, "
 			+ "p.tanggal_pengiriman, "
 			+ ":date_from AS date_from, "
 			+ ":date_to AS date_to, "
