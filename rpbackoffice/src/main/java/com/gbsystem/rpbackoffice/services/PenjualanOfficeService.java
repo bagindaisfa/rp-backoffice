@@ -125,11 +125,11 @@ public class PenjualanOfficeService {
 		Double total_penjualan = 0.0;
 		
 		if (diskon > 100.0) {
-			if (diskon > 0.0 && pajak > 0.0) {
+			if (pajak > 0.0) {
 				Double total_new = total - diskon;
 				total_penjualan =total_new + (total_new * (pajak / 100));
 				
-			} else if (diskon > 0.0 && pajak <= 0.0) {
+			} else if (pajak <= 0.0) {
 				total_penjualan =total - diskon;
 			} else if (diskon <= 0.0 && pajak > 0.0) {
 				total_penjualan =total + (total * (pajak / 100));

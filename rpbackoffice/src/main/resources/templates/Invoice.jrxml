@@ -306,7 +306,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{diskon} + "%"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{diskon} > 100.0  ? "Rp" + $F{diskon} : $F{diskon} + "%"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
