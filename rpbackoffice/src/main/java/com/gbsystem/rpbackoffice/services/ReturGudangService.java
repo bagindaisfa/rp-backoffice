@@ -73,6 +73,7 @@ public class ReturGudangService {
 				d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
 				d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
 				d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
+				d.setKeterangan(returGudang.getDetail_pengiriman().get(i).getKeterangan());
 				d.setRowstatus(1);
 				d.setReturGudang(p);
 				details.add(d);	
@@ -167,6 +168,7 @@ public class ReturGudangService {
 					detail.setUkuran(prod == null ? "" : prod.getUkuran());
 					detail.setHpp(prod == null ? 0 : prod.getHpp());
 					detail.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+					detail.setKeterangan(returGudang.getDetail_pengiriman().get(i).getKeterangan());
 					detail.setRowstatus(returGudang.getDetail_pengiriman().get(i).getRowstatus());
 					detail.setReturGudang(p);
 					details.add(detail);
@@ -186,6 +188,7 @@ public class ReturGudangService {
 						d.setUkuran(returGudang.getDetail_pengiriman().get(i).getUkuran());
 						d.setHpp(returGudang.getDetail_pengiriman().get(i).getHpp());
 						d.setHarga_jual(returGudang.getDetail_pengiriman().get(i).getHarga_jual());
+						d.setKeterangan(returGudang.getDetail_pengiriman().get(i).getKeterangan());
 						d.setRowstatus(1);
 						d.setReturGudang(p);
 						details.add(d);

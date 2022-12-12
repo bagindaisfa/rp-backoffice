@@ -50,6 +50,7 @@ public class PengirimanOfficeToStoreService {
 		p.setLokasi_office(pengirimanOfficeToStore.getLokasi_office());
 		p.setId_store(pengirimanOfficeToStore.getId_store());
 		p.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
+		p.setKeterangan(pengirimanOfficeToStore.getKeterangan());
 		p.setRowstatus(1);
 		for(int i = 0; i < pengirimanOfficeToStore.getDetailPengirimanList().size(); i++) {
 			StockOffice g = new StockOffice();
@@ -142,6 +143,7 @@ public class PengirimanOfficeToStoreService {
 			p.setLokasi_office(pengirimanOfficeToStore.getLokasi_office());
 			p.setId_store(pengirimanOfficeToStore.getId_store());
 			p.setLokasi_store(pengirimanOfficeToStore.getLokasi_store());
+			p.setKeterangan(pengirimanOfficeToStore.getKeterangan());
 			p.setRowstatus(pengirimanOfficeToStore.getRowstatus());
 			
 			for(int i = 0; i < pengirimanOfficeToStore.getDetailPengirimanList().size(); i++) {
