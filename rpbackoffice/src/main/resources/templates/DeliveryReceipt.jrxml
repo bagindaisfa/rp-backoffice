@@ -12,6 +12,7 @@
 	<field name="pengiriman_code" class="java.lang.String"/>
 	<field name="lokasi_store_asal" class="java.lang.String"/>
 	<field name="lokasi_office_tujuan" class="java.lang.String"/>
+	<field name="keterangan" class="java.lang.String"/>
 	<variable name="sum_qty" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{kuantitas}]]></variableExpression>
 	</variable>
@@ -87,11 +88,11 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="41" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement x="227" y="17" width="101" height="17" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd"/>
-				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+				<reportElement x="177" y="10" width="213" height="17" uuid="7ed7bef1-4ab4-4683-9b72-afeffa1be2dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DELIVERY RECEIPT]]></text>
 			</staticText>
@@ -181,7 +182,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="50" splitType="Stretch">
+		<band height="21" splitType="Stretch">
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="326" y="1" width="71" height="20" isPrintInFirstWholeBand="true" uuid="c5b308b0-d828-4304-b3db-851966b59614"/>
 				<box>
@@ -194,21 +195,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{kuantitas}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement isPrintRepeatedValues="false" x="-11" y="22" width="336" height="20" isPrintInFirstWholeBand="true" uuid="df5b0431-e955-4f31-9d8c-cbf7e9f6e9f2">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<box rightPadding="3">
-					<topPen lineWidth="0.0" lineStyle="Solid"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Total Kuantitas]]></text>
-			</staticText>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="107" y="1" width="218" height="20" isPrintInFirstWholeBand="true" uuid="22e59119-8369-4bdc-8d37-1f822b47c652"/>
 				<box>
@@ -222,25 +208,15 @@
 				<textFieldExpression><![CDATA[$F{nama_barang}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="326" y="22" width="71" height="20" isPrintInFirstWholeBand="true" uuid="792dc593-ceb5-477d-9b71-1983fa1f296d"/>
-				<box leftPadding="3">
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{sum_qty}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight" pattern="Rp #,##0.00" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="397" y="1" width="167" height="20" isPrintInFirstWholeBand="true" uuid="1a99cd36-4900-43ab-81b3-5984d27c429d"/>
 				<box>
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="1.0"/>
 				</box>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Left">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToTallestObject" x="-11" y="1" width="118" height="20" isPrintInFirstWholeBand="true" uuid="65004c12-4e4c-45de-8b2b-89e64e2589ee"/>
@@ -256,9 +232,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="229" splitType="Stretch">
+		<band height="419" splitType="Stretch">
 			<staticText>
-				<reportElement x="-9" y="2" width="100" height="68" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4"/>
+				<reportElement x="-9" y="111" width="100" height="68" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
@@ -266,7 +242,7 @@
 				<text><![CDATA[Received By]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="458" y="1" width="100" height="68" uuid="1e0f22a7-d70d-472b-8fc1-097c2414de75"/>
+				<reportElement x="458" y="110" width="100" height="68" uuid="1e0f22a7-d70d-472b-8fc1-097c2414de75"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
@@ -274,7 +250,7 @@
 				<text><![CDATA[Prepared By]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="230" y="2" width="100" height="70" uuid="4e066c4d-56b8-43f5-80ac-ff8edaa3ae06"/>
+				<reportElement x="230" y="111" width="100" height="70" uuid="4e066c4d-56b8-43f5-80ac-ff8edaa3ae06"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
@@ -282,61 +258,89 @@
 				<text><![CDATA[Delivered By]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="86" width="210" height="15" uuid="954c2959-8682-428f-a586-cad275fb6874"/>
+				<reportElement x="172" y="268" width="210" height="15" uuid="954c2959-8682-428f-a586-cad275fb6874"/>
 				<textElement textAlignment="Center">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Rudy Project Service Center & Gallery]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="47" y="102" width="460" height="20" uuid="175d7d0b-89cc-4ac1-b2de-94f7339b4cbd"/>
+				<reportElement x="47" y="284" width="460" height="20" uuid="175d7d0b-89cc-4ac1-b2de-94f7339b4cbd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Ruko Icon Business Park V Blok F No.6 BSD Sampora Tangerang 15345. Telp 021-53163512 / WA : 0811 1717 734]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="119" width="545" height="20" uuid="e0df7ff5-b77c-4103-b6a1-0c97c3df82f9"/>
+				<reportElement x="5" y="301" width="545" height="20" uuid="e0df7ff5-b77c-4103-b6a1-0c97c3df82f9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Galeria SCBD, Kawasan Niaga Terpadu Sudirman Lot. 6, JL Jend. Sudirman Kav 52 - 53. Telp 012-51402320 / WA : 0811 1717 901]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="136" width="545" height="20" uuid="9134ece3-e55d-4d37-b62a-c0959a94e9b5"/>
+				<reportElement x="5" y="318" width="545" height="20" uuid="9134ece3-e55d-4d37-b62a-c0959a94e9b5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[MotoVillage, JL Pangeran Antasari No. 36, Kebayoran Baru, Jakarta Selatan. Telp / WA : 0811 1818 955]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="154" width="545" height="20" uuid="34fc015a-77a9-4002-b71a-ac445682df57"/>
+				<reportElement x="5" y="336" width="545" height="20" uuid="34fc015a-77a9-4002-b71a-ac445682df57"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[JL Pajajaran No. 26 Babakan Bogor. Telp / WA : 0811 1717 239]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="173" width="545" height="20" uuid="e0386303-2758-430d-b538-66f4ef29faf9"/>
+				<reportElement x="5" y="355" width="545" height="20" uuid="e0386303-2758-430d-b538-66f4ef29faf9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Ganesha Kafe, JL Brigjen Katamso No. 92 Bandung. Telp / WA : 0811 1919 478]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="191" width="545" height="20" uuid="c496cd09-dd9a-47eb-9c0d-8f4fa6b4facd"/>
+				<reportElement x="5" y="373" width="545" height="20" uuid="c496cd09-dd9a-47eb-9c0d-8f4fa6b4facd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[Pakuwon Mall, Glass House Food Society Lt. 2 JL Mayjen Yono Suwoyo No. 2. Telp & WA : 0811 1917 734]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="208" width="545" height="20" uuid="c8df6b73-27c8-45f5-aebf-da1735e546c1"/>
+				<reportElement x="5" y="390" width="545" height="20" uuid="c8df6b73-27c8-45f5-aebf-da1735e546c1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
 				<text><![CDATA[JL Pegambiran No. 37 RT 10 RW 08 Rawamangun, Kec. Pulo Gadung, Jakarta Timur. Telp & WA : 0811 818 406]]></text>
 			</staticText>
+			<staticText>
+				<reportElement isPrintRepeatedValues="false" x="-11" y="4" width="118" height="20" isPrintInFirstWholeBand="true" uuid="ec8dbc21-6855-4df6-99d3-fb262182d979">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box rightPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Kuantitas]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="106" y="4" width="220" height="20" isPrintInFirstWholeBand="true" uuid="df9132a8-03f1-4843-8165-7a6428c74c59"/>
+				<box leftPadding="3">
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[": " + $V{sum_qty}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

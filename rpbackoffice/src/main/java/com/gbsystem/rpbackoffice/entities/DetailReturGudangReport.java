@@ -48,13 +48,10 @@ public class DetailReturGudangReport {
 	private double kuantitas;
 	
 	@Column(updatable=false, insertable=false)
-	private String ukuran;
-	
-	@Column(updatable=false, insertable=false)
-	private double hpp;
-	
-	@Column(updatable=false, insertable=false)
 	private double harga_jual;
+	
+	@Column(updatable=false, insertable=false)
+	private String keterangan;
 
 	public Long getId() {
 		return id;
@@ -152,22 +149,6 @@ public class DetailReturGudangReport {
 		this.kuantitas = kuantitas;
 	}
 
-	public String getUkuran() {
-		return ukuran;
-	}
-
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
-	}
-
-	public double getHpp() {
-		return hpp;
-	}
-
-	public void setHpp(double hpp) {
-		this.hpp = hpp;
-	}
-
 	public double getHarga_jual() {
 		return harga_jual;
 	}
@@ -175,4 +156,14 @@ public class DetailReturGudangReport {
 	public void setHarga_jual(double harga_jual) {
 		this.harga_jual = harga_jual;
 	}
+
+	public String getKeterangan() {
+		return keterangan;
+	}
+
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
+	}
+	
+	
 }

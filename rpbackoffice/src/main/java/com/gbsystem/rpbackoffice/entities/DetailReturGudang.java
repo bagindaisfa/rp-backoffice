@@ -34,8 +34,6 @@ public class DetailReturGudang {
 	private String nama_kategori;
 	private String nama_barang;
 	private Double kuantitas;
-	private String ukuran;
-	private Double hpp;
 	private Double harga_jual;
 	private String keterangan;
 	private int rowstatus;
@@ -110,18 +108,7 @@ public class DetailReturGudang {
 	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
-	public String getUkuran() {
-		return ukuran;
-	}
-	public void setUkuran(String ukuran) {
-		this.ukuran = ukuran;
-	}
-	public Double getHpp() {
-		return hpp;
-	}
-	public void setHpp(Double hpp) {
-		this.hpp = hpp;
-	}
+	
 	public Double getHarga_jual() {
 		return harga_jual;
 	}

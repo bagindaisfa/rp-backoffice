@@ -41,6 +41,9 @@ public class TransferRequest {
 	
 	@Column(updatable=false,nullable=false, insertable=false)
 	private Double sum_qty;
+	
+	@Column(updatable=false, insertable=false)
+	private String keterangan;
 
 	public Double getSum_qty() {
 		return sum_qty;
@@ -123,4 +126,13 @@ public class TransferRequest {
 		this.harga_jual = harga_jual;
 	}
 
+	public String getKeterangan() {
+		return keterangan;
+	}
+
+	public void setKeterangan(String keterangan) {
+		this.keterangan = keterangan;
+	}
+
+	
 }
