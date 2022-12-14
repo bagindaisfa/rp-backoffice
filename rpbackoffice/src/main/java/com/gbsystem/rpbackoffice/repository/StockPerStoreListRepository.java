@@ -11,5 +11,14 @@ public interface StockPerStoreListRepository extends JpaRepository<StockPerStore
 	
 	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 group by id_store,lokasi_store", nativeQuery = true)
 	List<StockPerStoreList> allStock();
+	
+	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 AND kuantitas > 0 AND "
+			+ "(sku_code LIKE %:keyword% OR "
+			+ "artikel LIKE %:keyword% OR "
+			+ "nama_barang LIKE %:keyword% OR "
+			+ "type_name LIKE %:keyword% OR "
+			+ "nama_kategori LIKE %:keyword% OR "
+			+ "lokasi_store LIKE %:keyword%) group by id_store,lokasi_store", nativeQuery = true)
+	List<StockPerStoreList> search(String keyword);
 
 }

@@ -1,5 +1,6 @@
 package com.gbsystem.rpbackoffice.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,5 +49,17 @@ public class StockPerStoreService {
 	public List<StockPerStoreList> allStock() {
 		
 		return eListRepo.allStock();
+	}
+	
+	public List<StockPerStoreList> searchStock(String keyword) {
+		List<StockPerStoreList> response = new ArrayList<>();
+		
+		if (keyword.length() > 0) {
+			response = eListRepo.search(keyword);
+		} else {
+			response = eListRepo.allStock();
+		}
+		
+		return response;
 	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,5 +53,10 @@ public class StockPerStoreController {
 	@GetMapping("/allStock")
 	public List<StockPerStoreList> allStock(){
 		return stockService.allStock();
+	}
+	
+	@GetMapping("/searchStock")
+	public ResponseEntity<List<StockPerStoreList>> searchStock(@Param("keyword") String keyword){
+		return new ResponseEntity<>(stockService.searchStock(keyword), HttpStatus.OK);
 	}
 }
