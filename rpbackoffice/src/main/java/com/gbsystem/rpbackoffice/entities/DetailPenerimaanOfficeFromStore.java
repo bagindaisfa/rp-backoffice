@@ -36,7 +36,6 @@ public class DetailPenerimaanOfficeFromStore {
 	private double kuantitas;
 	private String keterangan;
 	private Double harga_jual;
-	private Double hpp;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "penerimaan_office_from_store_id", referencedColumnName = "id")
@@ -120,12 +119,6 @@ public class DetailPenerimaanOfficeFromStore {
 	}
 	public void setHarga_jual(Double harga_jual) {
 		this.harga_jual = harga_jual;
-	}
-	public Double getHpp() {
-		return hpp;
-	}
-	public void setHpp(Double hpp) {
-		this.hpp = hpp;
 	}
 	public int getRowstatus() {
 		return rowstatus;
