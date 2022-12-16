@@ -21,13 +21,13 @@ public class StockStore {
 	private String kategori;
 	private String nama_kategori;
 	private String nama_barang;
-	private double kuantitas;
+	private Double kuantitas;
 	private String ukuran;
 	@Lob
 	@Column(columnDefinition = "MEDIUMBLOB")
 	private String foto_barang;
-	private double hpp;
-	private double harga_jual;
+	private Double hpp;
+	private Double harga_jual;
 	private int rowstatus;
 	public Long getId() {
 		return id;
@@ -90,10 +90,10 @@ public class StockStore {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
-	public double getKuantitas() {
+	public Double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(double kuantitas) {
+	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
 	public String getUkuran() {

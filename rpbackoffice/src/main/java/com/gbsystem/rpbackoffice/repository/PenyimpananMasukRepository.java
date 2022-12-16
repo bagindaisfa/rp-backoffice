@@ -23,10 +23,10 @@ public interface PenyimpananMasukRepository extends JpaRepository<PenyimpananMas
 	@Query(value = "delete from penyimpanan_masuk b where b.penerimaan_code=:penerimaan_code", nativeQuery = true)
 	void deleteStockMasuk(String penerimaan_code);
 	
-	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND sku_code = (?1)"
+	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_masuk where rowstatus = 1 AND artikel = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Double generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Double generateKuantitasMasuk(String artikel, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "SELECT * FROM penyimpanan_masuk WHERE rowstatus = 1 AND penerimaan_code= :penerimaan_code AND artikel=:artikel", nativeQuery = true)
 	PenyimpananMasuk getPenyimpananByPenerimanCodeandArtikel(String penerimaan_code, String artikel);

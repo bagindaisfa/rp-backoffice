@@ -43,8 +43,8 @@ public interface PenyimpananStoreKeluarRepository extends JpaRepository<Penyimpa
 	List<PenyimpananStoreKeluar> searchMobile(int id_store, String keyword);
 	
 	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_keluar where rowstatus = 1 AND artikel = (?1)"
-			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
-			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
+			+ "AND ((tanggal_keluar <= (?2) AND tanggal_keluar >= (?3))"
+			+ "OR tanggal_keluar = (?2) OR tanggal_keluar = (?3))", nativeQuery = true)
 	Float generateKuantitasKeluar(String artikel, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "select * from penyimpanan_store_keluar WHERE rowstatus=1 AND id_store=:id_store AND "

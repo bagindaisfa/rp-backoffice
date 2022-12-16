@@ -42,10 +42,10 @@ public interface PenyimpananStoreMasukRepository extends JpaRepository<Penyimpan
 			+ "lokasi_office LIKE %:keyword% )", nativeQuery = true)
 	List<PenyimpananStoreMasuk> searchMobile(int id_store, String keyword);
 	
-	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_masuk where rowstatus = 1 AND sku_code = (?1)"
+	@Query(value = "SELECT SUM(kuantitas) FROM penyimpanan_store_masuk where rowstatus = 1 AND artikel = (?1)"
 			+ "AND ((tanggal_masuk <= (?2) AND tanggal_masuk >= (?3))"
 			+ "OR tanggal_masuk = (?2) OR tanggal_masuk = (?3))", nativeQuery = true)
-	Float generateKuantitasMasuk(String sku_code, Date tanggal_awal, Date tanggal_akhir);
+	Float generateKuantitasMasuk(String artikel, Date tanggal_awal, Date tanggal_akhir);
 	
 	@Query(value = "select * from penyimpanan_store_masuk WHERE rowstatus=1 AND id_store=:id_store AND "
 			+ "DATE(tanggal_masuk) >= :date_from AND DATE(tanggal_masuk) <= :date_to", nativeQuery = true)

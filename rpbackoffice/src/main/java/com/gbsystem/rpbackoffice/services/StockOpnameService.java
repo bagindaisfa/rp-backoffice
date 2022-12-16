@@ -7,9 +7,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.entities.StockOpname;
 import com.gbsystem.rpbackoffice.repository.StockOpnameRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananMasukRepository;
+import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
 
 @Service
@@ -23,6 +25,9 @@ public class StockOpnameService {
 	@Autowired
 	private PenyimpananKeluarRepository eRepoKeluar;
 	
+	@Autowired
+	private StockOfficeRepository eStockRepo;
+	
 	public StockOpname saveStockOpname(String sku_code,String artikel, String kategori, String nama_kategori
 			,int type,String type_name, String nama_barang, Double stock_opname) {
 		
@@ -31,13 +36,19 @@ public class StockOpnameService {
 		Date date = new Date();
 		Date date_before = Date.from(ZonedDateTime.now().minusMonths(1).toInstant());
 		
-		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(sku_code, date, date_before);
-		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(sku_code, date, date_before);
-		
-		Double stock = kuantitas_masuk - kuantitas_keluar;
-		
+		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before);
+		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before);
+		Double stock = 0.0;
+		if (kuantitas_masuk.equals(0.0)) {
+			StockOffice d = new StockOffice();
+			d = eStockRepo.findById_officeAndArtikel(1,artikel);
+			stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();
+		} else {
+			stock = kuantitas_masuk - kuantitas_keluar;
+		}
 		String keterangan = "";
-		if (stock == stock_opname) {
+		
+		if (stock.equals(stock_opname)) {
 			keterangan = "Sesuai";
 		} else {
 			keterangan = "Tidak Sesuai";
@@ -87,11 +98,16 @@ public class StockOpnameService {
 		
 		Double kuantitas_masuk = eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before) == null ? 0.0 : eRepoMasuk.generateKuantitasMasuk(artikel, date, date_before);
 		Double kuantitas_keluar = eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before) == null ? 0.0 : eRepoKeluar.generateKuantitasKeluar(artikel, date, date_before);
-		
-		Double stock = kuantitas_masuk - kuantitas_keluar;
-		
+		Double stock = 0.0;
+		if (kuantitas_masuk.equals(0.0)) {
+			StockOffice d = new StockOffice();
+			d = eStockRepo.findById_officeAndArtikel(1,artikel);
+			stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();
+		} else {
+			stock = kuantitas_masuk - kuantitas_keluar;
+		}
 		String keterangan = "";
-		if (stock == stock_opname) {
+		if (stock.equals(stock_opname)) {
 			keterangan = "Sesuai";
 		} else {
 			keterangan = "Tidak Sesuai";
