@@ -1,6 +1,7 @@
 package com.gbsystem.rpbackoffice.controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,10 +26,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.PenyimpananMasuk;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
+import com.gbsystem.rpbackoffice.entities.StockStore;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenerimaanSupplierRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananMasukRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
+import com.gbsystem.rpbackoffice.repository.StockStoreRepository;
 import com.gbsystem.rpbackoffice.services.MasterProductService;
 
 @RestController
@@ -43,6 +46,9 @@ public class MasterProductController {
 	
 	@Autowired
 	private StockOfficeRepository eStockRepo;
+	
+	@Autowired
+	private StockStoreRepository eStockStoreRepo;
 	
 	@Autowired
 	private PenerimaanSupplierRepository ePenerimaanSuppRepo;
@@ -293,6 +299,22 @@ public class MasterProductController {
     	    		}
 
     	    		eStockRepo.save(q);
+    	    		
+    	    		List<StockStore> store = new ArrayList<>();
+    	    		store = eStockStoreRepo.findByArtikel(formatter.formatCellValue(row.getCell(0)));
+    	    		if (store != null) {
+    	    			for (int s=0; s<store.size(); s++) {
+    	    				store.get(s).setKategori(formatter.formatCellValue(row.getCell(4)));
+        	    			store.get(s).setNama_kategori(formatter.formatCellValue(row.getCell(5)));
+        	    			store.get(s).setType(Integer.valueOf(formatter.formatCellValue(row.getCell(2))));
+        	    			store.get(s).setType_name(formatter.formatCellValue(row.getCell(3)));
+        	    			store.get(s).setNama_barang(formatter.formatCellValue(row.getCell(1)));
+        	    			store.get(s).setHpp(Double.valueOf(formatter.formatCellValue(row.getCell(10))));
+        	    			store.get(s).setHarga_jual(Double.valueOf(formatter.formatCellValue(row.getCell(11))));
+        	    			eStockStoreRepo.save(store.get(s));
+    	    			}
+    	    			
+    	    		}
         		}
     		}
     		

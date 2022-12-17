@@ -72,4 +72,6 @@ public interface StockStoreRepository extends JpaRepository<StockStore, Long> {
 	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND id_store = :id_store AND kuantitas <=5 ", nativeQuery = true)
 	List<StockStore> stockMinimum(int id_store);
 	
+	@Query(value = "SELECT * FROM stock_store WHERE rowstatus = 1 AND artikel =:artikel", nativeQuery = true)
+	List<StockStore> findByArtikel(String artikel);
 }
