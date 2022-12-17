@@ -426,7 +426,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<textFieldExpression><![CDATA[": " + $F{no_rek}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="-6" y="144" width="136" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4">
+				<reportElement x="-6" y="144" width="156" height="18" uuid="c85fcccf-cbb4-493e-9b2c-a41e789275c4">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
@@ -436,17 +436,17 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Hormat Kami]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToTallestObject" x="-6" y="162" width="136" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc">
+				<reportElement stretchType="RelativeToTallestObject" x="-6" y="162" width="156" height="18" uuid="f49dfef1-82a3-4201-84f5-c52444ac62dc">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
 					<bottomPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Top"/>
-				<text><![CDATA[PT. Promatra Nusantara]]></text>
+				<text><![CDATA[PT. Arras Protama Sejahtera]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-7" y="226" width="136" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145">
+				<reportElement x="-7" y="226" width="157" height="18" uuid="ec7c6e6e-741c-4180-9655-c08ce1237145">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<box>
