@@ -75,50 +75,56 @@ public class PenjualanOfficeService {
 			MasterProduct prod = new MasterProduct();
 			prod = eMasterProductRepository.findByArticle(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
 			
-			d.setTanggal_transaksi(tanggal_transaksi);
-			d.setId_transaksi(id_transaksi);
-			d.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
-			d.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
-			d.setKategori(prod == null ? "" : prod.getKategori());
-			d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-			d.setType(prod == null ? 0 : prod.getType());
-			d.setType_name(prod == null ? "" : prod.getType_name());
-			d.setNama_barang(prod == null ? "" : prod.getNama_product());
-			d.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			d.setHarga_satuan_barang(prod == null ? 0 : prod.getHarga_jual());
-			d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * (prod == null ? 0 : prod.getHarga_jual()));
-			d.setRowstatus(1);
-			d.setPenjualanOffice(p);
-			total += (penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * (prod == null ? 0 : prod.getHarga_jual()));
-			details.add(d);
-			
-			StockOffice g = new StockOffice();
-			g = eStockOfficeRepo.findById_officeAndArtikel(
+			StockOffice checker = new StockOffice();
+			checker = eStockOfficeRepo.findById_officeAndArtikel(
 					penjualanOffice.getId_office(),
 					penjualanOffice.getDetail_penjualan().get(i).getArtikel());
-			g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			eStockOfficeRepo.save(g);
-			
-			PenyimpananKeluar f = new PenyimpananKeluar();
-			f.setPengiriman_code(id_transaksi);
-			f.setTanggal_keluar(tanggal_transaksi);
-			f.setId_office(penjualanOffice.getId_office());
-			f.setLokasi_office(penjualanOffice.getLokasi_office());
-			f.setLokasi_store("-");
-			f.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
-			f.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
-			f.setKategori(prod == null ? "" : prod.getKategori());
-			f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-			f.setType(prod == null ? 0 : prod.getType());
-			f.setType_name(prod == null ? "" : prod.getType_name());
-			f.setNama_barang(prod == null ? "" : prod.getNama_product());
-			f.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
-			f.setUkuran(prod == null ? "" : prod.getUkuran());
-			f.setHpp(prod == null ? 0 : prod.getHpp());
-			f.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
-			f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
-			f.setRowstatus(1);
-			ePenyimpananRepo.save(f);
+			if (checker != null) {
+				d.setTanggal_transaksi(tanggal_transaksi);
+				d.setId_transaksi(id_transaksi);
+				d.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
+				d.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
+				d.setKategori(prod == null ? "" : prod.getKategori());
+				d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				d.setType(prod == null ? 0 : prod.getType());
+				d.setType_name(prod == null ? "" : prod.getType_name());
+				d.setNama_barang(prod == null ? "" : prod.getNama_product());
+				d.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
+				d.setHarga_satuan_barang(prod == null ? 0 : prod.getHarga_jual());
+				d.setTotal(penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * (prod == null ? 0 : prod.getHarga_jual()));
+				d.setRowstatus(1);
+				d.setPenjualanOffice(p);
+				total += (penjualanOffice.getDetail_penjualan().get(i).getKuantitas() * (prod == null ? 0 : prod.getHarga_jual()));
+				details.add(d);
+				
+				StockOffice g = new StockOffice();
+				g = eStockOfficeRepo.findById_officeAndArtikel(
+						penjualanOffice.getId_office(),
+						penjualanOffice.getDetail_penjualan().get(i).getArtikel());
+				g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
+				eStockOfficeRepo.save(g);
+				
+				PenyimpananKeluar f = new PenyimpananKeluar();
+				f.setPengiriman_code(id_transaksi);
+				f.setTanggal_keluar(tanggal_transaksi);
+				f.setId_office(penjualanOffice.getId_office());
+				f.setLokasi_office(penjualanOffice.getLokasi_office());
+				f.setLokasi_store("-");
+				f.setSku_code(penjualanOffice.getDetail_penjualan().get(i).getSku_code());
+				f.setArtikel(penjualanOffice.getDetail_penjualan().get(i).getArtikel());
+				f.setKategori(prod == null ? "" : prod.getKategori());
+				f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+				f.setType(prod == null ? 0 : prod.getType());
+				f.setType_name(prod == null ? "" : prod.getType_name());
+				f.setNama_barang(prod == null ? "" : prod.getNama_product());
+				f.setKuantitas(penjualanOffice.getDetail_penjualan().get(i).getKuantitas());
+				f.setUkuran(prod == null ? "" : prod.getUkuran());
+				f.setHpp(prod == null ? 0 : prod.getHpp());
+				f.setHarga_jual(prod == null ? 0 : prod.getHarga_jual());
+				f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
+				f.setRowstatus(1);
+				ePenyimpananRepo.save(f);
+			}
 		}
 		Double pajak = penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya();
 		Double diskon = penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon();
@@ -267,151 +273,156 @@ public class PenjualanOfficeService {
 			MasterProduct prod = new MasterProduct();
 			prod = eMasterProductRepository.findByArticle(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
 			
-			if (penjualanOffice.getDetail_penjualan().get(k).getId() == null) {
-				d = null;
-			} else {
-				d = eDetailRepo.findById(penjualanOffice.getDetail_penjualan().get(k).getId()).orElse(null);
-			}
-			
-			if (d != null) {
-				d.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
-				d.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				d.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-				d.setKategori(prod == null ? "" : prod.getKategori());
-				d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-				d.setType(prod == null ? 0 : prod.getType());
-				d.setType_name(prod == null ? "" : prod.getType_name());
-				d.setNama_barang(prod == null ? "" : prod.getNama_product());
-				d.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				d.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
-				d.setRowstatus(penjualanOffice.getDetail_penjualan().get(k).getRowstatus());
-				d.setPenjualanOffice(p);
-				details.add(d);
-				if (penjualanOffice.getDetail_penjualan().get(k).getRowstatus() == 1) {
-					total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-					
-					StockOffice l = new StockOffice();
-					l = eStockOfficeRepo.findById_officeAndArtikel(
-							penjualanOffice.getId_office(),
-							penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-					l.setKuantitas(l.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-					eStockOfficeRepo.save(l);
-				
-					PenyimpananKeluar f = new PenyimpananKeluar();
-					f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
-							penjualanOffice.getId_transaksi(),
-							penjualanOffice.getDetail_penjualan().get(k).getArtikel()
-							);
-					if (f != null) {
-						f.setPengiriman_code(p.getId_transaksi());
-						f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
-						f.setId_office(penjualanOffice.getId_office());
-						f.setLokasi_office(penjualanOffice.getLokasi_office());
-						f.setLokasi_store("-");
-						f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-						f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-						f.setKategori(prod == null ? "" : prod.getKategori());
-						f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-						f.setType(prod == null ? 0 : prod.getType());
-						f.setType_name(prod == null ? "" : prod.getType_name());
-						f.setNama_barang(prod == null ? "" : prod.getNama_product());
-						f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-						f.setUkuran(prod == null ? "" : prod.getUkuran());
-						f.setHpp(prod == null ? 0 : prod.getHpp());
-						f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-						f.setKeterangan("Penjualan Office ke pelanggan" + penjualanOffice.getNama_pelanggan());
-						f.setRowstatus(1);
-						ePenyimpananRepo.save(f);
-					} else {
-						PenyimpananKeluar newitem = new PenyimpananKeluar();
-						newitem.setPengiriman_code(p.getId_transaksi());
-						newitem.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
-						newitem.setId_office(penjualanOffice.getId_office());
-						newitem.setLokasi_office(penjualanOffice.getLokasi_office());
-						newitem.setLokasi_store("-");
-						newitem.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-						newitem.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-						newitem.setKategori(prod == null ? "" : prod.getKategori());
-						newitem.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-						newitem.setType(prod == null ? 0 : prod.getType());
-						newitem.setType_name(prod == null ? "" : prod.getType_name());
-						newitem.setNama_barang(prod == null ? "" : prod.getNama_product());
-						newitem.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-						newitem.setUkuran(prod == null ? "" : prod.getUkuran());
-						newitem.setHpp(prod == null ? 0 : prod.getHpp());
-						newitem.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-						newitem.setKeterangan("Penjualan Office ke pelanggan" + penjualanOffice.getNama_pelanggan());
-						newitem.setRowstatus(1);
-						ePenyimpananRepo.save(newitem);
-					}
-					
+			StockOffice checker = new StockOffice();
+			checker = eStockOfficeRepo.findById_officeAndArtikel(
+					penjualanOffice.getId_office(),
+					penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+			if (checker != null) {
+				if (penjualanOffice.getDetail_penjualan().get(k).getId() == null) {
+					d = null;
 				} else {
-					total -= (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+					d = eDetailRepo.findById(penjualanOffice.getDetail_penjualan().get(k).getId()).orElse(null);
+				}
+				
+				if (d != null) {
+					d.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
+					d.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+					d.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
+					d.setKategori(prod == null ? "" : prod.getKategori());
+					d.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+					d.setType(prod == null ? 0 : prod.getType());
+					d.setType_name(prod == null ? "" : prod.getType_name());
+					d.setNama_barang(prod == null ? "" : prod.getNama_product());
+					d.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+					d.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+					d.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
+					d.setRowstatus(penjualanOffice.getDetail_penjualan().get(k).getRowstatus());
+					d.setPenjualanOffice(p);
+					details.add(d);
+					if (penjualanOffice.getDetail_penjualan().get(k).getRowstatus() == 1) {
+						total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+						
+						StockOffice l = new StockOffice();
+						l = eStockOfficeRepo.findById_officeAndArtikel(
+								penjualanOffice.getId_office(),
+								penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+						l.setKuantitas(l.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+						eStockOfficeRepo.save(l);
 					
-					StockOffice l = new StockOffice();
-					l = eStockOfficeRepo.findById_officeAndArtikel(
+						PenyimpananKeluar f = new PenyimpananKeluar();
+						f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
+								penjualanOffice.getId_transaksi(),
+								penjualanOffice.getDetail_penjualan().get(k).getArtikel()
+								);
+						if (f != null) {
+							f.setPengiriman_code(p.getId_transaksi());
+							f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
+							f.setId_office(penjualanOffice.getId_office());
+							f.setLokasi_office(penjualanOffice.getLokasi_office());
+							f.setLokasi_store("-");
+							f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
+							f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+							f.setKategori(prod == null ? "" : prod.getKategori());
+							f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+							f.setType(prod == null ? 0 : prod.getType());
+							f.setType_name(prod == null ? "" : prod.getType_name());
+							f.setNama_barang(prod == null ? "" : prod.getNama_product());
+							f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+							f.setUkuran(prod == null ? "" : prod.getUkuran());
+							f.setHpp(prod == null ? 0 : prod.getHpp());
+							f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+							f.setKeterangan("Penjualan Office ke pelanggan" + penjualanOffice.getNama_pelanggan());
+							f.setRowstatus(1);
+							ePenyimpananRepo.save(f);
+						} else {
+							PenyimpananKeluar newitem = new PenyimpananKeluar();
+							newitem.setPengiriman_code(p.getId_transaksi());
+							newitem.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
+							newitem.setId_office(penjualanOffice.getId_office());
+							newitem.setLokasi_office(penjualanOffice.getLokasi_office());
+							newitem.setLokasi_store("-");
+							newitem.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
+							newitem.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+							newitem.setKategori(prod == null ? "" : prod.getKategori());
+							newitem.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+							newitem.setType(prod == null ? 0 : prod.getType());
+							newitem.setType_name(prod == null ? "" : prod.getType_name());
+							newitem.setNama_barang(prod == null ? "" : prod.getNama_product());
+							newitem.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+							newitem.setUkuran(prod == null ? "" : prod.getUkuran());
+							newitem.setHpp(prod == null ? 0 : prod.getHpp());
+							newitem.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+							newitem.setKeterangan("Penjualan Office ke pelanggan" + penjualanOffice.getNama_pelanggan());
+							newitem.setRowstatus(1);
+							ePenyimpananRepo.save(newitem);
+						}
+						
+					} else {
+						total -= (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+						
+						StockOffice l = new StockOffice();
+						l = eStockOfficeRepo.findById_officeAndArtikel(
+								penjualanOffice.getId_office(),
+								penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+						l.setKuantitas(l.getKuantitas() + penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+						eStockOfficeRepo.save(l);
+					
+						PenyimpananKeluar f = new PenyimpananKeluar();
+						f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
+								penjualanOffice.getId_transaksi(),
+								penjualanOffice.getDetail_penjualan().get(k).getArtikel()
+								);
+						f.setRowstatus(0);
+						ePenyimpananRepo.save(f);
+					}
+				} else {
+					DetailPenjualanOffice new_insert = new DetailPenjualanOffice();
+					new_insert.setId_transaksi(p.getId_transaksi());
+					new_insert.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
+					new_insert.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
+					new_insert.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+					new_insert.setKategori(prod == null ? "" : prod.getKategori());
+					new_insert.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+					new_insert.setType(prod == null ? 0 : prod.getType());
+					new_insert.setType_name(prod == null ? "" : prod.getType_name());
+					new_insert.setNama_barang(prod == null ? "" : prod.getNama_product());
+					new_insert.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+					new_insert.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+					new_insert.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
+					new_insert.setRowstatus(1);
+					new_insert.setPenjualanOffice(p);
+					total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+					details.add(new_insert);
+					
+					StockOffice g = new StockOffice();
+					g = eStockOfficeRepo.findById_officeAndArtikel(
 							penjualanOffice.getId_office(),
 							penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-					l.setKuantitas(l.getKuantitas() + penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-					eStockOfficeRepo.save(l);
-				
+					g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+					eStockOfficeRepo.save(g);
+					
 					PenyimpananKeluar f = new PenyimpananKeluar();
-					f = ePenyimpananRepo.getPenyimpananByPengirimanCodeandArtikel(
-							penjualanOffice.getId_transaksi(),
-							penjualanOffice.getDetail_penjualan().get(k).getArtikel()
-							);
-					f.setRowstatus(0);
+					f.setPengiriman_code(p.getId_transaksi());
+					f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
+					f.setId_office(penjualanOffice.getId_office());
+					f.setLokasi_office(penjualanOffice.getLokasi_office());
+					f.setLokasi_store("-");
+					f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
+					f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
+					f.setKategori(prod == null ? "" : prod.getKategori());
+					f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
+					f.setType(prod == null ? 0 : prod.getType());
+					f.setType_name(prod == null ? "" : prod.getType_name());
+					f.setNama_barang(prod == null ? "" : prod.getNama_product());
+					f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
+					f.setUkuran(prod == null ? "" : prod.getUkuran());
+					f.setHpp(prod == null ? 0 : prod.getHpp());
+					f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
+					f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
+					f.setRowstatus(1);
 					ePenyimpananRepo.save(f);
 				}
-			} else {
-				DetailPenjualanOffice new_insert = new DetailPenjualanOffice();
-				new_insert.setId_transaksi(p.getId_transaksi());
-				new_insert.setTanggal_transaksi(penjualanOffice.getTanggal_transaksi());
-				new_insert.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-				new_insert.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				new_insert.setKategori(prod == null ? "" : prod.getKategori());
-				new_insert.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-				new_insert.setType(prod == null ? 0 : prod.getType());
-				new_insert.setType_name(prod == null ? "" : prod.getType_name());
-				new_insert.setNama_barang(prod == null ? "" : prod.getNama_product());
-				new_insert.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				new_insert.setHarga_satuan_barang(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				new_insert.setTotal(penjualanOffice.getDetail_penjualan().get(k).getTotal());
-				new_insert.setRowstatus(1);
-				new_insert.setPenjualanOffice(p);
-				total += (penjualanOffice.getDetail_penjualan().get(k).getKuantitas() * penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				details.add(new_insert);
-				
-				StockOffice g = new StockOffice();
-				g = eStockOfficeRepo.findById_officeAndArtikel(
-						penjualanOffice.getId_office(),
-						penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				g.setKuantitas(g.getKuantitas() - penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				eStockOfficeRepo.save(g);
-				
-				PenyimpananKeluar f = new PenyimpananKeluar();
-				f.setPengiriman_code(p.getId_transaksi());
-				f.setTanggal_keluar(penjualanOffice.getTanggal_transaksi());
-				f.setId_office(penjualanOffice.getId_office());
-				f.setLokasi_office(penjualanOffice.getLokasi_office());
-				f.setLokasi_store("-");
-				f.setSku_code(penjualanOffice.getDetail_penjualan().get(k).getSku_code());
-				f.setArtikel(penjualanOffice.getDetail_penjualan().get(k).getArtikel());
-				f.setKategori(prod == null ? "" : prod.getKategori());
-				f.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
-				f.setType(prod == null ? 0 : prod.getType());
-				f.setType_name(prod == null ? "" : prod.getType_name());
-				f.setNama_barang(prod == null ? "" : prod.getNama_product());
-				f.setKuantitas(penjualanOffice.getDetail_penjualan().get(k).getKuantitas());
-				f.setUkuran(prod == null ? "" : prod.getUkuran());
-				f.setHpp(prod == null ? 0 : prod.getHpp());
-				f.setHarga_jual(penjualanOffice.getDetail_penjualan().get(k).getHarga_satuan_barang());
-				f.setKeterangan("Penjualan Office ke pelanggan " + penjualanOffice.getNama_pelanggan());
-				f.setRowstatus(1);
-				ePenyimpananRepo.save(f);
 			}
-			
 		}
 		Double pajak = penjualanOffice.getPajak_biaya() == null ? 0.0 : penjualanOffice.getPajak_biaya();
 		Double diskon = penjualanOffice.getDiskon() == null ? 0.0 : penjualanOffice.getDiskon();

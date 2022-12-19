@@ -295,6 +295,12 @@ public class MasterProductService {
 		return eRepo.findByArticle(article);
 	}
 	
+	public StockOffice officeFindByArticle(String article) {
+		StockOffice response = new StockOffice();
+		response = eStockRepo.findByArtikel(article);
+		
+		return response;
+	}
 	public List<MasterProduct> findByType(int type) {
 		return eRepo.findByType(type);
 	}

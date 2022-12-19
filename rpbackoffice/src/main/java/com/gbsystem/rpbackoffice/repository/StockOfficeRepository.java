@@ -16,6 +16,9 @@ public interface StockOfficeRepository extends JpaRepository<StockOffice, Long> 
 	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = :id_office AND artikel = :artikel ORDER BY kuantitas DESC LIMIT 1", nativeQuery = true)
 	StockOffice findById_officeAndArtikel(int id_office, String artikel);
 	
+	@Query(value = "SELECT * FROM stock_office WHERE rowstatus = 1 AND id_office = 1 AND artikel = :artikel AND kuantitas > 0 ORDER BY kuantitas DESC LIMIT 1", nativeQuery = true)
+	StockOffice findByArtikel(String artikel);
+	
 	@Query(value = "SELECT SUM(kuantitas) AS kuantitas FROM stock_office WHERE rowstatus = :rowstatus ", nativeQuery = true)
 	Double totalStockOffice(int rowstatus);
 	

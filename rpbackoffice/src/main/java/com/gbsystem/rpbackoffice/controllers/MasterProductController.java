@@ -76,6 +76,17 @@ public class MasterProductController {
         return new ResponseEntity<>(masterProductService.findByArticle(article), HttpStatus.OK);
     }
     
+    @GetMapping("/office/getByArticle")
+	public ResponseEntity<StockOffice> officeGetByArticle(@Param("article") String article) {
+    	StockOffice response = new StockOffice();
+    	response = masterProductService.officeFindByArticle(article);
+    	ResponseEntity<StockOffice> officeGetByArticle = new ResponseEntity<>(response, HttpStatus.OK);
+    	if (response == null) {
+    		officeGetByArticle = new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    	}
+        return officeGetByArticle;
+    }
+    
     @GetMapping("/getByType")
 	public ResponseEntity<List<MasterProduct>> getByType(@Param("type") int type) {
         return new ResponseEntity<>(masterProductService.findByType(type), HttpStatus.OK);
