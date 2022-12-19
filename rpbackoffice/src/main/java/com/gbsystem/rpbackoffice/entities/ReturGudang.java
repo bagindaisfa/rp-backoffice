@@ -32,6 +32,8 @@ public class ReturGudang {
 	private String lokasi_store_asal;
 	private int id_office_tujuan;
 	private String lokasi_office_tujuan;
+	@Column(updatable=false, insertable=false)
+	private Integer qty;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "returGudang", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("returGudang")
@@ -77,6 +79,12 @@ public class ReturGudang {
 	}
 	public void setLokasi_office_tujuan(String lokasi_office_tujuan) {
 		this.lokasi_office_tujuan = lokasi_office_tujuan;
+	}
+	public Integer getQty() {
+		return qty;
+	}
+	public void setQty(Integer qty) {
+		this.qty = qty;
 	}
 	public int getRowstatus() {
 		return rowstatus;

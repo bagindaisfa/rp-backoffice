@@ -36,6 +36,8 @@ public class PengirimanOfficeToStore {
 	private int id_store;
 	private String lokasi_store;
 	private String keterangan;
+	@Column(updatable=false, insertable=false)
+	private Integer qty;
 	private int rowstatus;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pengirimanOfficeToStore", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
@@ -88,6 +90,12 @@ public class PengirimanOfficeToStore {
 	}
 	public void setKeterangan(String keterangan) {
 		this.keterangan = keterangan;
+	}
+	public Integer getQty() {
+		return qty;
+	}
+	public void setQty(Integer qty) {
+		this.qty = qty;
 	}
 	public int getRowstatus() {
 		return rowstatus;

@@ -9,10 +9,37 @@ import org.springframework.data.repository.query.Param;
 import com.gbsystem.rpbackoffice.entities.PengirimanStoreToStore;
 
 public interface PengirimanStoreToStoreRepository extends JpaRepository<PengirimanStoreToStore, Long> {
+	@Query(value = "SELECT "
+			+ "A.id, "
+			+ "A.id_karyawan, "
+			+ "A.id_store_asal, "
+			+ "A.id_store_tujuan, "
+			+ "A.keterangan, "
+			+ "A.lokasi_store_asal,"
+			+ "A.lokasi_store_tujuan, "
+			+ "A.nama_karyawan, "
+			+ "A.pengiriman_code, "
+			+ "A.rowstatus, "
+			+ "A.tanggal_pengiriman, "
+			+ "(SELECT SUM(kuantitas) FROM detail_pengiriman_store_to_store WHERE pengiriman_store_to_store_id=A.id and rowstatus=1) AS total_pindah  "
+			+ "FROM pengiriman_store_to_store A WHERE A.rowstatus = 1", nativeQuery = true)
 	List<PengirimanStoreToStore> findByRowstatus(@Param("rowstatus") int rowstatus);
 	
-	@Query(value = "SELECT * FROM pengiriman_store_to_store WHERE rowstatus = 1 AND ( pengiriman_code LIKE %:keyword% OR "
-			+ "lokasi_store_asal LIKE %:keyword% OR lokasi_store_tujuan LIKE %:keyword% )", nativeQuery = true)
+	@Query(value = "SELECT "
+			+ "A.id, "
+			+ "A.id_karyawan, "
+			+ "A.id_store_asal, "
+			+ "A.id_store_tujuan, "
+			+ "A.keterangan, "
+			+ "A.lokasi_store_asal,"
+			+ "A.lokasi_store_tujuan, "
+			+ "A.nama_karyawan, "
+			+ "A.pengiriman_code, "
+			+ "A.rowstatus, "
+			+ "A.tanggal_pengiriman, "
+			+ "(SELECT SUM(kuantitas) FROM detail_pengiriman_store_to_store WHERE pengiriman_store_to_store_id=A.id and rowstatus=1) AS total_pindah  "
+			+ "FROM pengiriman_store_to_store A WHERE A.rowstatus = 1 AND ( A.pengiriman_code LIKE %:keyword% OR "
+			+ "A.lokasi_store_asal LIKE %:keyword% OR A.lokasi_store_tujuan LIKE %:keyword% )", nativeQuery = true)
 	List<PengirimanStoreToStore> search( String keyword);
 	
 	@Query(value = "SELECT A.id AS id,A.id_store_asal AS id_store_asal,A.id_store_tujuan AS id_store_tujuan,"

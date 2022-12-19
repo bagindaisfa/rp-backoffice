@@ -11,14 +11,36 @@ import com.gbsystem.rpbackoffice.entities.PenerimaanOfficeFromStore;
 
 @Repository
 public interface PenerimaanOfficeFromStoreRepository extends JpaRepository<PenerimaanOfficeFromStore, Long> {
-   List<PenerimaanOfficeFromStore> findByRowstatus(@Param("rowstatus") int rowstatus);
+	@Query(value = "SELECT "
+			+ "A.id, "
+			+ "A.id_office, "
+			+ "A.id_store, "
+			+ "A.lokasi_office, "
+			+ "A.lokasi_store, "
+			+ "A.penerimaan_code, "
+			+ "A.retur_code, "
+			+ "A.rowstatus, "
+			+ "A.tanggal_penerimaan, "
+			+ "(SELECT SUM(kuantitas) from detail_penerimaan_office_from_store WHERE penerimaan_office_from_store_id=A.id and rowstatus=1) AS qty "
+			+ "FROM penerimaan_office_from_store A WHERE A.rowstatus = :rowstatus", nativeQuery = true)
+	List<PenerimaanOfficeFromStore> findByRowstatus(int rowstatus);
 	
-	@Query(value = "SELECT * FROM penerimaan_office_from_store WHERE rowstatus = 1 AND "
-			+ "(lokasi_office LIKE %:keyword% OR "
-			+ "retur_code LIKE %:keyword% OR "
-			+ "sku_code LIKE %:keyword% OR "
-			+ "penerimaan_code LIKE %:keyword% OR "
-			+ "lokasi_store LIKE %:keyword% )", nativeQuery = true)
+	@Query(value = "SELECT "
+			+ "A.id, "
+			+ "A.id_office, "
+			+ "A.id_store, "
+			+ "A.lokasi_office, "
+			+ "A.lokasi_store, "
+			+ "A.penerimaan_code, "
+			+ "A.retur_code, "
+			+ "A.rowstatus, "
+			+ "A.tanggal_penerimaan, "
+			+ "(SELECT SUM(kuantitas) from detail_penerimaan_office_from_store WHERE penerimaan_office_from_store_id=A.id and rowstatus=1) AS qty "
+			+ "FROM penerimaan_office_from_store A WHERE A.rowstatus = 1 AND "
+			+ "(A.lokasi_office LIKE %:keyword% OR "
+			+ "A.retur_code LIKE %:keyword% OR "
+			+ "A.penerimaan_code LIKE %:keyword% OR "
+			+ "A.lokasi_store LIKE %:keyword% )", nativeQuery = true)
 	List<PenerimaanOfficeFromStore> search(String keyword);
 	
 	@Query(value = "SELECT * FROM penerimaan_office_from_store WHERE rowstatus = 1 AND retur_code = :retur_code", nativeQuery = true)
