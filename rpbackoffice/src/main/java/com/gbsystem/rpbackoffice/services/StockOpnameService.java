@@ -42,7 +42,11 @@ public class StockOpnameService {
 		if (kuantitas_masuk.equals(0.0)) {
 			StockOffice d = new StockOffice();
 			d = eStockRepo.findById_officeAndArtikel(1,artikel);
-			stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();
+			if (d != null) {
+				stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();	
+			} else {
+				stock = 0.0;
+			}
 		} else {
 			stock = kuantitas_masuk - kuantitas_keluar;
 		}
@@ -102,7 +106,11 @@ public class StockOpnameService {
 		if (kuantitas_masuk.equals(0.0)) {
 			StockOffice d = new StockOffice();
 			d = eStockRepo.findById_officeAndArtikel(1,artikel);
-			stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();
+			if (d != null) {
+				stock = d.getKuantitas() == null ? 0.0 : d.getKuantitas();	
+			} else {
+				stock = 0.0;
+			}
 		} else {
 			stock = kuantitas_masuk - kuantitas_keluar;
 		}

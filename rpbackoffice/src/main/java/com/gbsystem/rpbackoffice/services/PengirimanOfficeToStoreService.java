@@ -168,7 +168,7 @@ public class PengirimanOfficeToStoreService {
 					detail_update.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
 					detail_update.setType(prod == null ? 0 : prod.getType());
 					detail_update.setType_name(prod == null ? "" : prod.getType_name());
-					detail_update.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
+					detail_update.setNama_barang(prod == null ? "" : prod.getNama_product());
 					detail_update.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 					detail_update.setUkuran(prod == null ? "" : prod.getUkuran());
 					detail_update.setHpp(prod == null ? 0 : prod.getHpp());
@@ -193,7 +193,7 @@ public class PengirimanOfficeToStoreService {
 						detail.setNama_kategori(prod == null ? "" : prod.getNama_kategori());
 						detail.setType(prod == null ? 0 : prod.getType());
 						detail.setType_name(prod == null ? "" : prod.getType_name());
-						detail.setNama_barang(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getNama_barang());
+						detail.setNama_barang(prod == null ? "" : prod.getNama_product());
 						detail.setKuantitas(pengirimanOfficeToStore.getDetailPengirimanList().get(i).getKuantitas());
 						detail.setUkuran(prod == null ? "" : prod.getUkuran());
 						detail.setHpp(prod == null ? 0 : prod.getHpp());

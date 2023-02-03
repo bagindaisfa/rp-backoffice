@@ -147,6 +147,20 @@ public class ReportController {
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 	
+	@GetMapping("/stockOpnameStore")
+	public ResponseEntity<byte []> generatePdfStockOpnameStore(@Param("id_store") int id_store, @Param("date_from") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_from, @Param("date_to") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_to) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(penyimpananStockOpnameReportService.PenyimpananStockOpnameStoreReport(id_store,date_from, date_to));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("classes/templates/PenyimpananStockOpnameStore.jrxml"));
+		
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=PenyimpananStockOpnameStoreReport.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
 	@GetMapping("/pengirimanGudangToStore")
 	public ResponseEntity<byte []> generatePdfPengirimanGudangToStore(@Param("date_from") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_from, @Param("date_to") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_to) throws Exception, JRException{
 		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(pengirimanGudangToStoreReportService.PengirimanGudangToStoreReport(date_from, date_to));

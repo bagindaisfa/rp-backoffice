@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.gbsystem.rpbackoffice.entities.StockPerStoreList;
 import com.gbsystem.rpbackoffice.entities.StockStore;
 
 public interface StockStoreRepository extends JpaRepository<StockStore, Long> {

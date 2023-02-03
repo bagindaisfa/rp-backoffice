@@ -18,7 +18,7 @@ public interface DetailReturGudangReportRepository extends JpaRepository<DetailR
 			+ "B.lokasi_store_asal,B.lokasi_office_tujuan,"
 			+ "A.id,"
 			+ "A.pengiriman_code,"
-			+ "A.tanggal_retur,"
+			+ "B.tanggal_retur,"
 			+ "A.sku_code,"
 			+ "A.artikel,"
 			+ "A.type,"

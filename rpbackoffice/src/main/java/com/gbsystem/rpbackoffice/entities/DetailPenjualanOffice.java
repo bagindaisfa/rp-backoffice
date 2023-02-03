@@ -31,9 +31,10 @@ public class DetailPenjualanOffice {
 	private String kategori;
 	private String nama_kategori;
 	private String nama_barang;
-	private double kuantitas;
-	private double harga_satuan_barang;
-	private double total;
+	private Double kuantitas;
+	private Double harga_satuan_barang;
+	private Double diskon;
+	private Double total;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "penjualan_office_id", referencedColumnName = "id")
@@ -101,24 +102,30 @@ public class DetailPenjualanOffice {
 	public void setNama_barang(String nama_barang) {
 		this.nama_barang = nama_barang;
 	}
-	public double getKuantitas() {
+	public Double getKuantitas() {
 		return kuantitas;
 	}
-	public void setKuantitas(double kuantitas) {
+	public void setKuantitas(Double kuantitas) {
 		this.kuantitas = kuantitas;
 	}
 	
-	public double getHarga_satuan_barang() {
+	public Double getHarga_satuan_barang() {
 		return harga_satuan_barang;
 	}
-	public void setHarga_satuan_barang(double harga_satuan_barang) {
+	public void setHarga_satuan_barang(Double harga_satuan_barang) {
 		this.harga_satuan_barang = harga_satuan_barang;
 	}
 	
-	public double getTotal() {
+	public Double getDiskon() {
+		return diskon;
+	}
+	public void setDiskon(Double diskon) {
+		this.diskon = diskon;
+	}
+	public Double getTotal() {
 		return total;
 	}
-	public void setTotal(double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 	public int getRowstatus() {

@@ -46,7 +46,11 @@ public class StockOpnameStoreService {
 		if (kuantitas_masuk == 0.0) {
 			StockStore stockStore = new StockStore();
 			stockStore = eStockStoreRepo.findById_storeAndArtikel(id_store,artikel);
-			stock = stockStore.getKuantitas() == null ? 0.0 : stockStore.getKuantitas();
+			if (stockStore != null) {
+				stock = stockStore.getKuantitas() == null ? 0.0 : stockStore.getKuantitas();	
+			} else {
+				stock = 0.0;
+			}
 		} else {
 			stock = kuantitas_masuk - kuantitas_keluar;
 		}
@@ -108,7 +112,11 @@ public class StockOpnameStoreService {
 		if (kuantitas_masuk.equals(0.0)) {
 			StockStore stockStore = new StockStore();
 			stockStore = eStockStoreRepo.findById_storeAndArtikel(id_store,artikel);
-			stock = stockStore.getKuantitas() == null ? 0.0 : stockStore.getKuantitas();
+			if (stockStore != null) {
+				stock = stockStore.getKuantitas() == null ? 0.0 : stockStore.getKuantitas();	
+			} else {
+				stock = 0.0;
+			}
 		} else {
 			stock = kuantitas_masuk - kuantitas_keluar;
 		}

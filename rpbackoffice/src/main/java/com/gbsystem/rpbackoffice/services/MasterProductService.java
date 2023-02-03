@@ -62,16 +62,19 @@ public class MasterProductService {
 		} else {
 			MasterProduct p = new MasterProduct();
 			StockOffice q = new StockOffice();
-			String fileName = StringUtils.cleanPath(image.getOriginalFilename());
-			if(fileName.contains("..")) {
-				System.out.println("not a valid file");
+			if (image != null) {
+				String fileName = StringUtils.cleanPath(image.getOriginalFilename());
+				if(fileName.contains("..")) {
+					System.out.println("not a valid file");
+				}
+				try {
+					p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
+					q.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
+				}catch(IOException e) {
+					e.printStackTrace();
+				}
 			}
-			try {
-				p.setImage(Base64.getEncoder().encodeToString(image.getBytes()));
-				q.setFoto_barang(Base64.getEncoder().encodeToString(image.getBytes()));
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
+			
 			p.setSku_code(sku_code);
 			p.setArtikel_product(artikel_product);
 			p.setNama_product(nama_product);

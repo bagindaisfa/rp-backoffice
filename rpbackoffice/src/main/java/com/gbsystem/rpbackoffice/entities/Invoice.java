@@ -19,6 +19,7 @@ public class Invoice {
 	private Double ongkos_kirim;
 	private Double pajak_biaya;
 	private Double diskon;
+	private Double diskon_satuan;
 	private Double kuantitas;
 	private Double total_kuantitas;
 	private Double harga;
@@ -78,6 +79,12 @@ public class Invoice {
 	}
 	public void setDiskon(Double diskon) {
 		this.diskon = diskon;
+	}
+	public Double getDiskon_satuan() {
+		return diskon_satuan;
+	}
+	public void setDiskon_satuan(Double diskon_satuan) {
+		this.diskon_satuan = diskon_satuan;
 	}
 	public Double getKuantitas() {
 		return kuantitas;

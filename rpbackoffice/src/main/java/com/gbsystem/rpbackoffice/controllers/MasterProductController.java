@@ -105,7 +105,7 @@ public class MasterProductController {
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String saveMaster_product(
-    		@RequestParam("image") MultipartFile image,
+    		@RequestParam(value= "image", required=false) MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
@@ -116,9 +116,9 @@ public class MasterProductController {
     		@RequestParam("artikel_frame") String artikel_frame,
     		@RequestParam("artikel_lens") String artikel_lens,
     		@RequestParam("ukuran") String ukuran,
-    		@RequestParam("kuantitas") double kuantitas,
-    		@RequestParam("hpp") double hpp,
-    		@RequestParam("harga_jual") double harga_jual,
+    		@RequestParam("kuantitas") Double kuantitas,
+    		@RequestParam("hpp") Double hpp,
+    		@RequestParam("harga_jual") Double harga_jual,
     		@RequestParam("remarks") String remarks
     		) 
 	{
@@ -128,7 +128,7 @@ public class MasterProductController {
     
     @PostMapping(value = "/addCustom", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String saveMasterProductCustom(
-    		@RequestParam("image") MultipartFile image,
+    		@RequestParam(value= "image", required=false) MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_f") String artikel_f,
     		@RequestParam("artikel_s") String artikel_s,
@@ -143,9 +143,9 @@ public class MasterProductController {
     		@RequestParam("artikel_frame_ns") String artikel_frame_ns,
     		@RequestParam("artikel_lens_ns") String artikel_lens_ns,
     		@RequestParam("ukuran") String ukuran,
-    		@RequestParam("kuantitas") double kuantitas,
-    		@RequestParam("hpp") double hpp,
-    		@RequestParam("harga_jual") double harga_jual,
+    		@RequestParam("kuantitas") Double kuantitas,
+    		@RequestParam("hpp") Double hpp,
+    		@RequestParam("harga_jual") Double harga_jual,
     		@RequestParam("remarks") String remarks
     		) 
 	{
@@ -156,7 +156,7 @@ public class MasterProductController {
     @PostMapping(value = "/update", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public @ResponseBody String update(
     		@RequestParam("id") Long id,
-    		@RequestParam("image") MultipartFile image,
+    		@RequestParam(value= "image", required=false) MultipartFile image,
     		@RequestParam("sku_code") String sku_code,
     		@RequestParam("artikel_product") String artikel_product,
     		@RequestParam("nama_product") String nama_product,
@@ -167,8 +167,8 @@ public class MasterProductController {
     		@RequestParam("artikel_frame") String artikel_frame,
     		@RequestParam("artikel_lens") String artikel_lens,
     		@RequestParam("ukuran") String ukuran,
-    		@RequestParam("hpp") double hpp,
-    		@RequestParam("harga_jual") double harga_jual,
+    		@RequestParam("hpp") Double hpp,
+    		@RequestParam("harga_jual") Double harga_jual,
     		@RequestParam("remarks") String remarks
     		) throws Exception {
     	
