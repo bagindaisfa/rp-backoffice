@@ -16,18 +16,23 @@ import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.Pelanggan;
 import com.gbsystem.rpbackoffice.entities.PenjualanOffice;
 import com.gbsystem.rpbackoffice.entities.PenyimpananKeluar;
+import com.gbsystem.rpbackoffice.entities.ProformaInvoice;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.DetailPenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PelangganRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanOfficeRepository;
 import com.gbsystem.rpbackoffice.repository.PenyimpananKeluarRepository;
+import com.gbsystem.rpbackoffice.repository.ProformaInvoiceRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 
 @Service
 public class PenjualanOfficeService {
 	@Autowired
 	private PenjualanOfficeRepository eRepo;
+	
+	@Autowired
+	private ProformaInvoiceRepository ePiRepo;
 	
 	@Autowired
 	private DetailPenjualanOfficeRepository eDetailRepo;
@@ -54,6 +59,7 @@ public class PenjualanOfficeService {
 		
 		p.setTanggal_transaksi(tanggal_transaksi);
 		p.setId_transaksi(id_transaksi);
+		p.setPi_no(penjualanOffice.getPi_no());
 		p.setId_office(penjualanOffice.getId_office());
 		p.setLokasi_office(penjualanOffice.getLokasi_office());
 		p.setNo_hp_pelanggan(penjualanOffice.getNo_hp_pelanggan());
@@ -173,9 +179,13 @@ public class PenjualanOfficeService {
 				total_penjualan =total;	
 			}
 		}
-		
-		p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
-		
+		if (penjualanOffice.getPi_no().length() > 0) {
+			ProformaInvoice pi = new ProformaInvoice();
+			pi = ePiRepo.getPi(penjualanOffice.getPi_no());
+			p.setTotal_penjualan(pi.getTotal_penjualan() - pi.getTotal_dp());
+		} else {
+			p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
+		}
 		p.setRowstatus(1);
 		p.setDetail_penjualan(details);
 		

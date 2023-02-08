@@ -16,13 +16,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-public class DetailPenjualanOffice {
+public class DetailProformaInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(columnDefinition="date")
 	private Date tanggal_transaksi;
+	private String pi_no;
 	private String id_transaksi;
 	private String sku_code;
 	private String artikel;
@@ -37,9 +38,9 @@ public class DetailPenjualanOffice {
 	private Double total;
 	private int rowstatus;
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "penjualan_office_id", referencedColumnName = "id")
-	@JsonIgnoreProperties("detail_penjualan")
-    private PenjualanOffice penjualanOffice;
+    @JoinColumn(name = "proforma_invoice_id", referencedColumnName = "id")
+	@JsonIgnoreProperties("detail_proforma_invoice")
+    private ProformaInvoice proformaInvoice;
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +52,12 @@ public class DetailPenjualanOffice {
 	}
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
+	}
+	public String getPi_no() {
+		return pi_no;
+	}
+	public void setPi_no(String pi_no) {
+		this.pi_no = pi_no;
 	}
 	public String getId_transaksi() {
 		return id_transaksi;
@@ -134,10 +141,10 @@ public class DetailPenjualanOffice {
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	public PenjualanOffice getPenjualanOffice() {
-		return penjualanOffice;
+	public ProformaInvoice getProformaInvoice() {
+		return proformaInvoice;
 	}
-	public void setPenjualanOffice(PenjualanOffice penjualanOffice) {
-		this.penjualanOffice = penjualanOffice;
+	public void setProformaInvoice(ProformaInvoice proformaInvoice) {
+		this.proformaInvoice = proformaInvoice;
 	}
 }

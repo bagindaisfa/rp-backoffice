@@ -22,15 +22,15 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
-public class PenjualanOffice {
+public class ProformaInvoice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(columnDefinition="date")
 	private Date tanggal_transaksi;
-	private String id_transaksi;
 	private String pi_no;
+	private String id_transaksi;
 	private int id_office;
 	private String lokasi_office;
 	private String no_hp_pelanggan;
@@ -45,12 +45,14 @@ public class PenjualanOffice {
 	private Double ongkos_kirim;
 	private String ekspedisi;
 	private Double pajak_biaya;
+	private Double dp;
 	private Double total_penjualan;
+	private Double total_dp;
 	private int rowstatus;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "penjualanOffice", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "proformaInvoice", cascade = CascadeType.ALL)
 	@Where(clause="rowstatus = 1")
-	@JsonIgnoreProperties("penjualanOffice")
-    private List<DetailPenjualanOffice> detail_penjualan = new ArrayList<>();
+	@JsonIgnoreProperties("proformaInvoice")
+    private List<DetailProformaInvoice> detail_proforma_invoice = new ArrayList<>();
 	public Long getId() {
 		return id;
 	}
@@ -63,17 +65,17 @@ public class PenjualanOffice {
 	public void setTanggal_transaksi(Date tanggal_transaksi) {
 		this.tanggal_transaksi = tanggal_transaksi;
 	}
-	public String getId_transaksi() {
-		return id_transaksi;
-	}
-	public void setId_transaksi(String id_transaksi) {
-		this.id_transaksi = id_transaksi;
-	}
 	public String getPi_no() {
 		return pi_no;
 	}
 	public void setPi_no(String pi_no) {
 		this.pi_no = pi_no;
+	}
+	public String getId_transaksi() {
+		return id_transaksi;
+	}
+	public void setId_transaksi(String id_transaksi) {
+		this.id_transaksi = id_transaksi;
 	}
 	public int getId_office() {
 		return id_office;
@@ -167,17 +169,28 @@ public class PenjualanOffice {
 	public void setTotal_penjualan(Double total_penjualan) {
 		this.total_penjualan = total_penjualan;
 	}
+	public Double getDp() {
+		return dp;
+	}
+	public void setDp(Double dp) {
+		this.dp = dp;
+	}
+	public Double getTotal_dp() {
+		return total_dp;
+	}
+	public void setTotal_dp(Double total_dp) {
+		this.total_dp = total_dp;
+	}
 	public int getRowstatus() {
 		return rowstatus;
 	}
 	public void setRowstatus(int rowstatus) {
 		this.rowstatus = rowstatus;
 	}
-	public List<DetailPenjualanOffice> getDetail_penjualan() {
-		return detail_penjualan;
+	public List<DetailProformaInvoice> getDetail_proforma_invoice() {
+		return detail_proforma_invoice;
 	}
-	public void setDetail_penjualan(List<DetailPenjualanOffice> detail_penjualan) {
-		this.detail_penjualan = detail_penjualan;
+	public void setDetail_proforma_invoice(List<DetailProformaInvoice> detail_proforma_invoice) {
+		this.detail_proforma_invoice = detail_proforma_invoice;
 	}
-	
 }
