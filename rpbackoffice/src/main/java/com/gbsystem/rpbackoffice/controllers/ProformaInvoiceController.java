@@ -41,6 +41,11 @@ public class ProformaInvoiceController {
     	return new ResponseEntity<>(proformaInvoiceService.getPi(pi_no), HttpStatus.OK);
     }
 	
+	@GetMapping("/getPiUpdate")
+    public ResponseEntity<ProformaInvoice> getPiUpdate(@Param("pi_no") String pi_no) {
+    	return new ResponseEntity<>(proformaInvoiceService.getPiUpdate(pi_no), HttpStatus.OK);
+    }
+	
 	@PostMapping(value = "/add")
 	@ResponseBody
 	public ProformaInvoice savePenjualan_office(@RequestBody ProformaInvoice proformaInvoice) 

@@ -160,6 +160,10 @@ public class ProformaInvoiceService {
 		return eRepo.getPi(pi_no);
 	}
 	
+	public ProformaInvoice getPiUpdate(String pi_no){
+		return eRepo.getPiOld(pi_no);
+	}
+	
 	public String deleteProformaInvoiceById(Long id)
     {
 		ProformaInvoice p = new ProformaInvoice();

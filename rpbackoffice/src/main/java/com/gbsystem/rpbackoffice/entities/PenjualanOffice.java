@@ -38,6 +38,7 @@ public class PenjualanOffice {
 	private int id_karyawan;
 	private String nama_karyawan;
 	private Double diskon;
+	private Double dp;
 	private String diskon_remark;
 	private String metode_pembayaran;
 	private String bank_name;
@@ -118,6 +119,12 @@ public class PenjualanOffice {
 	}
 	public void setDiskon(Double diskon) {
 		this.diskon = diskon;
+	}
+	public Double getDp() {
+		return dp;
+	}
+	public void setDp(Double dp) {
+		this.dp = dp;
 	}
 	public String getDiskon_remark() {
 		return diskon_remark;

@@ -19,6 +19,9 @@ public interface ProformaInvoiceRepository extends JpaRepository<ProformaInvoice
 	@Query(value = "SELECT * FROM proforma_invoice WHERE rowstatus=1 AND (pi_no LIKE %:keyword% OR id_transaksi LIKE %:keyword% OR id_office LIKE %:keyword% OR lokasi_office LIKE %:keyword%)", nativeQuery = true)
 	List<ProformaInvoice> search(String keyword);
 	
-	@Query(value = "SELECT * FROM proforma_invoice WHERE rowstatus=1 AND pi_no =:pi_no", nativeQuery = true)
+	@Query(value = "SELECT * FROM proforma_invoice WHERE rowstatus=1 AND pi_no =:pi_no and id_transaksi is null", nativeQuery = true)
 	ProformaInvoice getPi(String pi_no);
+	
+	@Query(value = "SELECT * FROM proforma_invoice WHERE rowstatus=1 AND pi_no =:pi_no", nativeQuery = true)
+	ProformaInvoice getPiOld(String pi_no);
 }

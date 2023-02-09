@@ -183,7 +183,11 @@ public class PenjualanOfficeService {
 			ProformaInvoice pi = new ProformaInvoice();
 			pi = ePiRepo.getPi(penjualanOffice.getPi_no());
 			p.setTotal_penjualan(pi.getTotal_penjualan() - pi.getTotal_dp());
+			p.setDp(pi.getDp());
+			pi.setId_transaksi(id_transaksi);
+			ePiRepo.save(pi);
 		} else {
+			p.setDp(0.0);
 			p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		}
 		p.setRowstatus(1);
@@ -502,9 +506,17 @@ public class PenjualanOfficeService {
 				total_penjualan =total;	
 			}
 		}
+		if (penjualanOffice.getPi_no().length() > 0) {
+			ProformaInvoice pi = new ProformaInvoice();
+			pi = ePiRepo.getPiOld(penjualanOffice.getPi_no());
+			p.setTotal_penjualan(pi.getTotal_penjualan() - pi.getTotal_dp());
+			p.setDp(pi.getDp());
+		} else {
+			p.setDp(0.0);
+			p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
+		}
 		
 		
-		p.setTotal_penjualan(total_penjualan + (penjualanOffice.getOngkos_kirim() == null ? 0.0 : penjualanOffice.getOngkos_kirim()));
 		p.setRowstatus(1);
     	p.setDetail_penjualan(details);
     	return eRepo.save(p);
