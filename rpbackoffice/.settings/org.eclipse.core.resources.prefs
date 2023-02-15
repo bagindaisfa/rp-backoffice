@@ -14,6 +14,7 @@ encoding//src/main/resources/templates/PenyimpananKeluar.jrxml=UTF-8
 encoding//src/main/resources/templates/PenyimpananMasuk.jrxml=UTF-8
 encoding//src/main/resources/templates/PenyimpananStockOpname.jrxml=UTF-8
 encoding//src/main/resources/templates/PenyimpananStockOpnameStore.jrxml=UTF-8
+encoding//src/main/resources/templates/ProformaInvoice.jrxml=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreByArticle.jrxml=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreBySummary.jrxml=UTF-8
 encoding//src/main/resources/templates/SalesByOffice.jrxml=UTF-8

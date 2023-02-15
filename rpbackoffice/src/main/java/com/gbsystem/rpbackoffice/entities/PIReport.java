@@ -8,11 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Invoice {
+public class PIReport {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String id_transaksi;
+	private String pi_no;
 	private String artikel;
 	private String nama_barang;
 	private Date tanggal_transaksi;
@@ -20,18 +20,12 @@ public class Invoice {
 	private Double pajak_biaya;
 	private Double diskon;
 	private Double diskon_satuan;
-	private Double dp;
-	public Double getDp() {
-		return dp;
-	}
-	public void setDp(Double dp) {
-		this.dp = dp;
-	}
 	private Double kuantitas;
 	private Double total_kuantitas;
 	private Double harga;
 	private Double jumlah;
 	private Double total_jumlah;
+	private Double total_dp;
 	private String terbilang;
 	private String nama_pelanggan;
 	private String alamat;
@@ -44,11 +38,17 @@ public class Invoice {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getId_transaksi() {
-		return id_transaksi;
+	public String getPi_no() {
+		return pi_no;
 	}
-	public void setId_transaksi(String id_transaksi) {
-		this.id_transaksi = id_transaksi;
+	public void setPi_no(String pi_no) {
+		this.pi_no = pi_no;
+	}
+	public Double getTotal_dp() {
+		return total_dp;
+	}
+	public void setTotal_dp(Double total_dp) {
+		this.total_dp = total_dp;
 	}
 	public String getArtikel() {
 		return artikel;

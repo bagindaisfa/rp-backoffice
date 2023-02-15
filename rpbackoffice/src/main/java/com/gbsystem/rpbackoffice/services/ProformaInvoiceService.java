@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.gbsystem.rpbackoffice.entities.DetailProformaInvoice;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
+import com.gbsystem.rpbackoffice.entities.PIReport;
 import com.gbsystem.rpbackoffice.entities.ProformaInvoice;
 import com.gbsystem.rpbackoffice.entities.StockOffice;
 import com.gbsystem.rpbackoffice.repository.DetailProformaInvoiceRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
+import com.gbsystem.rpbackoffice.repository.PIReportRepository;
 import com.gbsystem.rpbackoffice.repository.ProformaInvoiceRepository;
 import com.gbsystem.rpbackoffice.repository.StockOfficeRepository;
 
@@ -30,6 +32,9 @@ public class ProformaInvoiceService {
 	
 	@Autowired
 	private MasterProductRepository eMasterProductRepository;
+	
+	@Autowired
+	private PIReportRepository eReportRepo;
 	
 	public ProformaInvoice saveProformaInvoice(ProformaInvoice proformaInvoice) {
 		
@@ -336,4 +341,7 @@ public class ProformaInvoiceService {
     	return eRepo.save(p);
 	}
 	
+	public List<PIReport> ProformaInvoice(int id_office, String pi_no) {
+		return eReportRepo.ProformaInvoice(id_office, pi_no);
+	}
 }

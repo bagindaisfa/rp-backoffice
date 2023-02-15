@@ -24,6 +24,7 @@ import com.gbsystem.rpbackoffice.services.PengirimanStoreToStoreReportService;
 import com.gbsystem.rpbackoffice.services.PenyimpananBarangKeluarReportService;
 import com.gbsystem.rpbackoffice.services.PenyimpananBarangMasukReportService;
 import com.gbsystem.rpbackoffice.services.PenyimpananStockOpnameReportService;
+import com.gbsystem.rpbackoffice.services.ProformaInvoiceService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreByArticleService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreBySummaryService;
 import com.gbsystem.rpbackoffice.services.SalesByOfficeService;
@@ -75,6 +76,9 @@ public class ReportController {
 	
 	@Autowired
 	private InvoiceService invoiceOfficeService;
+	
+	@Autowired
+	private ProformaInvoiceService proformaInvoiceService;
 	
 	@GetMapping("/purchaseStoreBySummary")
 	public ResponseEntity<byte []> generatePdfSummary(@Param("no_hp_pelanggan") String no_hp_pelanggan, @Param("date_from") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_from, @Param("date_to") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_to) throws Exception, JRException{
@@ -270,6 +274,20 @@ public class ReportController {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=Invoice_"+ id_transaksi +".pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/proformaInvoice")
+	public ResponseEntity<byte []> generatePdfProformaInvoiceOffice(@Param("id_office") int id_office, @Param("pi_no") String pi_no) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(proformaInvoiceService.ProformaInvoice(id_office, pi_no));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("classes/templates/ProformaInvoice.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=ProformaInvoice_"+ pi_no +".pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 	
