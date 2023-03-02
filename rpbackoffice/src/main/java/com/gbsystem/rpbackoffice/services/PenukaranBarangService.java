@@ -7,11 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gbsystem.rpbackoffice.entities.DetailPesanan;
 import com.gbsystem.rpbackoffice.entities.MasterProduct;
 import com.gbsystem.rpbackoffice.entities.Penjualan;
 import com.gbsystem.rpbackoffice.entities.PenukaranBarang;
 import com.gbsystem.rpbackoffice.entities.PenyimpananStoreMasuk;
 import com.gbsystem.rpbackoffice.entities.StockStore;
+import com.gbsystem.rpbackoffice.repository.DetailPesananRepository;
 import com.gbsystem.rpbackoffice.repository.MasterProductRepository;
 import com.gbsystem.rpbackoffice.repository.PenjualanRepository;
 import com.gbsystem.rpbackoffice.repository.PenukaranBarangRepository;
@@ -30,6 +32,9 @@ public class PenukaranBarangService {
 	private PenjualanRepository ePenjualanRepo;
 	
 	@Autowired
+	private DetailPesananRepository eDetailPenjualanRepo;
+	
+	@Autowired
 	private StockStoreRepository eStockRepo;
 
 	@Autowired
@@ -39,13 +44,15 @@ public class PenukaranBarangService {
 		
 		String penerimaan_code = "RTS-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (eRepo.count()+1);
 		
+		Penjualan penjualan = new Penjualan();
+		penjualan = ePenjualanRepo.getPenjualan(penukaranBarang.get(0).getId_transaksi());
+		penjualan.setRowstatus(0);
+		List<DetailPesanan> detailPenjualan = eDetailPenjualanRepo.getByPenjualan_id(penjualan.getId());
+		
 		for (int i=0; i<penukaranBarang.size(); i++) {
 			PenukaranBarang p = new PenukaranBarang();
 			MasterProduct prod = new MasterProduct();
 			prod = eMasterProductRepo.findByArticle(penukaranBarang.get(i).getArtikel());
-			
-			Penjualan penjualan = new Penjualan();
-			penjualan = ePenjualanRepo.getPenjualan(penukaranBarang.get(i).getId_transaksi());
 			
 			p.setPenerimaan_code(penerimaan_code);
 			p.setId_transaksi(penukaranBarang.get(i).getId_transaksi());
@@ -97,6 +104,11 @@ public class PenukaranBarangService {
 			h.setRowstatus(1);
 			ePenyimpananStoreRepo.save(h);
 		}
+		for(var j=0; j<detailPenjualan.size(); j++) {
+			detailPenjualan.get(j).setRowstatus(0);
+			eDetailPenjualanRepo.save(detailPenjualan.get(j));
+		}
+		ePenjualanRepo.save(penjualan);
 	}
 	
 	public List<PenukaranBarang> getAllPerStore(int id_store){

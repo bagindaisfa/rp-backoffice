@@ -21,7 +21,7 @@ public interface DetailPesananRepository extends JpaRepository<DetailPesanan, Lo
 	List<DetailPesanan> all(String id_transaksi);
 	
 	@Query(value = "SELECT * FROM detail_pesanan WHERE rowstatus = 1 AND penjualan_id = :penjualan_id", nativeQuery = true)
-	DetailPesanan getByPenjualan_id(Long penjualan_id);
+	List<DetailPesanan> getByPenjualan_id(Long penjualan_id);
 	
 	@Query(value = "SELECT A.* "
 			+ "FROM detail_pesanan A "
