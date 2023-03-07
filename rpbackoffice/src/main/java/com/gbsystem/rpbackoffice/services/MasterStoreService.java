@@ -52,49 +52,51 @@ public class MasterStoreService {
 	
 	public void deleteMasterStoreById(int id)
     {
-		MasterStore p = new MasterStore();
-    	p = eRepo.findById(id);
-    	p.setRowstatus(0);
-    	eRepo.save(p);    
-    	
-    	String code_retur = "DEL-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenyimpananRepo.count()+1);
-    	
-    	List<StockStore> store = eStockStoreRepo.stockAvailPerStore(id);
-    	for (int i = 0; i < store.size(); i++) {
-    		StockOffice d = new StockOffice();
-    		d = eStockRepo.findById_officeAndArtikel(1,store.get(i).getArtikel());
-    		if (d != null) {
-        		d.setKuantitas(d.getKuantitas() + store.get(i).getKuantitas());
-        		eStockRepo.save(d);
-    		}
-    		
-    		StockStore e = new StockStore();
-			e = eStockStoreRepo.findById_storeAndArtikel(
-					id,
-					store.get(i).getArtikel());
-			e.setRowstatus(0);
-			eStockStoreRepo.save(e);
-			
-			PenyimpananMasuk f = new PenyimpananMasuk();
-			f.setPenerimaan_code(code_retur);
-			f.setTanggal_masuk(new Date());
-			f.setId_office(1);
-			f.setLokasi_office("Kantor Pusat");
-			f.setSku_code(store.get(i).getSku_code());
-			f.setArtikel(store.get(i).getArtikel());
-			f.setKategori(store.get(i).getKategori());
-			f.setNama_kategori(store.get(i).getNama_kategori());
-			f.setType(store.get(i).getType());
-			f.setType_name(store.get(i).getType_name());
-			f.setNama_barang(store.get(i).getNama_barang());
-			f.setKuantitas(store.get(i).getKuantitas());
-			f.setHpp(store.get(i).getHpp());
-			f.setHarga_jual(store.get(i).getHarga_jual());
-			f.setKeterangan("Penghapusan Master Store");
-			f.setRowstatus(1);
-			ePenyimpananRepo.save(f);
-    	}
-    	
+		if (id != 8) {
+			MasterStore p = new MasterStore();
+	    	p = eRepo.findById(id);
+	    	p.setRowstatus(0);
+	    	eRepo.save(p);    
+	    	
+	    	String code_retur = "DEL-" + new SimpleDateFormat("yyMM").format(new Date()) +"-"+ (ePenyimpananRepo.count()+1);
+	    	
+	    	List<StockStore> store = eStockStoreRepo.stockAvailPerStore(id);
+	    	for (int i = 0; i < store.size(); i++) {
+	    		StockOffice d = new StockOffice();
+	    		d = eStockRepo.findById_officeAndArtikel(1,store.get(i).getArtikel());
+	    		if (d != null) {
+	        		d.setKuantitas(d.getKuantitas() + store.get(i).getKuantitas());
+	        		eStockRepo.save(d);
+	    		}
+	    		
+	    		StockStore e = new StockStore();
+				e = eStockStoreRepo.findById_storeAndArtikel(
+						id,
+						store.get(i).getArtikel());
+				e.setRowstatus(0);
+				eStockStoreRepo.save(e);
+				
+				PenyimpananMasuk f = new PenyimpananMasuk();
+				f.setPenerimaan_code(code_retur);
+				f.setTanggal_masuk(new Date());
+				f.setId_office(1);
+				f.setLokasi_office("Kantor Pusat");
+				f.setSku_code(store.get(i).getSku_code());
+				f.setArtikel(store.get(i).getArtikel());
+				f.setKategori(store.get(i).getKategori());
+				f.setNama_kategori(store.get(i).getNama_kategori());
+				f.setType(store.get(i).getType());
+				f.setType_name(store.get(i).getType_name());
+				f.setNama_barang(store.get(i).getNama_barang());
+				f.setKuantitas(store.get(i).getKuantitas());
+				f.setHpp(store.get(i).getHpp());
+				f.setHarga_jual(store.get(i).getHarga_jual());
+				f.setKeterangan("Penghapusan Master Store");
+				f.setRowstatus(1);
+				ePenyimpananRepo.save(f);
+	    	}
+		}
+		
     }
 	
 	public void update(Long id, String store_name, String no_tlpn, String alamat, String kepala_store ) {

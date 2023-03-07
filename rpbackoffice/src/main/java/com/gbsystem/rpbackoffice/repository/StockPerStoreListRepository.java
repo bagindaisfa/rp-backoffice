@@ -9,10 +9,10 @@ import com.gbsystem.rpbackoffice.entities.StockPerStoreList;
 
 public interface StockPerStoreListRepository extends JpaRepository<StockPerStoreList, Long> {
 	
-	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 group by id_store,lokasi_store", nativeQuery = true)
+	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 and id_store != 8 group by id_store,lokasi_store", nativeQuery = true)
 	List<StockPerStoreList> allStock();
 	
-	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 AND kuantitas > 0 AND "
+	@Query(value = "SELECT id,id_store,lokasi_store,sum(kuantitas) as total_per_store FROM stock_store WHERE rowstatus = 1 and id_store != 8 AND kuantitas > 0 AND "
 			+ "(sku_code LIKE %:keyword% OR "
 			+ "artikel LIKE %:keyword% OR "
 			+ "nama_barang LIKE %:keyword% OR "

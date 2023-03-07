@@ -28,6 +28,7 @@ import com.gbsystem.rpbackoffice.services.ProformaInvoiceService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreByArticleService;
 import com.gbsystem.rpbackoffice.services.PurchaseStoreBySummaryService;
 import com.gbsystem.rpbackoffice.services.SalesByOfficeService;
+import com.gbsystem.rpbackoffice.services.SalesByStoreService;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -70,6 +71,9 @@ public class ReportController {
 
 	@Autowired
 	private SalesByOfficeService salesByOfficeService;
+	
+	@Autowired
+	private SalesByStoreService salesByStoreService;
 	
 	@Autowired
 	private PembelianService pembelianService;
@@ -232,6 +236,20 @@ public class ReportController {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=SalesByOffice.pdf");
+	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+	}
+	
+	@GetMapping("/salesByStore")
+	public ResponseEntity<byte []> generatePdfSalesStore(@Param("id_store") String id_store, @Param("date_from") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_from, @Param("date_to") @DateTimeFormat(pattern="yyyy-MM-dd") Date date_to) throws Exception, JRException{
+		JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(salesByStoreService.SalesByStore(id_store, date_from, date_to));
+		JasperReport compileReport = JasperCompileManager.compileReport(new FileInputStream("classes/templates/SalesByStore.jrxml"));
+
+		HashMap<String, Object> map = new HashMap<>();
+		JasperPrint report = JasperFillManager.fillReport(compileReport, map, beanCollectionDataSource);
+		byte [] data = JasperExportManager.exportReportToPdf(report);
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_DISPOSITION, "_blank;filename=SalesByStore.pdf");
 	return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
 	}
 	

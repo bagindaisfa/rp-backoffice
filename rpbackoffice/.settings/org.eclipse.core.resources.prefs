@@ -18,6 +18,7 @@ encoding//src/main/resources/templates/ProformaInvoice.jrxml=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreByArticle.jrxml=UTF-8
 encoding//src/main/resources/templates/PurchaseStoreBySummary.jrxml=UTF-8
 encoding//src/main/resources/templates/SalesByOffice.jrxml=UTF-8
+encoding//src/main/resources/templates/SalesByStore.jrxml=UTF-8
 encoding//src/main/resources/templates/TransferRequest.jrxml=UTF-8
 encoding//src/test/java=UTF-8
 encoding/<project>=UTF-8

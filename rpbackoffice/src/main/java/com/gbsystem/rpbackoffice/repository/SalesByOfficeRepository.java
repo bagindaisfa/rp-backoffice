@@ -16,8 +16,7 @@ public interface SalesByOfficeRepository extends JpaRepository<SalesByOffice, Lo
 			+ "B.harga_satuan_barang AS harga, :date_from AS date_from, :date_to AS date_to "
 			+ "FROM penjualan_office A "
 			+ "LEFT JOIN detail_penjualan_office B ON A.id = B.penjualan_office_id AND B.rowstatus=1 "
-			+ "AND DATE(B.tanggal_transaksi) >= :date_from AND DATE(B.tanggal_transaksi) <= :date_to "
-			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office", nativeQuery = true)
+			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office AND DATE(A.tanggal_transaksi) >= :date_from AND DATE(A.tanggal_transaksi) <= :date_to ", nativeQuery = true)
 	List<SalesByOffice> SalesByOffice(String id_office, Date date_from, Date date_to);
 	
 	@Query(value = "SELECT B.id AS id, A.nama_pelanggan AS nama_pelanggan,A.lokasi_office AS lokasi_office, "
@@ -25,8 +24,7 @@ public interface SalesByOfficeRepository extends JpaRepository<SalesByOffice, Lo
 			+ "B.harga_satuan_barang AS harga, :date_from AS date_from, :date_to AS date_to "
 			+ "FROM penjualan_office A "
 			+ "LEFT JOIN detail_penjualan_office B ON A.id = B.penjualan_office_id AND B.rowstatus=1 "
-			+ "AND DATE(B.tanggal_transaksi) >= :date_from AND DATE(B.tanggal_transaksi) <= :date_to "
-			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office "
+			+ "WHERE A.rowstatus=1 AND A.id_office = :id_office AND DATE(A.tanggal_transaksi) >= :date_from AND DATE(A.tanggal_transaksi) <= :date_to "
 			+ "ORDER BY B.kuantitas DESC", nativeQuery = true)
 	List<SalesByOffice> BestArticle(String id_office, Date date_from, Date date_to);
 }
