@@ -15,7 +15,9 @@ public class SalesByOfficeService {
 	private SalesByOfficeRepository eRepo;
 	
 	public List<SalesByOffice> SalesByOffice(String id_office, Date date_from, Date date_to){
-		return eRepo.SalesByOffice(id_office, date_from, date_to);
+		Double qty = eRepo.totalQty(id_office, date_from, date_to);
+		Double harga = eRepo.totalHarga(id_office, date_from, date_to);
+		return eRepo.SalesByOffice(id_office, date_from, date_to,qty,harga);
 	}
 	
 	public List<SalesByOffice> BestArticle(String id_office, Date date_from, Date date_to){

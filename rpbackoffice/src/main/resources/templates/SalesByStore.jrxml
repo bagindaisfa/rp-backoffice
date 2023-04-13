@@ -14,6 +14,8 @@
 	<field name="kuantitas" class="java.lang.Double"/>
 	<field name="harga" class="java.lang.Double"/>
 	<field name="lokasi_store" class="java.lang.String"/>
+	<field name="total_qty" class="java.lang.Double"/>
+	<field name="total_harga" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -42,7 +44,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="86" splitType="Stretch">
+		<band height="107" splitType="Stretch">
 			<staticText>
 				<reportElement x="178" y="3" width="199" height="27" uuid="715e8caf-6bc9-40a0-8df5-9193781ff7ec"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -92,6 +94,36 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format( $F{date_to})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-9" y="64" width="79" height="17" uuid="c4061743-8953-4a3f-b06d-16be002989ca"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Kuantitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="64" width="10" height="17" uuid="737594ef-df97-41f5-a4eb-69a19fc78864"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="80" y="64" width="140" height="17" isPrintInFirstWholeBand="true" uuid="eeaf82f7-78f9-4605-a7dd-98274c3bfbb8"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_qty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="82" width="10" height="17" uuid="6e322580-097e-4a1c-855e-ae5f3882392d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-9" y="82" width="79" height="17" uuid="18d5236a-57ab-4965-8717-22ce10ad2880"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Penjualan]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0.00">
+				<reportElement isPrintRepeatedValues="false" x="80" y="82" width="140" height="17" isPrintInFirstWholeBand="true" uuid="c826cd2b-0c74-4784-a9ca-a58f003affa0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_harga}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

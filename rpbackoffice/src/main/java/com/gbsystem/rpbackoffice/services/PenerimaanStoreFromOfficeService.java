@@ -215,8 +215,10 @@ public class PenerimaanStoreFromOfficeService {
 			d = eStockRepo.findById_storeAndArtikel(
 					p.getId_store(),
 					p.getDetailPenerimaanList().get(i).getArtikel());
-			d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
-			eStockRepo.save(d);
+			if (d.getKuantitas() > 0.0) {
+				d.setKuantitas(d.getKuantitas() - p.getDetailPenerimaanList().get(i).getKuantitas());
+				eStockRepo.save(d);
+			}
 			
 			StockOffice g = new StockOffice();
 			g = eStockOfficeRepo.findById_officeAndArtikel(

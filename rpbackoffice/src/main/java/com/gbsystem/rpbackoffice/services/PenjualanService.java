@@ -80,130 +80,135 @@ public class PenjualanService {
 	private PesananTungguRepository ePesananTungguRepo;
 	
 	public List<Penjualan> savePenjualan( Penjualan penjualan) {
-		Penjualan item = new Penjualan();
-		Double sum_qty = 0.0;
-		Double total_harga = 0.0;
-		if (penjualan.getId_transaksi() == null) {
-			System.out.println("Tidak ada pesanan tunggu");
-		} else {
-			ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
-		}
-		String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-S" + (eRepo.count() + 1);
-		Date tanggal_transaksi = new Date();
-		List<DetailPesanan> details = new ArrayList<>();
-		item.setTanggal_transaksi(tanggal_transaksi);
-		item.setId_transaksi(id_transaksi);
-		item.setId_store(penjualan.getId_store());
-		item.setLokasi_store(penjualan.getLokasi_store());
-		item.setNama_pelanggan(penjualan.getNama_pelanggan());
-		item.setNo_hp_pelanggan(penjualan.getNo_hp_pelanggan());
-		item.setId_karyawan(penjualan.getId_karyawan());
-		item.setNama_karyawan(penjualan.getNama_karyawan());
-		item.setDiskon(penjualan.getDiskon());
-		item.setDiskon_remark(penjualan.getDiskon_remark());
-		item.setMetode_bayar(penjualan.getMetode_bayar());
-		item.setBank_name(penjualan.getBank_name());
-		item.setNo_rek(penjualan.getNo_rek());
-		item.setEkspedisi(penjualan.getEkspedisi());
-		item.setOngkir(penjualan.getOngkir());
-		item.setRowstatus(1);
-		
-		for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
-			DetailPesanan d = new DetailPesanan();
-			MasterProduct product = eMasterProductRepository.findByArticle(penjualan.getDetailPesananList().get(i).getArtikel());
-			
-			d.setTanggal_transaksi(tanggal_transaksi);
-			d.setId_transaksi(id_transaksi);
-			d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
-			d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
-			d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
-			d.setSku_code(penjualan.getDetailPesananList().get(i).getSku_code());
-			d.setType(product.getType());
-			d.setType_name(product.getType_name());
-			d.setKategori(product.getKategori());
-			d.setNama_kategori(product.getNama_kategori());
-			d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
-			d.setHarga(product.getHarga_jual());
-			d.setHarga_baru(penjualan.getDetailPesananList().get(i).getHarga_baru());
-			d.setHarga_baru_remark(penjualan.getDetailPesananList().get(i).getHarga_baru_remark());
-			d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
-			d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
-			d.setRowstatus(1);
-			sum_qty += penjualan.getDetailPesananList().get(i).getKuantitas();
-			total_harga += (penjualan.getDetailPesananList().get(i).getKuantitas() * penjualan.getDetailPesananList().get(i).getHarga_baru());
-			d.setPenjualan(item);
-			details.add(d);
-			
-			StockStore check = new StockStore();
-			check = eStockRepo.findById_storeAndArtikel(
-					penjualan.getId_store(),
-					penjualan.getDetailPesananList().get(i).getArtikel());
-			check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
-			eStockRepo.save(check);
-			
-			PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
-			store_asal.setPengiriman_code(id_transaksi);
-			store_asal.setLokasi_office("-");
-			store_asal.setTanggal_keluar(new Date());
-			store_asal.setId_store(penjualan.getId_store());
-			store_asal.setLokasi_store(penjualan.getLokasi_store());
-			store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
-			store_asal.setType(product.getType());
-			store_asal.setType_name(product.getType_name());
-			store_asal.setKategori(product.getKategori());
-			store_asal.setNama_kategori(product.getNama_kategori());
-			store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
-			store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
-			
-			store_asal.setHpp(check.getHpp());
-			store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
-			store_asal.setKeterangan("Penjualan " + id_transaksi);
-			store_asal.setRowstatus(1);
-			ePenyimpananStoreKeluarRepo.save(store_asal);
-			
-		}
-		
-		Double diskon = item.getDiskon() == null ? 0.0 : item.getDiskon();
-		Double ongkir = item.getOngkir() == null ? 0.0 : item.getOngkir();
-		
-		Double total_new = 0.0;
-		if (diskon > 100.0) {
-			total_new = (total_harga - diskon) + ongkir;
-		} else if (diskon <= 100.0) {
-			total_new = (total_harga - (total_harga * (diskon / 100))) + ongkir;
-		} else {
-			total_new = (total_harga) + ongkir;
-		}
-		
-		item.setTotal(total_new);
-		item.setKembalian(penjualan.getKembalian());
-		item.setSum_qty(sum_qty);
-		item.setDetailPesananList(details);
-		eRepo.save(item);
-		
-		if (total_new > 1000000.0) {
-			List<Pelanggan> pembeli = new ArrayList<>();
-			pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
-			for (int i = 0; i < pembeli.size(); i++) {
-
-			    LocalDate now = LocalDate.now();
-			    LocalDate firstDay = now.with(firstDayOfYear());
-			    
-			    if (now != firstDay) {
-			    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
-			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
-			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
-					ePelangganRepo.save(pembeli.get(i));
-			    } else {
-			    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
-			    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
-			    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
-					ePelangganRepo.save(pembeli.get(i));
-			    }
+		if (penjualan.getId_store() != 8) {
+			Penjualan item = new Penjualan();
+			Double sum_qty = 0.0;
+			Double total_harga = 0.0;
+			if (penjualan.getId_transaksi() == null) {
+				System.out.println("Tidak ada pesanan tunggu");
+			} else {
+				ePesananTungguRepo.deleteByIdTransaksi(penjualan.getId_transaksi());
 			}
+			String id_transaksi = "INV-" + new SimpleDateFormat("yyMM").format(new Date()) + "-S" + (eRepo.count() + 1);
+			Date tanggal_transaksi = new Date();
+			List<DetailPesanan> details = new ArrayList<>();
+			item.setTanggal_transaksi(tanggal_transaksi);
+			item.setId_transaksi(id_transaksi);
+			item.setId_store(penjualan.getId_store());
+			item.setLokasi_store(penjualan.getLokasi_store());
+			item.setNama_pelanggan(penjualan.getNama_pelanggan());
+			item.setNo_hp_pelanggan(penjualan.getNo_hp_pelanggan());
+			item.setId_karyawan(penjualan.getId_karyawan());
+			item.setNama_karyawan(penjualan.getNama_karyawan());
+			item.setDiskon(penjualan.getDiskon());
+			item.setDiskon_remark(penjualan.getDiskon_remark());
+			item.setMetode_bayar(penjualan.getMetode_bayar());
+			item.setBank_name(penjualan.getBank_name());
+			item.setNo_rek(penjualan.getNo_rek());
+			item.setEkspedisi(penjualan.getEkspedisi());
+			item.setOngkir(penjualan.getOngkir());
+			item.setRowstatus(1);
+			
+			for(int i = 0; i < penjualan.getDetailPesananList().size(); i++) {
+				DetailPesanan d = new DetailPesanan();
+				MasterProduct product = eMasterProductRepository.findByArticle(penjualan.getDetailPesananList().get(i).getArtikel());
+				
+				d.setTanggal_transaksi(tanggal_transaksi);
+				d.setId_transaksi(id_transaksi);
+				d.setId_store(penjualan.getDetailPesananList().get(i).getId_store());
+				d.setLokasi_store(penjualan.getDetailPesananList().get(i).getLokasi_store());
+				d.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+				d.setSku_code(penjualan.getDetailPesananList().get(i).getSku_code());
+				d.setType(product.getType());
+				d.setType_name(product.getType_name());
+				d.setKategori(product.getKategori());
+				d.setNama_kategori(product.getNama_kategori());
+				d.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+				d.setHarga(product.getHarga_jual());
+				d.setHarga_baru(penjualan.getDetailPesananList().get(i).getHarga_baru());
+				d.setHarga_baru_remark(penjualan.getDetailPesananList().get(i).getHarga_baru_remark());
+				d.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+				d.setTotal(penjualan.getDetailPesananList().get(i).getTotal());
+				d.setRowstatus(1);
+				sum_qty += penjualan.getDetailPesananList().get(i).getKuantitas();
+				total_harga += (penjualan.getDetailPesananList().get(i).getKuantitas() * penjualan.getDetailPesananList().get(i).getHarga_baru());
+				d.setPenjualan(item);
+				details.add(d);
+				
+				StockStore check = new StockStore();
+				check = eStockRepo.findById_storeAndArtikel(
+						penjualan.getId_store(),
+						penjualan.getDetailPesananList().get(i).getArtikel());
+				check.setKuantitas(check.getKuantitas() - penjualan.getDetailPesananList().get(i).getKuantitas());
+				eStockRepo.save(check);
+				
+				PenyimpananStoreKeluar store_asal = new PenyimpananStoreKeluar();
+				store_asal.setPengiriman_code(id_transaksi);
+				store_asal.setLokasi_office("-");
+				store_asal.setTanggal_keluar(new Date());
+				store_asal.setId_store(penjualan.getId_store());
+				store_asal.setLokasi_store(penjualan.getLokasi_store());
+				store_asal.setArtikel(penjualan.getDetailPesananList().get(i).getArtikel());
+				store_asal.setType(product.getType());
+				store_asal.setType_name(product.getType_name());
+				store_asal.setKategori(product.getKategori());
+				store_asal.setNama_kategori(product.getNama_kategori());
+				store_asal.setNama_barang(penjualan.getDetailPesananList().get(i).getNama_barang());
+				store_asal.setKuantitas(penjualan.getDetailPesananList().get(i).getKuantitas());
+				
+				store_asal.setHpp(check.getHpp());
+				store_asal.setHarga_jual(penjualan.getDetailPesananList().get(i).getHarga());
+				store_asal.setKeterangan("Penjualan " + id_transaksi);
+				store_asal.setRowstatus(1);
+				ePenyimpananStoreKeluarRepo.save(store_asal);
+				
+			}
+			
+			Double diskon = item.getDiskon() == null ? 0.0 : item.getDiskon();
+			Double ongkir = item.getOngkir() == null ? 0.0 : item.getOngkir();
+			
+			Double total_new = 0.0;
+			if (diskon > 100.0) {
+				total_new = (total_harga - diskon) + ongkir;
+			} else if (diskon <= 100.0) {
+				total_new = (total_harga - (total_harga * (diskon / 100))) + ongkir;
+			} else {
+				total_new = (total_harga) + ongkir;
+			}
+			
+			item.setTotal(total_new);
+			item.setKembalian(penjualan.getKembalian());
+			item.setSum_qty(sum_qty);
+			item.setDetailPesananList(details);
+			eRepo.save(item);
+			
+			if (total_new > 1000000.0) {
+				List<Pelanggan> pembeli = new ArrayList<>();
+				pembeli = ePelangganRepo.findByNoHp(item.getNo_hp_pelanggan());
+				for (int i = 0; i < pembeli.size(); i++) {
+
+				    LocalDate now = LocalDate.now();
+				    LocalDate firstDay = now.with(firstDayOfYear());
+				    
+				    if (now != firstDay) {
+				    	pembeli.get(i).setPoin(pembeli.get(i).getPoin() + (penjualan.getTotal() * 0.001));
+				    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
+				    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+						ePelangganRepo.save(pembeli.get(i));
+				    } else {
+				    	pembeli.get(i).setPoin(penjualan.getTotal() * 0.001);
+				    	pembeli.get(i).setTotal_pembelian(pembeli.get(i).getTotal_pembelian() + penjualan.getTotal());
+				    	pembeli.get(i).setTotal_kunjungan(pembeli.get(i).getTotal_kunjungan() + 1);
+						ePelangganRepo.save(pembeli.get(i));
+				    }
+				}
+			}
+			
+			return eRepo.findByIdTransaksi(id_transaksi);
+		} else {
+			return null;
 		}
 		
-		return eRepo.findByIdTransaksi(id_transaksi);
 	}
 	
 	public List<Penjualan> getAllPenjualan(){

@@ -14,6 +14,8 @@
 	<field name="kuantitas" class="java.lang.Double"/>
 	<field name="harga" class="java.lang.Double"/>
 	<field name="lokasi_office" class="java.lang.String"/>
+	<field name="total_qty" class="java.lang.Double"/>
+	<field name="total_harga" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -42,7 +44,7 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="74" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<staticText>
 				<reportElement x="178" y="3" width="199" height="27" uuid="715e8caf-6bc9-40a0-8df5-9193781ff7ec"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -51,17 +53,17 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				<text><![CDATA[Laporan Penjualan Office]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="-9" y="44" width="79" height="17" uuid="c595267c-fb1d-4f78-98e4-452ca56a3ae6"/>
+				<reportElement x="-9" y="44" width="86" height="17" uuid="c595267c-fb1d-4f78-98e4-452ca56a3ae6"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Lokasi Office]]></text>
 			</staticText>
 			<textField>
-				<reportElement isPrintRepeatedValues="false" x="80" y="44" width="140" height="17" isPrintInFirstWholeBand="true" uuid="17813e59-3e20-482e-8eee-35df3a7cfba0"/>
+				<reportElement isPrintRepeatedValues="false" x="87" y="44" width="140" height="17" isPrintInFirstWholeBand="true" uuid="17813e59-3e20-482e-8eee-35df3a7cfba0"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lokasi_office}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="70" y="44" width="10" height="17" uuid="95e835d6-5670-44be-bc4f-7edda997d289"/>
+				<reportElement x="77" y="44" width="10" height="17" uuid="95e835d6-5670-44be-bc4f-7edda997d289"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[:]]></text>
 			</staticText>
@@ -93,6 +95,42 @@ E-mail: rudyproject.care@gmail.com Website: www.rudyproject.co.id]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format( $F{date_to})]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="87" y="61" width="64" height="17" isPrintInFirstWholeBand="true" uuid="01f74376-aae1-45b9-a8d9-7679e9408868"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_qty}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-9" y="61" width="86" height="17" uuid="fbe520f5-a58d-46c5-a37b-bf36d478b46e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Total Kuantitas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="77" y="61" width="10" height="17" uuid="952e6bfa-baeb-4952-93d3-cd907d8cc277"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField pattern="Rp #,##0.00">
+				<reportElement isPrintRepeatedValues="false" x="87" y="78" width="140" height="17" isPrintInFirstWholeBand="true" uuid="6799945a-a3e3-484a-9e55-4efb3e6d1810"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total_harga}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="77" y="78" width="10" height="17" uuid="4948a8f6-3560-43db-9217-ad00a478ec64"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-9" y="78" width="86" height="17" uuid="b50eca57-4cb8-40ae-ad42-735747bbb0e1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Total Penjualan]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<columnHeader>

@@ -39,6 +39,9 @@ public class SalesByOffice {
 	
 	
 	private double harga;
+	
+	private double total_qty;
+	private double total_harga;
 
 	public Long getId() {
 		return id;
@@ -118,6 +121,22 @@ public class SalesByOffice {
 
 	public void setHarga(double harga) {
 		this.harga = harga;
+	}
+
+	public double getTotal_qty() {
+		return total_qty;
+	}
+
+	public void setTotal_qty(double total_qty) {
+		this.total_qty = total_qty;
+	}
+
+	public double getTotal_harga() {
+		return total_harga;
+	}
+
+	public void setTotal_harga(double total_harga) {
+		this.total_harga = total_harga;
 	}
 
 	@Override
